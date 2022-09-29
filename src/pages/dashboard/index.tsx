@@ -33,10 +33,10 @@ import {
     FiSearch,
     FiBell
 } from "react-icons/fi";
-import Dashboard from '../components/dashboard/Dashboard';
+import Dashboard from '../../components/dashboard/Dashboard';
 
 
-export default function dashboard() {
+export default function index() {
     const [display, changeDisplay] = useState('hide');
     const [value, changeValue] = useState(1);
     return (
