@@ -33,6 +33,7 @@ import {
     FiSearch,
     FiBell
 } from "react-icons/fi";
+import Dashboard from '../components/dashboard/Dashboard';
 
 
 export default function dashboard() {
@@ -46,76 +47,7 @@ export default function dashboard() {
             maxW="2000px"
         >
             {/* column 1 */}
-            <Flex
-                w={["100%", "100%", "10%", "15%", "15%"]}
-                flexDir="column"
-                alignItems="center"
-                backgroundColor="#020202"
-                color="#fff"
-            >
-                <Flex
-                    flexDir="column"
-                    h={[null, null, "100vh"]}
-                    justifyContent="space-between"
-                >
-                    <Flex
-                        flexDir="column"
-                        as="nav"
-                    >
-                        <Heading
-                            mt={50}
-                            mb={[25, 50, 100]}
-                            fontSize={["4xl", "4xl", "2xl", "3xl", "4xl",]}
-                            alignSelf="center"
-                            letterSpacing="tight"
-                        >
-                            Kraken
-                        </Heading>
-                        <Flex
-                            flexDir={["row", "row", "column", "column", "column"]}
-                            align={["center", "center", "center", "flex-start", "flex-start"]}
-                            wrap={["wrap", "wrap", "nowrap", "nowrap", "nowrap"]}
-                            justifyContent="center"
-                        >
-                            <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                                <Link display={["none", "none", "flex", "flex", "flex"]} href="/dashboard">
-                                    <Icon as={FiHome} fontSize="2xl" className="active-icon" />
-                                </Link>
-                                <Link _hover={{ textDecor: 'none' }} href="/dashboard" display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text className="active">Inicio</Text>
-                                </Link>
-                            </Flex>
-                            <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                                <Link display={["none", "none", "flex", "flex", "flex"]} href="/velocidad">
-                                    <Icon as={FiPieChart} fontSize="2xl" />
-                                </Link>
-                                <Link _hover={{ textDecor: 'none' }} href="/velocidad" display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text>Velocidad</Text>
-                                </Link>
-                            </Flex>
-                            <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                                <Link display={["none", "none", "flex", "flex", "flex"]}>
-                                    <Icon as={FiBell} fontSize="2xl" />
-                                </Link>
-                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text>Push Notifications</Text>
-                                </Link>
-                            </Flex>
-                            <Flex className="sidebar-items" mr={[2, 6, 0, 0, 0]}>
-                                <Link display={["none", "none", "flex", "flex", "flex"]}>
-                                    <Icon as={FiBox} fontSize="2xl" /></Link>
-                                <Link _hover={{ textDecor: 'none' }} display={["flex", "flex", "none", "flex", "flex"]}>
-                                    <Text>Product Feed</Text>
-                                </Link>
-                            </Flex>
-                        </Flex>
-                    </Flex>
-                    <Flex flexDir="column" alignItems="center" mb={10} mt={5}>
-                        <Avatar my={2} src="avatar-1.jpg" />
-                        <Text textAlign="center">Martín Barajas</Text>
-                    </Flex>
-                </Flex>
-            </Flex>
+            <Dashboard />
             {/* column 2 */}
             <Flex
                 w={["100%", "100%", "60%", "60%", "55%"]}
