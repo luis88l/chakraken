@@ -61,7 +61,7 @@ export default function index() {
                     mb={4}
                     letterSpacing="tight"
                 >
-                    Welcome back, <Flex display="inline-flex" fontWeight="bold">Martín Barajas</Flex>
+                    Welcome back, <Flex display="inline-flex" fontWeight="bold">Emiliano Rios</Flex>
                 </Heading>
                 <Text color="gray" fontSize="sm">My Balance</Text>
                 <Text fontWeight="bold" fontSize="2xl">$5,750.20</Text>
