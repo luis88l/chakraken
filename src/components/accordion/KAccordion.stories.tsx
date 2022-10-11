@@ -5,17 +5,10 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KAccordion from "./KAccordion";
 
 export default {
-  title: "Kraken+ChakraUI/Accordion",
-  component: KAccordion,
+	title: "Kraken+ChakraUI/Accordion",
+	component: KAccordion,
 } as ComponentMeta<typeof KAccordion>;
 
-const Template: ComponentStory<typeof KAccordion> = (args) => <KAccordion {...args} />;
+const Template: ComponentStory<typeof KAccordion> = (args) => <KAccordion />;
 
 export const Default = Template.bind({});
-Default.args = {
-  status: "warning",
-  title: "Esto es el title del alert",
-  text: "Este es el texto del alert.",
-};
-
-

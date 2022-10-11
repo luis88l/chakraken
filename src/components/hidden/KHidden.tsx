@@ -1,13 +1,13 @@
-import { CheckIcon } from '@chakra-ui/icons';
-import { Button, VisuallyHidden, VisuallyHiddenInput } from '@chakra-ui/react';
+import { CheckIcon } from "@chakra-ui/icons";
+import { Button, VisuallyHidden, VisuallyHiddenInput } from "@chakra-ui/react";
 
 function KHidden() {
-    return (
-      <Button>
-        <VisuallyHidden>Checkmark</VisuallyHidden>
-        <CheckIcon />
-      </Button>
-    );
-  }
+	return (
+		<Button>
+			<VisuallyHidden>Checkmark</VisuallyHidden>
+			<CheckIcon />
+		</Button>
+	);
+}
 
-  export default KHidden;
+export default KHidden;
