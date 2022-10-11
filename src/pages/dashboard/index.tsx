@@ -31,13 +31,18 @@ import {
 } from "react-icons/fi";
 import Dashboard from "../../components/dashboard/Dashboard";
 
+import { userProfile, userOptions } from "../../fixtures/user";
+
 export default function index() {
 	const [display, changeDisplay] = useState("hide");
 	const [value, changeValue] = useState(1);
+
+	const { data: userData } = userProfile;
+
 	return (
 		<Flex h="100vh" flexDir="row" overflow="hidden" maxW="2000px">
 			{/* column 1 */}
-			<Dashboard />
+			<Dashboard userProfile={userData} userOptions={userOptions.data} />
 			{/* column 2 */}
 			<Flex
 				w={["100%", "100%", "60%", "60%", "55%"]}
@@ -47,9 +52,9 @@ export default function index() {
 				minH="100vh"
 			>
 				<Heading fontWeight="normal" mb={4} letterSpacing="tight">
-					Welcome back,{" "}
+					Bienvenido,{" "}
 					<Flex display="inline-flex" fontWeight="bold">
-						Emiliano Rios
+						{userData.nb_nombre}
 					</Flex>
 				</Heading>
 				<Text color="gray" fontSize="sm">
@@ -84,7 +89,6 @@ export default function index() {
 								<Tr>
 									<Td>
 										<Flex align="center">
-											<Avatar size="sm" mr={2} src="amazon.jpeg" />
 											<Flex flexDir="column">
 												<Heading size="sm" letterSpacing="tight">
 													Amazon
@@ -107,7 +111,6 @@ export default function index() {
 								<Tr>
 									<Td>
 										<Flex align="center">
-											<Avatar size="sm" mr={2} src="starbucks.png" />
 											<Flex flexDir="column">
 												<Heading size="sm" letterSpacing="tight">
 													Starbucks
@@ -130,7 +133,6 @@ export default function index() {
 								<Tr>
 									<Td>
 										<Flex align="center">
-											<Avatar size="sm" mr={2} src="youtube.png" />
 											<Flex flexDir="column">
 												<Heading size="sm" letterSpacing="tight">
 													YouTube
@@ -155,7 +157,6 @@ export default function index() {
 										<Tr>
 											<Td>
 												<Flex align="center">
-													<Avatar size="sm" mr={2} src="amazon.jpeg" />
 													<Flex flexDir="column">
 														<Heading size="sm" letterSpacing="tight">
 															Amazon

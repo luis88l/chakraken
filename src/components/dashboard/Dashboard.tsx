@@ -4,26 +4,37 @@ import DashboardHeading from "./DashboardHeading";
 import DashboardMenu from "./DashboardMenu";
 import DashboardProfile from "./DashboardProfile";
 
-export default function Dashboard() {
-  return (
-    <Flex
-      w={["100%", "100%", "10%", "15%", "15%"]}
-      flexDir="column"
-      alignItems="center"
-      backgroundColor="#020202"
-      color="#fff"
-    >
-      <Flex
-        flexDir="column"
-        h={[null, null, "100vh"]}
-        justifyContent="space-between"
-      >
-        <Flex flexDir="column" as="nav">
-          <DashboardHeading />
-          <DashboardMenu />
-        </Flex>
-        <DashboardProfile />
-      </Flex>
-    </Flex>
-  );
+interface DashboardProps {
+	userProfile: {
+		nb_nombre: string;
+		de_email: string;
+		nb_usuario: string;
+		cl_password?: string;
+		de_rol?: string;
+		id_rol?: string;
+	};
+	userOptions: {};
+}
+
+export default function Dashboard({
+	userProfile,
+	userOptions,
+}: DashboardProps) {
+	return (
+		<Flex
+			w={["100%", "100%", "18%", "18%", "18%"]}
+			flexDir="column"
+			alignItems="center"
+			backgroundColor="#020202"
+			color="#fff"
+		>
+			<Flex flexDir="column" h={[null, null, "100vh"]}>
+				<Flex flexDir="column" as="nav">
+					<DashboardHeading />
+					<DashboardMenu items={userOptions} />
+				</Flex>
+				<DashboardProfile name={userProfile.nb_nombre} />
+			</Flex>
+		</Flex>
+	);
 }

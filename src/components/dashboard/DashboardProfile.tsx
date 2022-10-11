@@ -1,11 +1,14 @@
 import { Avatar, Flex, Heading, Text } from "@chakra-ui/react";
 
-export default function DashboardProfile() {
-    return (
-        <Flex flexDir="column" alignItems="center" mb={10} mt={5}>
-            <Avatar my={2} src="avatar-1.jpg" />
-            <Text textAlign="center">Martín Barajas</Text>
-        </Flex>
+interface DashboardProfileProps {
+	name: string;
+}
 
-    );
+export default function DashboardProfile(props: DashboardProfileProps) {
+	return (
+		<Flex flexDir="column" alignItems="center" mb={10} mt={50}>
+			<Avatar my={2} src="avatar-1.jpg" />
+			<Text textAlign="center">{props.name}</Text>
+		</Flex>
+	);
 }
