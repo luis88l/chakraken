@@ -10,7 +10,7 @@ import {
 	InputLeftElement,
 	InputRightElement,
 } from "@chakra-ui/react";
-import { FiLock, FiUserCheck } from "react-icons/fi";
+import { FiLock, FiUser } from "react-icons/fi";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -54,16 +54,16 @@ const Index = () => {
 						>
 							<FormControl>
 								<InputGroup>
-									<InputLeftElement pointerEvents="none" color="gray.300">
-										<FiUserCheck color="gray.300" />
+									<InputLeftElement pointerEvents="none" color="#333">
+										<FiUser color="#333" />
 									</InputLeftElement>
 									<Input type="text" placeholder="Usuario" />
 								</InputGroup>
 							</FormControl>
 							<FormControl>
 								<InputGroup>
-									<InputLeftElement pointerEvents="none" color="gray.300">
-										<FiLock color="gray.300" />
+									<InputLeftElement pointerEvents="none" color="#333">
+										<FiLock color="#333" />
 									</InputLeftElement>
 									<Input
 										type={showPassword ? "text" : "password"}
