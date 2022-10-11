@@ -10,14 +10,15 @@ interface KAlertProps {
   status: AlertStatus;
   title: string;
   text: string;
+  icon?: boolean;
 }
 
-function KAlert(props: KAlertProps) {
+function KAlert({ status, title, text, icon }: KAlertProps) {
   return (
-    <Alert status={props.status}>
-      <AlertIcon />
-      <AlertTitle>{props.title}</AlertTitle>
-      <AlertDescription>{props.text}</AlertDescription>
+    <Alert status={status}>
+      {icon && <AlertIcon />}
+      <AlertTitle>{title}</AlertTitle>
+      <AlertDescription>{text}</AlertDescription>
     </Alert>
   );
 }

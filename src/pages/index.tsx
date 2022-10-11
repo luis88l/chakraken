@@ -20,7 +20,7 @@ const Index = () => (
   <Container height="100vh">
     <Hero />
     <Main>
-      <KAlert title="example" text="example text" />
+      <KAlert title="example" text="example text" status={"info"} />
       <Text color="text">
         Example repository of <Code>Next.js</Code> + <Code>chakra-ui</Code> +{" "}
         <Code>TypeScript</Code>.
