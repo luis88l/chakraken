@@ -6,7 +6,6 @@ import {
 	useDisclosure,
 	Collapse,
 	useAccordionItemState,
-	Link,
 } from "@chakra-ui/react";
 import {
 	FiBox,
@@ -15,6 +14,8 @@ import {
 	FiChevronDown,
 	FiChevronUp,
 } from "react-icons/fi";
+
+import Link from "next/link";
 
 interface DashboardMenuItemProps {
 	title: string;
@@ -27,7 +28,7 @@ export default function DashboardMenuItem(props: DashboardMenuItemProps) {
 	const subItems = props.items;
 
 	return (
-		<Box className="sidebar-item">
+		<Box className="sidebar-item" color={isOpen ? "#ea4c89" : "#cbd5e0"}>
 			<Flex
 				width="100%"
 				cursor="pointer"
@@ -46,15 +47,13 @@ export default function DashboardMenuItem(props: DashboardMenuItemProps) {
 			<Collapse in={isOpen} animateOpacity>
 				<Box color="white" mt="4" rounded="md" shadow="md">
 					{subItems.map((item) => (
-						<Link
-							key={item.id_opcion}
-							href={"/" + item.de_ruta}
-							cursor="pointer"
-						>
-							<Text pt={2} pb={2} fontSize="sm">
-								{item.nb_opcion}
-							</Text>
-						</Link>
+						<Box key={item.id_opcion} cursor="pointer">
+							<Link href={"/" + item.de_ruta}>
+								<Text pt={2} pb={2} fontSize="sm">
+									{item.nb_opcion}
+								</Text>
+							</Link>
+						</Box>
 					))}
 				</Box>
 			</Collapse>
