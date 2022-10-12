@@ -19,6 +19,49 @@ a {
 	margin-bottom: 2em;
 }
 
+.gradient-login {
+	background: linear-gradient(270deg, #15c89a, #5a3aaa, #df0b4b);
+	background-size: 600% 600%;
+
+	-webkit-animation: AnimationName 17s ease infinite;
+	-moz-animation: AnimationName 17s ease infinite;
+	animation: AnimationName 17s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+@-moz-keyframes AnimationName {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+@keyframes AnimationName {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 @media only screen and (max-width: 767px) {
 	.sidebar-item {
 		margin-bottom: 0 !important;

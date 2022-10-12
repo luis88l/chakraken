@@ -12,15 +12,24 @@ import {
 } from "@chakra-ui/react";
 import { FiLock, FiUser } from "react-icons/fi";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 
 const Index = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const handleShowClick = () => setShowPassword(!showPassword);
+	const userInputRef = useRef();
+	const passwordInputRef = useRef();
+
+	async function loginSubmitHandler(event) {
+		event.preventDefault();
+		console.log(userInputRef.current, passwordInputRef.current);
+	}
 
 	return (
 		<Flex
+			className="gradient-login"
 			flexDirection="column"
 			width="100wh"
 			height="100vh"
@@ -29,6 +38,9 @@ const Index = () => {
 			backgroundColor="#020202"
 			color="#fff"
 		>
+			<Head>
+				<title>Kraken | Login</title>
+			</Head>
 			<Stack
 				flexDir="column"
 				mb="1"
@@ -44,7 +56,7 @@ const Index = () => {
 					Kraken
 				</Heading>
 				<Box minW={{ base: "100%", md: "468px" }}>
-					<form>
+					<form onSubmit={loginSubmitHandler}>
 						<Stack
 							spacing={4}
 							p="2rem"
@@ -57,7 +69,7 @@ const Index = () => {
 									<InputLeftElement pointerEvents="none" color="#333">
 										<FiUser color="#333" />
 									</InputLeftElement>
-									<Input type="text" placeholder="Usuario" />
+									<Input type="text" placeholder="Usuario" ref={userInputRef} />
 								</InputGroup>
 							</FormControl>
 							<FormControl>
@@ -66,6 +78,7 @@ const Index = () => {
 										<FiLock color="#333" />
 									</InputLeftElement>
 									<Input
+										ref={passwordInputRef}
 										type={showPassword ? "text" : "password"}
 										placeholder="Contraseña"
 									/>
@@ -81,20 +94,18 @@ const Index = () => {
 									</InputRightElement>
 								</InputGroup>
 							</FormControl>
-							<Link href={"/dashboard"}>
-								<Button
-									mt={4}
-									bgColor="blackAlpha.900"
-									color="#fff"
-									p={7}
-									borderRadius={15}
-									type="submit"
-									variant="solid"
-									_hover={{ bg: "#4d4d4d" }}
-								>
-									Login
-								</Button>
-							</Link>
+							<Button
+								mt={4}
+								bgColor="blackAlpha.900"
+								color="#fff"
+								p={7}
+								borderRadius={15}
+								type="submit"
+								variant="solid"
+								_hover={{ bg: "#4d4d4d" }}
+							>
+								Login
+							</Button>
 						</Stack>
 					</form>
 				</Box>
