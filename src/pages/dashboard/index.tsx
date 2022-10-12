@@ -11,7 +11,8 @@ export default function index() {
 	const { data: userData } = userProfile;
 
 	return (
-		<Box>
+		<>
+			{/* column 2 */}
 			<Flex
 				w={["100%", "100%", "60%", "60%", "55%"]}
 				p="3%"
@@ -214,7 +215,7 @@ export default function index() {
 			</Flex>
 			{/* column 3 */}
 			<Flex
-				w={["100%", "100%", "30%"]}
+				w={["100%", "100%", "27%"]}
 				bgColor="#F5F5F5"
 				p="3%"
 				flexDir="column"
@@ -468,6 +469,6 @@ export default function index() {
 					Send money
 				</Button> */}
 			</Flex>
-		</Box>
+		</>
 	);
 }

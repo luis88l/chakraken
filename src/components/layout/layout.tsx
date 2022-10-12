@@ -8,7 +8,7 @@ export default function Layout(props) {
 	return (
 		<Flex h="100vh" flexDir="row" overflow="hidden" maxW="2000px">
 			<Dashboard userProfile={userData} userOptions={userOptions.data} />
-			<Box>{props.children}</Box>
+			<>{props.children}</>
 		</Flex>
 	);
 }
