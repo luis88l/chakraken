@@ -1,19 +1,12 @@
 import {
 	Flex,
-	Heading,
 	Box,
 	Text,
 	useDisclosure,
 	Collapse,
-	useAccordionItemState,
+	color,
 } from "@chakra-ui/react";
-import {
-	FiBox,
-	FiBell,
-	FiCircle,
-	FiChevronDown,
-	FiChevronUp,
-} from "react-icons/fi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import Link from "next/link";
 
@@ -36,7 +29,7 @@ export default function DashboardMenuItem(props: DashboardMenuItemProps) {
 				justifyContent="space-between"
 				onClick={onToggle}
 			>
-				<Box>
+				<Box mr={3}>
 					<Text className="active">{props.title}</Text>
 				</Box>
 				<Box>
@@ -47,7 +40,11 @@ export default function DashboardMenuItem(props: DashboardMenuItemProps) {
 			<Collapse in={isOpen} animateOpacity>
 				<Box color="white" mt="4" rounded="md" shadow="md">
 					{subItems.map((item) => (
-						<Box key={item.id_opcion} cursor="pointer">
+						<Box
+							key={item.id_opcion}
+							cursor="pointer"
+							_hover={{ color: "#ea4c89" }}
+						>
 							<Link href={`/dashboard/${item.de_ruta}`}>
 								<Text pt={2} pb={2} fontSize="sm">
 									{item.nb_opcion}
