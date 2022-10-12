@@ -1,8 +1,8 @@
 import { Flex } from "@chakra-ui/react";
 import KAlert from "../alert/KAlert";
-import DashboardHeading from "./DashboardHeading";
-import DashboardMenu from "./DashboardMenu";
-import DashboardProfile from "./DashboardProfile";
+import DashboardHeading from "./DashboardHeading/DashboardHeading";
+import DashboardMenu from "./DashboardMenu/DashboardMenu";
+import DashboardProfile from "./DashboardProfile/DashboardProfile";
 
 interface DashboardProps {
 	userProfile: {

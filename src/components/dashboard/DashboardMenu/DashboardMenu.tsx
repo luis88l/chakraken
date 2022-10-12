@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import DashboardMenuItem from "./DashboardMenuItem";
+import DashboardMenuItem from "../DashboardMenuItem/DashboardMenuItem";
 
 export default function DashboardMenu(props) {
 	const allMenuItems = props.items[0];
