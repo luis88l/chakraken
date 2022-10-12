@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
-import { Flex, Heading } from "@chakra-ui/react";
-import Dashboard from "../../components/dashboard/Dashboard";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 
 import { userProfile, userOptions } from "../../fixtures/user";
 
@@ -12,10 +11,7 @@ export default function index() {
 	const { data: userData } = userProfile;
 
 	return (
-		<Flex h="100vh" flexDir="row" overflow="hidden" maxW="2000px">
-			{/* column 1 */}
-			<Dashboard userProfile={userData} userOptions={userOptions.data} />
-			{/* column 2 */}
+		<Box>
 			<Flex
 				w={["100%", "100%", "60%", "60%", "55%"]}
 				p="3%"
@@ -472,6 +468,6 @@ export default function index() {
 					Send money
 				</Button> */}
 			</Flex>
-		</Flex>
+		</Box>
 	);
 }

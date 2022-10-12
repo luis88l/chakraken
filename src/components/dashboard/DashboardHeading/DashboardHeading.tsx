@@ -1,4 +1,5 @@
 import { Flex, Heading } from "@chakra-ui/react";
+import Link from "next/link";
 
 export default function DashboardHeading() {
 	return (
@@ -9,7 +10,7 @@ export default function DashboardHeading() {
 			alignSelf="center"
 			letterSpacing="tight"
 		>
-			Kraken
+			<Link href="/dashboard">Kraken</Link>
 		</Heading>
 	);
 }
