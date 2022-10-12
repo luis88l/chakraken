@@ -57,7 +57,7 @@ export default function index() {
 						{userData.nb_nombre}
 					</Flex>
 				</Heading>
-				<Text color="gray" fontSize="sm">
+				{/* <Text color="gray" fontSize="sm">
 					My Balance
 				</Text>
 				<Text fontWeight="bold" fontSize="2xl">
@@ -242,7 +242,7 @@ export default function index() {
 						/>
 						<Divider />
 					</Flex>
-				</Flex>
+				</Flex> */}
 			</Flex>
 			{/* column 3 */}
 			<Flex
@@ -253,7 +253,7 @@ export default function index() {
 				overflow="auto"
 				minW={[null, null, "300px", "300px", "400px"]}
 			>
-				<Flex alignContent="center">
+				{/* <Flex alignContent="center">
 					<InputGroup
 						bgColor="#fff"
 						mb={4}
@@ -498,7 +498,7 @@ export default function index() {
 					borderRadius={15}
 				>
 					Send money
-				</Button>
+				</Button> */}
 			</Flex>
 		</Flex>
 	);
