@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState } from "react";
 import { Flex, Heading } from "@chakra-ui/react";
-import Dashboard from "../../components/dashboard/Dashboard";
+import Dashboard from "../../../components/dashboard/Dashboard";
 
-import { userProfile, userOptions } from "../../fixtures/user";
+import { userProfile, userOptions } from "../../../fixtures/user";
 
-export default function index() {
+export default function modulos() {
 	const [display, changeDisplay] = useState("hide");
 	const [value, changeValue] = useState(1);
 

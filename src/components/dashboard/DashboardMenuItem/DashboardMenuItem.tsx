@@ -48,7 +48,7 @@ export default function DashboardMenuItem(props: DashboardMenuItemProps) {
 				<Box color="white" mt="4" rounded="md" shadow="md">
 					{subItems.map((item) => (
 						<Box key={item.id_opcion} cursor="pointer">
-							<Link href={"/" + item.de_ruta}>
+							<Link href={`/dashboard/${item.de_ruta}`}>
 								<Text pt={2} pb={2} fontSize="sm">
 									{item.nb_opcion}
 								</Text>
