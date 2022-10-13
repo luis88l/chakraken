@@ -1,4 +1,4 @@
-const loginRes = {
+export const loginRes = {
 	status: 200,
 	data: "stringdata",
 	user: {

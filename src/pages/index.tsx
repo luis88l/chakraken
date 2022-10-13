@@ -19,13 +19,13 @@ import Head from "next/head";
 const Index = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const handleShowClick = () => setShowPassword(!showPassword);
-	const userInputRef = useRef();
-	const passwordInputRef = useRef();
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
 
-	async function loginSubmitHandler(event) {
+	const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log(userInputRef.current, passwordInputRef.current);
-	}
+		alert(`Email: ${username} & Password: ${password}`);
+	};
 
 	return (
 		<Flex
@@ -56,7 +56,7 @@ const Index = () => {
 					Kraken
 				</Heading>
 				<Box minW={{ base: "100%", md: "468px" }}>
-					<form onSubmit={loginSubmitHandler}>
+					<form onSubmit={handleSubmit}>
 						<Stack
 							spacing={4}
 							p="2rem"
@@ -64,23 +64,29 @@ const Index = () => {
 							boxShadow="md"
 							borderRadius={15}
 						>
-							<FormControl>
+							<FormControl isRequired>
 								<InputGroup>
 									<InputLeftElement pointerEvents="none" color="#333">
 										<FiUser color="#333" />
 									</InputLeftElement>
-									<Input type="text" placeholder="Usuario" ref={userInputRef} />
+									<Input
+										color="#333"
+										type="text"
+										placeholder="Usuario"
+										onChange={(event) => setUsername(event.currentTarget.value)}
+									/>
 								</InputGroup>
 							</FormControl>
-							<FormControl>
+							<FormControl isRequired mt={6}>
 								<InputGroup>
 									<InputLeftElement pointerEvents="none" color="#333">
 										<FiLock color="#333" />
 									</InputLeftElement>
 									<Input
-										ref={passwordInputRef}
+										color="#333"
 										type={showPassword ? "text" : "password"}
-										placeholder="Contraseña"
+										placeholder="*******"
+										onChange={(event) => setPassword(event.currentTarget.value)}
 									/>
 									<InputRightElement width="4.5rem">
 										<Button
