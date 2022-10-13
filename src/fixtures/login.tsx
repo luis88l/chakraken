@@ -20,3 +20,15 @@ export const loginRes = {
 		de_tokenPush: "stringtoken",
 	},
 };
+
+export const userLogin = async ({ username, password }) => {
+	return new Promise<void>((resolve, reject) => {
+		setTimeout(() => {
+			if (username === "test@test.com" && password === "password") {
+				resolve();
+			} else {
+				reject();
+			}
+		}, 3000);
+	});
+};

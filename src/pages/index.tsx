@@ -12,19 +12,31 @@ import {
 } from "@chakra-ui/react";
 import { FiLock, FiUser } from "react-icons/fi";
 
-import { useRef, useState } from "react";
-import Link from "next/link";
+import { useState } from "react";
 import Head from "next/head";
+import { userLogin } from "../fixtures/login";
+import KAlert from "../components/alert/KAlert";
 
 const Index = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const handleShowClick = () => setShowPassword(!showPassword);
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
-	const handleSubmit = (event) => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		alert(`Email: ${username} & Password: ${password}`);
+		setIsLoading(true);
+		try {
+			await userLogin({ username, password });
+			setIsLoading(false);
+		} catch (error) {
+			setError("Invalid username or password");
+			setIsLoading(false);
+			setUsername("");
+			setPassword("");
+		}
 	};
 
 	return (
@@ -57,6 +69,7 @@ const Index = () => {
 				</Heading>
 				<Box minW={{ base: "100%", md: "468px" }}>
 					<form onSubmit={handleSubmit}>
+						{error && <KAlert status={"error"} title="" text={""}  />}
 						<Stack
 							spacing={4}
 							p="2rem"
