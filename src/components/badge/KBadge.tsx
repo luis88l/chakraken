@@ -1,18 +1,18 @@
 import { Avatar, Badge, Box, Flex, Text } 
 from '@chakra-ui/react';
 
-function KBadge(){
+function KBadge(props){
     return(
 <Flex>
-  <Avatar src='https://bit.ly/sage-adebayo' />
-  <Box ml='3'>
-    <Text fontWeight='bold'>
-      Segun Adebayo
-      <Badge ml='1' colorScheme='green'>
-        New
+  <Avatar src={props.src} />
+  <Box ml={props.Ml}>
+    <Text fontWeight={props.fontWeight}>
+      Emiliano Rios
+      <Badge ml={props.Ml} colorScheme={props.colorScheme}>
+        Nuevo
       </Badge>
     </Text>
-    <Text fontSize='sm'>UI Engineer</Text>
+    <Text fontSize={props.fontSize}> Ui Engineer </Text>
   </Box>
 </Flex>
     )

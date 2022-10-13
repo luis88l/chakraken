@@ -11,4 +11,3 @@ export default {
 
 const Template: ComponentStory<typeof KProgressBar> = (args) => <KProgressBar />;
 
-export const Default = Template.bind({});

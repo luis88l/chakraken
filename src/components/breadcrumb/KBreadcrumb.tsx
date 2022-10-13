@@ -5,21 +5,19 @@ import {
     BreadcrumbSeparator,
   } from '@chakra-ui/react';
 
-  function KBreadcrumb(){
+  function KBreadcrumb(props){
+    console.log(props);
+    const items = props.items
+    console.log(items);
     return(
   <Breadcrumb>
-  <BreadcrumbItem>
-    <BreadcrumbLink href='#'>Home</BreadcrumbLink>
-  </BreadcrumbItem>
+  {items.map((item)=>(
+     <BreadcrumbItem>
+     <BreadcrumbLink href={item.link}> {item.title} </BreadcrumbLink>
+   </BreadcrumbItem>
+  ))}
 
-  <BreadcrumbItem>
-    <BreadcrumbLink href='#'>Docs</BreadcrumbLink>
-  </BreadcrumbItem>
-
-  <BreadcrumbItem isCurrentPage>
-    <BreadcrumbLink href='#'>Breadcrumb</BreadcrumbLink>
-  </BreadcrumbItem>
-</Breadcrumb>
+  </Breadcrumb>
     )
   }
 
