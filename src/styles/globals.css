@@ -20,12 +20,12 @@ a {
 }
 
 .gradient-login {
-	background: linear-gradient(270deg, #15c89a, #5a3aaa, #df0b4b);
+	background: linear-gradient(270deg, #8a376a, #27146e, #943c52, #1c3897);
 	background-size: 600% 600%;
 
-	-webkit-animation: AnimationName 17s ease infinite;
-	-moz-animation: AnimationName 17s ease infinite;
-	animation: AnimationName 17s ease infinite;
+	-webkit-animation: AnimationName 12s ease infinite;
+	-moz-animation: AnimationName 12s ease infinite;
+	animation: AnimationName 12s ease infinite;
 }
 
 @-webkit-keyframes AnimationName {

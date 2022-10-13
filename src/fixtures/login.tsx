@@ -1,4 +1,4 @@
-const loginRes = {
+export const loginRes = {
 	status: 200,
 	data: "stringdata",
 	user: {
@@ -19,4 +19,16 @@ const loginRes = {
 		nb_area: "default",
 		de_tokenPush: "stringtoken",
 	},
+};
+
+export const userLogin = async ({ username, password }) => {
+	return new Promise<void>((resolve, reject) => {
+		setTimeout(() => {
+			if (username === "test@test.com" && password === "password") {
+				resolve();
+			} else {
+				reject();
+			}
+		}, 3000);
+	});
 };

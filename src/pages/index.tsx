@@ -12,20 +12,32 @@ import {
 } from "@chakra-ui/react";
 import { FiLock, FiUser } from "react-icons/fi";
 
-import { useRef, useState } from "react";
-import Link from "next/link";
+import { useState } from "react";
 import Head from "next/head";
+import { userLogin } from "../fixtures/login";
+import KAlert from "../components/alert/KAlert";
 
 const Index = () => {
 	const [showPassword, setShowPassword] = useState(false);
 	const handleShowClick = () => setShowPassword(!showPassword);
-	const userInputRef = useRef();
-	const passwordInputRef = useRef();
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
 
-	async function loginSubmitHandler(event) {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		console.log(userInputRef.current, passwordInputRef.current);
-	}
+		setIsLoading(true);
+		try {
+			await userLogin({ username, password });
+			setIsLoading(false);
+		} catch (error) {
+			setError("Invalid username or password");
+			setIsLoading(false);
+			setUsername("");
+			setPassword("");
+		}
+	};
 
 	return (
 		<Flex
@@ -56,7 +68,8 @@ const Index = () => {
 					Kraken
 				</Heading>
 				<Box minW={{ base: "100%", md: "468px" }}>
-					<form onSubmit={loginSubmitHandler}>
+					<form onSubmit={handleSubmit}>
+						{error && <KAlert status={"error"} title="" text={""}  />}
 						<Stack
 							spacing={4}
 							p="2rem"
@@ -64,23 +77,29 @@ const Index = () => {
 							boxShadow="md"
 							borderRadius={15}
 						>
-							<FormControl>
+							<FormControl isRequired>
 								<InputGroup>
 									<InputLeftElement pointerEvents="none" color="#333">
 										<FiUser color="#333" />
 									</InputLeftElement>
-									<Input type="text" placeholder="Usuario" ref={userInputRef} />
+									<Input
+										color="#333"
+										type="text"
+										placeholder="Usuario"
+										onChange={(event) => setUsername(event.currentTarget.value)}
+									/>
 								</InputGroup>
 							</FormControl>
-							<FormControl>
+							<FormControl isRequired mt={6}>
 								<InputGroup>
 									<InputLeftElement pointerEvents="none" color="#333">
 										<FiLock color="#333" />
 									</InputLeftElement>
 									<Input
-										ref={passwordInputRef}
+										color="#333"
 										type={showPassword ? "text" : "password"}
-										placeholder="Contraseña"
+										placeholder="*******"
+										onChange={(event) => setPassword(event.currentTarget.value)}
 									/>
 									<InputRightElement width="4.5rem">
 										<Button
