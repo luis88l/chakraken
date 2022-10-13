@@ -9,6 +9,17 @@ export default {
 	component: KBreadcrumb,
 } as ComponentMeta<typeof KBreadcrumb>;
 
-const Template: ComponentStory<typeof KBreadcrumb> = (args) => <KBreadcrumb />;
+const Template: ComponentStory<typeof KBreadcrumb> = (args) => <KBreadcrumb {...args}/>;
 
 export const Default = Template.bind({});
+Default.args={
+	items:[
+		{
+			link: "link", title: "home"
+		},{
+			link: "docs", title: "prueba"
+		},{
+			link: "page", title: "page"
+		}
+	]
+}
