@@ -9,15 +9,18 @@ import {
 	InputGroup,
 	InputLeftElement,
 	InputRightElement,
+	CircularProgress,
 } from "@chakra-ui/react";
-import { FiLock, FiUser } from "react-icons/fi";
+import { FiLock, FiUser, FiArrowRight, FiEye, FiEyeOff } from "react-icons/fi";
+import { useRouter } from "next/router";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import { userLogin } from "../fixtures/login";
 import KAlert from "../components/alert/KAlert";
 
 const Index = () => {
+	const router = useRouter();
 	const [showPassword, setShowPassword] = useState(false);
 	const handleShowClick = () => setShowPassword(!showPassword);
 	const [username, setUsername] = useState("");
@@ -25,17 +28,25 @@ const Index = () => {
 	const [error, setError] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 
+	const handleLogout = async (event) => {
+		event.preventDefault();
+		localStorage.clear();
+		window.location.reload();
+	};
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+		setError("");
 		setIsLoading(true);
 		try {
-			await userLogin({ username, password });
+			const res = await userLogin({ username, password });
+			localStorage.setItem("session", res.data);
+			localStorage.setItem("_user", JSON.stringify(res.user));
 			setIsLoading(false);
+			router.push("/dashboard");
 		} catch (error) {
 			setError("Invalid username or password");
 			setIsLoading(false);
-			setUsername("");
-			setPassword("");
 		}
 	};
 
@@ -69,7 +80,6 @@ const Index = () => {
 				</Heading>
 				<Box minW={{ base: "100%", md: "468px" }}>
 					<form onSubmit={handleSubmit}>
-						{error && <KAlert status={"error"} title="" text={""}  />}
 						<Stack
 							spacing={4}
 							p="2rem"
@@ -108,7 +118,7 @@ const Index = () => {
 											onClick={handleShowClick}
 											color="#555050"
 										>
-											{showPassword ? "Ocultar" : "Mostrar"}
+											{showPassword ? <FiEyeOff /> : <FiEye />}
 										</Button>
 									</InputRightElement>
 								</InputGroup>
@@ -121,10 +131,31 @@ const Index = () => {
 								borderRadius={15}
 								type="submit"
 								variant="solid"
+								rightIcon={
+									!isLoading ? (
+										<FiArrowRight />
+									) : (
+										<CircularProgress
+											isIndeterminate
+											color="white"
+											size={"20px"}
+										/>
+									)
+								}
 								_hover={{ bg: "#4d4d4d" }}
 							>
 								Login
 							</Button>
+							{/* <Button onClick={handleLogout}>logout</Button> */}
+							<Box mt={10} maxW="404px">
+								{error && (
+									<KAlert
+										icon
+										status={"error"}
+										title="Verifique su nombre de usuario y contraseña y vuelva a intentarlo."
+									/>
+								)}
+							</Box>
 						</Stack>
 					</form>
 				</Box>

@@ -1,6 +1,27 @@
+export interface loginResProps {
+	status: number;
+	data: string;
+	user: {
+		id_usuario: string;
+		id_rol: string;
+		id_area: string;
+		nb_nombre: string;
+		de_email: string;
+		nb_usuario: string;
+		cl_password: string;
+		de_rol: string;
+		fh_registro: string;
+		fh_cumpleanios: string;
+		user_photo: string;
+		sn_activo: boolean;
+		nb_area: string;
+		de_tokenPush: string;
+	};
+}
+
 export const loginRes = {
 	status: 200,
-	data: "stringdata",
+	data: "stringdataid",
 	user: {
 		id_usuario: "0cf4d20b-fb89-4cb8-ba51-224563941ff4",
 		id_rol: "f2320fd2-fd6f-4876-a8a5-e2c2d71f09aa",
@@ -22,10 +43,11 @@ export const loginRes = {
 };
 
 export const userLogin = async ({ username, password }) => {
-	return new Promise<void>((resolve, reject) => {
+	console.log(username, password);
+	return new Promise<loginResProps>((resolve, reject) => {
 		setTimeout(() => {
-			if (username === "test@test.com" && password === "password") {
-				resolve();
+			if (username === "admin" && password === "admin") {
+				resolve(loginRes);
 			} else {
 				reject();
 			}
