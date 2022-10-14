@@ -12,9 +12,9 @@ import {
     Box,
     ButtonGroup,
   } from '@chakra-ui/react';
-import React from 'react';
+  import React from 'react';
 
-  function KPopOver() {
+  function KPopOver(props) {
     const initialFocusRef = React.useRef()
     return (
       <Popover
@@ -23,31 +23,36 @@ import React from 'react';
         closeOnBlur={false}
       >
         <PopoverTrigger>
-          <Button>Trigger</Button>
+          <Button>{props.btnTitle}</Button>
         </PopoverTrigger>
-        <PopoverContent color='white' bg='blue.800' borderColor='blue.800'>
-          <PopoverHeader pt={4} fontWeight='bold' border='0'>
-            Manage Your Channels
+        <PopoverContent color={props.FontColor} bg={props.bg} borderColor={props.borderColor}>
+          <PopoverHeader pt={4} fontWeight={props.fontWeight} border={props.border}>
+            {props.headerTitle}
           </PopoverHeader>
           <PopoverArrow />
           <PopoverCloseButton />
+          
           <PopoverBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore.
+            {props.BodyContent}
           </PopoverBody>
+
           <PopoverFooter
-            border='0'
-            display='flex'
-            alignItems='center'
-            justifyContent='space-between'
+            border={props.borderContent}
+            display={props.display}
+            alignItems={props.alignItems}
+            justifyContent={props.justifyContent}
             pb={4}
           >
-            <Box fontSize='sm'>Step 2 of 4</Box>
-            <ButtonGroup size='sm'>
-              <Button colorScheme='green'>Setup Email</Button>
-              <Button colorScheme='blue' ref={initialFocusRef}>
-                Next
+            <Box fontSize={props.fontSize}>{props.boxContent}</Box>
+            <ButtonGroup size={props.size}>
+              <Button colorScheme={props.colorBtn1}>
+                {props.txtBtn1}
               </Button>
+
+              <Button colorScheme={props.colorBtn2} ref={initialFocusRef}>
+                {props.txtBtn2}
+              </Button>
+              
             </ButtonGroup>
           </PopoverFooter>
         </PopoverContent>

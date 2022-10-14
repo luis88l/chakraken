@@ -10,26 +10,28 @@ import {
     Button,
   } from '@chakra-ui/react';
 
-  function KModal() {
+  function KModal(props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
       <>
-        <Button onClick={onOpen}>Open Modal</Button>
+        <Button onClick={onOpen}> {props.BtnTitle} </Button>
   
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
+            <ModalHeader>{props.ModalHeaderTitle}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              Texto a insertar de tu preferencia ;)
+              {props.ModalBodyTitle}
             </ModalBody>
   
             <ModalFooter>
-              <Button colorScheme='blue' mr={3} onClick={onClose}>
-                Close
+              <Button colorScheme={props.ColorBtnCancel} mr={3} onClick={onClose}>
+                {props.TxtBtnClose}
               </Button>
-              <Button variant='ghost'>Secondary Action</Button>
+              <Button variant={props.variant} colorScheme={props.ColorBtnSave}>
+                {props.TxtBtnSave}
+              </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
