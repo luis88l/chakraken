@@ -8,24 +8,24 @@ import {
   } 
   from '@chakra-ui/react';
 
-  function KStat(){
+  function KStat(props){
     return(
   <StatGroup>
   <Stat>
-    <StatLabel>Sent</StatLabel>
-    <StatNumber>345,670</StatNumber>
+    <StatLabel>{props.title}</StatLabel>
+    <StatNumber>{props.Number}</StatNumber>
     <StatHelpText>
-      <StatArrow type='increase' />
-      23.36%
+      <StatArrow type={props.type} />
+      {props.percentage}
     </StatHelpText>
   </Stat>
 
   <Stat>
-    <StatLabel>Clicked</StatLabel>
-    <StatNumber>45</StatNumber>
+    <StatLabel>{props.title2}</StatLabel>
+    <StatNumber>{props.Number2}</StatNumber>
     <StatHelpText>
-      <StatArrow type='decrease' />
-      9.05%
+      <StatArrow type={props.type2} />
+      {props.percentage2}
     </StatHelpText>
   </Stat>
 </StatGroup>
