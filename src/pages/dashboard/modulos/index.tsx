@@ -1,16 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from "react";
-import { Breadcrumb, Flex, Heading } from "@chakra-ui/react";
+import React, { useState } from "react"
+import { Breadcrumb, Flex, Heading } from "@chakra-ui/react"
 
-import { userProfile, userOptions } from "../../../fixtures/user";
-import KBreadcrumb from "../../../components/breadcrumb/KBreadcrumb";
-import KAvatar from "../../../components/avatar/KAvatar";
+import KBreadcrumb from "../../../components/breadcrumb/KBreadcrumb"
+import KAvatar from "../../../components/avatar/KAvatar"
 
 export default function modulos() {
-	const [display, changeDisplay] = useState("hide");
-	const [value, changeValue] = useState(1);
-
-	const { data: userData } = userProfile;
+	const [display, changeDisplay] = useState("hide")
+	const [value, changeValue] = useState(1)
 
 	return (
 		<Flex
@@ -25,7 +22,7 @@ export default function modulos() {
 					Módulos Kraken
 				</Flex>
 			</Heading>
-			<KAvatar name="Emiliano" src='avatar-1.jpg' size='md'/>
+			<KAvatar name="Emiliano" src="avatar-1.jpg" size="md" />
 		</Flex>
-	);
+	)
 }

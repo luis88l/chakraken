@@ -1,14 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from "react";
-import { Box, Flex, Heading } from "@chakra-ui/react";
-
-import { userProfile, userOptions } from "../../fixtures/user";
+import React, { useState } from "react"
+import { Flex, Heading } from "@chakra-ui/react"
+import { useRouter } from "next/router"
 
 export default function index() {
-	const [display, changeDisplay] = useState("hide");
-	const [value, changeValue] = useState(1);
-
-	const { data: userData } = userProfile;
+	const [display, changeDisplay] = useState("hide")
+	const [value, changeValue] = useState(1)
+	const router = useRouter()
 
 	return (
 		<>
@@ -23,7 +21,7 @@ export default function index() {
 				<Heading fontWeight="normal" mb={4} letterSpacing="tight">
 					Bienvenido,{" "}
 					<Flex display="inline-flex" fontWeight="bold">
-						{userData.nb_nombre}
+						hi
 					</Flex>
 				</Heading>
 				{/* <Text color="gray" fontSize="sm">
@@ -470,5 +468,5 @@ export default function index() {
 				</Button> */}
 			</Flex>
 		</>
-	);
+	)
 }

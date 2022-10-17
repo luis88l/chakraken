@@ -1,18 +1,18 @@
-import { Flex } from "@chakra-ui/react";
-import DashboardMenuItem from "../DashboardMenuItem/DashboardMenuItem";
+import { Flex } from "@chakra-ui/react"
+import DashboardMenuItem from "../DashboardMenuItem/DashboardMenuItem"
 
 export default function DashboardMenu(props) {
-	const allMenuItems = props.items[0];
+	const allMenuItems = props.items
 
-	const menuItems = [];
+	const menuItems = []
 
 	allMenuItems.filter(function (item) {
-		var i = menuItems.findIndex((x) => x.id_modulo == item.id_modulo);
+		var i = menuItems.findIndex((x) => x.id_modulo == item.id_modulo)
 		if (i <= -1) {
-			menuItems.push(item);
+			menuItems.push(item)
 		}
-		return null;
-	});
+		return null
+	})
 
 	return (
 		<Flex
@@ -29,5 +29,5 @@ export default function DashboardMenu(props) {
 				/>
 			))}
 		</Flex>
-	);
+	)
 }
