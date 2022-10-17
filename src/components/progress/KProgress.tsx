@@ -1,9 +1,9 @@
 import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react';
 
-function KProgress(){
+function KProgress(props){
     return(
-<CircularProgress value={40} color='green.400'>
-  <CircularProgressLabel>40%</CircularProgressLabel>
+<CircularProgress max={props.max} min={props.min} value={props.content} color={props.color}>
+  <CircularProgressLabel>{props.content}%</CircularProgressLabel>
 </CircularProgress>
 );
 }

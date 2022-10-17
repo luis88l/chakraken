@@ -9,6 +9,16 @@ export default {
 	component: KModal,
 } as ComponentMeta<typeof KModal>;
 
-const Template: ComponentStory<typeof KModal> = (args) => <KModal />;
+const Template: ComponentStory<typeof KModal> = (args) => <KModal {...args}/>;
 
-export const Default = Template.bind({});
+export const Modal1 = Template.bind({});
+Modal1.args={
+	BtnTitle:'Open Modal',
+	ModalHeaderTitle:'Modal Title',
+	ModalBodyTitle:'Texto a insertar de tu preferencia',
+	TxtBtnClose:'Close',
+	TxtBtnSave:'Save',
+	ColorBtnSave:'green',
+	ColorBtnCancel:'red',
+	variant:'outline',
+}
