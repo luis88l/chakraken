@@ -12,11 +12,7 @@ function MyApp({ Component, pageProps: { ...pageProps }, router }: AppProps) {
 	const [isLogged, setIsLogged] = useState(false)
 	const [queryClient] = useState(() => new QueryClient())
 
-	if (
-		isLogged &&
-		router.pathname.startsWith("/dashboard") &&
-		!router.pathname.startsWith("/login")
-	) {
+	if (router.pathname.startsWith("/dashboard")) {
 		return (
 			<QueryClientProvider client={queryClient}>
 				<ChakraProvider theme={theme}>

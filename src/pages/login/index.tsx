@@ -48,9 +48,16 @@ const Index = () => {
 			password: password,
 		})
 
+		console.log("hi")
+
 		if (!result.error) {
 			// set some auth state
 			console.log(result)
+		}
+
+		if (result.status === 200) {
+			console.log("200")
+			router.push("/dashboard")
 		}
 	}
 
