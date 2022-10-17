@@ -3,22 +3,22 @@ import {
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbSeparator,
-  } from '@chakra-ui/react';
+} from '@chakra-ui/react';
 
-  function KBreadcrumb(props){
+function KBreadcrumb(props) {
     console.log(props);
     const items = props.items
     console.log(items);
-    return(
-  <Breadcrumb>
-  {items.map((item)=>(
-     <BreadcrumbItem>
-     <BreadcrumbLink href={item.link}> {item.title} </BreadcrumbLink>
-   </BreadcrumbItem>
-  ))}
+    return (
+        <Breadcrumb>
+            {items.map((item) => (
+                <BreadcrumbItem>
+                    <BreadcrumbLink href={item.link}> {item.title} </BreadcrumbLink>
+                </BreadcrumbItem>
+            ))}
 
-  </Breadcrumb>
+        </Breadcrumb>
     )
-  }
+}
 
-  export default KBreadcrumb;
+export default KBreadcrumb;
