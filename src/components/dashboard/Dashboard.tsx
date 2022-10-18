@@ -1,7 +1,8 @@
-import { Flex } from "@chakra-ui/react"
+import { Button, Flex } from "@chakra-ui/react"
 import DashboardHeading from "./DashboardHeading/DashboardHeading"
 import DashboardMenu from "./DashboardMenu/DashboardMenu"
 import DashboardProfile from "./DashboardProfile/DashboardProfile"
+import { signOut } from "next-auth/react"
 
 export default function Dashboard({ userOptions }) {
 	return (
@@ -18,6 +19,14 @@ export default function Dashboard({ userOptions }) {
 					<DashboardMenu items={userOptions} />
 				</Flex>
 				<DashboardProfile nb_nombre="example" />
+				<Button
+					bg="#c21a6e"
+					size="sm"
+					_hover={{ bg: "#5e173a" }}
+					onClick={() => signOut({ callbackUrl: "/login" })}
+				>
+					Cerrar sesión
+				</Button>
 			</Flex>
 		</Flex>
 	)
