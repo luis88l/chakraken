@@ -20,6 +20,7 @@ import Head from "next/head"
 import { userLogin } from "../../fixtures/login"
 import KAlert from "../../components/alert/KAlert"
 import { signIn } from "next-auth/react"
+import { useSession } from "next-auth/react"
 
 const Index = () => {
 	const router = useRouter()
@@ -27,9 +28,10 @@ const Index = () => {
 	const handleShowClick = () => setShowPassword(!showPassword)
 	const [username, setUsername] = useState("")
 	const [password, setPassword] = useState("")
-	const [error, setError] = useState("")
+	const [error, setError] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
 	const [isLogin, setIsLogin] = useState(true)
+	const { data: session } = useSession()
 
 	const handleLogout = async (event) => {
 		event.preventDefault()
@@ -39,7 +41,7 @@ const Index = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault()
-		setError("")
+		setError(false)
 		setIsLoading(true)
 
 		const result = await signIn("credentials", {
@@ -48,16 +50,13 @@ const Index = () => {
 			password: password,
 		})
 
-		console.log("hi")
-
-		if (!result.error) {
-			// set some auth state
-			console.log(result)
-		}
-
-		if (result.status === 200) {
-			console.log("200")
-			router.push("/dashboard")
+		if (result.ok) {
+			console.log("200", "loggin exitoso", result)
+			console.log(session)
+		} else {
+			console.log("hay error")
+			setError(true)
+			console.log(session)
 		}
 	}
 

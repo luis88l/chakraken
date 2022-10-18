@@ -14,19 +14,21 @@ function MyApp({ Component, pageProps: { ...pageProps }, router }: AppProps) {
 
 	if (router.pathname.startsWith("/dashboard")) {
 		return (
-			<QueryClientProvider client={queryClient}>
-				<ChakraProvider theme={theme}>
-					<Layout>
-						<Component {...pageProps}></Component>
-					</Layout>
-				</ChakraProvider>
-				<ReactQueryDevtools initialIsOpen={false} />
-			</QueryClientProvider>
+			<SessionProvider>
+				<QueryClientProvider client={queryClient}>
+					<ChakraProvider theme={theme}>
+						<Layout>
+							<Component {...pageProps}></Component>
+						</Layout>
+					</ChakraProvider>
+					<ReactQueryDevtools initialIsOpen={false} />
+				</QueryClientProvider>
+			</SessionProvider>
 		)
 	}
 
 	return (
-		<SessionProvider refetchInterval={5 * 60}>
+		<SessionProvider>
 			<QueryClientProvider client={queryClient}>
 				<ChakraProvider theme={theme}>
 					<Component {...pageProps} />
