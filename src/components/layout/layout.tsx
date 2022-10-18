@@ -5,6 +5,8 @@ import Head from "next/head"
 import ApiService from "../../../data/services/ApiService"
 import FormData from "form-data"
 import { useQuery } from "react-query"
+import { useSession } from "next-auth/react"
+import { useEffect } from "react"
 
 export default function Layout(props) {
 	const userData = userProfile.data

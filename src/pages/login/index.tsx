@@ -19,7 +19,7 @@ import { useState, useEffect } from "react"
 import Head from "next/head"
 import { userLogin } from "../../fixtures/login"
 import KAlert from "../../components/alert/KAlert"
-import { signIn } from "next-auth/react"
+import { getSession, signIn } from "next-auth/react"
 import { useSession } from "next-auth/react"
 
 const Index = () => {
@@ -30,8 +30,8 @@ const Index = () => {
 	const [password, setPassword] = useState("")
 	const [error, setError] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
-	const [isLogin, setIsLogin] = useState(true)
-	const { data: session } = useSession()
+	const { data: session, status } = useSession()
+	const [loadedSession, setLoadedSession] = useState({})
 
 	const handleLogout = async (event) => {
 		event.preventDefault()
@@ -51,12 +51,12 @@ const Index = () => {
 		})
 
 		if (result.ok) {
-			console.log("200", "loggin exitoso", result)
-			console.log(session)
+			const session = await getSession()
+			//localStorage.setItem("session", result.data.data)
+			//localStorage.setItem("_user", JSON.stringify(result.data.user))
+			router.push("/dashboard")
 		} else {
-			console.log("hay error")
 			setError(true)
-			console.log(session)
 		}
 	}
 

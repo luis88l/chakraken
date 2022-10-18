@@ -4,17 +4,22 @@ import { QueryClient, QueryClientProvider, Hydrate } from "react-query"
 import { ReactQueryDevtools } from "react-query/devtools"
 import theme from "../theme"
 import { AppProps } from "next/app"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Layout from "../components/layout/layout"
 import { SessionProvider } from "next-auth/react"
+import type { Session } from "next-auth"
 
-function MyApp({ Component, pageProps: { ...pageProps }, router }: AppProps) {
+function MyApp({
+	Component,
+	pageProps: { session, ...pageProps },
+	router,
+}: AppProps<{ session: Session }>) {
 	const [isLogged, setIsLogged] = useState(false)
 	const [queryClient] = useState(() => new QueryClient())
 
 	if (router.pathname.startsWith("/dashboard")) {
 		return (
-			<SessionProvider>
+			<SessionProvider session={session}>
 				<QueryClientProvider client={queryClient}>
 					<ChakraProvider theme={theme}>
 						<Layout>
@@ -28,7 +33,7 @@ function MyApp({ Component, pageProps: { ...pageProps }, router }: AppProps) {
 	}
 
 	return (
-		<SessionProvider>
+		<SessionProvider session={session}>
 			<QueryClientProvider client={queryClient}>
 				<ChakraProvider theme={theme}>
 					<Component {...pageProps} />

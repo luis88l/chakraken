@@ -2,6 +2,7 @@
 import React, { useState } from "react"
 import { Flex, Heading } from "@chakra-ui/react"
 import { useRouter } from "next/router"
+import { useSession } from "next-auth/react"
 
 export default function index() {
 	const [display, changeDisplay] = useState("hide")
