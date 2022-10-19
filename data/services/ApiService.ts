@@ -64,12 +64,12 @@ if (hostname === "localhost") {
 
 export class ApiService {
 	public async defaults() {
-		const session = await getSession()
+		const session: any = await getSession()
 		let defaults = {
 			headers: {
 				"Request-Source": "kraken",
 				"Content-Type": "multipart/form-data",
-				authorization: session.user.data!,
+				authorization: session.user.data,
 			},
 		}
 		return defaults

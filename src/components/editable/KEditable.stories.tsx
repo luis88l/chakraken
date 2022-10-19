@@ -6,9 +6,12 @@ import KEditable from "./KEditable";
 
 export default {
 	title: "Kraken+ChakraUI/Editable",
-	component: KEditable
+	component: KEditable,
 } as ComponentMeta<typeof KEditable>;
 
 const Template: ComponentStory<typeof KEditable> = (args) => <KEditable />;
 
-export const Default = Template.bind({});
+export const Editable = Template.bind({});
+Editable.args = {
+	defaultValue: "Write here...",
+};

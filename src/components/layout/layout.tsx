@@ -1,6 +1,5 @@
 import { Flex, Box } from "@chakra-ui/react"
 import Dashboard from "../dashboard/Dashboard"
-import { userProfile, userOptions } from "../../fixtures/user"
 import Head from "next/head"
 import ApiService from "../../../data/services/ApiService"
 import FormData from "form-data"
@@ -9,7 +8,10 @@ import { useSession } from "next-auth/react"
 import { useEffect } from "react"
 
 export default function Layout(props) {
-	const userData = userProfile.data
+	const { data: session } = useSession()
+
+	const user: any = session.user.user
+
 	const form = new FormData()
 
 	const {
@@ -31,7 +33,7 @@ export default function Layout(props) {
 			<Head>
 				<title>Kraken</title>
 			</Head>
-			<Dashboard userProfile={userData} userOptions={userOptions} />
+			<Dashboard userProfile={user} userOptions={userOptions} />
 			<>{props.children}</>
 		</Flex>
 	)

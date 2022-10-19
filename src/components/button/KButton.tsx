@@ -1,19 +1,27 @@
-import { Button, ButtonGroup, Stack } from "@chakra-ui/react"
+import { Button, Stack } from "@chakra-ui/react"
 
-function KButton() {
+export interface KButtonProps {
+	direction
+	align: string
+	/**
+	 * Este es el color del Boton.
+	 */
+	colorScheme: string
+	/**
+	 * Este es el tamaño del Boton
+	 */
+	size: string
+	/**
+	 * Este es el titulo del Boton
+	 */
+	title: string
+}
+
+function KButton(props: KButtonProps) {
 	return (
-		<Stack spacing={4} direction="row" align="center">
-			<Button colorScheme="teal" size="xs">
-				Button
-			</Button>
-			<Button colorScheme="teal" size="sm">
-				Button
-			</Button>
-			<Button colorScheme="teal" size="md">
-				Button
-			</Button>
-			<Button colorScheme="teal" size="lg">
-				Button
+		<Stack direction={props.direction} align={props.align}>
+			<Button colorScheme={props.colorScheme} size={props.size}>
+				{props.title}
 			</Button>
 		</Stack>
 	)
