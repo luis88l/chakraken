@@ -20,7 +20,16 @@ function MyApp({
 	router,
 }: AppProps<{ session: krakenSessionProps }>) {
 	const [isLogged, setIsLogged] = useState(false)
-	const [queryClient] = useState(() => new QueryClient())
+	const [queryClient] = useState(
+		() =>
+			new QueryClient({
+				defaultOptions: {
+					queries: {
+						refetchOnWindowFocus: false,
+					},
+				},
+			})
+	)
 
 	if (router.pathname.startsWith("/dashboard")) {
 		return (

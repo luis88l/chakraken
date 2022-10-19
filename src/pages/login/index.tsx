@@ -13,14 +13,11 @@ import {
 } from "@chakra-ui/react"
 import { FiLock, FiUser, FiArrowRight, FiEye, FiEyeOff } from "react-icons/fi"
 import { useRouter } from "next/router"
-import ApiService from "../../../data/services/ApiService"
 
 import { useState, useEffect } from "react"
 import Head from "next/head"
-import { userLogin } from "../../fixtures/login"
 import KAlert from "../../components/alert/KAlert"
 import { getSession, signIn } from "next-auth/react"
-import { useSession } from "next-auth/react"
 
 const Index = () => {
 	const router = useRouter()
@@ -30,14 +27,6 @@ const Index = () => {
 	const [password, setPassword] = useState("")
 	const [error, setError] = useState(false)
 	const [isLoading, setIsLoading] = useState(false)
-	const { data: session, status } = useSession()
-	const [loadedSession, setLoadedSession] = useState({})
-
-	const handleLogout = async (event) => {
-		event.preventDefault()
-		localStorage.clear()
-		window.location.reload()
-	}
 
 	const handleSubmit = async (event) => {
 		event.preventDefault()
@@ -52,8 +41,6 @@ const Index = () => {
 
 		if (result.ok) {
 			const session = await getSession()
-			//localStorage.setItem("session", result.data.data)
-			//localStorage.setItem("_user", JSON.stringify(result.data.user))
 			router.push("/dashboard")
 		} else {
 			setError(true)
