@@ -4,7 +4,7 @@ import DashboardMenu from "./DashboardMenu/DashboardMenu"
 import DashboardProfile from "./DashboardProfile/DashboardProfile"
 import { signOut } from "next-auth/react"
 
-export default function Dashboard({ userOptions }) {
+export default function Dashboard({ userOptions, userProfile }) {
 	return (
 		<Flex
 			w={["100%", "100%", "18%", "18%", "18%"]}

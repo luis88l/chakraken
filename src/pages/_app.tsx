@@ -9,11 +9,16 @@ import Layout from "../components/layout/layout"
 import { SessionProvider } from "next-auth/react"
 import type { Session } from "next-auth"
 
+interface krakenSessionProps {
+	user: any
+	expires: string
+}
+
 function MyApp({
 	Component,
 	pageProps: { session, ...pageProps },
 	router,
-}: AppProps<{ session: Session }>) {
+}: AppProps<{ session: krakenSessionProps }>) {
 	const [isLogged, setIsLogged] = useState(false)
 	const [queryClient] = useState(() => new QueryClient())
 

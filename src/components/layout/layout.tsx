@@ -9,8 +9,9 @@ import { useEffect } from "react"
 
 export default function Layout(props) {
 	const { data: session } = useSession()
-
-	const user: any = session.user.user
+	console.log(session)
+	// @ts-ignore
+	const user: any = session.user.user // eslint-disable-line no-use-before-define
 
 	const form = new FormData()
 

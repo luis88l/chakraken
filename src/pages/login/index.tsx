@@ -57,6 +57,7 @@ const Index = () => {
 			router.push("/dashboard")
 		} else {
 			setError(true)
+			setIsLoading(false)
 		}
 	}
 
