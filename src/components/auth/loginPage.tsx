@@ -22,7 +22,7 @@ import KAlert from "../../components/alert/KAlert"
 import { getSession, signIn } from "next-auth/react"
 import { useSession } from "next-auth/react"
 
-const Index = () => {
+const LoginPage = () => {
 	const router = useRouter()
 	const [showPassword, setShowPassword] = useState(false)
 	const handleShowClick = () => setShowPassword(!showPassword)
@@ -174,22 +174,4 @@ const Index = () => {
 	)
 }
 
-export async function getServerSideProps(context) {
-	const session = await getSession({ req: context.req })
-
-	if (session) {
-		return {
-			props: { session },
-			redirect: {
-				destination: "/dashboard",
-				permanent: false,
-			},
-		}
-	} else {
-		return {
-			props: {},
-		}
-	}
-}
-
-export default Index
+export default LoginPage

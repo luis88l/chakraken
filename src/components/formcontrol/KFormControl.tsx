@@ -1,21 +1,34 @@
-import {
-    FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-    Select,
-  } from '@chakra-ui/react';
+import { FormControl, FormLabel, Select } from "@chakra-ui/react";
 
-  function KFormControl(props){
-    return(
-  <FormControl>
-  <FormLabel>{props.formtitle}</FormLabel>
-  <Select placeholder={props.placeholder}>
-    <option>{props.option}</option>
-    <option>{props.option2}</option>
-  </Select>
-</FormControl>
-    )
-  }
+export interface KFormControlProps {
+	/**
+	 * Este es el titulo del Form
+	 */
+	formtitle: string;
+	/**
+	 * Este es el titulo del Place Holder
+	 */
+	placeholder: string;
+	/**
+	 * Este es el nombre de la primer opcion
+	 */
+	option: string;
+	/**
+	 * Este es el titulo de la segunda opcion
+	 */
+	option2: string;
+}
 
-  export default KFormControl;
+function KFormControl(props: KFormControlProps) {
+	return (
+		<FormControl>
+			<FormLabel>{props.formtitle}</FormLabel>
+			<Select placeholder={props.placeholder}>
+				<option>{props.option}</option>
+				<option>{props.option2}</option>
+			</Select>
+		</FormControl>
+	);
+}
+
+export default KFormControl;

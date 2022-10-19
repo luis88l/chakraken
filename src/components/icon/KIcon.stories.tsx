@@ -9,6 +9,11 @@ export default {
 	component: KIcon,
 } as ComponentMeta<typeof KIcon>;
 
-const Template: ComponentStory<typeof KIcon> = (args) => <KIcon />;
+const Template: ComponentStory<typeof KIcon> = (args) => <KIcon {...args} />;
 
-export const Default = Template.bind({});
+export const Icon = Template.bind({});
+Icon.args = {
+	w: "7",
+	h: "7",
+	color: "red.500",
+};

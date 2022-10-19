@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios"
+import { getSession, useSession } from "next-auth/react"
 
 interface User {
 	nombre: string
@@ -62,27 +63,23 @@ if (hostname === "localhost") {
 }
 
 export class ApiService {
-	public defaults() {
+	public async defaults() {
+		const session = await getSession()
 		let defaults = {
 			headers: {
 				"Request-Source": "kraken",
 				"Content-Type": "multipart/form-data",
-				authorization: localStorage.getItem("session")!,
+				authorization: session.user.data!,
 			},
 		}
 		return defaults
-	}
-
-	public async login(login: any) {
-		const res = await axios.post("/api/auth/signup", login, this.defaults())
-		return res
 	}
 
 	public async getOpcionesUsuario(form: {}) {
 		const res = await axios.post(
 			`${pathServer}/modulos/getOpcionesUsuario`,
 			form,
-			this.defaults()
+			await this.defaults()
 		)
 		return res.data.data[0]
 	}

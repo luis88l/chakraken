@@ -4,33 +4,36 @@ import { QueryClient, QueryClientProvider, Hydrate } from "react-query"
 import { ReactQueryDevtools } from "react-query/devtools"
 import theme from "../theme"
 import { AppProps } from "next/app"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Layout from "../components/layout/layout"
 import { SessionProvider } from "next-auth/react"
+import type { Session } from "next-auth"
 
-function MyApp({ Component, pageProps: { ...pageProps }, router }: AppProps) {
+function MyApp({
+	Component,
+	pageProps: { session, ...pageProps },
+	router,
+}: AppProps<{ session: Session }>) {
 	const [isLogged, setIsLogged] = useState(false)
 	const [queryClient] = useState(() => new QueryClient())
 
-	if (
-		isLogged &&
-		router.pathname.startsWith("/dashboard") &&
-		!router.pathname.startsWith("/login")
-	) {
+	if (router.pathname.startsWith("/dashboard")) {
 		return (
-			<QueryClientProvider client={queryClient}>
-				<ChakraProvider theme={theme}>
-					<Layout>
-						<Component {...pageProps}></Component>
-					</Layout>
-				</ChakraProvider>
-				<ReactQueryDevtools initialIsOpen={false} />
-			</QueryClientProvider>
+			<SessionProvider session={session}>
+				<QueryClientProvider client={queryClient}>
+					<ChakraProvider theme={theme}>
+						<Layout>
+							<Component {...pageProps}></Component>
+						</Layout>
+					</ChakraProvider>
+					<ReactQueryDevtools initialIsOpen={false} />
+				</QueryClientProvider>
+			</SessionProvider>
 		)
 	}
 
 	return (
-		<SessionProvider refetchInterval={5 * 60}>
+		<SessionProvider session={session}>
 			<QueryClientProvider client={queryClient}>
 				<ChakraProvider theme={theme}>
 					<Component {...pageProps} />

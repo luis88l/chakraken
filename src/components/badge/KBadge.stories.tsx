@@ -10,26 +10,16 @@ export default {
 	component: KBadge,
 } as ComponentMeta<typeof KBadge>;
 
-const Template: ComponentStory<typeof KBadge> = (args) => <KBadge {...args}/>;
-
-export const Default = Template.bind({});
+const Template: ComponentStory<typeof KBadge> = (args) => <KBadge {...args} />;
 
 export const Example1 = Template.bind({});
-Example1.args={
+Example1.args = {
 	src: "https://bit.ly/sage-adebayo",
-	variant: 'subtle',
-	Ml:'3',
-	fontWeight:'thin',
-	colorScheme:'purple',
-	fontSize:'sm',
-}
-
-export const Example2 = Template.bind({});
-Example2.args={
-	src: "https://bit.ly/sage-adebayo",
-	variant: 'subtle',
-	Ml:'2',
-	fontWeight:'extrabold',
-	colorScheme:'teal',
-	fontSize:'md',
-}
+	Ml: "3",
+	fontWeight: "thin",
+	colorScheme: "purple",
+	fontSize: "sm",
+	title: "Emiliano Rios",
+	status: "nuevo",
+	description: "Ui Engineer",
+};

@@ -1,33 +1,40 @@
-import { ChevronDownIcon } from '@chakra-ui/icons';
-import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
-    Button,
-  } from '@chakra-ui/react';
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 
-  function KMenu(props){
-    return(
-  <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDownIcon />} colorScheme={props.colorScheme}>
-    {props.titleMenu}
-  </MenuButton>
-  
-  <MenuList>
-    <MenuItem as="a" href={props.href} color={props.colorItem}> {props.item1} </MenuItem>
-    <MenuItem as="a" href={props.href}> {props.item2} </MenuItem>
-    <MenuItem as="a" href={props.href}> {props.item3} </MenuItem>
-    <MenuItem as="a" href={props.href}> {props.item4} </MenuItem>
-    <MenuItem as="a" href={props.href} color={props.colorItemDelete}> {props.item5} </MenuItem>
-  </MenuList>
+export interface KMenuProps {
+	/**
+	 * Arreglo que va tener las opciones
+	 */
+	items: [];
+	/**
+	 * Este es el titulo del menu
+	 */
+	titleMenu: string;
+}
 
-</Menu>
-    );
-  }
+export interface KMenuItemProps {
+	link: string;
+	title: string;
+}
 
-  export default KMenu;
+function KMenu(props: KMenuProps) {
+	const items = props.items;
+	return (
+		<Menu>
+			<MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+				{props.titleMenu}
+			</MenuButton>
+
+			<MenuList>
+				{items.map((item: KMenuItemProps) => (
+					<MenuItem as="a" href={item.link}>
+						{" "}
+						{item.title}{" "}
+					</MenuItem>
+				))}
+			</MenuList>
+		</Menu>
+	);
+}
+
+export default KMenu;

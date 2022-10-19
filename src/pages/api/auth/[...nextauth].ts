@@ -1,4 +1,5 @@
-import NextAuth from "next-auth/next"
+import NextAuth, { unstable_getServerSession } from "next-auth/next"
+
 import CredentialsProvider from "next-auth/providers/credentials"
 import FormData from "form-data"
 
@@ -28,7 +29,6 @@ export default NextAuth({
 					headers: { "Content-Type": "application/json" },
 				})
 				const user = await res.json()
-				console.log(user)
 
 				// If no error and we have user data, return it
 				if (res.ok && user) {
@@ -40,17 +40,23 @@ export default NextAuth({
 			},
 		}),
 	],
+	session: {
+		strategy: "jwt",
+		maxAge: 30 * 24 * 60 * 60, // 30 days
+	},
 	callbacks: {
-		async signIn({ user, account, profile, email, credentials }) {
-			const isAllowedToSignIn = true
-			if (isAllowedToSignIn) {
-				return true
-			} else {
-				// Return false to display a default error message
-				return false
-				// Or you can return a URL to redirect to:
-				// return '/login'
+		jwt: async ({ token, user }) => {
+			if (user) {
+				token.user = user
 			}
+			return token
 		},
+		session: async ({ session, token }) => {
+			if (token) {
+				session.user = token.user
+			}
+			return session
+		},
+		secret: process.env.NEXTAUTH_SECRET,
 	},
 })
