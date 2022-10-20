@@ -6,11 +6,8 @@ import { useQuery } from "react-query"
 import { createColumnHelper } from "@tanstack/react-table"
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout"
 import { EditIcon, DeleteIcon, AddIcon } from "@chakra-ui/icons"
-import KButton from "../../../components/button/KButton"
-import KSkeleton from "../../../components/skeleton/KSkeleton"
 import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react"
 import Link from "next/link"
-import { clearLine } from "readline"
 
 export interface modulosTable {
 	nb_modulo: string
@@ -50,7 +47,11 @@ export default function Modulos() {
 			cell: (props) => (
 				<ButtonGroup gap="2">
 					<Box m={2} cursor="pointer">
-						<Link href={{ pathname: "/dashboard/modulos/" + props.getValue() }}>
+						<Link
+							href={{
+								pathname: "/dashboard/modulos/" + props.getValue(),
+							}}
+						>
 							<EditIcon />
 						</Link>
 					</Box>

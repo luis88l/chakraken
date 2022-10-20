@@ -2,7 +2,7 @@ import { useState } from "react"
 import { getSession } from "next-auth/react"
 import KPage from "../../../components/page/KPage"
 import ApiService from "../../../../data/services/ApiService"
-import { useMutation, useQuery } from "react-query"
+import { useMutation } from "react-query"
 import {
 	Box,
 	Button,
@@ -17,13 +17,6 @@ import {
 	Textarea,
 } from "@chakra-ui/react"
 import { useRouter } from "next/router"
-
-export interface modulosTable {
-	nb_modulo: string
-	id_modulo: string
-	nu_orden: number
-	acciones: string
-}
 
 export default function New() {
 	const colSpan = { base: 2, md: 1 }

@@ -4,6 +4,7 @@ import DashboardMenuItem from "../DashboardMenuItem/DashboardMenuItem"
 export default function DashboardMenu(props) {
 	const allMenuItems = props.items
 
+
 	const menuItems = []
 
 	allMenuItems.filter(function (item) {
