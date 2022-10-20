@@ -5,16 +5,20 @@ import ApiService from "../../../../data/services/ApiService"
 import { useQuery } from "react-query"
 import { createColumnHelper } from "@tanstack/react-table"
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout"
-import { EditIcon, DeleteIcon } from "@chakra-ui/icons"
+import { EditIcon, DeleteIcon, AddIcon } from "@chakra-ui/icons"
 import KButton from "../../../components/button/KButton"
 import KSkeleton from "../../../components/skeleton/KSkeleton"
-import { Box, Flex } from "@chakra-ui/react"
+import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react"
+import Link from "next/link"
+import { clearLine } from "readline"
 
 export interface modulosTable {
 	nb_modulo: string
 	id_modulo: string
 	nu_orden: number
 	acciones: string
+	de_modulo: string
+	de_clase: string
 }
 
 export default function Modulos() {
@@ -34,10 +38,6 @@ export default function Modulos() {
 	const columnHelper = createColumnHelper<modulosTable>()
 
 	const columns = [
-		columnHelper.accessor("id_modulo", {
-			cell: (info) => info.getValue(),
-			header: "Id",
-		}),
 		columnHelper.accessor("nb_modulo", {
 			cell: (info) => info.getValue(),
 			header: "Nombre",
@@ -46,16 +46,18 @@ export default function Modulos() {
 			cell: (info) => info.getValue(),
 			header: "Orden",
 		}),
-		columnHelper.accessor("acciones", {
-			cell: (action) => (
-				<Box flexDir="row" justifyContent="space-between">
-					<Box m={2}>
-						<EditIcon />
+		columnHelper.accessor("id_modulo", {
+			cell: (props) => (
+				<ButtonGroup gap="2">
+					<Box m={2} cursor="pointer">
+						<Link href={{ pathname: "/dashboard/modulos/" + props.getValue() }}>
+							<EditIcon />
+						</Link>
 					</Box>
-					<Box m={2}>
+					<Box m={2} cursor="pointer">
 						<DeleteIcon />
 					</Box>
-				</Box>
+				</ButtonGroup>
 			),
 			header: "Acciones",
 		}),
@@ -63,14 +65,30 @@ export default function Modulos() {
 
 	return (
 		<KPage title="Módulos">
-			<KTableLayout
-				columns={columns}
-				data={modules.map(({ id_modulo, nb_modulo, nu_orden }) => ({
-					id_modulo,
-					nb_modulo,
-					nu_orden,
-				}))}
-			/>
+			<Box>
+				<Flex mb={4} display="grid" justifyItems="flex-end">
+					<Link href={"/dashboard/modulos/new"}>
+						<Button
+							w="200px"
+							alignSelf="flex-end"
+							color="#fff"
+							bg="#1cb35b"
+							_hover={{ bg: "#238152" }}
+							leftIcon={<AddIcon />}
+						>
+							Nuevo módulo
+						</Button>
+					</Link>
+				</Flex>
+				<KTableLayout
+					columns={columns}
+					data={modules.map(({ id_modulo, nb_modulo, nu_orden }) => ({
+						id_modulo,
+						nb_modulo,
+						nu_orden,
+					}))}
+				/>
+			</Box>
 		</KPage>
 	)
 }

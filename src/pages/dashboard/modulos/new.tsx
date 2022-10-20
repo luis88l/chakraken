@@ -25,7 +25,7 @@ export interface modulosTable {
 	acciones: string
 }
 
-export default function Modulo() {
+export default function New() {
 	const colSpan = { base: 2, md: 1 }
 	const router = useRouter()
 	const [nombreModulo, setNombreModulo] = useState("")
@@ -33,15 +33,9 @@ export default function Modulo() {
 	const [descripcionModulo, setDescripcionModulo] = useState("")
 	const [updating, setUpdating] = useState(false)
 
-	const {
-		isLoading,
-		error,
-		data: modules,
-	} = useQuery("modulos", () => ApiService.getModulos())
-
-	const updateModulo = useMutation(
+	const crearModulo = useMutation(
 		(formData: any) => {
-			return ApiService.updateModulos(formData)
+			return ApiService.saveModulos(formData)
 		},
 		{
 			onSuccess: () => {
@@ -50,39 +44,19 @@ export default function Modulo() {
 		}
 	)
 
-	if (isLoading) {
-		return <p>Cargando...</p>
-	}
-
-	const modulo = modules.filter(
-		(modulo) => modulo.id_modulo === router.query.id
-	)
-
 	const handleSubmit = async (event) => {
 		event.preventDefault()
 		setUpdating(true)
 		console.log(nombreModulo, claseModulo, descripcionModulo)
 		const formData = new FormData()
-		formData.append("id_modulo", modulo[0].id_modulo)
-		formData.append(
-			"nb_modulo",
-			nombreModulo === "" ? modulo[0].nb_modulo : nombreModulo
-		)
-		formData.append(
-			"de_clase",
-			claseModulo === "" ? modulo[0].de_clase : claseModulo
-		)
-		formData.append(
-			"de_modulo",
-			descripcionModulo === "" && modulo[0].de_modulo !== ""
-				? modulo[0].de_modulo
-				: descripcionModulo
-		)
-		updateModulo.mutate(formData)
+		formData.append("nb_modulo", nombreModulo)
+		formData.append("de_clase", claseModulo)
+		formData.append("de_modulo", descripcionModulo)
+		crearModulo.mutate(formData)
 	}
 
 	return (
-		<KPage title={"Módulo " + modulo[0].nb_modulo}>
+		<KPage title="Crear módulo">
 			<Box>
 				<Text fontSize="l" fontWeight="bold">
 					Actualizar módulo
@@ -96,7 +70,6 @@ export default function Modulo() {
 							<FormControl isRequired>
 								<FormLabel>Nombre</FormLabel>
 								<Input
-									defaultValue={modulo[0].nb_modulo}
 									onChange={(event) => {
 										setNombreModulo(event.currentTarget.value)
 									}}
@@ -107,7 +80,6 @@ export default function Modulo() {
 							<FormControl isRequired>
 								<FormLabel>Clase</FormLabel>
 								<Input
-									defaultValue={modulo[0].de_clase}
 									onChange={(event) => {
 										setClaseModulo(event.currentTarget.value)
 									}}
@@ -118,7 +90,6 @@ export default function Modulo() {
 							<FormControl>
 								<FormLabel>Descripción</FormLabel>
 								<Textarea
-									defaultValue={modulo[0].de_modulo}
 									onChange={(event) => {
 										setDescripcionModulo(event.currentTarget.value)
 									}}
@@ -144,7 +115,7 @@ export default function Modulo() {
 									) : null
 								}
 							>
-								Actualizar
+								Crear módulo
 							</Button>
 						</GridItem>
 					</SimpleGrid>

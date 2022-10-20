@@ -68,6 +68,8 @@ export class ApiService {
 		return defaults
 	}
 
+	// opciones usuarios menu
+
 	public async getOpcionesUsuario(form: {}) {
 		const res = await axios.post(
 			`${pathServer}/modulos/getOpcionesUsuario`,
@@ -76,6 +78,8 @@ export class ApiService {
 		)
 		return res.data.data[0]
 	}
+
+	// obtener lista de modulos
 
 	public async getModulos() {
 		const res = await axios
@@ -87,6 +91,34 @@ export class ApiService {
 				return error.response
 			})
 		return res.data.data
+	}
+
+	// actualizar modulo
+
+	public async updateModulos(form: {}) {
+		const res = await axios
+			.post(`${pathServer}/modulos/Update`, form, await this.defaults())
+			.then((response) => {
+				return response
+			})
+			.catch((error) => {
+				return error.response
+			})
+		return res
+	}
+
+	// crear modulo
+
+	public async saveModulos(form: {}) {
+		const res = await axios
+			.post(`${pathServer}/modulos/save`, form, await this.defaults())
+			.then((response) => {
+				return response
+			})
+			.catch((error) => {
+				return error.response
+			})
+		return res
 	}
 }
 

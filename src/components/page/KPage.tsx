@@ -21,9 +21,17 @@ export default function KPage(props: KPageProps) {
 			<Box mt={4} mb={5} width="100%">
 				<Text fontSize="2xl">{props.title}</Text>
 			</Box>
-			<Box width="100%" overflowY="scroll" flex="auto">
-				<Flex bgColor="#fff" borderRadius={15} width="100%" minH="calc(81vh)">
-					<Box p={10} width="100%">
+			<Box width="100%">
+				<Flex
+					bgColor="#fff"
+					borderRadius={15}
+					width="100%"
+					minH="calc(87vh)"
+					maxH="calc(87vh)"
+					overflowY="scroll"
+					flex="auto"
+				>
+					<Box p={6} width="100%">
 						{props.children}
 					</Box>
 				</Flex>

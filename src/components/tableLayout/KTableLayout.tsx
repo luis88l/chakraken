@@ -82,7 +82,7 @@ export function KTableLayout<Data extends object>({
 								{row.getVisibleCells().map((cell) => {
 									const meta: any = cell.column.columnDef.meta
 									return (
-										<Td key={cell.id} isNumeric={meta?.isNumeric}>
+										<Td key={cell.id} isNumeric={meta?.isNumeric} fontSize="sm">
 											{flexRender(
 												cell.column.columnDef.cell,
 												cell.getContext()
