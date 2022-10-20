@@ -1,9 +1,14 @@
-import { Heading } from '@chakra-ui/react';
+import { Heading } from "@chakra-ui/react";
 
-function KHeading(props){
-    return(
-<Heading>{props.text}</Heading>
-    )
+export interface KHeadingProps {
+	/**
+	 * Este es el Heading
+	 */
+	text: string;
 }
 
-export default KHeading
+function KHeading(props: KHeadingProps) {
+	return <Heading>{props.text}</Heading>;
+}
+
+export default KHeading;

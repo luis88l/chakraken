@@ -1,8 +1,8 @@
-import { Box, calc, Flex, Text } from "@chakra-ui/react"
+import { Box, calc, Flex, Text } from "@chakra-ui/react";
 
 export interface KPageProps {
-	title: string
-	children: React.ReactNode
+	title: string;
+	children: React.ReactNode;
 }
 
 export default function KPage(props: KPageProps) {
@@ -19,5 +19,5 @@ export default function KPage(props: KPageProps) {
 				</Flex>
 			</Box>
 		</Flex>
-	)
+	);
 }

@@ -22,14 +22,9 @@ export interface KCheckboxProps {
 
 function KCheckbox(props: KCheckboxProps) {
 	return (
-		<Stack spacing={props.spacing} direction={props.direction}>
-			<Checkbox colorScheme={props.colorScheme} defaultChecked>
-				{props.title}
-			</Checkbox>
-			<Checkbox colorScheme={props.colorScheme} defaultChecked>
-				{props.title2}
-			</Checkbox>
-		</Stack>
+		<Checkbox colorScheme={props.colorScheme} defaultChecked>
+			{props.title}
+		</Checkbox>
 	);
 }
 

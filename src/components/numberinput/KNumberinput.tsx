@@ -1,21 +1,21 @@
 import {
-    NumberInput,
-    NumberInputField,
-    NumberInputStepper,
-    NumberIncrementStepper,
-    NumberDecrementStepper,
-  } from '@chakra-ui/react';
+	NumberInput,
+	NumberInputField,
+	NumberInputStepper,
+	NumberIncrementStepper,
+	NumberDecrementStepper,
+} from "@chakra-ui/react";
 
-  function KNumberinput(){
-    return(
-  <NumberInput>
-  <NumberInputField />
-  <NumberInputStepper>
-    <NumberIncrementStepper />
-    <NumberDecrementStepper />
-  </NumberInputStepper>
-</NumberInput>
-    )
-  }
+function KNumberinput() {
+	return (
+		<NumberInput>
+			<NumberInputField />
+			<NumberInputStepper>
+				<NumberIncrementStepper />
+				<NumberDecrementStepper />
+			</NumberInputStepper>
+		</NumberInput>
+	);
+}
 
-  export default KNumberinput
+export default KNumberinput;

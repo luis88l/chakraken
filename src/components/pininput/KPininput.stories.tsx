@@ -6,7 +6,7 @@ import KPininput from "./KPininput";
 
 export default {
 	title: "Kraken+ChakraUI/Pin input",
-	component: KPininput
+	component: KPininput,
 } as ComponentMeta<typeof KPininput>;
 
 const Template: ComponentStory<typeof KPininput> = (args) => <KPininput />;

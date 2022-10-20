@@ -15,5 +15,4 @@ export const Icon = Template.bind({});
 Icon.args = {
 	w: "7",
 	h: "7",
-	color: "red.500",
 };

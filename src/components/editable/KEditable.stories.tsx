@@ -11,7 +11,4 @@ export default {
 
 const Template: ComponentStory<typeof KEditable> = (args) => <KEditable />;
 
-export const Editable = Template.bind({});
-Editable.args = {
-	defaultValue: "Write here...",
-};
+export const Default = Template.bind({});
