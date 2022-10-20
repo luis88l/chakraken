@@ -19,7 +19,6 @@ function MyApp({
 	pageProps: { session, ...pageProps },
 	router,
 }: AppProps<{ session: krakenSessionProps }>) {
-	const [isLogged, setIsLogged] = useState(false)
 	const [queryClient] = useState(
 		() =>
 			new QueryClient({
@@ -31,7 +30,7 @@ function MyApp({
 			})
 	)
 
-	if (router.pathname.startsWith("/dashboard")) {
+	if (session) {
 		return (
 			<SessionProvider session={session}>
 				<QueryClientProvider client={queryClient}>

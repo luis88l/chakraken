@@ -5,13 +5,40 @@ import ApiService from "../../../data/services/ApiService"
 import FormData from "form-data"
 import { useQuery } from "react-query"
 import { useSession } from "next-auth/react"
-import { useEffect } from "react"
+
+interface userSessionProps {
+	expires: string
+	user: userDataProps
+}
+
+interface userDataProps {
+	status: number
+	data: string
+	user: userInfoDataProps
+}
+
+interface userInfoDataProps {
+	cl_password: string
+	de_email: string
+	de_rol: string
+	de_tokenPush: string | null
+	fh_cumpleanios: string | null
+	fh_modificado: string
+	fh_registro: string
+	id_area: string | null
+	id_rol: string
+	id_usuario: string
+	nb_area: string
+	nb_nombre: string
+	nb_usuario: string
+	sn_activo: boolean
+	user_photo: string | null
+}
 
 export default function Layout(props) {
 	const { data: session } = useSession()
-	console.log(session)
 	// @ts-ignore
-	const user: any = session.user.user // eslint-disable-line no-use-before-define
+	const user: userInfoDataProps = session.user.user // eslint-disable-line no-use-before-define
 
 	const form = new FormData()
 

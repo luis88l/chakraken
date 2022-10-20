@@ -36,13 +36,6 @@ axios.interceptors.response.use(undefined, function (error: AxiosError<any>) {
 		}
 	}
 
-	// bugsnag.notify(error, {
-	//     metaData: {
-	//         response: newResponse,
-	//         config: newConfig
-	//     }
-	// })
-
 	return Promise.reject(error)
 })
 
@@ -82,6 +75,18 @@ export class ApiService {
 			await this.defaults()
 		)
 		return res.data.data[0]
+	}
+
+	public async getModulos() {
+		const res = await axios
+			.get(`${pathServer}/modulos/get`, await this.defaults())
+			.then((response) => {
+				return response
+			})
+			.catch((error) => {
+				return error.response
+			})
+		return res.data.data
 	}
 }
 
