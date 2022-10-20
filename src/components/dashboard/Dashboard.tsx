@@ -18,7 +18,7 @@ export default function Dashboard({ userOptions, userProfile }) {
 					<DashboardHeading />
 					<DashboardMenu items={userOptions} />
 				</Flex>
-				<DashboardProfile nb_nombre="example" />
+				<DashboardProfile />
 				<Button
 					bg="#c21a6e"
 					size="sm"

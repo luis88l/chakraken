@@ -5,11 +5,15 @@ import ApiService from "../../../../data/services/ApiService"
 import { useQuery } from "react-query"
 import { createColumnHelper } from "@tanstack/react-table"
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout"
+import { EditIcon, DeleteIcon } from "@chakra-ui/icons"
+import KButton from "../../../components/button/KButton"
+import KSkeleton from "../../../components/skeleton/KSkeleton"
 
 export interface modulosTable {
 	nb_modulo: string
 	id_modulo: string
 	nu_orden: number
+	acciones: string
 }
 
 export default function Modulos() {
@@ -26,8 +30,6 @@ export default function Modulos() {
 		return <p>Is loading...</p>
 	}
 
-	console.log(modules)
-
 	const columnHelper = createColumnHelper<modulosTable>()
 
 	const columns = [
@@ -42,6 +44,10 @@ export default function Modulos() {
 		columnHelper.accessor("nu_orden", {
 			cell: (info) => info.getValue(),
 			header: "Orden",
+		}),
+		columnHelper.accessor("acciones", {
+			cell: (action) => <KSkeleton />,
+			header: "Acciones",
 		}),
 	]
 
