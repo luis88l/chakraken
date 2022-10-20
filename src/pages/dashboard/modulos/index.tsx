@@ -8,6 +8,7 @@ import { KTableLayout } from "../../../components/tableLayout/KTableLayout"
 import { EditIcon, DeleteIcon } from "@chakra-ui/icons"
 import KButton from "../../../components/button/KButton"
 import KSkeleton from "../../../components/skeleton/KSkeleton"
+import { Box, Flex } from "@chakra-ui/react"
 
 export interface modulosTable {
 	nb_modulo: string
@@ -27,7 +28,7 @@ export default function Modulos() {
 	} = useQuery("modulos", () => ApiService.getModulos())
 
 	if (isLoading) {
-		return <p>Is loading...</p>
+		return <p>Cargando...</p>
 	}
 
 	const columnHelper = createColumnHelper<modulosTable>()
@@ -46,7 +47,16 @@ export default function Modulos() {
 			header: "Orden",
 		}),
 		columnHelper.accessor("acciones", {
-			cell: (action) => <KSkeleton />,
+			cell: (action) => (
+				<Box flexDir="row" justifyContent="space-between">
+					<Box m={2}>
+						<EditIcon />
+					</Box>
+					<Box m={2}>
+						<DeleteIcon />
+					</Box>
+				</Box>
+			),
 			header: "Acciones",
 		}),
 	]

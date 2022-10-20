@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react"
+import { Box, Flex } from "@chakra-ui/react"
 import DashboardMenuItem from "../DashboardMenuItem/DashboardMenuItem"
 
 export default function DashboardMenu(props) {
@@ -15,7 +15,7 @@ export default function DashboardMenu(props) {
 	})
 
 	return (
-		<Flex
+		<Box
 			flexDir={["row", "row", "column", "column", "column"]}
 			justifyContent="center"
 		>
@@ -28,6 +28,6 @@ export default function DashboardMenu(props) {
 					)}
 				/>
 			))}
-		</Flex>
+		</Box>
 	)
 }
