@@ -21,4 +21,5 @@ Accordion1.args = {
 	titleBox2: "Section 2 Title",
 	contentPanel1: "Text example here...",
 	contentPanel2: "Text example here...",
+	pb: 4,
 };
