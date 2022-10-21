@@ -10,16 +10,12 @@ export default {
 	component: KStat,
 } as ComponentMeta<typeof KStat>;
 
-const Template: ComponentStory<typeof KStat> = (args) => <KStat {...args}/>;
+const Template: ComponentStory<typeof KStat> = (args) => <KStat {...args} />;
 
 export const Stat1 = Template.bind({});
-Stat1.args={
-	title:'Visits',
-	Number: '345,670',
-	percentage:'23.36%',
-	type:'increase',
-	title2: 'Clicked',
-	Number2: '45',
-	percentage2:'9.05%',
-	type2:'decrease',
-}
+Stat1.args = {
+	title: "Visits",
+	Number: "345,670",
+	percentage: "23.36%",
+	type: "increase",
+};

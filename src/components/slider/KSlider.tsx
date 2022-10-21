@@ -1,20 +1,26 @@
 import {
-    Slider,
-    SliderTrack,
-    SliderFilledTrack,
-    SliderThumb,
-    SliderMark,
-  } from '@chakra-ui/react';
+	Slider,
+	SliderTrack,
+	SliderFilledTrack,
+	SliderThumb,
+} from "@chakra-ui/react";
 
-  function KSlider(){
-    return(
-  <Slider aria-label='slider-ex-1' defaultValue={30}>
-  <SliderTrack>
-    <SliderFilledTrack />
-  </SliderTrack>
-  <SliderThumb />
-</Slider>
-    )
-  }
+export interface KSliderProps {
+	/**
+	 * Este es el punto de inicio del Slider
+	 */
+	defaultValue: number;
+}
 
-  export default KSlider;
+function KSlider(props: KSliderProps) {
+	return (
+		<Slider aria-label="slider-ex-1" defaultValue={props.defaultValue}>
+			<SliderTrack>
+				<SliderFilledTrack />
+			</SliderTrack>
+			<SliderThumb />
+		</Slider>
+	);
+}
+
+export default KSlider;

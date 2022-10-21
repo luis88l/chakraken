@@ -5,20 +5,22 @@ import {
 	useDisclosure,
 	Collapse,
 	color,
-} from "@chakra-ui/react";
-import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+} from "@chakra-ui/react"
+import { FiChevronDown, FiChevronUp } from "react-icons/fi"
 
-import Link from "next/link";
+import Link from "next/link"
 
 interface DashboardMenuItemProps {
-	title: string;
-	items: any;
+	title: string
+	items: any
 }
 
 export default function DashboardMenuItem(props: DashboardMenuItemProps) {
-	const { isOpen, onToggle } = useDisclosure();
+	const { isOpen, onToggle } = useDisclosure()
 
-	const subItems = props.items;
+	const subItems = props.items
+
+	console.log(subItems)
 
 	return (
 		<Box className="sidebar-item" color={isOpen ? "#ea4c89" : "#cbd5e0"}>
@@ -55,5 +57,5 @@ export default function DashboardMenuItem(props: DashboardMenuItemProps) {
 				</Box>
 			</Collapse>
 		</Box>
-	);
+	)
 }

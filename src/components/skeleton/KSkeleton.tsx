@@ -1,14 +1,18 @@
-import {
-	Box,
-	Flex,
-	Skeleton,
-	SkeletonCircle,
-	SkeletonText,
-	Stack,
-} from "@chakra-ui/react"
+import { Skeleton } from "@chakra-ui/react";
 
-function KSkeleton() {
-	return <Skeleton height="30" width="100%" />
+export interface KSkeletonProps {
+	/**
+	 * Este es la altura del Skeleton
+	 */
+	height: number;
+	/**
+	 * Este es el ancho del Skeleton
+	 */
+	width: string;
 }
 
-export default KSkeleton
+function KSkeleton(props: KSkeletonProps) {
+	return <Skeleton height={props.height} width={props.width} />;
+}
+
+export default KSkeleton;

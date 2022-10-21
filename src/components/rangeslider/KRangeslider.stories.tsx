@@ -6,9 +6,11 @@ import KRangeslider from "./KRangeslider";
 
 export default {
 	title: "Kraken+ChakraUI/Range slider",
-	component: KRangeslider
+	component: KRangeslider,
 } as ComponentMeta<typeof KRangeslider>;
 
-const Template: ComponentStory<typeof KRangeslider> = (args) => <KRangeslider />;
+const Template: ComponentStory<typeof KRangeslider> = (args) => (
+	<KRangeslider />
+);
 
 export const Default = Template.bind({});

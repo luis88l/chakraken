@@ -9,6 +9,11 @@ export default {
 	component: KTextarea,
 } as ComponentMeta<typeof KTextarea>;
 
-const Template: ComponentStory<typeof KTextarea> = (args) => <KTextarea />;
+const Template: ComponentStory<typeof KTextarea> = (args) => (
+	<KTextarea {...args} />
+);
 
 export const Default = Template.bind({});
+Default.args = {
+	placeholder: "Here is a sample placeholder",
+};

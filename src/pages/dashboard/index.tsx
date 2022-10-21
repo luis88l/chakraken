@@ -9,14 +9,7 @@ export default function index() {
 	const [value, changeValue] = useState(1)
 	const router = useRouter()
 
-	
-
-
-	return <KPage title="Inicio">
-
-
-
-	</KPage>
+	return <KPage title="Inicio">hi</KPage>
 }
 
 export async function getServerSideProps(context) {

@@ -9,6 +9,12 @@ export default {
 	component: KToolTip,
 } as ComponentMeta<typeof KToolTip>;
 
-const Template: ComponentStory<typeof KToolTip> = (args) => <KToolTip />;
+const Template: ComponentStory<typeof KToolTip> = (args) => (
+	<KToolTip {...args} />
+);
 
 export const Default = Template.bind({});
+Default.args = {
+	label: "Search places",
+	title: "Boton",
+};

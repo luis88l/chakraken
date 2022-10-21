@@ -3,7 +3,7 @@ import {
 	RangeSliderTrack,
 	RangeSliderFilledTrack,
 	RangeSliderThumb,
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
 
 function KRangeslider() {
 	return (
@@ -14,7 +14,7 @@ function KRangeslider() {
 			<RangeSliderThumb index={0} />
 			<RangeSliderThumb index={1} />
 		</RangeSlider>
-	)
+	);
 }
 
-export default KRangeslider
+export default KRangeslider;

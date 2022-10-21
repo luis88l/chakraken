@@ -1,24 +1,24 @@
-import { ChevronDownIcon } from "@chakra-ui/icons"
-import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react"
+import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 
 export interface KMenuProps {
 	/**
 	 * Arreglo que va tener las opciones
 	 */
-	items: []
+	items: [];
 	/**
 	 * Este es el titulo del menu
 	 */
-	titleMenu: string
+	titleMenu: string;
 }
 
 export interface KMenuItemProps {
-	link: string
-	title: string
+	link: string;
+	title: string;
 }
 
 function KMenu(props: KMenuProps) {
-	const items = props.items
+	const items = props.items;
 	return (
 		<Menu>
 			<MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -33,7 +33,7 @@ function KMenu(props: KMenuProps) {
 				))}
 			</MenuList>
 		</Menu>
-	)
+	);
 }
 
-export default KMenu
+export default KMenu;

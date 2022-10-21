@@ -1,35 +1,44 @@
 import {
-    Stat,
-    StatLabel,
-    StatNumber,
-    StatHelpText,
-    StatArrow,
-    StatGroup,
-  } 
-  from '@chakra-ui/react';
+	Stat,
+	StatLabel,
+	StatNumber,
+	StatHelpText,
+	StatArrow,
+	StatGroup,
+} from "@chakra-ui/react";
 
-  function KStat(props){
-    return(
-  <StatGroup>
-  <Stat>
-    <StatLabel>{props.title}</StatLabel>
-    <StatNumber>{props.Number}</StatNumber>
-    <StatHelpText>
-      <StatArrow type={props.type} />
-      {props.percentage}
-    </StatHelpText>
-  </Stat>
+export interface KStatProps {
+	/**
+	 * Este es el titulo de la Estadistica
+	 */
+	title: string;
+	/**
+	 * Este es el numero de la estadistica
+	 */
+	Number: number;
+	/**
+	 * Porcentaje
+	 */
+	percentage: string;
+	/**
+	 * Este es el tipo de Estadistica (increase or decrease)
+	 */
+	type;
+}
 
-  <Stat>
-    <StatLabel>{props.title2}</StatLabel>
-    <StatNumber>{props.Number2}</StatNumber>
-    <StatHelpText>
-      <StatArrow type={props.type2} />
-      {props.percentage2}
-    </StatHelpText>
-  </Stat>
-</StatGroup>
-    )
-  }
+function KStat(props: KStatProps) {
+	return (
+		<StatGroup>
+			<Stat>
+				<StatLabel>{props.title}</StatLabel>
+				<StatNumber>{props.Number}</StatNumber>
+				<StatHelpText>
+					<StatArrow type={props.type} />
+					{props.percentage}
+				</StatHelpText>
+			</Stat>
+		</StatGroup>
+	);
+}
 
-  export default KStat;
+export default KStat;

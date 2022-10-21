@@ -6,9 +6,12 @@ import KSlider from "./KSlider";
 
 export default {
 	title: "Kraken+ChakraUI/Slider",
-	component: KSlider
+	component: KSlider,
 } as ComponentMeta<typeof KSlider>;
 
-const Template: ComponentStory<typeof KSlider> = (args) => <KSlider />;
+const Template: ComponentStory<typeof KSlider> = (args) => <KSlider {...args}/>;
 
 export const Default = Template.bind({});
+Default.args = {
+	defaultValue: 30,
+};

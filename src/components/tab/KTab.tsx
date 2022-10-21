@@ -1,23 +1,38 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
-function KTab() {
+export interface KTabProps {
+	/**
+	 * Titulo del Tab
+	 */
+	title: string;
+	/**
+	 * Titulo del Tab
+	 */
+	title2: string;
+	/**
+	 * Contenido del Tab
+	 */
+	content: string;
+	/**
+	 * Contenido del Tab
+	 */
+	content2: string;
+}
+
+function KTab(props: KTabProps) {
 	return (
 		<Tabs>
 			<TabList>
-				<Tab>One</Tab>
-				<Tab>Two</Tab>
-				<Tab>Three</Tab>
+				<Tab>{props.title}</Tab>
+				<Tab>{props.title2}</Tab>
 			</TabList>
 
 			<TabPanels>
 				<TabPanel>
-					<p>Uno</p>
+					<p>{props.content}</p>
 				</TabPanel>
 				<TabPanel>
-					<p>Dos</p>
-				</TabPanel>
-				<TabPanel>
-					<p>Tres</p>
+					<p>{props.content2}</p>
 				</TabPanel>
 			</TabPanels>
 		</Tabs>

@@ -1,14 +1,20 @@
 // Button.stories.ts|tsx
 
-import React from "react"
-import { ComponentStory, ComponentMeta } from "@storybook/react"
-import KTable from "./KTable"
+import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import KTable from "./KTable";
 
 export default {
 	title: "Kraken+ChakraUI/Table",
 	component: KTable,
-} as ComponentMeta<typeof KTable>
+} as ComponentMeta<typeof KTable>;
 
-const Template: ComponentStory<typeof KTable> = (args) => <KTable />
+const Template: ComponentStory<typeof KTable> = (args) => <KTable {...args} />;
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
+Default.args = {
+	Caption: "Imperial to metric conversion factors",
+	Description: "To convert",
+	Content: "inches",
+	Variant: "striped",
+};

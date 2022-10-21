@@ -9,6 +9,12 @@ export default {
 	component: KProgressBar,
 } as ComponentMeta<typeof KProgressBar>;
 
-const Template: ComponentStory<typeof KProgressBar> = (args) => <KProgressBar />;
+const Template: ComponentStory<typeof KProgressBar> = (args) => (
+	<KProgressBar {...args} />
+);
 
 export const ProgressBar1 = Template.bind({});
+ProgressBar1.args = {
+	size: "md",
+	value: 20,
+};
