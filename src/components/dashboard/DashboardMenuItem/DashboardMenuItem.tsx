@@ -20,8 +20,6 @@ export default function DashboardMenuItem(props: DashboardMenuItemProps) {
 
 	const subItems = props.items
 
-	console.log(subItems)
-
 	return (
 		<Box className="sidebar-item" color={isOpen ? "#ea4c89" : "#cbd5e0"}>
 			<Flex

@@ -40,6 +40,7 @@ axios.interceptors.response.use(undefined, function (error: AxiosError<any>) {
 })
 
 interface GetUserResponse {
+  data: any
 	Data: User
 }
 
@@ -118,6 +119,49 @@ export class ApiService {
 			.catch((error) => {
 				return error.response
 			})
+		return res
+	}
+
+	// get areas
+
+	public async getAreas() {
+		console.log("hi areas")
+		const res = await axios
+			.get(`${pathServer}/areas/get`, await this.defaults())
+			.then((response) => {
+				console.log(response)
+				return response
+			})
+			.catch((error) => {
+				return error.response
+			})
+
+		console.log(res)
+		return res.data.data
+	}
+
+	// get roles
+
+	public async getRoles() {
+		const res = await axios
+			.get(`${pathServer}/roles/get`, await this.defaults())
+			.then((response) => {
+				return response
+			})
+			.catch((error) => {
+				return error.response
+			})
+		return res.data.data
+	}
+
+	// get usuarios
+
+	public async getUsers(form: {}) {
+		const res = await axios.post<GetUserResponse>(
+			`${pathServer}/users/get`,
+			form,
+			await this.defaults()
+		)
 		return res
 	}
 }
