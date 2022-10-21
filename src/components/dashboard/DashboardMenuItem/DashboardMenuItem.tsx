@@ -1,11 +1,4 @@
-import {
-	Flex,
-	Box,
-	Text,
-	useDisclosure,
-	Collapse,
-	color,
-} from "@chakra-ui/react"
+import { Flex, Box, Text, useDisclosure, Collapse } from "@chakra-ui/react"
 import { FiChevronDown, FiChevronUp } from "react-icons/fi"
 
 import Link from "next/link"

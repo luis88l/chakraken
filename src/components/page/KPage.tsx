@@ -1,4 +1,4 @@
-import { Box, calc, Flex, Text } from "@chakra-ui/react"
+import { Box, Flex, Text } from "@chakra-ui/react"
 
 export interface KPageProps {
 	title: string
