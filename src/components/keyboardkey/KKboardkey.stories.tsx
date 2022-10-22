@@ -6,9 +6,15 @@ import KKboardkey from "./KKboardkey";
 
 export default {
 	title: "Kraken+ChakraUI/Kboard key",
-	component: KKboardkey
+	component: KKboardkey,
 } as ComponentMeta<typeof KKboardkey>;
 
-const Template: ComponentStory<typeof KKboardkey> = (args) => <KKboardkey />;
+const Template: ComponentStory<typeof KKboardkey> = (args) => (
+	<KKboardkey {...args} />
+);
 
 export const Default = Template.bind({});
+Default.args = {
+	funcion: "Ctrl",
+	funcion2: "H",
+};

@@ -17,7 +17,6 @@ export const Checkbox1 = Template.bind({});
 Checkbox1.args = {
 	direction: "row",
 	title: "option 1",
-	title2: "option 2",
 	colorScheme: "green",
 	spacing: "5",
 };

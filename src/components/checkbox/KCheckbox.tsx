@@ -7,10 +7,6 @@ export interface KCheckboxProps {
 	 */
 	title: string;
 	/**
-	 * Este es el titulo del segundo CheckBox
-	 */
-	title2: string;
-	/**
 	 * Este es el color del CheckBox
 	 */
 	colorScheme: string;
