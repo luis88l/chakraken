@@ -9,6 +9,11 @@ export default {
 	component: KEditable,
 } as ComponentMeta<typeof KEditable>;
 
-const Template: ComponentStory<typeof KEditable> = (args) => <KEditable />;
+const Template: ComponentStory<typeof KEditable> = (args) => (
+	<KEditable {...args} />
+);
 
 export const Default = Template.bind({});
+Default.args = {
+	defaultValue: "write here...",
+};

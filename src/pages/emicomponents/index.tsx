@@ -1,4 +1,5 @@
 import { Grid, GridItem } from "@chakra-ui/react";
+import { time } from "console";
 import KBadge from "../../components/badge/KBadge";
 import KButton from "../../components/button/KButton";
 import KCheckbox from "../../components/checkbox/KCheckbox";
@@ -71,8 +72,23 @@ export default function emicomponents() {
 					h={"1.75rem"}
 				></KInput>
 				<KKboardkey funcion={"Ctrl"} funcion2={"H"}></KKboardkey>
-				<KLink></KLink>
-				<KLinkoverlay></KLinkoverlay>
+				<KLink
+					href={"https://chakra-ui.com"}
+					text={"Chakra Design system"}
+					mx={"2px"}
+				></KLink>
+				<KLinkoverlay
+					maxW={"sm"}
+					p={5}
+					borderWidth={1}
+					rounded={"md"}
+					size={"md"}
+					my={2}
+					href={"#"}
+					text={"New Year, New Beginnings: Smashing Workshops & Audits"}
+					text2={"Catch up on whats been cookin"}
+					dateTime={"2021-01-15 15:30:00 +0000 UTC"}
+				></KLinkoverlay>
 				<KMenu items={[]} titleMenu={"Home"}></KMenu>
 				<br></br>
 				<br></br>
@@ -114,7 +130,7 @@ export default function emicomponents() {
 					titleBtnCancel={"Cancel"}
 					titleBtnSave={"Save"}
 				></KDrawer>
-				<KEditable></KEditable>
+				<KEditable defaultValue={"Text Here..."}></KEditable>
 				<KFormControl
 					formtitle={"This is a Form control"}
 					placeholder={"select country"}

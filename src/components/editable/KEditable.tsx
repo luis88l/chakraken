@@ -1,8 +1,15 @@
 import { Editable, EditableInput, EditablePreview } from "@chakra-ui/react";
 
-function KEditable() {
+export interface KEditableProps {
+	/**
+	 * Este es el texto que aparecera por Default
+	 */
+	defaultValue: string;
+}
+
+function KEditable(props: KEditableProps) {
 	return (
-		<Editable defaultValue="write here...">
+		<Editable defaultValue={props.defaultValue}>
 			<EditablePreview />
 			<EditableInput />
 		</Editable>
