@@ -5,8 +5,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KSpinner from "./KSpinner";
 
 export default {
-	title: "Kraken+ChakraUI/Spinner",
-	component: KSpinner,
+  title: "Kraken+ChakraUI/Spinner",
+  component: KSpinner,
 } as ComponentMeta<typeof KSpinner>;
 
 const Template: ComponentStory<typeof KSpinner> = (args) => <KSpinner />;

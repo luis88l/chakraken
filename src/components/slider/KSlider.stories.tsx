@@ -5,8 +5,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KSlider from "./KSlider";
 
 export default {
-	title: "Kraken+ChakraUI/Slider",
-	component: KSlider
+  title: "Kraken+ChakraUI/Slider",
+  component: KSlider,
 } as ComponentMeta<typeof KSlider>;
 
 const Template: ComponentStory<typeof KSlider> = (args) => <KSlider />;

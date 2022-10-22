@@ -1,31 +1,28 @@
-import { useRouter } from "next/router"
-import { getSession } from "next-auth/react"
+import { getSession } from "next-auth/react";
 
-const Index = () => {
-	const router = useRouter()
-
-	return null
-}
+const Index = (): any => {
+  return null;
+};
 
 export async function getServerSideProps(context) {
-	const session = await getSession({ req: context.req })
+  const session = await getSession({ req: context.req });
 
-	if (!session) {
-		return {
-			redirect: {
-				destination: "/login",
-				permanent: false,
-			},
-		}
-	} else {
-		return {
-			props: { session },
-			redirect: {
-				destination: "/dashboard",
-				permanent: false,
-			},
-		}
-	}
+  if (session == null) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  } else {
+    return {
+      props: { session },
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
 }
 
-export default Index
+export default Index;

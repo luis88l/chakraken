@@ -5,8 +5,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KTag from "./KTag";
 
 export default {
-	title: "Kraken+ChakraUI/Tag",
-	component: KTag,
+  title: "Kraken+ChakraUI/Tag",
+  component: KTag,
 } as ComponentMeta<typeof KTag>;
 
 const Template: ComponentStory<typeof KTag> = (args) => <KTag />;

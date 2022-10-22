@@ -5,8 +5,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KTab from "./KTab";
 
 export default {
-	title: "Kraken+ChakraUI/Tab",
-	component: KTab,
+  title: "Kraken+ChakraUI/Tab",
+  component: KTab,
 } as ComponentMeta<typeof KTab>;
 
 const Template: ComponentStory<typeof KTab> = (args) => <KTab />;

@@ -5,8 +5,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KImage from "./KImage";
 
 export default {
-	title: "Kraken+ChakraUI/Image",
-	component: KImage
+  title: "Kraken+ChakraUI/Image",
+  component: KImage,
 } as ComponentMeta<typeof KImage>;
 
 const Template: ComponentStory<typeof KImage> = (args) => <KImage />;

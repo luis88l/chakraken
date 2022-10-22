@@ -5,8 +5,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KList from "./KList";
 
 export default {
-	title: "Kraken+ChakraUI/List",
-	component: KList
+  title: "Kraken+ChakraUI/List",
+  component: KList,
 } as ComponentMeta<typeof KList>;
 
 const Template: ComponentStory<typeof KList> = (args) => <KList />;

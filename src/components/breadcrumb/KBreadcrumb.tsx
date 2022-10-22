@@ -1,16 +1,16 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
-function KBreadcrumb(props) {
-	const items = props.items
-	return (
-		<Breadcrumb>
-			{items.map((item, index) => (
-				<BreadcrumbItem key={index}>
-					<BreadcrumbLink href={item.link}> {item.title} </BreadcrumbLink>
-				</BreadcrumbItem>
-			))}
-		</Breadcrumb>
-	)
+function KBreadcrumb(props): any {
+  const items = props.items;
+  return (
+    <Breadcrumb>
+      {items.map((item, index) => (
+        <BreadcrumbItem key={index}>
+          <BreadcrumbLink href={item.link}> {item.title} </BreadcrumbLink>
+        </BreadcrumbItem>
+      ))}
+    </Breadcrumb>
+  );
 }
 
-export default KBreadcrumb
+export default KBreadcrumb;
