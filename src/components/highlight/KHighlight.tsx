@@ -1,6 +1,6 @@
 import { Highlight } from "@chakra-ui/react";
 
-function KHighlight() {
+function KHighlight(): any {
   return (
     <Highlight
       query="spotlight"

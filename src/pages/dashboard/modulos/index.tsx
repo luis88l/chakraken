@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
 import ApiService from "../../../../data/services/ApiService";
@@ -19,10 +18,11 @@ export interface modulosTable {
 }
 
 export default function Modulos(): any {
-  const { isLoading, data: modules } = useQuery(
-    "modulos",
-    async () => await ApiService.getModulos()
-  );
+  const {
+    isLoading,
+    data: modules,
+    isSuccess,
+  } = useQuery("modulos", async () => await ApiService.getModulos());
 
   if (isLoading) {
     return <p>Cargando...</p>;
@@ -45,6 +45,7 @@ export default function Modulos(): any {
           <Box m={2} cursor="pointer">
             <Link
               href={{
+                // eslint-disable-next-line react/prop-types
                 pathname: "/dashboard/modulos/" + props.getValue(),
               }}
             >
@@ -60,37 +61,42 @@ export default function Modulos(): any {
     }),
   ];
 
-  return (
-    <KPage title="Módulos">
-      <Box>
-        <Flex mb={4} display="grid" justifyItems="flex-end">
-          <Link href={"/dashboard/modulos/new"}>
-            <Button
-              w="200px"
-              alignSelf="flex-end"
-              color="#fff"
-              bg="#1cb35b"
-              _hover={{ bg: "#238152" }}
-              leftIcon={<AddIcon />}
-            >
-              Nuevo módulo
-            </Button>
-          </Link>
-        </Flex>
-        <KTableLayout
-          columns={columns}
-          data={modules.map(({ id_modulo, nb_modulo, nu_orden }) => ({
-            id_modulo,
-            nb_modulo,
-            nu_orden,
-          }))}
-        />
-      </Box>
-    </KPage>
-  );
+  if (isSuccess) {
+    return (
+      <KPage title="Módulos">
+        <Box>
+          <Flex mb={4} display="grid" justifyItems="flex-end">
+            <Link href={"/dashboard/modulos/new"}>
+              <Button
+                w="200px"
+                alignSelf="flex-end"
+                color="#fff"
+                bg="#1cb35b"
+                _hover={{ bg: "#238152" }}
+                leftIcon={<AddIcon />}
+              >
+                Nuevo módulo
+              </Button>
+            </Link>
+          </Flex>
+          {Array.isArray(modules) && (
+            <KTableLayout
+              columns={columns}
+              // @ts-expect-error
+              data={modules.map(({ id_modulo, nb_modulo, nu_orden }) => ({
+                id_modulo,
+                nb_modulo,
+                nu_orden,
+              }))}
+            />
+          )}
+        </Box>
+      </KPage>
+    );
+  }
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: { req: any }): Promise<any> {
   const session = await getSession({ req: context.req });
 
   if (session == null) {

@@ -10,7 +10,18 @@ import {
   Button,
 } from "@chakra-ui/react";
 
-function KModal(props) {
+interface KModalProps {
+  BtnTitle: string;
+  ModalHeaderTitle: string;
+  ModalBodyTitle: string;
+  ColorBtnCancel: string;
+  TxtBtnClose: string;
+  TxtBtnSave: string;
+  variant: string;
+  ColorBtnSave: string;
+}
+
+function KModal(props: KModalProps): any {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>

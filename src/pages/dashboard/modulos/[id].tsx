@@ -25,6 +25,13 @@ export interface modulosTable {
   acciones: string;
 }
 
+interface moduloProps {
+  id_modulo: string;
+  nb_modulo: string;
+  de_clase: string;
+  de_modulo: string;
+}
+
 export default function Modulo(): any {
   const colSpan = { base: 2, md: 1 };
   const router = useRouter();
@@ -53,35 +60,39 @@ export default function Modulo(): any {
     return <p>Cargando...</p>;
   }
 
-  const modulo = modules.filter(
-    (modulo) => modulo.id_modulo === router.query.id
+  const modulo = modules?.filter(
+    (modulo: { id_modulo: string | string[] | undefined }) =>
+      modulo.id_modulo === router.query.id
   );
+  // @ts-expect-error
+  const moduloDetails: moduloProps = modulo[0];
 
-  const handleSubmit = async (event) => {
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setUpdating(true);
-    console.log(nombreModulo, claseModulo, descripcionModulo);
     const formData = new FormData();
-    formData.append("id_modulo", modulo[0].id_modulo);
+    formData.append("id_modulo", moduloDetails.id_modulo);
     formData.append(
       "nb_modulo",
-      nombreModulo === "" ? modulo[0].nb_modulo : nombreModulo
+      nombreModulo === "" ? moduloDetails.nb_modulo : nombreModulo
     );
     formData.append(
       "de_clase",
-      claseModulo === "" ? modulo[0].de_clase : claseModulo
+      claseModulo === "" ? moduloDetails.de_clase : claseModulo
     );
     formData.append(
       "de_modulo",
-      descripcionModulo === "" && modulo[0].de_modulo !== ""
-        ? modulo[0].de_modulo
+      descripcionModulo === "" && moduloDetails.de_modulo !== ""
+        ? moduloDetails.de_modulo
         : descripcionModulo
     );
     updateModulo.mutate(formData);
   };
 
   return (
-    <KPage title={"Módulo " + modulo[0].nb_modulo}>
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    <KPage title={"Módulo " + moduloDetails.nb_modulo}>
       <Box>
         <Text fontSize="l" fontWeight="bold">
           Actualizar módulo
@@ -95,7 +106,7 @@ export default function Modulo(): any {
               <FormControl isRequired>
                 <FormLabel>Nombre</FormLabel>
                 <Input
-                  defaultValue={modulo[0].nb_modulo}
+                  defaultValue={moduloDetails.nb_modulo}
                   onChange={(event) => {
                     setNombreModulo(event.currentTarget.value);
                   }}
@@ -106,7 +117,7 @@ export default function Modulo(): any {
               <FormControl isRequired>
                 <FormLabel>Clase</FormLabel>
                 <Input
-                  defaultValue={modulo[0].de_clase}
+                  defaultValue={moduloDetails.de_clase}
                   onChange={(event) => {
                     setClaseModulo(event.currentTarget.value);
                   }}
@@ -117,7 +128,7 @@ export default function Modulo(): any {
               <FormControl>
                 <FormLabel>Descripción</FormLabel>
                 <Textarea
-                  defaultValue={modulo[0].de_modulo}
+                  defaultValue={moduloDetails.de_modulo}
                   onChange={(event) => {
                     setDescripcionModulo(event.currentTarget.value);
                   }}
@@ -140,7 +151,7 @@ export default function Modulo(): any {
                       color="white"
                       size={"20px"}
                     />
-                  ) : null
+                  ) : undefined
                 }
               >
                 Actualizar
@@ -153,7 +164,7 @@ export default function Modulo(): any {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: { req: any }): Promise<any> {
   const session = await getSession({ req: context.req });
 
   if (session == null) {

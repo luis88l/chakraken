@@ -1,14 +1,7 @@
 import { AddIcon } from "@chakra-ui/icons";
-import {
-  Tag,
-  TagLabel,
-  TagLeftIcon,
-  TagRightIcon,
-  TagCloseButton,
-  HStack,
-} from "@chakra-ui/react";
+import { Tag, TagLabel, TagLeftIcon, HStack } from "@chakra-ui/react";
 
-function KTag() {
+function KTag(): any {
   return (
     <HStack spacing={4}>
       {["sm", "md", "lg"].map((size) => (

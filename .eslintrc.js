@@ -20,11 +20,14 @@ module.exports = {
   plugins: ["react"],
   rules: {
     "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/naming-convention": "off",
   },
   settings: {
     react: {
       version: "detect",
     },
   },
-  ignorePatterns: [".eslintrc.js"],
+  ignorePatterns: [".eslintrc.js", "next-env.d.ts"],
 };

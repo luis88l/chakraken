@@ -14,13 +14,8 @@ import {
 import React from "react";
 
 function KPopOver(props: any): any {
-  const initialFocusRef = React.useRef();
   return (
-    <Popover
-      initialFocusRef={initialFocusRef}
-      placement="bottom"
-      closeOnBlur={false}
-    >
+    <Popover placement="bottom" closeOnBlur={false}>
       <PopoverTrigger>
         <Button>{props.btnTitle}</Button>
       </PopoverTrigger>
@@ -52,9 +47,7 @@ function KPopOver(props: any): any {
           <ButtonGroup size={props.size}>
             <Button colorScheme={props.colorBtn1}>{props.txtBtn1}</Button>
 
-            <Button colorScheme={props.colorBtn2} ref={initialFocusRef}>
-              {props.txtBtn2}
-            </Button>
+            <Button colorScheme={props.colorBtn2}>{props.txtBtn2}</Button>
           </ButtonGroup>
         </PopoverFooter>
       </PopoverContent>

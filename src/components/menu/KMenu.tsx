@@ -5,7 +5,7 @@ export interface KMenuProps {
   /**
    * Arreglo que va tener las opciones
    */
-  items: [];
+  items: KMenuItemProps[];
   /**
    * Este es el titulo del menu
    */
@@ -17,7 +17,7 @@ export interface KMenuItemProps {
   title: string;
 }
 
-function KMenu(props: KMenuProps) {
+function KMenu(props: KMenuProps): any {
   const items = props.items;
   return (
     <Menu>

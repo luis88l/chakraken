@@ -59,6 +59,7 @@ export default function Usuarios(): any {
           <Box m={2} cursor="pointer">
             <Link
               href={{
+                // eslint-disable-next-line react/prop-types
                 pathname: "/dashboard/usuarios/" + props.getValue(),
               }}
             >
@@ -95,11 +96,17 @@ export default function Usuarios(): any {
           columns={columns}
           data={usuarios.data.data.rows.map(
             ({
+              // @ts-expect-error
               nb_nombre,
+              // @ts-expect-error
               de_email,
+              // @ts-expect-error
               nb_usuario,
+              // @ts-expect-error
               de_rol,
+              // @ts-expect-error
               nb_area,
+              // @ts-expect-error
               id_usuario,
             }) => ({
               nb_nombre,
@@ -116,7 +123,7 @@ export default function Usuarios(): any {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: { req: any }): Promise<any> {
   const session = await getSession({ req: context.req });
 
   if (session == null) {

@@ -42,7 +42,6 @@ export default function New(): any {
   }): Promise<any> => {
     event.preventDefault();
     setUpdating(true);
-    console.log(nombreModulo, claseModulo, descripcionModulo);
     const formData = new FormData();
     formData.append("nb_modulo", nombreModulo);
     formData.append("de_clase", claseModulo);

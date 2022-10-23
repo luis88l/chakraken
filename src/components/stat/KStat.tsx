@@ -7,24 +7,22 @@ import {
   StatGroup,
 } from "@chakra-ui/react";
 
-function KStat(props) {
+interface KStatProps {
+  title: string;
+  number: string;
+  type: "increase" | "decrease" | undefined;
+  percentage: string;
+}
+
+function KStat(props: KStatProps): any {
   return (
     <StatGroup>
       <Stat>
         <StatLabel>{props.title}</StatLabel>
-        <StatNumber>{props.Number}</StatNumber>
+        <StatNumber>{props.number}</StatNumber>
         <StatHelpText>
           <StatArrow type={props.type} />
           {props.percentage}
-        </StatHelpText>
-      </Stat>
-
-      <Stat>
-        <StatLabel>{props.title2}</StatLabel>
-        <StatNumber>{props.Number2}</StatNumber>
-        <StatHelpText>
-          <StatArrow type={props.type2} />
-          {props.percentage2}
         </StatHelpText>
       </Stat>
     </StatGroup>

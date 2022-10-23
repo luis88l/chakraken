@@ -1,12 +1,9 @@
 import { HStack, PinInput, PinInputField } from "@chakra-ui/react";
 
-function KPininput() {
+function KPininput(): any {
   return (
     <HStack>
       <PinInput>
-        <PinInputField />
-        <PinInputField />
-        <PinInputField />
         <PinInputField />
       </PinInput>
     </HStack>

@@ -10,7 +10,7 @@ export default function Carruseles(): any {
   );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: { req: any }): Promise<any> {
   const session = await getSession({ req: context.req });
 
   if (session == null) {

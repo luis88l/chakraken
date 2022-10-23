@@ -1,6 +1,6 @@
 import { Box, Heading, LinkBox, LinkOverlay, Text } from "@chakra-ui/react";
 
-function KLinkoverlay() {
+function KLinkoverlay(): any {
   return (
     <LinkBox as="article" maxW="sm" p="5" borderWidth="1px" rounded="md">
       <Box as="time" dateTime="2021-01-15 15:30:00 +0000 UTC">

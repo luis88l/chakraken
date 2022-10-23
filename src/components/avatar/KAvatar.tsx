@@ -17,7 +17,6 @@ export interface KAvatarProps {
 }
 
 function KAvatar(props: KAvatarProps): any {
-  console.log(props.size);
   return (
     <Wrap>
       <WrapItem>

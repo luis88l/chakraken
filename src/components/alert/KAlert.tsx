@@ -16,7 +16,7 @@ interface KAlertProps {
 function KAlert({ status, title, text, icon }: KAlertProps): any {
   return (
     <Alert status={status} borderRadius={"15px"} color="black">
-      {icon && <AlertIcon />}
+      {(icon ?? false) && <AlertIcon />}
       <AlertTitle>{title}</AlertTitle>
       <AlertDescription>{text}</AlertDescription>
     </Alert>

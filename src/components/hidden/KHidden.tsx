@@ -1,7 +1,7 @@
 import { CheckIcon } from "@chakra-ui/icons";
-import { Button, VisuallyHidden, VisuallyHiddenInput } from "@chakra-ui/react";
+import { Button, VisuallyHidden } from "@chakra-ui/react";
 
-function KHidden() {
+function KHidden(): any {
   return (
     <Button>
       <VisuallyHidden>Checkmark</VisuallyHidden>

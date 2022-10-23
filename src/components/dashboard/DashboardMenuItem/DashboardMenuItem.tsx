@@ -8,6 +8,12 @@ interface DashboardMenuItemProps {
   items: any;
 }
 
+interface DashboardMenuItemOptionProps {
+  id_opcion: string;
+  de_ruta: string;
+  nb_opcion: string;
+}
+
 export default function DashboardMenuItem(props: DashboardMenuItemProps): any {
   const { isOpen, onToggle } = useDisclosure();
 
@@ -32,7 +38,7 @@ export default function DashboardMenuItem(props: DashboardMenuItemProps): any {
       </Flex>
       <Collapse in={isOpen} animateOpacity>
         <Box color="white" mt="4" rounded="md" shadow="md">
-          {subItems.map((item: any) => (
+          {subItems.map((item: DashboardMenuItemOptionProps) => (
             <Box
               key={item.id_opcion}
               cursor="pointer"

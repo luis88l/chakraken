@@ -1,6 +1,6 @@
 import { Progress, Stack } from "@chakra-ui/react";
 
-function KProgressBar() {
+function KProgressBar(): any {
   return (
     <Stack spacing={5}>
       <Progress colorScheme="green" size="sm" value={20} />

@@ -3,7 +3,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KBadge from "./KBadge";
-import { Badge } from "@chakra-ui/react";
 
 export default {
   title: "Kraken+ChakraUI/Badge",

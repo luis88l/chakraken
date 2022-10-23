@@ -36,7 +36,8 @@ axios.interceptors.response.use(
       newResponse.statusText = response.statusText;
       newResponse.headers = response.headers;
 
-      if (response?.data?.message) {
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      if (response.data.message != null && !response.data.message) {
         newResponse.dataMessage = response.data.message;
       }
     }
@@ -89,7 +90,7 @@ export class ApiService {
 
   // obtener lista de modulos
 
-  public async getModulos(): Promise<void> {
+  public async getModulos(): Promise<any[]> {
     const res = await axios
       .get(`${pathServer}/modulos/get`, await this.defaults())
       .then((response) => {
@@ -117,7 +118,7 @@ export class ApiService {
 
   // crear modulo
 
-  public async saveModulos(form: {}): Promise<void> {
+  public async saveModulos(form: {}): Promise<any> {
     const res = await axios
       .post(`${pathServer}/modulos/save`, form, await this.defaults())
       .then((response) => {
@@ -132,18 +133,15 @@ export class ApiService {
   // get areas
 
   public async getAreas(): Promise<void> {
-    console.log("hi areas");
     const res = await axios
       .get(`${pathServer}/areas/get`, await this.defaults())
       .then((response) => {
-        console.log(response);
         return response;
       })
       .catch((error) => {
         return error.response;
       });
 
-    console.log(res);
     return res.data.data;
   }
 

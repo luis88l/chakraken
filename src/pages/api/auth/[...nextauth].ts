@@ -1,7 +1,6 @@
-import NextAuth, { unstable_getServerSession } from "next-auth/next";
+import NextAuth from "next-auth/next";
 
 import CredentialsProvider from "next-auth/providers/credentials";
-import FormData from "form-data";
 
 export default NextAuth({
   providers: [
@@ -31,7 +30,7 @@ export default NextAuth({
         const user = await res.json();
 
         // If no error and we have user data, return it
-        if (res.ok && user) {
+        if (user.status === 200) {
           return user;
         }
 
@@ -52,7 +51,9 @@ export default NextAuth({
       return token;
     },
     session: async ({ session, token }) => {
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (token) {
+        // @ts-expect-error: Unreachable code error
         session.user = token.user;
       }
       return session;

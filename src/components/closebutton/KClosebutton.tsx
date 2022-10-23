@@ -8,7 +8,7 @@ export interface KClosebuttonProps {
   size: string;
 }
 
-function KClosebutton(props: KClosebuttonProps) {
+function KClosebutton(props: KClosebuttonProps): any {
   return (
     <Stack direction={props.direction}>
       <CloseButton size={props.size} />

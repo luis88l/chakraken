@@ -6,7 +6,7 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 
-function KNumberinput() {
+function KNumberinput(): any {
   return (
     <NumberInput>
       <NumberInputField />

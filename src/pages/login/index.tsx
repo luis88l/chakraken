@@ -76,7 +76,7 @@ const Index = (): any => {
           Kraken
         </Heading>
         <Box minW={{ base: "100%", md: "468px" }}>
-          <form onSubmit={(async) => handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <Stack
               spacing={4}
               p="2rem"

@@ -5,7 +5,7 @@ export interface KPageProps {
   children: React.ReactNode;
 }
 
-export default function KPage(props: KPageProps) {
+export default function KPage(props: KPageProps): any {
   return (
     <Box
       bgColor="#F5F5F5"

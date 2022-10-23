@@ -5,33 +5,30 @@ import {
   AccordionPanel,
   AccordionIcon,
   Box,
+  BoxProps,
 } from "@chakra-ui/react";
+import { ReactNode } from "react";
 
-function KAccordion(props): any {
+interface KAccordionProps {
+  flex: BoxProps["flex"];
+  textAlign: BoxProps["textAlign"];
+  titleBox: string;
+  contentPanel: ReactNode;
+}
+
+function KAccordion(props: KAccordionProps): any {
   return (
     <Accordion>
       <AccordionItem>
         <h2>
           <AccordionButton>
             <Box flex={props.flex} textAlign={props.textAlign}>
-              {props.titleBox1}
+              {props.titleBox}
             </Box>
             <AccordionIcon />
           </AccordionButton>
         </h2>
-        <AccordionPanel pb={4}>{props.contentPanel1}</AccordionPanel>
-      </AccordionItem>
-
-      <AccordionItem>
-        <h2>
-          <AccordionButton>
-            <Box flex={props.flex} textAlign={props.textAlign}>
-              {props.titleBox2}
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={4}>{props.contentPanel2}</AccordionPanel>
+        <AccordionPanel pb={4}>{props.contentPanel}</AccordionPanel>
       </AccordionItem>
     </Accordion>
   );

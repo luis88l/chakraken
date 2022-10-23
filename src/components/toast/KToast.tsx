@@ -1,6 +1,6 @@
 import { Button, useToast } from "@chakra-ui/react";
 
-function KToast() {
+function KToast(): any {
   const toast = useToast();
   return (
     <Button

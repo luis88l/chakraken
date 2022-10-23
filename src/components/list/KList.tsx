@@ -1,13 +1,7 @@
-import {
-  List,
-  ListItem,
-  ListIcon,
-  OrderedList,
-  UnorderedList,
-} from "@chakra-ui/react";
+import { List, ListItem, ListIcon } from "@chakra-ui/react";
 import { MdCheckCircle, MdSettings } from "react-icons/md";
 
-function KList() {
+function KList(): any {
   return (
     <List spacing={3}>
       <ListItem>

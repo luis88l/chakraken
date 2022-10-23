@@ -1,6 +1,6 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
-function KTab() {
+function KTab(): any {
   return (
     <Tabs>
       <TabList>

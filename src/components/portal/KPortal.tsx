@@ -1,6 +1,13 @@
 import { Box, Portal } from "@chakra-ui/react";
 
-function KPortal(props) {
+interface KPortalProps {
+  color: string;
+  text: string;
+  portal: React.ReactNode;
+  bg: string;
+}
+
+function KPortal(props: KPortalProps): any {
   return (
     <Box bg={props.bg} color={props.color}>
       {props.text}

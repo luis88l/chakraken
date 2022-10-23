@@ -1,6 +1,6 @@
 import { Spinner, Stack } from "@chakra-ui/react";
 
-function KSpinner() {
+function KSpinner(): any {
   return (
     <Stack direction="row" spacing={4}>
       <Spinner size="xs" color="#239bbf" />

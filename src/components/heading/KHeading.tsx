@@ -1,6 +1,10 @@
 import { Heading } from "@chakra-ui/react";
 
-function KHeading(props) {
+interface KHeadingProps {
+  text: string;
+}
+
+function KHeading(props: KHeadingProps): any {
   return <Heading>{props.text}</Heading>;
 }
 

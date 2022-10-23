@@ -14,10 +14,11 @@ export interface areasTable {
 }
 
 export default function Roles(): any {
-  const { isLoading, data: roles } = useQuery(
-    "roles",
-    async () => await ApiService.getRoles()
-  );
+  const {
+    isLoading,
+    data: roles,
+    isSuccess,
+  } = useQuery("roles", async () => await ApiService.getRoles());
 
   if (isLoading) {
     return <p>Cargando...</p>;
@@ -36,6 +37,7 @@ export default function Roles(): any {
           <Box m={2} cursor="pointer">
             <Link
               href={{
+                // eslint-disable-next-line react/prop-types
                 pathname: "/dashboard/roles/" + props.getValue(),
               }}
             >
@@ -51,33 +53,37 @@ export default function Roles(): any {
     }),
   ];
 
-  return (
-    <KPage title="Roles">
-      <Box>
-        <Flex mb={4} display="grid" justifyItems="flex-end">
-          <Link href={"/dashboard/roles/new"}>
-            <Button
-              w="200px"
-              alignSelf="flex-end"
-              color="#fff"
-              bg="#1cb35b"
-              _hover={{ bg: "#238152" }}
-              leftIcon={<AddIcon />}
-            >
-              Nuevo rol
-            </Button>
-          </Link>
-        </Flex>
-        <KTableLayout
-          columns={columns}
-          data={roles.map(({ id_rol, de_rol }) => ({
-            id_rol,
-            de_rol,
-          }))}
-        />
-      </Box>
-    </KPage>
-  );
+  if (isSuccess) {
+    return (
+      <KPage title="Roles">
+        <Box>
+          <Flex mb={4} display="grid" justifyItems="flex-end">
+            <Link href={"/dashboard/roles/new"}>
+              <Button
+                w="200px"
+                alignSelf="flex-end"
+                color="#fff"
+                bg="#1cb35b"
+                _hover={{ bg: "#238152" }}
+                leftIcon={<AddIcon />}
+              >
+                Nuevo rol
+              </Button>
+            </Link>
+          </Flex>
+          {Array.isArray(roles) && (
+            <KTableLayout
+              columns={columns}
+              data={roles.map(({ id_rol, de_rol }) => ({
+                id_rol,
+                de_rol,
+              }))}
+            />
+          )}
+        </Box>
+      </KPage>
+    );
+  }
 }
 
 export async function getServerSideProps(context: { req: any }): Promise<any> {

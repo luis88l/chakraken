@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof KTransitions> = (args) => (
 
 export const Transition = Template.bind({});
 Transition.args = {
-  buttontext: "Click me",
+  buttonText: "Click me",
   p: "40px",
   color: "white",
   mt: "4",

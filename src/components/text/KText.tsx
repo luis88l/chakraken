@@ -1,6 +1,11 @@
 import { Stack, Text } from "@chakra-ui/react";
 
-function KText(props) {
+interface KTextProps {
+  fontSize?: string;
+  content: string;
+}
+
+function KText(props: KTextProps): any {
   return (
     <Stack>
       <Text fontSize={props.fontSize}>{props.content}</Text>

@@ -3,8 +3,7 @@ import { Key } from "react";
 import DashboardMenuItem from "../DashboardMenuItem/DashboardMenuItem";
 
 export default function DashboardMenu(props: { items: any }): any {
-  const allMenuItems = props.items;
-
+  const allMenuItems = props.items[0];
   const menuItems: any = [];
 
   allMenuItems.filter(function (item: { id_modulo: any }) {
@@ -28,8 +27,8 @@ export default function DashboardMenu(props: { items: any }): any {
           id_modulo: Key | null | undefined;
         }) => (
           <DashboardMenuItem
-            title={menuItem.nb_modulo}
             key={menuItem.id_modulo}
+            title={menuItem.nb_modulo}
             items={allMenuItems.filter(
               (item: { id_modulo: Key | null | undefined }) =>
                 item.id_modulo === menuItem.id_modulo

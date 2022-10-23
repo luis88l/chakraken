@@ -10,7 +10,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
-function KTable() {
+function KTable(): any {
   return (
     <TableContainer>
       <Table variant="simple">

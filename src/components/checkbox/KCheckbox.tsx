@@ -1,7 +1,7 @@
-import { Checkbox, Stack } from "@chakra-ui/react";
+import { Checkbox, Stack, StackDirection } from "@chakra-ui/react";
 
 export interface KCheckboxProps {
-  direction;
+  direction: StackDirection | undefined;
   /**
    * Este es el titulo del primer CheckBox
    */
@@ -17,7 +17,7 @@ export interface KCheckboxProps {
   /**
    * Este es el espacio entre los CheckBox
    */
-  spacing: number;
+  spacing: string;
 }
 
 function KCheckbox(props: KCheckboxProps): any {

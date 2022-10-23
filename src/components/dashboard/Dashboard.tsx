@@ -3,7 +3,12 @@ import DashboardHeading from "./DashboardHeading/DashboardHeading";
 import DashboardMenu from "./DashboardMenu/DashboardMenu";
 import DashboardProfile from "./DashboardProfile/DashboardProfile";
 
-export default function Dashboard({ userOptions }): any {
+interface DashboardProps {
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+  userOptions: void | undefined[] | any[];
+}
+
+export default function Dashboard(props: DashboardProps): any {
   return (
     <Flex
       w={["100%", "100%", "15%", "15%", "15%"]}
@@ -28,7 +33,7 @@ export default function Dashboard({ userOptions }): any {
           }}
         >
           <Box>
-            <DashboardMenu items={userOptions} />
+            <DashboardMenu items={props.userOptions} />
           </Box>
         </Flex>
         <Divider orientation="horizontal" color="#cccccc" mt={10} />

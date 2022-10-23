@@ -19,7 +19,7 @@ export interface KFormControlProps {
   option2: string;
 }
 
-function KFormControl(props: KFormControlProps) {
+function KFormControl(props: KFormControlProps): any {
   return (
     <FormControl>
       <FormLabel>{props.formtitle}</FormLabel>

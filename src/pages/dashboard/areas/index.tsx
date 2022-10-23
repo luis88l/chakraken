@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
 import ApiService from "../../../../data/services/ApiService";
@@ -14,15 +13,11 @@ export interface areasTable {
   id_area: string;
 }
 
-export default function Areas() {
-  const [display, changeDisplay] = useState("hide");
-  const [value, changeValue] = useState(1);
-
-  const {
-    isLoading,
-    error,
-    data: areas,
-  } = useQuery("areas", async () => await ApiService.getAreas());
+export default function Areas(): any {
+  const { isLoading, data: areas } = useQuery(
+    "areas",
+    async () => await ApiService.getAreas()
+  );
 
   if (isLoading) {
     return <p>Cargando...</p>;
@@ -41,6 +36,7 @@ export default function Areas() {
           <Box m={2} cursor="pointer">
             <Link
               href={{
+                // eslint-disable-next-line react/prop-types
                 pathname: "/dashboard/areas/" + props.getValue(),
               }}
             >
@@ -75,6 +71,7 @@ export default function Areas() {
         </Flex>
         <KTableLayout
           columns={columns}
+          // @ts-expect-error
           data={areas.map(({ id_area, nb_area }: areasTable) => ({
             id_area,
             nb_area,
@@ -85,7 +82,7 @@ export default function Areas() {
   );
 }
 
-export async function getServerSideProps(context: { req: any }) {
+export async function getServerSideProps(context: { req: any }): Promise<any> {
   const session = await getSession({ req: context.req });
 
   if (session == null) {

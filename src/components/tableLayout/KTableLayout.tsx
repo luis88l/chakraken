@@ -25,6 +25,7 @@ export interface KTableLayoutProps<Data extends object> {
   columns: Array<ColumnDef<Data, any>>;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function KTableLayout<Data extends object>({
   data,
   columns,
@@ -62,13 +63,16 @@ export function KTableLayout<Data extends object>({
                       )}
 
                       <chakra.span pl="4">
-                        {header.column.getIsSorted() ? (
-                          header.column.getIsSorted() === "desc" ? (
-                            <TriangleDownIcon aria-label="sorted descending" />
-                          ) : (
-                            <TriangleUpIcon aria-label="sorted ascending" />
-                          )
-                        ) : null}
+                        {
+                          // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+                          header.column.getIsSorted() ? (
+                            header.column.getIsSorted() === "desc" ? (
+                              <TriangleDownIcon aria-label="sorted descending" />
+                            ) : (
+                              <TriangleUpIcon aria-label="sorted ascending" />
+                            )
+                          ) : null
+                        }
                       </chakra.span>
                     </Th>
                   );

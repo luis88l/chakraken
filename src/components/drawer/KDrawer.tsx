@@ -12,25 +12,33 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 
-function KDrawer(props) {
+interface KDrawerProps {
+  colorScheme: string;
+  titleBtnDrawer: string;
+  placement?: "right" | "left";
+  title: string;
+  placeholder?: string;
+  variant: string;
+  colorCancel: string;
+  mr: string;
+  titleBtnCancel: string;
+  secondColorScheme: string;
+  titleBtnSave: string;
+  size: string;
+}
+
+function KDrawer(props: KDrawerProps): any {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
   return (
     <>
       <Button
-        ref={btnRef}
         colorScheme={props.colorScheme}
         size={props.size}
         onClick={onOpen}
       >
         {props.titleBtnDrawer}
       </Button>
-      <Drawer
-        isOpen={isOpen}
-        placement={props.placement}
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
+      <Drawer isOpen={isOpen} placement={props.placement} onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />

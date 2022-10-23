@@ -4,31 +4,8 @@ import Head from "next/head";
 import ApiService from "../../../data/services/ApiService";
 import FormData from "form-data";
 import { useQuery } from "react-query";
-import { useSession } from "next-auth/react";
-
-interface userInfoDataProps {
-  cl_password: string;
-  de_email: string;
-  de_rol: string;
-  de_tokenPush: string | null;
-  fh_cumpleanios: string | null;
-  fh_modificado: string;
-  fh_registro: string;
-  id_area: string | null;
-  id_rol: string;
-  id_usuario: string;
-  nb_area: string;
-  nb_nombre: string;
-  nb_usuario: string;
-  sn_activo: boolean;
-  user_photo: string | null;
-}
 
 export default function Layout(props: { children: any }): any {
-  const { data: session } = useSession();
-  // @ts-expect-error
-  const user: userInfoDataProps = session.user.user; // eslint-disable-line no-use-before-define
-
   const form = new FormData();
 
   const {
@@ -44,6 +21,7 @@ export default function Layout(props: { children: any }): any {
     return <p>loading...</p>;
   }
 
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   if (error) {
     return <p>error!</p>;
   }
@@ -53,7 +31,7 @@ export default function Layout(props: { children: any }): any {
       <Head>
         <title>Kraken</title>
       </Head>
-      <Dashboard userProfile={user} userOptions={userOptions} />
+      <Dashboard userOptions={userOptions} />
       <>{props.children}</>
     </Flex>
   );

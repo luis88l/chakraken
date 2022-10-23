@@ -1,17 +1,9 @@
 import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
-import { ReactElement, JSXElementConstructor, ReactFragment } from "react";
 
 function KProgress(props: {
   max: number | undefined;
   min: number | undefined;
-  content:
-    | string
-    | number
-    | boolean
-    | ReactElement<any, string | JSXElementConstructor<any>>
-    | ReactFragment
-    | null
-    | undefined;
+  content: number | undefined;
   color: string | undefined;
 }): any {
   return (

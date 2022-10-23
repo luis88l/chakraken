@@ -16,7 +16,6 @@ interface krakenSessionProps {
 function MyApp({
   Component,
   pageProps: { session, ...pageProps },
-  router,
 }: AppProps<{ session: krakenSessionProps }>): any {
   const [queryClient] = useState(
     () =>
@@ -29,6 +28,7 @@ function MyApp({
       })
   );
 
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   if (session) {
     return (
       <SessionProvider session={session}>

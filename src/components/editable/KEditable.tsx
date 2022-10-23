@@ -1,11 +1,10 @@
-import {
-  Editable,
-  EditableInput,
-  EditablePreview,
-  propNames,
-} from "@chakra-ui/react";
+import { Editable, EditableInput, EditablePreview } from "@chakra-ui/react";
 
-function KEditable(props) {
+interface KEditableProps {
+  defaultValue: string | undefined;
+}
+
+function KEditable(props: KEditableProps): any {
   return (
     <Editable defaultValue={props.defaultValue}>
       <EditablePreview />
