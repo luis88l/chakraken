@@ -1,4 +1,5 @@
 import { Avatar, Wrap, WrapItem } from "@chakra-ui/react";
+import { FC } from "react";
 
 export interface KAvatarProps {
   /**
@@ -16,14 +17,14 @@ export interface KAvatarProps {
   src: string;
 }
 
-function KAvatar(props: KAvatarProps): any {
+const KAvatar: FC<KAvatarProps> = ({ size, name, src }) => {
   return (
     <Wrap>
       <WrapItem>
-        <Avatar size={props.size} name={props.name} src={props.src} />
+        <Avatar size={size} name={name} src={src} />
       </WrapItem>
     </Wrap>
   );
-}
+};
 
 export default KAvatar;
