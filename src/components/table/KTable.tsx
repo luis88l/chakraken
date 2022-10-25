@@ -1,57 +1,54 @@
 import {
-	Table,
-	Thead,
-	Tbody,
-	Tfoot,
-	Tr,
-	Th,
-	Td,
-	TableCaption,
-	TableContainer,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
 } from "@chakra-ui/react";
 
-export interface KTableProps {
-	/**
-	 * Esta es la caption de la tabla
-	 */
-	Caption: string;
-	/**
-	 * Este es parte del contenido dentro de la tabla
-	 */
-	Content: string;
-	/**
-	 * Este es la descripcion de un campo en la tabla
-	 */
-	Description: string;
-	/**
-	 * Este es el estilo de la tabla (striped, simple, unstyled)
-	 */
-	Variant: string;
-}
-
-function KTable(props: KTableProps) {
-	return (
-		<TableContainer>
-			<Table variant={props.Variant}>
-				<TableCaption>{props.Caption}</TableCaption>
-				<Thead>
-					<Tr>
-						<Th>{props.Description}</Th>
-					</Tr>
-				</Thead>
-				<Tbody>
-					<Tr>
-						<Td>{props.Content}</Td>
-					</Tr>
-				</Tbody>
-				<Tfoot>
-					<Tr>
-						<Th>{props.Description}</Th>
-					</Tr>
-				</Tfoot>
-			</Table>
-		</TableContainer>
-	);
+function KTable(): any {
+  return (
+    <TableContainer>
+      <Table variant="simple">
+        <TableCaption>Imperial to metric conversion factors</TableCaption>
+        <Thead>
+          <Tr>
+            <Th>To convert</Th>
+            <Th>into</Th>
+            <Th isNumeric>multiply by</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          <Tr>
+            <Td>inches</Td>
+            <Td>millimetres (mm)</Td>
+            <Td isNumeric>25.4</Td>
+          </Tr>
+          <Tr>
+            <Td>feet</Td>
+            <Td>centimetres (cm)</Td>
+            <Td isNumeric>30.48</Td>
+          </Tr>
+          <Tr>
+            <Td>yards</Td>
+            <Td>metres (m)</Td>
+            <Td isNumeric>0.91444</Td>
+          </Tr>
+        </Tbody>
+        <Tfoot>
+          <Tr>
+            <Th>To convert</Th>
+            <Th>into</Th>
+            <Th isNumeric>multiply by</Th>
+          </Tr>
+        </Tfoot>
+      </Table>
+    </TableContainer>
+  );
 }
 
 export default KTable;

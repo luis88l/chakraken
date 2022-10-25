@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+.next
+.storybook
+.vscode
+.husky
+public
+next-env.d.ts

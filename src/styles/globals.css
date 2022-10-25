@@ -1,81 +1,81 @@
 html,
 body {
-	padding: 0;
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
-	color: inherit;
-	text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .sidebar-item:not(:last-child) {
-	margin-bottom: 2em;
+  margin-bottom: 2em;
 }
 
 .gradient-login {
-	background: linear-gradient(270deg, #8a376a, #27146e, #943c52, #1c3897);
-	background-size: 600% 600%;
+  background: linear-gradient(270deg, #8a376a, #27146e, #943c52, #1c3897);
+  background-size: 600% 600%;
 
-	-webkit-animation: AnimationName 12s ease infinite;
-	-moz-animation: AnimationName 12s ease infinite;
-	animation: AnimationName 12s ease infinite;
+  -webkit-animation: AnimationName 12s ease infinite;
+  -moz-animation: AnimationName 12s ease infinite;
+  animation: AnimationName 12s ease infinite;
 }
 
 @-webkit-keyframes AnimationName {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 @-moz-keyframes AnimationName {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 @keyframes AnimationName {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @media only screen and (max-width: 767px) {
-	.sidebar-item {
-		margin-bottom: 0 !important;
-	}
+  .sidebar-item {
+    margin-bottom: 0 !important;
+  }
 }
 
 .sidebar-item {
-	color: gray;
+  color: gray;
 }
 
 .active {
-	color: #fff;
+  color: #fff;
 }
 
 .active-icon {
-	color: #b57295 !important;
+  color: #b57295 !important;
 }

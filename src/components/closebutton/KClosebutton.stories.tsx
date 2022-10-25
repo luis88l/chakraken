@@ -5,16 +5,18 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KClosebutton from "./KClosebutton";
 
 export default {
-	title: "Kraken+ChakraUI/Close Button",
-	component: KClosebutton,
+  title: "Kraken+ChakraUI/Close Button",
+  component: KClosebutton,
 } as ComponentMeta<typeof KClosebutton>;
 
-const Template: ComponentStory<typeof KClosebutton> = (args) => <KClosebutton {...args}/>;
+const Template: ComponentStory<typeof KClosebutton> = (args) => (
+  <KClosebutton {...args} />
+);
 
 export const Default = Template.bind({});
 
 export const CloseButton = Template.bind({});
-CloseButton.args={
-    size:'md',
-    direction:'row',
-}
+CloseButton.args = {
+  size: "md",
+  direction: "row",
+};

@@ -1,13 +1,6 @@
 import { Textarea } from "@chakra-ui/react";
 
-export interface KTextareaProps {
-	/**
-	 * Este es el placeholder del text area.
-	 */
-	placeholder: string;
-}
-
-function KTextarea(props: KTextareaProps) {
-	return <Textarea placeholder={props.placeholder} />;
+function KTextarea(): any {
+  return <Textarea placeholder="Here is a sample placeholder" />;
 }
 export default KTextarea;

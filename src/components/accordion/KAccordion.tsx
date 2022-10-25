@@ -1,68 +1,43 @@
 import {
-	Accordion,
-	AccordionItem,
-	AccordionButton,
-	AccordionPanel,
-	AccordionIcon,
-	Box,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Box,
+  BoxProps,
 } from "@chakra-ui/react";
+import { ReactNode } from "react";
 
-export interface KAccordionProps {
-	flex;
-	/**
-	 * De esta manera se alinea el texto.
-	 */
-	textAlign;
-	/**
-	 * Este es el titulo del primer Box.
-	 */
-	titleBox1: string;
-	/**
-	 * Este es el tamaño de el contenido del Box
-	 */
-	pb: number;
-	/**
-	 * Este es el contenido del primer Box.
-	 */
-	contentPanel1: string;
-	/**
-	 * Este es el titulo del segundo Box
-	 */
-	titleBox2: string;
-	/**
-	 * Este es el contenido del segundo Box
-	 */
-	contentPanel2: string;
+interface KAccordionProps {
+  flex: BoxProps["flex"];
+  /**
+   * De esta manera se alineara el Texto
+   */
+  textAlign: BoxProps["textAlign"];
+  /**
+   * Este es el titulo de la Box
+   */
+  titleBox: string;
+  contentPanel: ReactNode;
 }
 
-function KAccordion(props: KAccordionProps) {
-	return (
-		<Accordion>
-			<AccordionItem>
-				<h2>
-					<AccordionButton>
-						<Box flex={props.flex} textAlign={props.textAlign}>
-							{props.titleBox1}
-						</Box>
-						<AccordionIcon />
-					</AccordionButton>
-				</h2>
-				<AccordionPanel pb={props.pb}>{props.contentPanel1}</AccordionPanel>
-			</AccordionItem>
-
-			<AccordionItem>
-				<h2>
-					<AccordionButton>
-						<Box flex={props.flex} textAlign={props.textAlign}>
-							{props.titleBox2}
-						</Box>
-						<AccordionIcon />
-					</AccordionButton>
-				</h2>
-				<AccordionPanel pb={props.pb}>{props.contentPanel2}</AccordionPanel>
-			</AccordionItem>
-		</Accordion>
-	);
+function KAccordion(props: KAccordionProps): any {
+  return (
+    <Accordion>
+      <AccordionItem>
+        <h2>
+          <AccordionButton>
+            <Box flex={props.flex} textAlign={props.textAlign}>
+              {props.titleBox}
+            </Box>
+            <AccordionIcon />
+          </AccordionButton>
+        </h2>
+        <AccordionPanel pb={4}>{props.contentPanel}</AccordionPanel>
+      </AccordionItem>
+    </Accordion>
+  );
 }
 
 export default KAccordion;

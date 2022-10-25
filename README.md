@@ -1,6 +1,6 @@
 # Kraken 2.0
 
-Nueva versión de Kraken con Nextjs, ChakraUi, React, Typescript. 
+Nueva versión de Kraken con Nextjs, ChakraUi, React y Typescript.
 
 ## Instalación
 

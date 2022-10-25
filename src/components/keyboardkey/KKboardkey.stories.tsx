@@ -5,16 +5,14 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KKboardkey from "./KKboardkey";
 
 export default {
-	title: "Kraken+ChakraUI/Kboard key",
-	component: KKboardkey,
+  title: "Kraken+ChakraUI/Kboard key",
+  component: KKboardkey,
 } as ComponentMeta<typeof KKboardkey>;
 
-const Template: ComponentStory<typeof KKboardkey> = (args) => (
-	<KKboardkey {...args} />
-);
+const Template: ComponentStory<typeof KKboardkey> = (args) => <KKboardkey />;
 
 export const Default = Template.bind({});
 Default.args = {
-	funcion: "Ctrl",
-	funcion2: "H",
+  funcion: "Ctrl",
+  funcion2: "H",
 };

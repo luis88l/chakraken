@@ -5,16 +5,18 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KPortal from "./KPortal";
 
 export default {
-	title: "Kraken+ChakraUI/Portal",
-	component: KPortal,
+  title: "Kraken+ChakraUI/Portal",
+  component: KPortal,
 } as ComponentMeta<typeof KPortal>;
 
 const Template: ComponentStory<typeof KPortal> = (args) => (
-	<KPortal {...args} />
+  <KPortal {...args} />
 );
 
 export const Portal = Template.bind({});
 Portal.args = {
-	text: "im here",
-	portal: "This text is portaled at the end of document.body!",
+  bg: "gray.400",
+  color: "white",
+  text: "im here",
+  portal: "This text is portaled at the end of document.body!",
 };
