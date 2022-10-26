@@ -7,6 +7,7 @@ import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import { EditIcon, DeleteIcon, AddIcon } from "@chakra-ui/icons";
 import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
 import Link from "next/link";
+import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 
 export interface areasTable {
   nb_area: string;
@@ -20,7 +21,7 @@ export default function Areas(): any {
   );
 
   if (isLoading) {
-    return <p>Cargando...</p>;
+    return <KSkeletonPage />;
   }
 
   const columnHelper = createColumnHelper<areasTable>();

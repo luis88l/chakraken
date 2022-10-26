@@ -7,6 +7,7 @@ import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import { EditIcon, DeleteIcon, AddIcon } from "@chakra-ui/icons";
 import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
 import Link from "next/link";
+import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 
 export interface areasTable {
   de_rol: string;
@@ -21,7 +22,7 @@ export default function Roles(): any {
   } = useQuery("roles", async () => await ApiService.getRoles());
 
   if (isLoading) {
-    return <p>Cargando...</p>;
+    return <KSkeletonPage />;
   }
 
   const columnHelper = createColumnHelper<areasTable>();
