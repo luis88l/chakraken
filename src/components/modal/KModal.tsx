@@ -8,9 +8,11 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
+  ResponsiveValue,
 } from "@chakra-ui/react";
+import { FC } from "react";
 
-interface KModalProps {
+export interface KModalProps {
   /**
    * Este es el titulo del Boton
    */
@@ -39,37 +41,50 @@ interface KModalProps {
    * Este es el estilo que llevara el boton
    * (ghost, solid, outline, unstyled)
    */
-  variant: string;
+  variant?:
+    | ResponsiveValue<
+        "link" | "outline" | (string & {}) | "ghost" | "solid" | "unstyled"
+      >
+    | undefined;
   /**
    * Este es el color del boton situado a la derecha
    */
   ColorBtnSave: string;
 }
 
-function KModal(props: KModalProps): any {
+const KModal: FC<KModalProps> = ({
+  BtnTitle,
+  ModalHeaderTitle,
+  ModalBodyTitle,
+  ColorBtnCancel,
+  TxtBtnClose,
+  variant,
+  ColorBtnSave,
+  TxtBtnSave,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button onClick={onOpen}> {props.BtnTitle} </Button>
+      <Button onClick={onOpen}> {BtnTitle} </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{props.ModalHeaderTitle}</ModalHeader>
+          <ModalHeader>{ModalHeaderTitle}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>{props.ModalBodyTitle}</ModalBody>
+          <ModalBody>{ModalBodyTitle}</ModalBody>
 
           <ModalFooter>
-            <Button colorScheme={props.ColorBtnCancel} mr={3} onClick={onClose}>
-              {props.TxtBtnClose}
+            <Button colorScheme={ColorBtnCancel} mr={3} onClick={onClose}>
+              {TxtBtnClose}
             </Button>
-            <Button variant={props.variant} colorScheme={props.ColorBtnSave}>
-              {props.TxtBtnSave}
+            <Button variant={variant} colorScheme={ColorBtnSave}>
+              {TxtBtnSave}
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
     </>
   );
-}
+};
 
 export default KModal;

@@ -7,9 +7,9 @@ import {
   Box,
   BoxProps,
 } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import { FC, ReactNode } from "react";
 
-interface KAccordionProps {
+export interface KAccordionProps {
   flex: BoxProps["flex"];
   /**
    * De esta manera se alineara el Texto
@@ -19,25 +19,33 @@ interface KAccordionProps {
    * Este es el titulo de la Box
    */
   titleBox: string;
+  /**
+   * Este es el contenido dentro del panel
+   */
   contentPanel: ReactNode;
 }
 
-function KAccordion(props: KAccordionProps): any {
+const KAccordion: FC<KAccordionProps> = ({
+  flex,
+  textAlign,
+  titleBox,
+  contentPanel,
+}) => {
   return (
     <Accordion>
       <AccordionItem>
         <h2>
           <AccordionButton>
-            <Box flex={props.flex} textAlign={props.textAlign}>
-              {props.titleBox}
+            <Box flex={flex} textAlign={textAlign}>
+              {titleBox}
             </Box>
             <AccordionIcon />
           </AccordionButton>
         </h2>
-        <AccordionPanel pb={4}>{props.contentPanel}</AccordionPanel>
+        <AccordionPanel pb={4}>{contentPanel}</AccordionPanel>
       </AccordionItem>
     </Accordion>
   );
-}
+};
 
 export default KAccordion;

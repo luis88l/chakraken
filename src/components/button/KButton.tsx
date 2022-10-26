@@ -1,8 +1,7 @@
 import { Button, Stack, StackDirection } from "@chakra-ui/react";
+import { FC } from "react";
 
 export interface KButtonProps {
-  direction: StackDirection | undefined;
-  align: string;
   /**
    * Este es el color del Boton.
    */
@@ -17,14 +16,12 @@ export interface KButtonProps {
   title: string;
 }
 
-function KButton(props: KButtonProps): any {
+const KButton: FC<KButtonProps> = ({ colorScheme, size, title }) => {
   return (
-    <Stack direction={props.direction} align={props.align}>
-      <Button colorScheme={props.colorScheme} size={props.size}>
-        {props.title}
-      </Button>
-    </Stack>
+    <Button colorScheme={colorScheme} size={size}>
+      {title}
+    </Button>
   );
-}
+};
 
 export default KButton;

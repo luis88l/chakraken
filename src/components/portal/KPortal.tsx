@@ -1,6 +1,7 @@
 import { Box, Portal } from "@chakra-ui/react";
+import { FC } from "react";
 
-interface KPortalProps {
+export interface KPortalProps {
   /**
    * Este es el color del Portal
    */
@@ -9,17 +10,23 @@ interface KPortalProps {
    * Este es el texto del Portal
    */
   text: string;
+  /**
+   * Este es el texto que se situara al final del documento
+   */
   portal: React.ReactNode;
+  /**
+   * Este es color de fondo del portal
+   */
   bg: string;
 }
 
-function KPortal(props: KPortalProps): any {
+const KPortal: FC<KPortalProps> = ({ color, text, portal, bg }) => {
   return (
-    <Box bg={props.bg} color={props.color}>
-      {props.text}
-      <Portal>{props.portal}</Portal>
+    <Box bg={bg} color={color}>
+      {text}
+      <Portal>{portal}</Portal>
     </Box>
   );
-}
+};
 
 export default KPortal;
