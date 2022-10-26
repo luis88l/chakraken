@@ -29,7 +29,7 @@ npm run check-types ||
 )
 
 # If everything passes... Now we can commit
-echo '🤔🤔🤔🤔... Al parecer todo luce bien... Lets go!!!. 🤔🤔🤔🤔'
+echo '✅✅✅... Al parecer todo luce bien... Lets go!!!. ✅✅✅'
 
 
 # If everything passes... Now we can commit
