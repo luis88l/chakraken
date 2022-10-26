@@ -9,9 +9,7 @@ export default {
   component: KTextarea,
 } as ComponentMeta<typeof KTextarea>;
 
-const Template: ComponentStory<typeof KTextarea> = (args) => (
-  <KTextarea {...args} />
-);
+const Template: ComponentStory<typeof KTextarea> = (args) => <KTextarea />;
 
 export const Default = Template.bind({});
 Default.args = {

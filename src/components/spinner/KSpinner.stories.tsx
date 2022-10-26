@@ -9,9 +9,7 @@ export default {
   component: KSpinner,
 } as ComponentMeta<typeof KSpinner>;
 
-const Template: ComponentStory<typeof KSpinner> = (args) => (
-  <KSpinner {...args} />
-);
+const Template: ComponentStory<typeof KSpinner> = (args) => <KSpinner />;
 
 export const Default = Template.bind({});
 Default.args = {

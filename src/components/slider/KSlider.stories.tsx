@@ -9,9 +9,7 @@ export default {
   component: KSlider,
 } as ComponentMeta<typeof KSlider>;
 
-const Template: ComponentStory<typeof KSlider> = (args) => (
-  <KSlider {...args} />
-);
+const Template: ComponentStory<typeof KSlider> = (args) => <KSlider />;
 
 export const Default = Template.bind({});
 Default.args = {

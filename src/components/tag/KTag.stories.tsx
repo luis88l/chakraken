@@ -9,7 +9,7 @@ export default {
   component: KTag,
 } as ComponentMeta<typeof KTag>;
 
-const Template: ComponentStory<typeof KTag> = (args) => <KTag {...args} />;
+const Template: ComponentStory<typeof KTag> = (args) => <KTag />;
 
 export const Default = Template.bind({});
 Default.args = {
