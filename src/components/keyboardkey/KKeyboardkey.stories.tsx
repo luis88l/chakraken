@@ -9,7 +9,9 @@ export default {
   component: KKeyboardkey,
 } as ComponentMeta<typeof KKeyboardkey>;
 
-const Template: ComponentStory<typeof KKeyboardkey> = (args) => <KKeyboardkey {...args}/>;
+const Template: ComponentStory<typeof KKeyboardkey> = (args) => (
+  <KKeyboardkey {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {

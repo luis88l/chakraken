@@ -9,7 +9,7 @@ export default {
   component: KTab,
 } as ComponentMeta<typeof KTab>;
 
-const Template: ComponentStory<typeof KTab> = (args) => <KTab {...args} />;
+const Template: ComponentStory<typeof KTab> = (args) => <KTab />;
 
 export const Default = Template.bind({});
 Default.args = {

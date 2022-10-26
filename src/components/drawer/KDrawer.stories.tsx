@@ -13,7 +13,6 @@ const Template: ComponentStory<typeof KDrawer> = (args) => (
   <KDrawer {...args} />
 );
 
-
 export const Drawer1 = Template.bind({});
 Drawer1.args = {
   colorScheme: "blackAlpha",

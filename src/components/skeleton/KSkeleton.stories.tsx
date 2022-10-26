@@ -9,9 +9,7 @@ export default {
   component: KSkeleton,
 } as ComponentMeta<typeof KSkeleton>;
 
-const Template: ComponentStory<typeof KSkeleton> = (args) => (
-  <KSkeleton {...args} />
-);
+const Template: ComponentStory<typeof KSkeleton> = (args) => <KSkeleton />;
 
 export const Default = Template.bind({});
 Default.args = {

@@ -9,7 +9,7 @@ export default {
   component: KLink,
 } as ComponentMeta<typeof KLink>;
 
-const Template: ComponentStory<typeof KLink> = (args) => <KLink {...args} />;
+const Template: ComponentStory<typeof KLink> = (args) => <KLink />;
 
 export const Default = Template.bind({});
 Default.args = {

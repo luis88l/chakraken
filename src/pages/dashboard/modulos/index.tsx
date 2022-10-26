@@ -7,6 +7,7 @@ import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import { EditIcon, DeleteIcon, AddIcon } from "@chakra-ui/icons";
 import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
 import Link from "next/link";
+import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 
 export interface modulosTable {
   nb_modulo: string;
@@ -25,7 +26,7 @@ export default function Modulos(): any {
   } = useQuery("modulos", async () => await ApiService.getModulos());
 
   if (isLoading) {
-    return <p>Cargando...</p>;
+    return <KSkeletonPage />;
   }
 
   const columnHelper = createColumnHelper<modulosTable>();

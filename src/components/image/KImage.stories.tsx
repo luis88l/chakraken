@@ -9,7 +9,7 @@ export default {
   component: KImage,
 } as ComponentMeta<typeof KImage>;
 
-const Template: ComponentStory<typeof KImage> = (args) => <KImage {...args}/>;
+const Template: ComponentStory<typeof KImage> = (args) => <KImage {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
