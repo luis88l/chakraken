@@ -1,7 +1,13 @@
 import { Box, Portal } from "@chakra-ui/react";
 
 interface KPortalProps {
+  /**
+   * Este es el color del Portal
+   */
   color: string;
+  /**
+   * Este es el texto del Portal
+   */
   text: string;
   portal: React.ReactNode;
   bg: string;

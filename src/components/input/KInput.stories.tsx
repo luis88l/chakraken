@@ -12,3 +12,10 @@ export default {
 const Template: ComponentStory<typeof KInput> = (args) => <KInput />;
 
 export const Input1 = Template.bind({});
+Input1.args = {
+  size: "md",
+  pr: "4.5rem",
+  placeholder: "Enter password",
+  width: "4.5rem",
+  h: "1.75rem",
+};

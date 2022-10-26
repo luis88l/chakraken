@@ -8,9 +8,22 @@ import {
 } from "@chakra-ui/react";
 
 interface KStatProps {
+  /**
+   * Esto es el titulo del Stat
+   */
   title: string;
+  /**
+   * Esto es el numero de nuestro Stat
+   */
   number: string;
+  /**
+   * Esto es el tipo que llevara nuestro stat, incremento o decremento
+   * (increase o decrease)
+   */
   type: "increase" | "decrease" | undefined;
+  /**
+   * Esto es el porcentaje de nuestro Stat
+   */
   percentage: string;
 }
 

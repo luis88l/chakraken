@@ -12,3 +12,7 @@ export default {
 const Template: ComponentStory<typeof KKboardkey> = (args) => <KKboardkey />;
 
 export const Default = Template.bind({});
+Default.args = {
+  funcion: "Ctrl",
+  funcion2: "H",
+};

@@ -1,6 +1,9 @@
 import { Heading } from "@chakra-ui/react";
 
 interface KHeadingProps {
+  /**
+   * Este es el texto que se mostrara.
+   */
   text: string;
 }
 

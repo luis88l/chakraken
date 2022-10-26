@@ -11,13 +11,38 @@ import {
 } from "@chakra-ui/react";
 
 interface KModalProps {
+  /**
+   * Este es el titulo del Boton
+   */
   BtnTitle: string;
+  /**
+   * Este es el titulo del encabezado
+   */
   ModalHeaderTitle: string;
+  /**
+   * Este es el titulo del Body del modal
+   */
   ModalBodyTitle: string;
+  /**
+   * Este es el color del boton situado a la izquierda del Modal
+   */
   ColorBtnCancel: string;
+  /**
+   * Este es el titulo del boton situado a la izquierda
+   */
   TxtBtnClose: string;
+  /**
+   * Este es el titulo del boton situado a la derecha
+   */
   TxtBtnSave: string;
+  /**
+   * Este es el estilo que llevara el boton
+   * (ghost, solid, outline, unstyled)
+   */
   variant: string;
+  /**
+   * Este es el color del boton situado a la derecha
+   */
   ColorBtnSave: string;
 }
 

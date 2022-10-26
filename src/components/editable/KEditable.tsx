@@ -1,6 +1,9 @@
 import { Editable, EditableInput, EditablePreview } from "@chakra-ui/react";
 
 interface KEditableProps {
+  /**
+   * Este es el texto que aparecera por default
+   */
   defaultValue: string | undefined;
 }
 

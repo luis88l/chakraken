@@ -12,3 +12,9 @@ export default {
 const Template: ComponentStory<typeof KImage> = (args) => <KImage />;
 
 export const Default = Template.bind({});
+Default.args = {
+  boxSize: "100px",
+  objectFit: "cover",
+  src: "https://bit.ly/dan-abramov",
+  alt: "Dan Abramov",
+};

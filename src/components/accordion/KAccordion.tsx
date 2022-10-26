@@ -11,7 +11,13 @@ import { ReactNode } from "react";
 
 interface KAccordionProps {
   flex: BoxProps["flex"];
+  /**
+   * De esta manera se alineara el Texto
+   */
   textAlign: BoxProps["textAlign"];
+  /**
+   * Este es el titulo de la Box
+   */
   titleBox: string;
   contentPanel: ReactNode;
 }

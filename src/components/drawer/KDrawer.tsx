@@ -14,16 +14,44 @@ import React from "react";
 
 interface KDrawerProps {
   colorScheme: string;
+  /**
+   * Este es el titulo del Boton.
+   */
   titleBtnDrawer: string;
   placement?: "right" | "left";
+  /**
+   * Este es el titulo del drawer
+   */
   title: string;
+  /**
+   * Este es el texto que aparecera por encima al escribir en el Drawer.
+   */
   placeholder?: string;
+  /**
+   * Este es el estilo que llevara el boton
+   * (ghost, solid, outline)
+   */
   variant: string;
+  /**
+   * Este es color del boton situado en la Parte izquierda
+   */
   colorCancel: string;
+  /**
+   * Este es el margen que se aplicara al Drawer.
+   */
   mr: string;
+  /**
+   * Este es el titulo del boton situado en la parte izquierda
+   */
   titleBtnCancel: string;
   secondColorScheme: string;
+  /**
+   * Este es el titulo del boton situado a la derecha
+   */
   titleBtnSave: string;
+  /**
+   * Este es el tamaño del boton
+   */
   size: string;
 }
 

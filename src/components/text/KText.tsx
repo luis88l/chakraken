@@ -1,7 +1,13 @@
 import { Stack, Text } from "@chakra-ui/react";
 
 interface KTextProps {
+  /**
+   * Esto es el tamaño de la letra
+   */
   fontSize?: string;
+  /**
+   * Este es el contenido
+   */
   content: string;
 }
 
