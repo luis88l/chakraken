@@ -1,6 +1,7 @@
 import { FormControl, FormLabel, Switch } from "@chakra-ui/react";
+import { FC } from "react";
 
-interface KSwitchProps {
+export interface KSwitchProps {
   display: string;
   /**
    * De esta manera se alineara
@@ -18,15 +19,22 @@ interface KSwitchProps {
   mb: string;
 }
 
-function KSwitch(props: KSwitchProps): any {
+const KSwitch: FC<KSwitchProps> = ({
+  display,
+  htmlFor,
+  alignItems,
+  mb,
+  text,
+  id,
+}) => {
   return (
-    <FormControl display={props.display} alignItems={props.alignItems}>
-      <FormLabel htmlFor={props.htmlFor} mb={props.mb}>
-        {props.text}
+    <FormControl display={display} alignItems={alignItems}>
+      <FormLabel htmlFor={htmlFor} mb={mb}>
+        {text}
       </FormLabel>
-      <Switch id={props.id} />
+      <Switch id={id} />
     </FormControl>
   );
-}
+};
 
 export default KSwitch;

@@ -10,11 +10,12 @@ export default {
 } as ComponentMeta<typeof KProgressBar>;
 
 const Template: ComponentStory<typeof KProgressBar> = (args) => (
-  <KProgressBar />
+  <KProgressBar {...args} />
 );
 
 export const ProgressBar1 = Template.bind({});
 ProgressBar1.args = {
+  colorScheme: "green",
   size: "md",
   value: 20,
 };

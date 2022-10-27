@@ -9,7 +9,7 @@ export default {
   component: KTag,
 } as ComponentMeta<typeof KTag>;
 
-const Template: ComponentStory<typeof KTag> = (args) => <KTag />;
+const Template: ComponentStory<typeof KTag> = (args) => <KTag {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -17,4 +17,5 @@ Default.args = {
   variant: "subtle",
   boxSize: "12px",
   title: "Cyan",
+  colorScheme: "twitter",
 };

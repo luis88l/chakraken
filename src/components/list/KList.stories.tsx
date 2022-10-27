@@ -15,4 +15,5 @@ export const Default = Template.bind({});
 Default.args = {
   text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
   text2: "Este es un texto de ejemplo",
+  color: "green.500",
 };

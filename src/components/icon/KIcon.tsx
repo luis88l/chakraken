@@ -21,12 +21,6 @@ export interface KIconProps {
 const KIcon: FC<KIconProps> = ({ w, h, color }) => {
   return (
     <HStack>
-      {/* The default icon size is 1em (16px) */}
-      <Icon as={MdSettings} />
-
-      {/* Use the `boxSize` prop to change the icon size */}
-      <Icon as={MdReceipt} w={w} h={h} />
-
       {/* Use the `color` prop to change the icon color */}
       <Icon as={MdGroupWork} w={w} h={h} color={color} />
     </HStack>

@@ -1,6 +1,7 @@
 import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
+import { FC } from "react";
 
-function KProgress(props: {
+export interface KProgressProps {
   /**
    * Esto es lo que indicaremos como maximo de progreso que pueda alcanzar
    */
@@ -17,17 +18,14 @@ function KProgress(props: {
    * Este es el color del componente de progreso
    */
   color: string | undefined;
-}): any {
+}
+
+const KProgress: FC<KProgressProps> = ({ max, min, content, color }) => {
   return (
-    <CircularProgress
-      max={props.max}
-      min={props.min}
-      value={props.content}
-      color={props.color}
-    >
-      <CircularProgressLabel>{props.content}%</CircularProgressLabel>
+    <CircularProgress max={max} min={min} value={content} color={color}>
+      <CircularProgressLabel>{content}%</CircularProgressLabel>
     </CircularProgress>
   );
-}
+};
 
 export default KProgress;

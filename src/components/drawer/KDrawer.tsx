@@ -9,6 +9,7 @@ import {
   useDisclosure,
   Button,
   Input,
+  ResponsiveValue,
 } from "@chakra-ui/react";
 import React, { FC } from "react";
 
@@ -73,7 +74,27 @@ export interface KDrawerProps {
   /**
    * Este es el color del boton situado a la derecha
    */
-  secondColorScheme: string;
+  secondColorScheme:
+    | (string & {})
+    | "whiteAlpha"
+    | "blackAlpha"
+    | "gray"
+    | "red"
+    | "orange"
+    | "yellow"
+    | "green"
+    | "teal"
+    | "blue"
+    | "cyan"
+    | "purple"
+    | "pink"
+    | "linkedin"
+    | "facebook"
+    | "messenger"
+    | "whatsapp"
+    | "twitter"
+    | "telegram"
+    | undefined;
   /**
    * Este es el titulo del boton situado a la derecha
    */
@@ -81,7 +102,7 @@ export interface KDrawerProps {
   /**
    * Este es el tamaño del boton
    */
-  size: string;
+  size: ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs"> | undefined;
 }
 
 const KDrawer: FC<KDrawerProps> = ({

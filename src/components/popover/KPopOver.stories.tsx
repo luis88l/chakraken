@@ -26,7 +26,6 @@ PopOver1.args = {
     "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.",
   borderContent: "0",
   display: "flex",
-  alignItems: "center",
   justifyContent: "space-between",
   fontSize: "sm",
   boxContent: "Step 2 of 4",

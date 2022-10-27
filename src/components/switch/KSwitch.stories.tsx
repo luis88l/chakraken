@@ -13,8 +13,6 @@ const Template: ComponentStory<typeof KSwitch> = (args) => (
   <KSwitch {...args} />
 );
 
-export const Default = Template.bind({});
-
 export const Switch = Template.bind({});
 Switch.args = {
   display: "flex",

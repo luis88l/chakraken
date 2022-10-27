@@ -11,18 +11,22 @@ export interface KListprops {
    * Texto del otro punto de la lista.
    */
   text2: string;
+  /**
+   * Este es el color del list.
+   */
+  color: string;
 }
 
-const KList: FC<KListprops> = ({ text, text2 }) => {
+const KList: FC<KListprops> = ({ text, text2, color }) => {
   return (
     <List spacing={3}>
       <ListItem>
-        <ListIcon as={MdCheckCircle} color="green.500" />
+        <ListIcon as={MdCheckCircle} color={color} />
         {text}
       </ListItem>
       {/* You can also use custom icons from react-icons */}
       <ListItem>
-        <ListIcon as={MdSettings} color="green.500" />
+        <ListIcon as={MdSettings} color={color} />
         {text2}
       </ListItem>
     </List>

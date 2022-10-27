@@ -1,8 +1,10 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, Key } from "react";
 
 export interface KBreadcrumbProps {
   items: KBreadcrumbItemProps[];
+  title: string;
+  link: string;
 }
 
 export interface KBreadcrumbItemProps {
@@ -10,8 +12,8 @@ export interface KBreadcrumbItemProps {
   link: string;
 }
 
-const KBreadcrum: FC<KBreadcrumbItemProps> = ({ items, title, link }) => {
-  const items = items;
+const KBreadcrumb: FC<KBreadcrumbProps> = ({ items }) => {
+  const Items = items;
   return (
     <Breadcrumb>
       {items.map((item: KBreadcrumbItemProps, index) => (
