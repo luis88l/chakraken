@@ -1,14 +1,43 @@
 import { Progress, Stack } from "@chakra-ui/react";
+import { FC } from "react";
 
-function KProgressBar(): any {
-  return (
-    <Stack spacing={5}>
-      <Progress colorScheme="green" size="sm" value={20} />
-      <Progress colorScheme="green" size="md" value={20} />
-      <Progress colorScheme="green" size="lg" value={20} />
-      <Progress colorScheme="green" height="32px" value={20} />
-    </Stack>
-  );
+export interface KProgressBarProps {
+  /**
+   * Este es el color de la barra de progreso.
+   */
+  colorScheme:
+    | (string & {})
+    | "blue"
+    | "cyan"
+    | "gray"
+    | "green"
+    | "orange"
+    | "pink"
+    | "purple"
+    | "red"
+    | "teal"
+    | "yellow"
+    | "whiteAlpha"
+    | "blackAlpha"
+    | "linkedin"
+    | "facebook"
+    | "messenger"
+    | "whatsapp"
+    | "twitter"
+    | "telegram"
+    | undefined;
+  /**
+   * Este es el tamaño de la barra de progreso
+   */
+  size: string;
+  /**
+   * Este es el valor que tendra la barra de progreso
+   */
+  value: number;
 }
+
+const KProgressBar: FC<KProgressBarProps> = ({ colorScheme, size, value }) => {
+  return <Progress colorScheme={colorScheme} size={size} value={value} />;
+};
 
 export default KProgressBar;

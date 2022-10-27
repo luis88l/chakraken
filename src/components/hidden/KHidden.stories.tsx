@@ -9,6 +9,11 @@ export default {
   component: KHidden,
 } as ComponentMeta<typeof KHidden>;
 
-const Template: ComponentStory<typeof KHidden> = (args) => <KHidden />;
+const Template: ComponentStory<typeof KHidden> = (args) => (
+  <KHidden {...args} />
+);
 
 export const Default = Template.bind({});
+Default.args = {
+  nameicon: "Checkmark",
+};

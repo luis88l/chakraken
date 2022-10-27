@@ -1,15 +1,15 @@
-import { Spinner, Stack } from "@chakra-ui/react";
+import { ResponsiveValue, Spinner } from "@chakra-ui/react";
+import { FC } from "react";
 
-function KSpinner(): any {
-  return (
-    <Stack direction="row" spacing={4}>
-      <Spinner size="xs" color="#239bbf" />
-      <Spinner size="sm" color="#239bbf" />
-      <Spinner size="md" color="#239bbf" />
-      <Spinner size="lg" color="#239bbf" />
-      <Spinner size="xl" color="#239bbf" />
-    </Stack>
-  );
+export interface KSpinnerProps {
+  size:
+    | ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xl" | "xs">
+    | undefined;
+  color: string;
 }
+
+const KSpinner: FC<KSpinnerProps> = ({ size, color }) => {
+  return <Spinner size={size} color={color} />;
+};
 
 export default KSpinner;

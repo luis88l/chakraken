@@ -13,10 +13,7 @@ const Template: ComponentStory<typeof KClosebutton> = (args) => (
   <KClosebutton {...args} />
 );
 
-export const Default = Template.bind({});
-
 export const CloseButton = Template.bind({});
 CloseButton.args = {
   size: "md",
-  direction: "row",
 };

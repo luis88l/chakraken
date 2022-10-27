@@ -6,8 +6,9 @@ import {
   StatArrow,
   StatGroup,
 } from "@chakra-ui/react";
+import { FC } from "react";
 
-interface KStatProps {
+export interface KStatProps {
   /**
    * Esto es el titulo del Stat
    */
@@ -20,26 +21,26 @@ interface KStatProps {
    * Esto es el tipo que llevara nuestro stat, incremento o decremento
    * (increase o decrease)
    */
-  type: "increase" | "decrease" | undefined;
+  type?: "increase" | "decrease" | undefined;
   /**
    * Esto es el porcentaje de nuestro Stat
    */
   percentage: string;
 }
 
-function KStat(props: KStatProps): any {
+const KStat: FC<KStatProps> = ({ title, number, type, percentage }) => {
   return (
     <StatGroup>
       <Stat>
-        <StatLabel>{props.title}</StatLabel>
-        <StatNumber>{props.number}</StatNumber>
+        <StatLabel>{title}</StatLabel>
+        <StatNumber>{number}</StatNumber>
         <StatHelpText>
-          <StatArrow type={props.type} />
-          {props.percentage}
+          <StatArrow type={type} />
+          {percentage}
         </StatHelpText>
       </Stat>
     </StatGroup>
   );
-}
+};
 
 export default KStat;

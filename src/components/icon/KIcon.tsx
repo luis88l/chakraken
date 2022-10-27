@@ -1,8 +1,9 @@
 // 1. Import
 import { HStack, Icon } from "@chakra-ui/react";
+import { FC } from "react";
 import { MdGroupWork, MdReceipt, MdSettings } from "react-icons/md";
 
-interface KIconProps {
+export interface KIconProps {
   /**
    * Este es el ancho del Icono
    */
@@ -17,19 +18,13 @@ interface KIconProps {
   color: string;
 }
 
-function KIcon(props: KIconProps): any {
+const KIcon: FC<KIconProps> = ({ w, h, color }) => {
   return (
     <HStack>
-      {/* The default icon size is 1em (16px) */}
-      <Icon as={MdSettings} />
-
-      {/* Use the `boxSize` prop to change the icon size */}
-      <Icon as={MdReceipt} w={props.w} h={props.h} />
-
       {/* Use the `color` prop to change the icon color */}
-      <Icon as={MdGroupWork} w={props.w} h={props.h} color={props.color} />
+      <Icon as={MdGroupWork} w={w} h={h} color={color} />
     </HStack>
   );
-}
+};
 
 export default KIcon;

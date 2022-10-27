@@ -9,6 +9,11 @@ export default {
   component: KList,
 } as ComponentMeta<typeof KList>;
 
-const Template: ComponentStory<typeof KList> = (args) => <KList />;
+const Template: ComponentStory<typeof KList> = (args) => <KList {...args} />;
 
 export const Default = Template.bind({});
+Default.args = {
+  text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+  text2: "Este es un texto de ejemplo",
+  color: "green.500",
+};

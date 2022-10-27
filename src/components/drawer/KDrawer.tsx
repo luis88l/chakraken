@@ -9,15 +9,42 @@ import {
   useDisclosure,
   Button,
   Input,
+  ResponsiveValue,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { FC } from "react";
 
-interface KDrawerProps {
-  colorScheme: string;
+export interface KDrawerProps {
+  /**
+   * Este es el color del Boton.
+   */
+  colorScheme:
+    | (string & {})
+    | "whiteAlpha"
+    | "blackAlpha"
+    | "gray"
+    | "red"
+    | "orange"
+    | "yellow"
+    | "green"
+    | "teal"
+    | "blue"
+    | "cyan"
+    | "purple"
+    | "pink"
+    | "linkedin"
+    | "facebook"
+    | "messenger"
+    | "whatsapp"
+    | "twitter"
+    | "telegram"
+    | undefined;
   /**
    * Este es el titulo del Boton.
    */
   titleBtnDrawer: string;
+  /**
+   * Esta es la posicion donde se alineara.
+   */
   placement?: "right" | "left";
   /**
    * Este es el titulo del drawer
@@ -44,7 +71,30 @@ interface KDrawerProps {
    * Este es el titulo del boton situado en la parte izquierda
    */
   titleBtnCancel: string;
-  secondColorScheme: string;
+  /**
+   * Este es el color del boton situado a la derecha
+   */
+  secondColorScheme:
+    | (string & {})
+    | "whiteAlpha"
+    | "blackAlpha"
+    | "gray"
+    | "red"
+    | "orange"
+    | "yellow"
+    | "green"
+    | "teal"
+    | "blue"
+    | "cyan"
+    | "purple"
+    | "pink"
+    | "linkedin"
+    | "facebook"
+    | "messenger"
+    | "whatsapp"
+    | "twitter"
+    | "telegram"
+    | undefined;
   /**
    * Este es el titulo del boton situado a la derecha
    */
@@ -52,47 +102,54 @@ interface KDrawerProps {
   /**
    * Este es el tamaño del boton
    */
-  size: string;
+  size: ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs"> | undefined;
 }
 
-function KDrawer(props: KDrawerProps): any {
+const KDrawer: FC<KDrawerProps> = ({
+  colorScheme,
+  titleBtnDrawer,
+  placement,
+  title,
+  placeholder,
+  variant,
+  colorCancel,
+  mr,
+  titleBtnCancel,
+  secondColorScheme,
+  titleBtnSave,
+  size,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button
-        colorScheme={props.colorScheme}
-        size={props.size}
-        onClick={onOpen}
-      >
-        {props.titleBtnDrawer}
+      <Button colorScheme={colorScheme} size={size} onClick={onOpen}>
+        {titleBtnDrawer}
       </Button>
-      <Drawer isOpen={isOpen} placement={props.placement} onClose={onClose}>
+      <Drawer isOpen={isOpen} placement={placement} onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>{props.title}</DrawerHeader>
+          <DrawerHeader>{title}</DrawerHeader>
 
           <DrawerBody>
-            <Input placeholder={props.placeholder} />
+            <Input placeholder={placeholder} />
           </DrawerBody>
 
           <DrawerFooter>
             <Button
-              variant={props.variant}
-              mr={props.mr}
-              colorScheme={props.colorCancel}
+              variant={variant}
+              mr={mr}
+              colorScheme={colorCancel}
               onClick={onClose}
             >
-              {props.titleBtnCancel}
+              {titleBtnCancel}
             </Button>
-            <Button colorScheme={props.secondColorScheme}>
-              {props.titleBtnSave}
-            </Button>
+            <Button colorScheme={secondColorScheme}>{titleBtnSave}</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
   );
-}
+};
 
 export default KDrawer;

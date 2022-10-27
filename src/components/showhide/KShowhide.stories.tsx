@@ -12,3 +12,7 @@ export default {
 const Template: ComponentStory<typeof KShowhide> = (args) => <KShowhide />;
 
 export const Default = Template.bind({});
+Default.args = {
+  breakpoint: "(max-width: 400px)",
+  text: "This text appears only on screens 400px and smaller.",
+};

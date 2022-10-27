@@ -10,7 +10,7 @@ export default {
 } as ComponentMeta<typeof KLinkoverlay>;
 
 const Template: ComponentStory<typeof KLinkoverlay> = (args) => (
-  <KLinkoverlay />
+  <KLinkoverlay {...args} />
 );
 
 export const Default = Template.bind({});
@@ -22,7 +22,7 @@ Default.args = {
   size: "md",
   my: "2",
   href: "#",
-  text: "New Year, New Beginnings: Smashing Workshops & Audits",
-  text2: "Catch up on whats been cookin",
+  text: "13 days ago",
+  text2: "New Year, New Beginnings: Smashing Workshops & Audits",
   dateTime: "2021-01-15 15:30:00 +0000 UTC",
 };

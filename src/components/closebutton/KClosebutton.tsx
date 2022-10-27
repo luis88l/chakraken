@@ -1,19 +1,15 @@
-import { CloseButton, Stack } from "@chakra-ui/react";
+import { CloseButton, ResponsiveValue, Stack } from "@chakra-ui/react";
+import { FC } from "react";
 
 export interface KClosebuttonProps {
-  direction: any;
   /**
    * Este es el tamaño del Boton.
    */
-  size: string;
+  size: ResponsiveValue<"md" | (string & {}) | "sm" | "lg"> | undefined;
 }
 
-function KClosebutton(props: KClosebuttonProps): any {
-  return (
-    <Stack direction={props.direction}>
-      <CloseButton size={props.size} />
-    </Stack>
-  );
-}
+const KClosebutton: FC<KClosebuttonProps> = ({ size }) => {
+  return <CloseButton size={size} />;
+};
 
 export default KClosebutton;

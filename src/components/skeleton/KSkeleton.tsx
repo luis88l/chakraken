@@ -1,7 +1,13 @@
 import { Skeleton } from "@chakra-ui/react";
+import { FC } from "react";
 
-function KSkeleton(): any {
-  return <Skeleton height="30" width="100%" />;
+export interface KSkeletonProps {
+  height: string;
+  width: string;
 }
+
+const KSkeleton: FC<KSkeletonProps> = ({ height, width }) => {
+  return <Skeleton height={height} width={width} />;
+};
 
 export default KSkeleton;

@@ -1,4 +1,12 @@
-import { Avatar, Badge, Box, Flex, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  Badge,
+  Box,
+  Flex,
+  ResponsiveValue,
+  Text,
+} from "@chakra-ui/react";
+import { FC } from "react";
 
 export interface KBadgeProps {
   /**
@@ -25,26 +33,54 @@ export interface KBadgeProps {
    * Esta es la descripcion.
    */
   description: string;
-
-  fontWeight: string;
+  /**
+   * Este es el estilo de la letra.
+   */
+  fontWeight:
+    | ResponsiveValue<
+        | number
+        | (string & {})
+        | "bold"
+        | "hairline"
+        | "thin"
+        | "light"
+        | "normal"
+        | "medium"
+        | "semibold"
+        | "extrabold"
+        | "black"
+      >
+    | undefined;
+  /**
+   * Este es el color de la alerta.
+   */
   colorScheme: string;
 }
 
-function KBadge(props: KBadgeProps): any {
+const KBadge: FC<KBadgeProps> = ({
+  src,
+  Ml,
+  fontSize,
+  title,
+  status,
+  description,
+  fontWeight,
+  colorScheme,
+}) => {
   return (
     <Flex>
-      <Avatar src={props.src} />
-      <Box ml={props.Ml}>
-        <Text fontWeight={props.fontWeight}>
-          {props.title}
-          <Badge ml={props.Ml} colorScheme={props.colorScheme}>
-            {props.status}
+      <Avatar src={src} />
+      <Box ml={Ml}>
+        <Text fontWeight={fontWeight}>
+          {title}
+          <Badge ml={Ml} colorScheme={colorScheme}>
+            {status}
           </Badge>
         </Text>
-        <Text fontSize={props.fontSize}>{props.description}</Text>
+        <Text fontSize={fontSize}>{description}</Text>
       </Box>
     </Flex>
   );
-}
+};
 
 export default KBadge;

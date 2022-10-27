@@ -15,8 +15,6 @@ const Template: ComponentStory<typeof KButton> = (args) => (
 
 export const Button1 = Template.bind({});
 Button1.args = {
-  direction: "row",
-  align: "center",
   colorScheme: "teal",
   size: "md",
   title: "Button",

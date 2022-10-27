@@ -1,4 +1,5 @@
 import { FormControl, FormLabel, Select } from "@chakra-ui/react";
+import { FC } from "react";
 
 export interface KFormControlProps {
   /**
@@ -19,16 +20,21 @@ export interface KFormControlProps {
   option2: string;
 }
 
-function KFormControl(props: KFormControlProps): any {
+const KFormControl: FC<KFormControlProps> = ({
+  formtitle,
+  placeholder,
+  option,
+  option2,
+}) => {
   return (
     <FormControl>
-      <FormLabel>{props.formtitle}</FormLabel>
-      <Select placeholder={props.placeholder}>
-        <option>{props.option}</option>
-        <option>{props.option2}</option>
+      <FormLabel>{formtitle}</FormLabel>
+      <Select placeholder={placeholder}>
+        <option>{option}</option>
+        <option>{option2}</option>
       </Select>
     </FormControl>
   );
-}
+};
 
 export default KFormControl;
