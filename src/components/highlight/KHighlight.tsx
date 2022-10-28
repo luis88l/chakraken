@@ -1,4 +1,4 @@
-import { Highlight } from "@chakra-ui/react";
+import { Highlight, SystemStyleObject } from "@chakra-ui/react";
 import { FC } from "react";
 
 export interface KHighlightProps {
@@ -6,6 +6,7 @@ export interface KHighlightProps {
    * Este es el texto principal.
    */
   text: string;
+  styles: SystemStyleObject | undefined;
 }
 
 const KHighlight: FC<KHighlightProps> = ({ text }) => {
