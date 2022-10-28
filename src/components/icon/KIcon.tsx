@@ -1,7 +1,7 @@
 // 1. Import
 import { HStack, Icon } from "@chakra-ui/react";
 import { FC } from "react";
-import { MdGroupWork, MdReceipt, MdSettings } from "react-icons/md";
+import { MdGroupWork } from "react-icons/md";
 
 export interface KIconProps {
   /**

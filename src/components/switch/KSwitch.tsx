@@ -14,7 +14,7 @@ export interface KSwitchProps {
   text: string;
   id: string;
   /**
-   * Este es el margen del switch
+   * Este es el margen del componente
    */
   mb: string;
 }

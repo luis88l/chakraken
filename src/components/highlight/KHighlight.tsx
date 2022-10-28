@@ -1,14 +1,22 @@
 import { Highlight } from "@chakra-ui/react";
+import { FC } from "react";
 
-function KHighlight(): any {
+export interface KHighlightProps {
+  /**
+   * Este es el texto principal.
+   */
+  text: string;
+}
+
+const KHighlight: FC<KHighlightProps> = ({ text }) => {
   return (
     <Highlight
       query="spotlight"
       styles={{ px: "1", py: "1", bg: "orange.100" }}
     >
-      With the Highlight component, you can spotlight words.
+      {text}
     </Highlight>
   );
-}
+};
 
 export default KHighlight;

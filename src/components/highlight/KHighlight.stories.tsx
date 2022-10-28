@@ -7,6 +7,11 @@ export default {
   component: KHighlight,
 } as ComponentMeta<typeof KHighlight>;
 
-const Template: ComponentStory<typeof KHighlight> = (args) => <KHighlight />;
+const Template: ComponentStory<typeof KHighlight> = (args) => (
+  <KHighlight {...args} />
+);
 
 export const Default = Template.bind({});
+Default.args = {
+  text: "With the Highlight component, you can spotlight words.",
+};

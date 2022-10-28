@@ -28,13 +28,27 @@ export interface KPopOverProps {
    */
   bg: string;
   /**
-   * Este es el color del Icono
+   * Este es el color del borde del Pop Over.
    */
   borderColor: string;
   /**
    * Este es el estilo de la letra
    */
-  fontWeight: string;
+  fontWeight:
+    | ResponsiveValue<
+        | number
+        | (string & {})
+        | "bold"
+        | "normal"
+        | "medium"
+        | "black"
+        | "hairline"
+        | "thin"
+        | "light"
+        | "semibold"
+        | "extrabold"
+      >
+    | undefined;
   /**
    * Tamaño del borde que se desplega en la parte superior del pop over
    */
@@ -57,7 +71,7 @@ export interface KPopOverProps {
    */
   justifyContent: string;
   /**
-   * Este es el tamaño de la letra
+   * Este es el tamaño de la letra (inferiores)
    */
   fontSize: string;
   /**

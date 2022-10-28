@@ -5,7 +5,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KDrawer from "./KDrawer";
 
 export default {
-  title: "Kraken+ChakraUI/Avatar",
+  title: "Kraken+ChakraUI/Drawer",
   component: KDrawer,
 } as ComponentMeta<typeof KDrawer>;
 

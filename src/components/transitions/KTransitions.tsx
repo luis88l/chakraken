@@ -1,6 +1,7 @@
 import { Box, Button, Fade, useDisclosure } from "@chakra-ui/react";
+import { FC } from "react";
 
-interface KTranstionsProps {
+export interface KTranstionsProps {
   /**
    * Esto es el texto del Boton
    */
@@ -13,6 +14,9 @@ interface KTranstionsProps {
    * Esto es el color del Boton
    */
   color: string;
+  /**
+   * Margen en la parte superior
+   */
   mt: string;
   /**
    * Esto es el color del fondo
@@ -32,26 +36,35 @@ interface KTranstionsProps {
   content: string;
 }
 
-function KTranstions(props: KTranstionsProps): any {
+const KTranstions: FC<KTranstionsProps> = ({
+  buttonText,
+  p,
+  color,
+  mt,
+  bg,
+  rounded,
+  shadow,
+  content,
+}) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
     <>
-      <Button onClick={onToggle}>{props.buttonText}</Button>
+      <Button onClick={onToggle}>{buttonText}</Button>
       <Fade in={isOpen}>
         <Box
-          p={props.p}
-          color={props.color}
-          mt={props.mt}
-          bg={props.bg}
-          rounded={props.rounded}
-          shadow={props.shadow}
+          p={p}
+          color={color}
+          mt={mt}
+          bg={bg}
+          rounded={rounded}
+          shadow={shadow}
         >
-          {props.content}
+          {content}
         </Box>
       </Fade>
     </>
   );
-}
+};
 
 export default KTranstions;

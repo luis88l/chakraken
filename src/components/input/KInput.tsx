@@ -1,24 +1,59 @@
-import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
-import React from "react";
+import {
+  Button,
+  Input,
+  InputGroup,
+  InputRightElement,
+  ResponsiveValue,
+} from "@chakra-ui/react";
+import React, { FC } from "react";
 
-function KInput(): any {
+export interface KInput {
+  /**
+   * Este es el tamaño del Input
+   */
+  size: ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs"> | undefined;
+  /**
+   * Este es el tamaño del Boton
+   */
+  sizebtn:
+    | ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs">
+    | undefined;
+  /**
+   * Este es el padding a la derecha
+   */
+  pr: string;
+  /**
+   * Este es el texto que aparecera por default en el Input.
+   */
+  placeholder: string;
+  /**
+   * Este es el ancho del Boton
+   */
+  width: string;
+  /**
+   * Este es el alto del Boton
+   */
+  h: string;
+}
+
+const KInput: FC<KInput> = ({ size, pr, placeholder, width, h, sizebtn }) => {
   const [show, setShow] = React.useState(false);
   const handleClick = (): any => setShow(!show);
 
   return (
-    <InputGroup size="md">
+    <InputGroup size={size}>
       <Input
-        pr="4.5rem"
+        pr={pr}
         type={show ? "text" : "password"}
-        placeholder="Enter password"
+        placeholder={placeholder}
       />
-      <InputRightElement width="4.5rem">
-        <Button h="1.75rem" size="sm" onClick={handleClick}>
+      <InputRightElement width={width}>
+        <Button h={h} size={sizebtn} onClick={handleClick}>
           {show ? "Hide" : "Show"}
         </Button>
       </InputRightElement>
     </InputGroup>
   );
-}
+};
 
 export default KInput;

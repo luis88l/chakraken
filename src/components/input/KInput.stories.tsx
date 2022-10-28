@@ -9,11 +9,12 @@ export default {
   component: KInput,
 } as ComponentMeta<typeof KInput>;
 
-const Template: ComponentStory<typeof KInput> = (args) => <KInput />;
+const Template: ComponentStory<typeof KInput> = (args) => <KInput {...args} />;
 
 export const Input1 = Template.bind({});
 Input1.args = {
   size: "md",
+  sizebtn: "lg",
   pr: "4.5rem",
   placeholder: "Enter password",
   width: "4.5rem",

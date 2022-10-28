@@ -1,4 +1,5 @@
 import { Button, Tooltip } from "@chakra-ui/react";
+import { FC } from "react";
 
 export interface KToolTipProps {
   /**
@@ -9,14 +10,18 @@ export interface KToolTipProps {
    * Este es el titulo del boton.
    */
   title: string;
+  /**
+   * Este es el color del Tip de desplegara.
+   */
+  bg: string;
 }
 
-function KToolTip(props: KToolTipProps): any {
+const KToolTip: FC<KToolTipProps> = ({ label, title, bg }) => {
   return (
-    <Tooltip hasArrow label={props.label} bg="green.600">
-      <Button>{props.title}</Button>
+    <Tooltip hasArrow label={label} bg={bg}>
+      <Button>{title}</Button>
     </Tooltip>
   );
-}
+};
 
 export default KToolTip;
