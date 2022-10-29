@@ -169,6 +169,30 @@ export class ApiService {
     );
     return res;
   }
+
+  // get feed list
+
+  public async getFeedList(data: {}): Promise<any> {
+    console.log("data", data);
+    const result = await axios
+      .get(`${pathServer}/productfeed/getFeedList`, {
+        params: {
+          data,
+        },
+        headers: {
+          authorization: await (await this.defaults()).headers.authorization,
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    console.log(result);
+    return result;
+  }
 }
 
 export default new ApiService();
