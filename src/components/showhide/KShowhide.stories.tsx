@@ -9,10 +9,12 @@ export default {
   component: KShowhide,
 } as ComponentMeta<typeof KShowhide>;
 
-const Template: ComponentStory<typeof KShowhide> = (args) => <KShowhide />;
+const Template: ComponentStory<typeof KShowhide> = (args) => (
+  <KShowhide {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {
-  breakpoint: "(max-width: 400px)",
-  text: "This text appears only on screens 400px and smaller.",
+  below: "md",
+  text: "This text hides at the md value screen width and smaller.",
 };

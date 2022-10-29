@@ -39,7 +39,7 @@ export interface KLinkoverlayProps {
    */
   rounded: string;
   /**
-   * Tamaño del componente
+   * Tamaño de la letra dentro del componente
    */
   size:
     | ResponsiveValue<

@@ -9,6 +9,10 @@ export interface KTextareaProps {
 }
 
 const KTextarea: FC<KTextareaProps> = ({ placeholder }) => {
-  return <Textarea placeholder={placeholder} />;
+  return (
+    <>
+      <Textarea placeholder={placeholder} />;
+    </>
+  );
 };
 export default KTextarea;

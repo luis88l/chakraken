@@ -12,7 +12,7 @@ export interface KListprops {
    */
   text2: string;
   /**
-   * Este es el color del list.
+   * Este es el color de los iconos.
    */
   color: string;
 }

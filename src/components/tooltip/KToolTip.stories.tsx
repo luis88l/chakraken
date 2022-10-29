@@ -17,4 +17,5 @@ export const Default = Template.bind({});
 Default.args = {
   label: "Search places",
   title: "Boton",
+  bg: "green.600",
 };

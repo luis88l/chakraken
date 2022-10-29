@@ -3,7 +3,7 @@ import { FC } from "react";
 
 export interface KPortalProps {
   /**
-   * Este es el color del Portal
+   * Este es el color de la letra
    */
   color: string;
   /**
