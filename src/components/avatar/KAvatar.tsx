@@ -1,4 +1,4 @@
-import { Avatar, Wrap, WrapItem } from "@chakra-ui/react";
+import { Avatar, ResponsiveValue, Wrap, WrapItem } from "@chakra-ui/react";
 import { FC } from "react";
 
 export interface KAvatarProps {
@@ -6,7 +6,19 @@ export interface KAvatarProps {
    * Tamaño de la imagen
    * (full, 2xl, xl, lg, md, sm, xs, 2xs)
    */
-  size: string;
+  size:
+    | ResponsiveValue<
+        | (string & {})
+        | "sm"
+        | "md"
+        | "lg"
+        | "xl"
+        | "2xl"
+        | "full"
+        | "2xs"
+        | "xs"
+      >
+    | undefined;
   /**
    * Este es el nombre de la imagen
    */

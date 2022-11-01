@@ -58,7 +58,11 @@ export interface KDrawerProps {
    * Este es el estilo que llevara el boton
    * (ghost, solid, outline)
    */
-  variant: string;
+  variant?:
+    | ResponsiveValue<
+        (string & {}) | "link" | "outline" | "ghost" | "solid" | "unstyled"
+      >
+    | undefined;
   /**
    * Este es color del boton situado en la Parte izquierda
    */

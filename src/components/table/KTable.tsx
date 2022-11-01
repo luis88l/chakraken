@@ -13,13 +13,31 @@ import {
 import { FC } from "react";
 
 export interface KTableProps {
+  /**
+   * Este es el estilo de la Tabla.
+   */
   variant:
     | ResponsiveValue<(string & {}) | "simple" | "striped" | "unstyled">
     | undefined;
+  /**
+   * Caption de la tabla situado hasta abajo de ella (texto)
+   */
   tablecaption: string;
+  /**
+   * Descripcion de columna de la tabla
+   */
   descriptiontable: string;
+  /**
+   * Descripcion de columna de la tabla
+   */
   secondDescription: string;
+  /**
+   * Contenido de la tabla
+   */
   content: string;
+  /**
+   * Contenido de la tabla
+   */
   secondContent: string;
 }
 

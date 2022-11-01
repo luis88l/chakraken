@@ -57,11 +57,11 @@ export interface KLinkoverlayProps {
   /**
    * propiedad de texto
    */
-  text: string;
+  text?: string;
   /**
    * propiedad de texto (contenido)
    */
-  text2: string;
+  text2?: string;
   /**
    * propiedad de tiempo
    */

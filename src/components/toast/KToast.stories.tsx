@@ -9,6 +9,13 @@ export default {
   component: KToast,
 } as ComponentMeta<typeof KToast>;
 
-const Template: ComponentStory<typeof KToast> = (args) => <KToast />;
+const Template: ComponentStory<typeof KToast> = (args) => <KToast {...args} />;
 
 export const Default = Template.bind({});
+Default.args = {
+  title: "Cuenta creada exitosamente.",
+  description: "Hemos creado su cuenta.",
+  status: "success",
+  duration: 9000,
+  isClosable: true,
+};

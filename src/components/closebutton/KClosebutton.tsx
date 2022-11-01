@@ -1,4 +1,4 @@
-import { CloseButton, ResponsiveValue, Stack } from "@chakra-ui/react";
+import { CloseButton, ResponsiveValue } from "@chakra-ui/react";
 import { FC } from "react";
 
 export interface KClosebuttonProps {

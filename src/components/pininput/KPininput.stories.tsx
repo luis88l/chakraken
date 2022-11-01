@@ -9,6 +9,14 @@ export default {
   component: KPininput,
 } as ComponentMeta<typeof KPininput>;
 
-const Template: ComponentStory<typeof KPininput> = (args) => <KPininput />;
+const Template: ComponentStory<typeof KPininput> = (args) => (
+  <KPininput {...args} />
+);
 
 export const Default = Template.bind({});
+Default.args = {
+  defaultValue: "",
+  size: "md",
+  placeholder: "pin",
+  variant: "filled",
+};

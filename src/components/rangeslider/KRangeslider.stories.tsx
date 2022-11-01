@@ -10,7 +10,14 @@ export default {
 } as ComponentMeta<typeof KRangeslider>;
 
 const Template: ComponentStory<typeof KRangeslider> = (args) => (
-  <KRangeslider />
+  <KRangeslider {...args} />
 );
 
 export const Default = Template.bind({});
+Default.args = {
+  defaultValue: [2, 3],
+  max: 10,
+  min: 1,
+  minStepsBetweenThumbs: 1,
+  size: "md",
+};

@@ -1,4 +1,4 @@
-import { Progress, Stack } from "@chakra-ui/react";
+import { Progress, ResponsiveValue } from "@chakra-ui/react";
 import { FC } from "react";
 
 export interface KProgressBarProps {
@@ -29,7 +29,7 @@ export interface KProgressBarProps {
   /**
    * Este es el tamaño de la barra de progreso
    */
-  size: string;
+  size: ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs"> | undefined;
   /**
    * Este es el valor que tendra la barra de progreso
    */

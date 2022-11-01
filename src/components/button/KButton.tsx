@@ -1,4 +1,4 @@
-import { Button, Stack, StackDirection } from "@chakra-ui/react";
+import { Button, ResponsiveValue } from "@chakra-ui/react";
 import { FC } from "react";
 
 export interface KButtonProps {
@@ -9,7 +9,7 @@ export interface KButtonProps {
   /**
    * Este es el tamaño del Boton
    */
-  size: string;
+  size: ResponsiveValue<(string & {}) | "sm" | "md" | "lg" | "xs"> | undefined;
   /**
    * Este es el titulo del Boton
    */
