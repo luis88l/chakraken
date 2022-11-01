@@ -6,7 +6,7 @@ export interface KImageProps {
    * Este es el tamaño de la imagen
    */
   boxSize: string;
-  objectFit: any;
+  objectFit?: any;
   /**
    * Esta es nuestra imagen, aqui ira nuestro enlace o repositorio.
    */

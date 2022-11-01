@@ -10,7 +10,14 @@ export default {
 } as ComponentMeta<typeof KNumberinput>;
 
 const Template: ComponentStory<typeof KNumberinput> = (args) => (
-  <KNumberinput />
+  <KNumberinput {...args} />
 );
 
 export const Default = Template.bind({});
+Default.args = {
+  defaultValue: 0,
+  size: "lg",
+  max: 100,
+  min: 1,
+  variant: "filled",
+};

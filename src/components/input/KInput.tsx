@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import React, { FC } from "react";
 
-export interface KInput {
+export interface KInputProps {
   /**
    * Este es el tamaño del Input
    */
@@ -36,7 +36,14 @@ export interface KInput {
   h: string;
 }
 
-const KInput: FC<KInput> = ({ size, pr, placeholder, width, h, sizebtn }) => {
+const KInput: FC<KInputProps> = ({
+  size,
+  pr,
+  placeholder,
+  width,
+  h,
+  sizebtn,
+}) => {
   const [show, setShow] = React.useState(false);
   const handleClick = (): any => setShow(!show);
 
