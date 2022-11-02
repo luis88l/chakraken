@@ -1,5 +1,3 @@
-// Button.stories.ts|tsx
-
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import KToast from "./KToast";
@@ -13,9 +11,9 @@ const Template: ComponentStory<typeof KToast> = (args) => <KToast {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  title: "Cuenta creada exitosamente.",
-  description: "Hemos creado su cuenta.",
-  status: "success",
-  duration: 9000,
-  isClosable: true,
+  btntext: "show toast",
+  color: "white",
+  p: "3",
+  bg: "blue.500",
+  text: "hello world",
 };
