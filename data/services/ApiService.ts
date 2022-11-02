@@ -193,6 +193,15 @@ export class ApiService {
     console.log(result);
     return result;
   }
+
+  public async updateOrdenModulos(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/modulos/updateOrdenModulos`,
+      form,
+      await this.defaults()
+    );
+    return res;
+  }
 }
 
 export default new ApiService();
