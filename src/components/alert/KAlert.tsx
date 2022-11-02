@@ -7,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { FC } from "react";
 
-interface KAlertProps {
+export interface KAlertProps {
   /**
    * Este es el estatus/tipo de la alerta
    * (info, warning, succes, error, loading)
