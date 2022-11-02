@@ -1,5 +1,6 @@
 import { Avatar, Button, Flex, Text } from "@chakra-ui/react";
 import { useSession, signOut } from "next-auth/react";
+import { KAvatar } from "../../react";
 
 export default function DashboardProfile(props: any): any {
   const { data: session } = useSession();
@@ -12,7 +13,7 @@ export default function DashboardProfile(props: any): any {
 
   return (
     <Flex flexDir="column" alignItems="center" pb={10} pt={10}>
-      <Avatar />
+      <KAvatar size={"sm"} name={"admin"} src={""} />
       <Text textAlign="center">{username}</Text>
       <Button
         mt={5}
