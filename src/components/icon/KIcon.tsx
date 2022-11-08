@@ -1,7 +1,8 @@
 // 1. Import
+import { CloseIcon } from "@chakra-ui/icons";
 import { HStack, Icon } from "@chakra-ui/react";
 import { FC } from "react";
-import { MdGroupWork } from "react-icons/md";
+import { IconType } from "react-icons";
 
 export interface KIconProps {
   /**
@@ -16,15 +17,15 @@ export interface KIconProps {
    * Este es el color del Icono
    */
   color: string;
+  /**
+   * Este es icono que utilizaremos, te recomendamos checar la variedad de iconos en
+   * https://chakra-ui.com/docs/components/icon/usage
+   */
+  as: any;
 }
 
-const KIcon: FC<KIconProps> = ({ w, h, color }) => {
-  return (
-    <HStack>
-      {/* Use the `color` prop to change the icon color */}
-      <Icon as={MdGroupWork} w={w} h={h} color={color} />
-    </HStack>
-  );
+const KIcon: FC<KIconProps> = ({ w, h, color, as }) => {
+  return <Icon as={as} w={w} h={h} color={color} />;
 };
 
 export default KIcon;

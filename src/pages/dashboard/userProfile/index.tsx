@@ -1,8 +1,10 @@
 import { getSession } from "next-auth/react";
-import { Box } from "@chakra-ui/react";
+import { Box, Center, Spacer } from "@chakra-ui/react";
 import { KAvatar } from "../../../components/react";
 import KText from "../../../components/text/KText";
 import KButton from "../../../components/button/KButton";
+import { EditIcon } from "@chakra-ui/icons";
+import KIconbutton from "../../../components/iconbutton/KIconbutton";
 
 export default function UserProfile(): any {
   /*
@@ -20,57 +22,52 @@ export default function UserProfile(): any {
   */
 
   return (
+    //box principal
     <Box
-      maxW="sm"
-      borderWidth="2px"
+      p={10}
+      maxW="inismtial"
+      borderWidth="3px"
       borderRadius="lg"
       overflow="hidden"
-      shadow={"2xl"}
+      boxShadow={"dark-lg"}
+      w={"370px"}
     >
-      <Box p="20">
+      <Center p={14}>
         <Box textAlign={"center"}>
           <KAvatar size={"2xl"} name={"Admin"} src={""}></KAvatar>
+          <KText content={"Administrador"}></KText>
+          <KText content={"default"}></KText>
         </Box>
-        <Box
-          textAlign={"center"}
-          mt="1"
-          fontWeight="semibold"
-          as="h4"
-          lineHeight="tight"
-          noOfLines={1}
-        >
-          <KText content={"ADMINISTRADOR"}></KText>
+      </Center>
+
+      <Box mb={5}>
+        <Box fontSize={"lg"} alignItems={"center"} mb={"5"} display={"flex"}>
+          <KText content={"Informacion de contacto"}></KText>
+          <Spacer />
+          <KIconbutton arialabel={""} icon={<EditIcon />}></KIconbutton>
         </Box>
 
-        <Box>
-          <Box as="span" color="gray.600" fontSize="sm" textAlign={"center"}>
-            <KText content={"default"}></KText>
-          </Box>
-        </Box>
-      </Box>
-      <Box>
-        <KText content={"INFORMACION DEL CONTACTO"}></KText>
-      </Box>
-
-      <Box mt={"3"}>
-        <Box as="span" color="gray.600" fontSize="sm">
+        <Box mb={3} as="span" color="gray.600" fontSize="lg">
           <KText content={"nombre de usuario"}></KText>
         </Box>
-        admin
-        <Box as="span" color="gray.600" fontSize="sm">
+        <KText content={"admin"}></KText>
+        <Box mt={30} mb={3} as="span" color="gray.600" fontSize="lg">
           <KText content={"Correo Electronico"}></KText>
         </Box>
-        emilianox1311@gmail.com
-        <Box as="span" color="gray.600" fontSize="sm">
+        <KText content={"emilianox1311@gmail.com"}></KText>
+        <Box as="span" color="gray.600" fontSize="lg">
           <KText content={"Fecha de Registro"}></KText>
         </Box>
-        08/11/2019
-        <Box as="span" color="gray.600" fontSize="sm">
+        <KText content={"08/11/2019"}></KText>
+        <Box color="gray.600" fontSize="lg" display="flex" alignItems="center">
           <KText content={"Fecha de Nacimiento"}></KText>
+          <Spacer />
+          <KIconbutton arialabel={""} icon={<EditIcon />}></KIconbutton>
         </Box>
-        13/11/2002
+        <KText content={"13/11/2002"}></KText>
       </Box>
-      <Box mt={"10"}>
+
+      <Box mt={10} alignItems="left">
         <KButton
           colorScheme={"gray"}
           size={"md"}
