@@ -1,8 +1,6 @@
 // 1. Import
-import { CloseIcon } from "@chakra-ui/icons";
-import { HStack, Icon } from "@chakra-ui/react";
+import { Icon } from "@chakra-ui/react";
 import { FC } from "react";
-import { IconType } from "react-icons";
 
 export interface KIconProps {
   /**

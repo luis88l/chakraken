@@ -22,7 +22,6 @@ export default function UserProfile(): any {
   */
 
   return (
-    //box principal
     <Box
       p={10}
       maxW="inismtial"
