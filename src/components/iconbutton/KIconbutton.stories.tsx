@@ -18,4 +18,6 @@ export const Iconbutton = Template.bind({});
 Iconbutton.args = {
   arialabel: "search database",
   icon: <SearchIcon />,
+  colorScheme: "gray",
+  rounded: "0",
 };
