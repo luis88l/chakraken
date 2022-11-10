@@ -1,5 +1,9 @@
 import axios, { AxiosError } from "axios";
 import { getSession } from "next-auth/react";
+import {
+  areasInterface,
+  rolesInterface,
+} from "../../src/pages/dashboard/usuarios/new";
 
 interface User {
   nombre: string;
@@ -132,7 +136,7 @@ export class ApiService {
 
   // get areas
 
-  public async getAreas(): Promise<void> {
+  public async getAreas(): Promise<areasInterface[]> {
     const res = await axios
       .get(`${pathServer}/areas/get`, await this.defaults())
       .then((response) => {
@@ -147,7 +151,7 @@ export class ApiService {
 
   // get roles
 
-  public async getRoles(): Promise<void> {
+  public async getRoles(): Promise<rolesInterface[]> {
     const res = await axios
       .get(`${pathServer}/roles/get`, await this.defaults())
       .then((response) => {
@@ -194,12 +198,72 @@ export class ApiService {
     return result;
   }
 
+  // orden de modulos
+
   public async updateOrdenModulos(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/modulos/updateOrdenModulos`,
       form,
       await this.defaults()
     );
+    return res;
+  }
+
+  // crea rol
+
+  public async saveRoles(user: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/roles/save`, user, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  }
+
+  // update rol
+
+  public async updateRoles(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/roles/update`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  // crear area
+
+  public async saveAreas(user: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/areas/save`, user, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  }
+
+  // crear usuario
+
+  public async saveUser(user: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/users/save`,
+      user,
+      await this.defaults()
+    );
+
+    console.log(res);
+
     return res;
   }
 }

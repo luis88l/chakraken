@@ -13,9 +13,11 @@ export default function Layout(props: { children: any }): any {
     error,
     data: userOptions,
   } = useQuery(
-    "menuOptions",
+    "opcionesModulos",
     async () => await ApiService.getOpcionesUsuario(form)
   );
+
+  console.log(userOptions);
 
   if (isLoading) {
     return <p>loading...</p>;
