@@ -42,6 +42,7 @@ export default function Modulos(): any {
     {
       onSuccess: () => {
         void queryClient.invalidateQueries("modulos");
+        void queryClient.invalidateQueries("opcionesModulos");
       },
     }
   );
