@@ -193,6 +193,20 @@ export class ApiService {
     console.log(result);
     return result;
   }
+
+  public async getTwitter(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/tendencias/get`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    console.log(res);
+
+    return res;
+  }
 }
 
 export default new ApiService();
