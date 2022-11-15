@@ -1,6 +1,5 @@
 import { List, ListItem, ListIcon } from "@chakra-ui/react";
 import { FC } from "react";
-import { MdCheckCircle, MdSettings } from "react-icons/md";
 
 export interface KListprops {
   /**
