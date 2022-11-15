@@ -214,13 +214,13 @@ export class ApiService {
   public async saveRoles(user: {}): Promise<any> {
     const res = await axios
       .post(`${pathServer}/roles/save`, user, await this.defaults())
+
       .then((response) => {
         return response;
       })
       .catch((error) => {
         return error.response;
       });
-
     return res;
   }
 
@@ -275,9 +275,20 @@ export class ApiService {
       user,
       await this.defaults()
     );
+    return res;
+  }
 
-    console.log(res);
+  // get twitter
 
+  public async getTwitter(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/tendencias/get`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
     return res;
   }
 }
