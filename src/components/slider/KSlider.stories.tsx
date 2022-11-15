@@ -16,4 +16,5 @@ const Template: ComponentStory<typeof KSlider> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   defaultValue: 30,
+  size: "lg",
 };

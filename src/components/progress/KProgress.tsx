@@ -18,11 +18,21 @@ export interface KProgressProps {
    * Este es el color del componente de progreso
    */
   color: string | undefined;
+  /**
+   * Este es el tamaño del componente
+   */
+  size: number;
 }
 
-const KProgress: FC<KProgressProps> = ({ max, min, content, color }) => {
+const KProgress: FC<KProgressProps> = ({ max, min, content, color, size }) => {
   return (
-    <CircularProgress max={max} min={min} value={content} color={color}>
+    <CircularProgress
+      max={max}
+      min={min}
+      value={content}
+      color={color}
+      size={size}
+    >
       <CircularProgressLabel>{content}%</CircularProgressLabel>
     </CircularProgress>
   );

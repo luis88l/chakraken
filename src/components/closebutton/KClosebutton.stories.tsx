@@ -16,4 +16,5 @@ const Template: ComponentStory<typeof KClosebutton> = (args) => (
 export const CloseButton = Template.bind({});
 CloseButton.args = {
   size: "md",
+  color: "red",
 };
