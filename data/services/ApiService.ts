@@ -253,6 +253,20 @@ export class ApiService {
     return res;
   }
 
+  // editar area
+
+  public async updateAreas(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/areas/update`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
   // crear usuario
 
   public async saveUser(user: {}): Promise<any> {

@@ -16,6 +16,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import { areasInterface } from "../usuarios/new";
 
 export interface modulosTable {
   nb_modulo: string;
@@ -24,27 +25,20 @@ export interface modulosTable {
   acciones: string;
 }
 
-interface moduloProps {
-  id_modulo: string;
-  nb_modulo: string;
-  de_clase: string;
-  de_modulo: string;
-}
-
 export default function Area(): any {
   const colSpan = { base: 2, md: 1 };
   const router = useRouter();
-  const [nombreModulo, setNombreModulo] = useState("");
+  const [nombreArea, setNombreArea] = useState("");
   const [updating, setUpdating] = useState(false);
 
-  const { isLoading, data: modules } = useQuery(
-    "modulos",
-    async () => await ApiService.getModulos()
+  const { isLoading, data: areas } = useQuery(
+    "areas",
+    async () => await ApiService.getAreas()
   );
 
-  const updateModulo = useMutation(
+  const updateArea = useMutation(
     async (formData: any) => {
-      return await ApiService.updateModulos(formData);
+      return await ApiService.updateAreas(formData);
     },
     {
       onSuccess: () => {
@@ -57,29 +51,30 @@ export default function Area(): any {
     return <p>Cargando...</p>;
   }
 
-  const modulo = modules?.filter(
-    (modulo: { id_modulo: string | string[] | undefined }) =>
-      modulo.id_modulo === router.query.id
+  const area = areas?.filter(
+    (area: { id_area: string | string[] | undefined }) =>
+      area.id_area === router.query.id
   );
   // @ts-expect-error
-  const moduloDetails: moduloProps = modulo[0];
+  const areaDetails: areasInterface = area[0];
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setUpdating(true);
     const formData = new FormData();
-    formData.append("id_modulo", moduloDetails.id_modulo);
+    formData.append("id", areaDetails.id_area);
     formData.append(
-      "nb_modulo",
-      nombreModulo === "" ? moduloDetails.nb_modulo : nombreModulo
+      "name",
+      nombreArea === "" ? areaDetails.nb_area : nombreArea
     );
-    updateModulo.mutate(formData);
+
+    updateArea.mutate(formData);
   };
 
   return (
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    <KPage title={"Rol " + moduloDetails.nb_modulo}>
+    <KPage title={"Área " + areaDetails.nb_area}>
       <Box>
         <Text fontSize="l" fontWeight="bold">
           Actualizar área
@@ -93,9 +88,9 @@ export default function Area(): any {
               <FormControl isRequired>
                 <FormLabel>Nombre</FormLabel>
                 <Input
-                  defaultValue={moduloDetails.nb_modulo}
+                  defaultValue={areaDetails.nb_area}
                   onChange={(event) => {
-                    setNombreModulo(event.currentTarget.value);
+                    setNombreArea(event.currentTarget.value);
                   }}
                 />
               </FormControl>
