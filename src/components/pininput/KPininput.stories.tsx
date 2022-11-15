@@ -19,4 +19,5 @@ Default.args = {
   size: "md",
   placeholder: "pin",
   variant: "filled",
+  mr: "2",
 };

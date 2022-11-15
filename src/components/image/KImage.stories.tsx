@@ -17,4 +17,5 @@ Default.args = {
   objectFit: "cover",
   src: "https://bit.ly/dan-abramov",
   alt: "Dan Abramov",
+  rounded: 50,
 };

@@ -15,10 +15,22 @@ export interface KImageProps {
    * Este es el nombre de nuestra imagen
    */
   alt: string;
+  /**
+   * Este es un efecto de redondeo que podemos aplicar en la imagen (0 - 100)
+   */
+  rounded: number;
 }
 
-const KImage: FC<KImageProps> = ({ boxSize, objectFit, src, alt }) => {
-  return <Image boxSize={boxSize} objectFit={objectFit} src={src} alt={alt} />;
+const KImage: FC<KImageProps> = ({ boxSize, objectFit, src, alt, rounded }) => {
+  return (
+    <Image
+      boxSize={boxSize}
+      objectFit={objectFit}
+      src={src}
+      alt={alt}
+      rounded={rounded}
+    />
+  );
 };
 
 export default KImage;

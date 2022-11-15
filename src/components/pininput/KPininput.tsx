@@ -22,6 +22,7 @@ export interface KPininputProps {
         (string & {}) | "flushed" | "outline" | "filled" | "unstyled"
       >
     | undefined;
+  mr: string;
 }
 
 const KPininput: FC<KPininputProps> = ({
@@ -29,6 +30,7 @@ const KPininput: FC<KPininputProps> = ({
   size,
   placeholder,
   variant,
+  mr,
 }) => {
   return (
     <PinInput
@@ -37,8 +39,8 @@ const KPininput: FC<KPininputProps> = ({
       placeholder={placeholder}
       variant={variant}
     >
-      <PinInputField />
-      <PinInputField />
+      <PinInputField mr={mr} />
+      <PinInputField mr={mr} />
     </PinInput>
   );
 };
