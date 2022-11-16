@@ -28,7 +28,9 @@ export default function StatsPage(): any {
           <KLineChart
             data={{
               labels: feed.data.feed.map((item: { created_at: any }) =>
-                DateTime.fromISO(item.created_at).toFormat("MMMM dd, yyyy")
+                DateTime.fromISO(item.created_at).toFormat("MMMM dd, yyyy", {
+                  locale: "es",
+                })
               ),
               datasets: [
                 {

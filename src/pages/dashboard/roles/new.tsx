@@ -14,21 +14,18 @@ import {
   Input,
   SimpleGrid,
   Text,
-  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 export default function New(): any {
   const colSpan = { base: 2, md: 1 };
   const router = useRouter();
-  const [nombreModulo, setNombreModulo] = useState("");
-  const [claseModulo, setClaseModulo] = useState("");
-  const [descripcionModulo, setDescripcionModulo] = useState("");
+  const [nombreRol, setNombreRol] = useState("");
   const [updating, setUpdating] = useState(false);
 
-  const crearModulo = useMutation(
+  const crearRol = useMutation(
     async (formData: any) => {
-      return await ApiService.saveModulos(formData);
+      return await ApiService.saveRoles(formData);
     },
     {
       onSuccess: () => {
@@ -43,17 +40,15 @@ export default function New(): any {
     event.preventDefault();
     setUpdating(true);
     const formData = new FormData();
-    formData.append("nb_modulo", nombreModulo);
-    formData.append("de_clase", claseModulo);
-    formData.append("de_modulo", descripcionModulo);
-    crearModulo.mutate(formData);
+    formData.append("name", nombreRol);
+    crearRol.mutate(formData);
   };
 
   return (
-    <KPage title="Crear módulo">
+    <KPage title="Crear rol">
       <Box>
         <Text fontSize="l" fontWeight="bold">
-          Crear módulo
+          Crear rol
         </Text>
       </Box>
       <Divider mt={2} mb={2} />
@@ -65,29 +60,9 @@ export default function New(): any {
                 <FormLabel>Nombre</FormLabel>
                 <Input
                   onChange={(event) => {
-                    setNombreModulo(event.currentTarget.value);
+                    setNombreRol(event.currentTarget.value);
                   }}
                 />
-              </FormControl>
-            </GridItem>
-            <GridItem colSpan={colSpan}>
-              <FormControl isRequired>
-                <FormLabel>Clase</FormLabel>
-                <Input
-                  onChange={(event) => {
-                    setClaseModulo(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-            <GridItem colSpan={colSpan}>
-              <FormControl>
-                <FormLabel>Descripción</FormLabel>
-                <Textarea
-                  onChange={(event) => {
-                    setDescripcionModulo(event.currentTarget.value);
-                  }}
-                ></Textarea>
               </FormControl>
             </GridItem>
             <GridItem colSpan={1}></GridItem>
@@ -109,7 +84,7 @@ export default function New(): any {
                   ) : undefined
                 }
               >
-                Crear módulo
+                Crear rol
               </Button>
             </GridItem>
           </SimpleGrid>

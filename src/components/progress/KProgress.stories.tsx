@@ -19,4 +19,5 @@ Progress1.args = {
   content: 82,
   max: 100,
   min: 0,
+  size: 100,
 };

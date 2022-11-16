@@ -34,10 +34,10 @@ export default function Tendencias(): any {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    GetTwitter();
+    void GetTwitter();
   }, [company]);
 
-  const GetTwitter = async () => {
+  const GetTwitter = async (): Promise<any> => {
     const form = new FormData();
     form.append("company", company);
     form.append("offset", offset.toString());
@@ -217,12 +217,10 @@ export default function Tendencias(): any {
 
                             <div>
                               <Tooltip
-                                label={
+                                label={`${
                                   JSON.parse(item.txt_analitycs)[0]
-                                    .confidenceScores.positive *
-                                    100 +
-                                  "% positivo"
-                                }
+                                    .confidenceScores.positive * 100
+                                }% positivo`}
                                 placement="top"
                               >
                                 <div
@@ -239,12 +237,10 @@ export default function Tendencias(): any {
                                 ></div>
                               </Tooltip>
                               <Tooltip
-                                label={
+                                label={`${
                                   JSON.parse(item.txt_analitycs)[0]
-                                    .confidenceScores.neutral *
-                                    100 +
-                                  "% neutral"
-                                }
+                                    .confidenceScores.neutral * 100
+                                }% neutral`}
                                 placement="top"
                               >
                                 <div
@@ -260,12 +256,10 @@ export default function Tendencias(): any {
                                 ></div>
                               </Tooltip>
                               <Tooltip
-                                label={
+                                label={`${
                                   JSON.parse(item.txt_analitycs)[0]
-                                    .confidenceScores.negative *
-                                    100 +
-                                  "% negativo"
-                                }
+                                    .confidenceScores.negative * 100
+                                }% negativo`}
                                 placement="top"
                               >
                                 <div

@@ -1,29 +1,30 @@
-import { Button, useToast } from "@chakra-ui/react";
+import { Box, Button, useToast } from "@chakra-ui/react";
 import { FC } from "react";
 
 export interface KToastProps {
-  title: string;
-  description: string;
-  status: "success" | "info" | "warning" | "error" | "loading" | undefined;
-  duration: number;
-  isClosable: boolean;
+  btntext: string;
+  color: string;
+  p: string;
+  bg: string;
+  text: string;
 }
 
-const KToast: FC<KToastProps> = ({}) => {
+const KToast: FC<KToastProps> = ({ color, p, bg, text, btntext }) => {
   const toast = useToast();
   return (
     <Button
       onClick={() =>
         toast({
-          title: "Account created.",
-          description: "We've created your account for you.",
-          status: "success",
-          duration: 9000,
-          isClosable: true,
+          position: "bottom-left",
+          render: () => (
+            <Box color={color} p={p} bg={bg}>
+              {text}
+            </Box>
+          ),
         })
       }
     >
-      Mostrar Toast
+      {btntext}
     </Button>
   );
 };

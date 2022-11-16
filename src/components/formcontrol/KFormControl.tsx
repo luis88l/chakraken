@@ -17,7 +17,7 @@ export interface KFormControlProps {
   /**
    * Este es el titulo de la segunda opcion
    */
-  option2: string;
+  option2?: string;
 }
 
 const KFormControl: FC<KFormControlProps> = ({
