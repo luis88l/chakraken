@@ -1,25 +1,20 @@
-import { getSession } from "next-auth/react";
-import { Box, Center, Spacer } from "@chakra-ui/react";
+import { getSession, signOut, useSession } from "next-auth/react";
+import { Box, Button, Center, Spacer } from "@chakra-ui/react";
 import { KAvatar } from "../../../components/react";
 import KText from "../../../components/text/KText";
-import KButton from "../../../components/button/KButton";
 import { EditIcon } from "@chakra-ui/icons";
 import KIconbutton from "../../../components/iconbutton/KIconbutton";
 
 export default function UserProfile(): any {
-  /*
-  return (
-    <>
-      <KPage title="Perfil de usuario">
-        <Box shadow={"lg"} borderWidth="2px" overflow={"hidden"}>
-          <KAvatar size={"2xl"} name={"Admin"} src={""}></KAvatar>
-          <KText content={"informacion de contacto"} />
-          <KText content={"Default"}></KText>
-        </Box>
-      </KPage>
-    </>
-  );
-  */
+  const { data: session } = useSession();
+
+  if (session == null) {
+    return null;
+  }
+  const { nb_usuario, de_email, fh_cumpleanios, fh_registro, de_rol, nb_area } =
+    // @ts-expect-error
+
+    session.user.user;
 
   return (
     <Box
@@ -42,9 +37,9 @@ export default function UserProfile(): any {
             rounded={"100"}
           ></KIconbutton>
           <KAvatar size={"2xl"} name={"Admin"} src={""}></KAvatar>
-          <KText content={"Administrador"}></KText>
+          <KText content={de_rol}></KText>
           <Box color={"gray.500"}>
-            <KText content={"default"}></KText>
+            <KText content={nb_area}></KText>
           </Box>
         </Box>
       </Center>
@@ -66,21 +61,21 @@ export default function UserProfile(): any {
         <Box as="span" color="gray.500" fontSize="lg">
           <KText content={"nombre de usuario"}></KText>
           <Box color={"black"} fontSize={"md"} pb={4}>
-            <KText content={"admin"}></KText>
+            <KText content={nb_usuario}></KText>
           </Box>
         </Box>
 
         <Box as="span" color="gray.500" fontSize="lg">
           <KText content={"Correo Electronico"}></KText>
           <Box color={"black"} fontSize={"md"} pb={4}>
-            <KText content={"emilianox1311@gmail.com"}></KText>
+            <KText content={de_email}></KText>
           </Box>
         </Box>
 
         <Box as="span" color="gray.500" fontSize="lg">
           <KText content={"Fecha de Registro"}></KText>
           <Box color={"black"} fontSize={"md"} pb={3}>
-            <KText content={"08/11/2019"}></KText>
+            <KText content={fh_registro}></KText>
           </Box>
         </Box>
 
@@ -97,16 +92,18 @@ export default function UserProfile(): any {
           </Box>
         </Box>
         <Box fontSize={"md"}>
-          <KText content={"13/11/2002"}></KText>
+          <KText content={fh_cumpleanios}></KText>
         </Box>
       </Box>
 
       <Box pt={10}>
-        <KButton
+        <Button
           colorScheme={"gray"}
           size={"lg"}
-          title={"Cerrar Sesion"}
-        ></KButton>
+          onClick={async () => await signOut({ callbackUrl: "/login" })}
+        >
+          <KText content="Cerrar Sesion"></KText>
+        </Button>
       </Box>
     </Box>
   );
