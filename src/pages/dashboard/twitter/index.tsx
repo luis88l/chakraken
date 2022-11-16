@@ -30,7 +30,7 @@ import { DateTime } from "luxon";
 
 export default function Tendencias(): any {
   const [company, setCompany] = useState("");
-  const [offset] = useState(0);
+  const [offset, setOffset] = useState(0);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -45,6 +45,25 @@ export default function Tendencias(): any {
     await ApiService.getTwitter(form).then((item: any) => {
       if (item.data.status === 200) {
         setData(item.data.data);
+      }
+    });
+  };
+
+  const GetMas = () => {
+    setOffset(offset + 10);
+    GetRoles();
+  };
+
+  const GetRoles = () => {
+    const form = new FormData();
+    form.append("company", company);
+    form.append("offset", offset.toString());
+
+    ApiService.getTwitter(form).then((item: any) => {
+      if (item.data.status === 200) {
+        var i = data.concat(item.data.data);
+        setData(i);
+        return;
       }
     });
   };
@@ -324,6 +343,18 @@ export default function Tendencias(): any {
               </Box>
             )
           )}
+          <Center>
+            {" "}
+            <Button
+              marginBottom={10}
+              colorScheme="blue"
+              size="lg"
+              variant="outline"
+              onClick={GetMas}
+            >
+              Ver mas
+            </Button>
+          </Center>
         </Box>
       </Box>
     </KPage>
