@@ -337,18 +337,20 @@ export default function Tendencias(): any {
               </Box>
             )
           )}
-          <Center>
-            {" "}
-            <Button
-              marginBottom={10}
-              colorScheme="blue"
-              size="lg"
-              variant="outline"
-              onClick={GetMas}
-            >
-              Ver mas
-            </Button>
-          </Center>
+          {data.length > 0 ? (
+            <Center>
+              {" "}
+              <Button
+                marginBottom={10}
+                colorScheme="blue"
+                size="lg"
+                variant="outline"
+                onClick={GetMas}
+              >
+                Ver mas
+              </Button>
+            </Center>
+          ) : null}
         </Box>
       </Box>
     </KPage>
