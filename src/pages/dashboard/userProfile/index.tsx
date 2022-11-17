@@ -1,9 +1,10 @@
 import { getSession, signOut, useSession } from "next-auth/react";
-import { Box, Button, Center, Spacer } from "@chakra-ui/react";
+import { Box, Button, Center, Spacer, Text } from "@chakra-ui/react";
 import { KAvatar } from "../../../components/react";
 import KText from "../../../components/text/KText";
 import { EditIcon } from "@chakra-ui/icons";
 import KIconbutton from "../../../components/iconbutton/KIconbutton";
+import { DateTime } from "luxon";
 
 export default function UserProfile(): any {
   const { data: session } = useSession();
@@ -15,6 +16,8 @@ export default function UserProfile(): any {
     // @ts-expect-error
 
     session.user.user;
+  //console.log("Hola");
+  //console.log(session.user.user);
 
   return (
     <Box
@@ -75,7 +78,11 @@ export default function UserProfile(): any {
         <Box as="span" color="gray.500" fontSize="lg">
           <KText content={"Fecha de Registro"}></KText>
           <Box color={"black"} fontSize={"md"} pb={3}>
-            <KText content={fh_registro}></KText>
+            <Text>
+              {DateTime.fromISO(fh_registro).toFormat("dd MMMM, yyyy", {
+                locale: "es",
+              })}
+            </Text>
           </Box>
         </Box>
 
@@ -92,7 +99,11 @@ export default function UserProfile(): any {
           </Box>
         </Box>
         <Box fontSize={"md"}>
-          <KText content={fh_cumpleanios}></KText>
+          <Text>
+            {DateTime.fromISO(fh_cumpleanios).toFormat("dd MMMM, yyyy", {
+              locale: "es",
+            })}
+          </Text>
         </Box>
       </Box>
 
