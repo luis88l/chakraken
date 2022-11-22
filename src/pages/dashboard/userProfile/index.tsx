@@ -16,8 +16,6 @@ export default function UserProfile(): any {
     // @ts-expect-error
 
     session.user.user;
-  //console.log("Hola");
-  //console.log(session.user.user);
 
   return (
     <Box
