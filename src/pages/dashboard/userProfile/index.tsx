@@ -1,12 +1,22 @@
 import { getSession, signOut, useSession } from "next-auth/react";
-import { Box, Button, Center, Spacer, Text } from "@chakra-ui/react";
+import {
+  Accordion,
+  Box,
+  Button,
+  Center,
+  Hide,
+  IconButton,
+  Input,
+  Spacer,
+  Text,
+} from "@chakra-ui/react";
 import { KAvatar } from "../../../components/react";
 import KText from "../../../components/text/KText";
 import { EditIcon } from "@chakra-ui/icons";
 import KIconbutton from "../../../components/iconbutton/KIconbutton";
 import { DateTime } from "luxon";
 
-export default function UserProfile(): any {
+export default function UserProfile(this: any): any {
   const { data: session } = useSession();
 
   if (session == null) {
@@ -16,6 +26,8 @@ export default function UserProfile(): any {
     // @ts-expect-error
 
     session.user.user;
+
+  function editcumpleanios() {}
 
   return (
     <Box
@@ -44,19 +56,11 @@ export default function UserProfile(): any {
           </Box>
         </Box>
       </Center>
-
       <Box bg={""}>
         <Box fontSize={"lg"} alignItems={"center"} display={"flex"} pb={5}>
           <KText content={"Informacion de contacto"}></KText>
           <Spacer />
-          <Box color={"black"}>
-            <KIconbutton
-              arialabel={""}
-              icon={<EditIcon />}
-              colorScheme={undefined}
-              rounded={"none"}
-            ></KIconbutton>
-          </Box>
+          <Box color={"black"}></Box>
         </Box>
 
         <Box as="span" color="gray.500" fontSize="lg">
@@ -83,17 +87,18 @@ export default function UserProfile(): any {
             </Text>
           </Box>
         </Box>
-
         <Box color="gray.500" fontSize="lg" display="flex" alignItems="center">
           <KText content={"Fecha de Nacimiento"}></KText>
           <Spacer />
+
           <Box color={"black"}>
-            <KIconbutton
-              arialabel={""}
+            <IconButton
+              onClick={editcumpleanios}
               icon={<EditIcon />}
               colorScheme={undefined}
               rounded={"none"}
-            ></KIconbutton>
+              aria-label={""}
+            ></IconButton>
           </Box>
         </Box>
         <Box fontSize={"md"}>
@@ -104,6 +109,18 @@ export default function UserProfile(): any {
           </Text>
         </Box>
       </Box>
+
+      <Hide>
+        <Box>
+          <Accordion flex={undefined} textAlign={undefined} title={"Editar"}>
+            <Input
+              placeholder="Select date and time"
+              size={"md"}
+              type="datetime-local"
+            ></Input>
+          </Accordion>
+        </Box>
+      </Hide>
 
       <Box pt={10}>
         <Button

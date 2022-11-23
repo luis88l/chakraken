@@ -291,6 +291,16 @@ export class ApiService {
       });
     return res;
   }
+
+  //EDITAR USUARIO
+  public async updateUser(user: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/users/update`,
+      user,
+      await this.defaults()
+    );
+    return res;
+  }
 }
 
 export default new ApiService();
