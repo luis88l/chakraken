@@ -1,10 +1,9 @@
 import { getSession, signOut, useSession } from "next-auth/react";
 import {
-  Accordion,
   Box,
   Button,
   Center,
-  Hide,
+  CloseButton,
   IconButton,
   Input,
   Spacer,
@@ -15,9 +14,11 @@ import KText from "../../../components/text/KText";
 import { EditIcon } from "@chakra-ui/icons";
 import KIconbutton from "../../../components/iconbutton/KIconbutton";
 import { DateTime } from "luxon";
+import React, { useState } from "react";
 
 export default function UserProfile(this: any): any {
   const { data: session } = useSession();
+  const [show, setShow] = useState(true);
 
   if (session == null) {
     return null;
@@ -26,8 +27,6 @@ export default function UserProfile(this: any): any {
     // @ts-expect-error
 
     session.user.user;
-
-  function editcumpleanios() {}
 
   return (
     <Box
@@ -93,7 +92,9 @@ export default function UserProfile(this: any): any {
 
           <Box color={"black"}>
             <IconButton
-              onClick={editcumpleanios}
+              onClick={() => {
+                setShow(!show);
+              }}
               icon={<EditIcon />}
               colorScheme={undefined}
               rounded={"none"}
@@ -110,21 +111,53 @@ export default function UserProfile(this: any): any {
         </Box>
       </Box>
 
-      <Hide>
-        <Box>
-          <Accordion flex={undefined} textAlign={undefined} title={"Editar"}>
-            <Input
-              placeholder="Select date and time"
-              size={"md"}
-              type="datetime-local"
-            ></Input>
-          </Accordion>
-        </Box>
-      </Hide>
+      {show ? (
+        <>
+          <Box bg={"gray.200"} mt={"5"}>
+            <Box textAlign="right">
+              <IconButton
+                onClick={() => {
+                  setShow(!show);
+                }}
+                size="xs"
+                aria-label={""}
+                icon={<CloseButton />}
+                bg={"red.400"}
+                color={"gray.100"}
+                rounded={"0"}
+              ></IconButton>
+            </Box>
+            <Box p={3} alignItems="center" textAlign={"center"}>
+              <KText content={"¿Cual es tu fecha de nacimiento?"}></KText>
+              <Input
+                mt={4}
+                bg={"gray.100"}
+                placeholder="Select date"
+                size={"md"}
+                type="DateTime-local"
+              ></Input>
+            </Box>
+            <Box p={3} textAlign={"center"}>
+              <Button
+                onClick={() => {
+                  setShow(!show);
+                }}
+                colorScheme={"green"}
+                size={"sm"}
+              >
+                Guardar
+              </Button>
+            </Box>
+          </Box>
+        </>
+      ) : (
+        ""
+      )}
 
-      <Box pt={10}>
+      <Box pt={20} textAlign="center">
         <Button
-          colorScheme={"gray"}
+          bg={"gray.200"}
+          color="black"
           size={"lg"}
           onClick={async () => await signOut({ callbackUrl: "/login" })}
         >
