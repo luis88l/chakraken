@@ -56,7 +56,7 @@ export default function Tendencias(): any {
           <Flex>
             <Center>
               <List spacing={4}>
-                <ListItem fontWeight={900} fontFamily="Roboto" color="black">
+                <ListItem fontWeight={900} color="black">
                   <Icon
                     as={AiFillTwitterCircle}
                     marginLeft="5"
@@ -64,7 +64,7 @@ export default function Tendencias(): any {
                     h={10}
                   ></Icon>
                 </ListItem>
-                <ListItem fontWeight={900} fontFamily="Roboto" color="black">
+                <ListItem fontWeight={900} color="black">
                   <Button
                     variant="ghost"
                     colorScheme="gray"
@@ -73,7 +73,7 @@ export default function Tendencias(): any {
                     Coppel
                   </Button>
                 </ListItem>
-                <ListItem fontWeight={900} fontFamily="Roboto">
+                <ListItem fontWeight={900}>
                   <Button
                     variant="ghost"
                     colorScheme="gray"
@@ -82,7 +82,7 @@ export default function Tendencias(): any {
                     Amazon
                   </Button>
                 </ListItem>
-                <ListItem fontWeight={900} fontFamily="Roboto">
+                <ListItem fontWeight={900}>
                   <Button
                     variant="ghost"
                     colorScheme="gray"
@@ -92,7 +92,7 @@ export default function Tendencias(): any {
                   </Button>
                 </ListItem>
                 {/* You can also use custom icons from react-icons */}
-                <ListItem fontWeight={900} fontFamily="Roboto">
+                <ListItem fontWeight={900}>
                   <Button
                     variant="ghost"
                     colorScheme="gray"
@@ -101,7 +101,7 @@ export default function Tendencias(): any {
                     Walmart{" "}
                   </Button>
                 </ListItem>
-                <ListItem fontWeight={900} fontFamily="Roboto">
+                <ListItem fontWeight={900}>
                   <Button
                     variant="ghost"
                     colorScheme="gray"
@@ -111,7 +111,7 @@ export default function Tendencias(): any {
                   </Button>
                 </ListItem>
 
-                <ListItem fontWeight={900} fontFamily="Roboto">
+                <ListItem fontWeight={900}>
                   <Button
                     variant="ghost"
                     colorScheme="gray"
@@ -169,18 +169,10 @@ export default function Tendencias(): any {
                   </GridItem>
                   <GridItem padding="1px" w="100%">
                     <List spacing={1}>
-                      <ListItem
-                        fontWeight={600}
-                        fontFamily="Roboto"
-                        fontSize={15}
-                      >
+                      <ListItem fontWeight={600} fontSize={15}>
                         <Text fontSize={15}>Confident scores</Text>
                       </ListItem>
-                      <ListItem
-                        fontWeight={600}
-                        fontFamily="Roboto"
-                        fontSize={15}
-                      >
+                      <ListItem fontWeight={600} fontSize={15}>
                         {item.txt_analitycs != null ? (
                           <div>
                             <p>

@@ -23,7 +23,6 @@ export default function UserProfile(): any {
 
   return (
     <Box
-      bg={"gray.100"}
       p={10}
       maxW="inismtial"
       borderWidth="3px"
