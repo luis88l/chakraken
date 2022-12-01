@@ -20,7 +20,7 @@ import KPage from "../../../components/page/KPage";
 export default function UserProfile(this: any): any {
   const { data: session } = useSession();
   const [show, setShow] = useState(false);
-  const [showinp, setShowinp] = useState(true);
+  const [showinp, setShowinp] = useState(false);
 
   if (session == null) {
     return null;
@@ -29,6 +29,23 @@ export default function UserProfile(this: any): any {
     // @ts-expect-error
 
     session.user.user;
+  /*
+  const [datos, setDatos] = useState({
+    fechac: "",
+  });
+
+  const guardado = (event) => {
+    setDatos({
+      ...datos,
+      [event.target.name] : event.target.value
+    })
+  }
+  
+
+  const enviarDatos = (event) => {
+    event.preventDefault();
+  };
+  */
 
   <Flex overflow={"scroll"}></Flex>;
   return (
@@ -125,20 +142,22 @@ export default function UserProfile(this: any): any {
 
         {showinp ? (
           <>
-            <Input
-              onClick={() => {
-                setShowinp(!showinp);
-              }}
-              type="file"
-              height="100%"
-              width="100%"
-              position="absolute"
-              top="0"
-              left="0"
-              opacity="0"
-              aria-hidden="true"
-              accept="image/*"
-            />
+            <Box>
+              <Input
+                onClick={() => {
+                  setShowinp(!showinp);
+                }}
+                type="file"
+                height="100%"
+                width="100%"
+                position="absolute"
+                top="0"
+                left="0"
+                opacity="0"
+                aria-hidden="true"
+                accept="image/*"
+              />
+            </Box>
           </>
         ) : (
           ""
@@ -158,6 +177,7 @@ export default function UserProfile(this: any): any {
                   bg={"red.400"}
                   color={"gray.100"}
                   rounded={"0"}
+                  name="fechac"
                 ></IconButton>
               </Box>
               <Box p={3} alignItems="center" textAlign={"center"}>
@@ -167,7 +187,7 @@ export default function UserProfile(this: any): any {
                   bg={"gray.100"}
                   placeholder="Select date"
                   size={"md"}
-                  type="DateTime-local"
+                  type="date"
                 ></Input>
               </Box>
               <Box p={3} textAlign={"center"}>
