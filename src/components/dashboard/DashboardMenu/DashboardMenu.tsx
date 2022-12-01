@@ -3,7 +3,6 @@ import { Key } from "react";
 import DashboardMenuItem from "../DashboardMenuItem/DashboardMenuItem";
 
 export default function DashboardMenu(props: { items: any }): any {
-  console.log(props.items);
   const allMenuItems = props.items[0];
   const menuItems: any = [];
 
