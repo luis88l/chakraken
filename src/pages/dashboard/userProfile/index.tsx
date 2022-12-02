@@ -20,7 +20,6 @@ import KPage from "../../../components/page/KPage";
 export default function UserProfile(this: any): any {
   const { data: session } = useSession();
   const [show, setShow] = useState(false);
-  const [showinp, setShowinp] = useState(false);
 
   if (session == null) {
     return null;
@@ -65,13 +64,20 @@ export default function UserProfile(this: any): any {
           <Box textAlign={"center"}>
             <IconButton
               onClick={() => {
-                setShowinp(!showinp);
+                document.getElementById("file-up")?.click();
               }}
               aria-label={"files"}
               icon={<EditIcon />}
               colorScheme={undefined}
               rounded={"100"}
             ></IconButton>
+            <Input
+              type="file"
+              aria-hidden="true"
+              accept="image/*"
+              display={"none"}
+              id="file-up"
+            />
             <KAvatar size={"2xl"} name={"Admin"} src={""}></KAvatar>
             <KText content={de_rol}></KText>
             <Box color={"gray.500"}>
@@ -139,29 +145,6 @@ export default function UserProfile(this: any): any {
             </Text>
           </Box>
         </Box>
-
-        {showinp ? (
-          <>
-            <Box>
-              <Input
-                onClick={() => {
-                  setShowinp(!showinp);
-                }}
-                type="file"
-                height="100%"
-                width="100%"
-                position="absolute"
-                top="0"
-                left="0"
-                opacity="0"
-                aria-hidden="true"
-                accept="image/*"
-              />
-            </Box>
-          </>
-        ) : (
-          ""
-        )}
 
         {show ? (
           <>
