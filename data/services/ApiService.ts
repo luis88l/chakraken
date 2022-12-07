@@ -249,13 +249,9 @@ export class ApiService {
     return res;
   }
 
-
   // get permisos roles
 
-
-  // update permisos roles 
-
-  
+  // update permisos roles
 
   // crear area
 
@@ -311,10 +307,23 @@ export class ApiService {
     return res;
   }
 
+  // update user
+
   public async updateUser(user: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/users/update`,
       user,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  // download xml sitemap
+
+  public async downloadSitemap(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/productfeed/downloadSitemap`,
+      form,
       await this.defaults()
     );
     return res;
