@@ -160,11 +160,19 @@ export default function Modulo(): any {
           </SimpleGrid>
         </form>
       </Box>
+
+      <Box mt={10}>
+        <Text fontSize="l" fontWeight="bold">
+          Opciones módulo
+        </Text>
+      </Box>
     </KPage>
   );
 }
 
 export async function getServerSideProps(context: { req: any }): Promise<any> {
+  console.log("hi server");
+
   const session = await getSession({ req: context.req });
 
   if (session == null) {
