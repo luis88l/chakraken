@@ -36,7 +36,7 @@ export default function UserProfile(this: any): any {
   );
 
   if (session == null) {
-    return null;
+    return;
   }
   const {
     nb_usuario,
@@ -45,13 +45,14 @@ export default function UserProfile(this: any): any {
     fh_registro,
     de_rol,
     nb_area,
-    id_usuario,
+    nb_nombre,
+    cl_password,
   } =
     // @ts-expect-error
 
     session.user.user;
 
-  const updateUs = useMutation(
+  const updateUser = useMutation(
     async (formData: any) => {
       return await ApiService.updateUser(formData);
     },
@@ -62,27 +63,26 @@ export default function UserProfile(this: any): any {
     }
   );
 
-  //3
-  const user = users?.filter(
-    (user: { id_usuario: string | string[] | undefined }) =>
-      user.id_usuario === router.query.id
-  );
+  console.log(users);
 
-  const userDetails: any = user;
-
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  // @ts-expect-error
+  const userDetails: usersInterface = session.user.user;
 
   //2
   const handleSubmit = async (event: { preventDefault: () => void }) => {
+    console.log("submit");
     event.preventDefault();
     setUpdating(true);
     const formData = new FormData();
+    console.log(userDetails.fh_cumpleanios);
     formData.append("id", userDetails.id_usuario);
-    formData.append(
-      "fecha",
-      fechacumple === "" ? userDetails.fh_cumpleanios : fechacumple
-    );
-    updateUs.mutate(formData);
+    formData.append("cumple", fechacumple);
+    formData.append("name", nb_nombre);
+    formData.append("email", de_email);
+    formData.append("user", nb_usuario);
+    formData.append("password", cl_password);
+    formData.append("rol", de_rol);
+    updateUser.mutate(formData);
   };
 
   <Flex overflow={"scroll"}></Flex>;
@@ -99,127 +99,138 @@ export default function UserProfile(this: any): any {
         w={"370px"}
         letterSpacing={1}
       >
-        <Center pb={12}>
-          <Box textAlign={"center"}>
-            <IconButton
-              onClick={() => {
-                document.getElementById("file-up")?.click();
-              }}
-              aria-label={"files"}
-              icon={<EditIcon />}
-              colorScheme={undefined}
-              rounded={"100"}
-            ></IconButton>
-            <Input
-              type="file"
-              aria-hidden="true"
-              accept="image/*"
-              display={"none"}
-              id="file-up"
-            />
-            <KAvatar size={"2xl"} name={"Admin"} src={""}></KAvatar>
-            <KText content={de_rol}></KText>
-            <Box color={"gray.500"}>
-              <KText content={nb_area}></KText>
-            </Box>
-          </Box>
-        </Center>
-        <Box bg={""}>
-          <Box fontSize={"lg"} alignItems={"center"} display={"flex"} pb={5}>
-            <KText content={"Informacion de contacto"}></KText>
-            <Spacer />
-            <Box color={"black"}></Box>
-          </Box>
-
-          <Box as="span" color="gray.500" fontSize="lg">
-            <KText content={"nombre de usuario"}></KText>
-            <Box color={"black"} fontSize={"md"} pb={4}>
-              <KText content={nb_usuario}></KText>
-            </Box>
-          </Box>
-
-          <Box as="span" color="gray.500" fontSize="lg">
-            <KText content={"Correo Electronico"}></KText>
-            <Box color={"black"} fontSize={"md"} pb={4}>
-              <KText content={de_email}></KText>
-            </Box>
-          </Box>
-
-          <Box as="span" color="gray.500" fontSize="lg">
-            <KText content={"Fecha de Registro"}></KText>
-            <Box color={"black"} fontSize={"md"} pb={3}>
-              <Text>
-                {DateTime.fromISO(fh_registro).toFormat("dd MMMM, yyyy", {
-                  locale: "es",
-                })}
-              </Text>
-            </Box>
-          </Box>
-          <Box
-            color="gray.500"
-            fontSize="lg"
-            display="flex"
-            alignItems="center"
-          >
-            <KText content={"Fecha de Nacimiento"}></KText>
-            <Spacer />
-
-            <Box color={"black"}>
+        <form>
+          <Center pb={12}>
+            <Box textAlign={"center"}>
               <IconButton
                 onClick={() => {
-                  setShow(!show);
+                  document.getElementById("file-up")?.click();
                 }}
+                aria-label={"files"}
                 icon={<EditIcon />}
                 colorScheme={undefined}
-                rounded={"none"}
-                aria-label={""}
+                rounded={"100"}
               ></IconButton>
+              <Input
+                type="file"
+                aria-hidden="true"
+                accept="image/*"
+                display={"none"}
+                id="file-up"
+              />
+              <KAvatar size={"2xl"} name={"Admin"} src={""}></KAvatar>
+              <KText content={de_rol}></KText>
+              <Box color={"gray.500"}>
+                <KText content={nb_area}></KText>
+              </Box>
+            </Box>
+          </Center>
+          <Box bg={""}>
+            <Box fontSize={"lg"} alignItems={"center"} display={"flex"} pb={5}>
+              <KText content={"Informacion de contacto"}></KText>
+              <Spacer />
+              <Box color={"black"}></Box>
+            </Box>
+
+            <Box as="span" color="gray.500" fontSize="lg">
+              <KText content={"nombre de usuario"}></KText>
+              <Box color={"black"} fontSize={"md"} pb={4}>
+                <KText content={nb_usuario}></KText>
+              </Box>
+            </Box>
+
+            <Box as="span" color="gray.500" fontSize="lg">
+              <KText content={"Correo Electronico"}></KText>
+              <Box color={"black"} fontSize={"md"} pb={4}>
+                <KText content={de_email}></KText>
+              </Box>
+            </Box>
+
+            <Box as="span" color="gray.500" fontSize="lg">
+              <KText content={"Fecha de Registro"}></KText>
+              <Box color={"black"} fontSize={"md"} pb={3}>
+                <form
+                  defaultValue={fh_cumpleanios}
+                  onChange={(event) => {
+                    setFechaCumple(event.currentTarget.value);
+                  }}
+                >
+                  <Text>
+                    {DateTime.fromISO(fh_registro).toFormat("dd MMMM, yyyy", {
+                      locale: "es",
+                    })}
+                  </Text>
+                </form>
+              </Box>
+            </Box>
+            <Box
+              color="gray.500"
+              fontSize="lg"
+              display="flex"
+              alignItems="center"
+            >
+              <KText content={"Fecha de Nacimiento"}></KText>
+              <Spacer />
+
+              <Box color={"black"}>
+                <IconButton
+                  onClick={() => {
+                    setShow(!show);
+                  }}
+                  icon={<EditIcon />}
+                  colorScheme={undefined}
+                  rounded={"none"}
+                  aria-label={""}
+                ></IconButton>
+              </Box>
+            </Box>
+            <Box fontSize={"md"}>
+              <Box>
+                {DateTime.fromISO(fh_cumpleanios).toFormat("dd MMMM, yyyy", {
+                  locale: "es",
+                })}
+              </Box>
             </Box>
           </Box>
-          <Box fontSize={"md"}>
-            <Text>
-              {DateTime.fromISO(fh_cumpleanios).toFormat("dd MMMM, yyyy", {
-                locale: "es",
-              })}
-            </Text>
-          </Box>
-        </Box>
-
+        </form>
         {show ? (
           <>
-            <form onSubmit={handleSubmit}>
-              <Box bg={"gray.200"} mt={"5"}>
-                <Box textAlign="right">
-                  <IconButton
-                    onClick={() => {
-                      setShow(!show);
-                    }}
-                    size="xs"
-                    aria-label={""}
-                    icon={<CloseButton />}
-                    bg={"red.400"}
-                    color={"gray.100"}
-                    rounded={"0"}
-                    name="fechac"
-                  ></IconButton>
-                </Box>
-                <Box p={3} alignItems="center" textAlign={"center"}>
-                  <KText content={"¿Cual es tu fecha de nacimiento?"}></KText>
-                  <Input
-                    mt={4}
-                    bg={"gray.100"}
-                    placeholder="Select date"
-                    size={"md"}
-                    type="date"
-                  ></Input>
-                </Box>
-                <Box p={3} textAlign={"center"}>
-                  <Button colorScheme={"green"} size={"sm"} type="submit">
-                    Guardar
-                  </Button>
-                </Box>
+            <Box bg={"gray.200"} mt={"5"}>
+              <Box textAlign="right">
+                <IconButton
+                  onClick={() => {
+                    setShow(!show);
+                  }}
+                  size="xs"
+                  aria-label={""}
+                  icon={<CloseButton />}
+                  bg={"red.400"}
+                  color={"gray.100"}
+                  rounded={"0"}
+                  name="fechac"
+                ></IconButton>
               </Box>
-            </form>
+              <Box p={3} alignItems="center" textAlign={"center"}>
+                <KText content={"¿Cual es tu fecha de nacimiento?"}></KText>
+                <Input
+                  mt={4}
+                  bg={"gray.100"}
+                  placeholder="Select date"
+                  size={"md"}
+                  type="date"
+                ></Input>
+              </Box>
+              <Box p={3} textAlign={"center"}>
+                <Button
+                  colorScheme={"green"}
+                  size={"sm"}
+                  type="submit"
+                  onClick={handleSubmit}
+                >
+                  Guardar
+                </Button>
+              </Box>
+            </Box>
           </>
         ) : (
           ""
