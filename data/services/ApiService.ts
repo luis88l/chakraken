@@ -292,12 +292,36 @@ export class ApiService {
     return res;
   }
 
+  // get profile
+
+  public async getProfile(): Promise<any> {
+    const res = await axios.get(
+      `${pathServer}/users/getprofile`,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  // update user
+
   public async updateUser(user: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/users/update`,
       user,
       await this.defaults()
     );
+    return res;
+  }
+
+  // update user birthday
+
+  public async userCumple(user: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/users/cumple`,
+      user,
+      await this.defaults()
+    );
+
     return res;
   }
 }
