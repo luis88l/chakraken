@@ -37,6 +37,24 @@ export interface areasInterface {
   sn_activo: boolean;
 }
 
+export interface usersInterface {
+  id_usuario: string;
+  id_rol: string;
+  nb_nombre: string;
+  cl_password: string;
+  de_email: string;
+  nb_usuario: string;
+  de_rol: string;
+  fh_registro: string;
+  fh_modificado: string;
+  fh_cumpleanios: string;
+  user_photo: string;
+  sn_activo: boolean;
+  nb_area: string;
+  id_area: string;
+  de_tokenPush: string;
+}
+
 export default function New(): any {
   const colSpan = { base: 2, md: 1 };
   const router = useRouter();

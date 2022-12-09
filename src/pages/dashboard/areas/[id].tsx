@@ -36,6 +36,7 @@ export default function Area(): any {
     async () => await ApiService.getAreas()
   );
 
+  //1
   const updateArea = useMutation(
     async (formData: any) => {
       return await ApiService.updateAreas(formData);
@@ -59,6 +60,7 @@ export default function Area(): any {
   const areaDetails: areasInterface = area[0];
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     setUpdating(true);

@@ -16,35 +16,74 @@ import { EditIcon } from "@chakra-ui/icons";
 import { DateTime } from "luxon";
 import React, { useState } from "react";
 import KPage from "../../../components/page/KPage";
+import { useMutation, useQuery } from "react-query";
+import ApiService from "../../../../data/services/ApiService";
+import { useRouter } from "next/router";
+import { usersInterface } from "../usuarios/new";
 
 export default function UserProfile(this: any): any {
   const { data: session } = useSession();
   const [show, setShow] = useState(false);
+  const router = useRouter();
+  const [updating, setUpdating] = useState(false);
+  const [fechacumple, setFechaCumple] = useState("");
+  const form = new FormData();
+
+  //otro
+  const { isLoading, data: users } = useQuery(
+    "users",
+    async () => await ApiService.getUsers(form)
+  );
 
   if (session == null) {
     return null;
   }
-  const { nb_usuario, de_email, fh_cumpleanios, fh_registro, de_rol, nb_area } =
+  const {
+    nb_usuario,
+    de_email,
+    fh_cumpleanios,
+    fh_registro,
+    de_rol,
+    nb_area,
+    id_usuario,
+  } =
     // @ts-expect-error
 
     session.user.user;
-  /*
-  const [datos, setDatos] = useState({
-    fechac: "",
-  });
 
-  const guardado = (event) => {
-    setDatos({
-      ...datos,
-      [event.target.name] : event.target.value
-    })
-  }
-  
+  const updateUs = useMutation(
+    async (formData: any) => {
+      return await ApiService.updateUser(formData);
+    },
+    {
+      onSuccess: () => {
+        router.back();
+      },
+    }
+  );
 
-  const enviarDatos = (event) => {
+  //3
+  const user = users?.filter(
+    (user: { id_usuario: string | string[] | undefined }) =>
+      user.id_usuario === router.query.id
+  );
+
+  const userDetails: any = user;
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+
+  //2
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    setUpdating(true);
+    const formData = new FormData();
+    formData.append("id", userDetails.id_usuario);
+    formData.append(
+      "fecha",
+      fechacumple === "" ? userDetails.fh_cumpleanios : fechacumple
+    );
+    updateUs.mutate(formData);
   };
-  */
 
   <Flex overflow={"scroll"}></Flex>;
   return (
@@ -148,43 +187,39 @@ export default function UserProfile(this: any): any {
 
         {show ? (
           <>
-            <Box bg={"gray.200"} mt={"5"}>
-              <Box textAlign="right">
-                <IconButton
-                  onClick={() => {
-                    setShow(!show);
-                  }}
-                  size="xs"
-                  aria-label={""}
-                  icon={<CloseButton />}
-                  bg={"red.400"}
-                  color={"gray.100"}
-                  rounded={"0"}
-                  name="fechac"
-                ></IconButton>
+            <form onSubmit={handleSubmit}>
+              <Box bg={"gray.200"} mt={"5"}>
+                <Box textAlign="right">
+                  <IconButton
+                    onClick={() => {
+                      setShow(!show);
+                    }}
+                    size="xs"
+                    aria-label={""}
+                    icon={<CloseButton />}
+                    bg={"red.400"}
+                    color={"gray.100"}
+                    rounded={"0"}
+                    name="fechac"
+                  ></IconButton>
+                </Box>
+                <Box p={3} alignItems="center" textAlign={"center"}>
+                  <KText content={"¿Cual es tu fecha de nacimiento?"}></KText>
+                  <Input
+                    mt={4}
+                    bg={"gray.100"}
+                    placeholder="Select date"
+                    size={"md"}
+                    type="date"
+                  ></Input>
+                </Box>
+                <Box p={3} textAlign={"center"}>
+                  <Button colorScheme={"green"} size={"sm"} type="submit">
+                    Guardar
+                  </Button>
+                </Box>
               </Box>
-              <Box p={3} alignItems="center" textAlign={"center"}>
-                <KText content={"¿Cual es tu fecha de nacimiento?"}></KText>
-                <Input
-                  mt={4}
-                  bg={"gray.100"}
-                  placeholder="Select date"
-                  size={"md"}
-                  type="date"
-                ></Input>
-              </Box>
-              <Box p={3} textAlign={"center"}>
-                <Button
-                  onClick={() => {
-                    setShow(!show);
-                  }}
-                  colorScheme={"green"}
-                  size={"sm"}
-                >
-                  Guardar
-                </Button>
-              </Box>
-            </Box>
+            </form>
           </>
         ) : (
           ""
