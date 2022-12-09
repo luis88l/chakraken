@@ -163,6 +163,17 @@ export class ApiService {
     return res.data.data;
   }
 
+  // get opciones rol
+
+  public async getOpcionesRol(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/modulos/getOpcionesRol`,
+      form,
+      await this.defaults()
+    );
+    return res;
+  }
+
   // get usuarios
 
   public async getUsers(form: {}): Promise<any> {
@@ -237,6 +248,14 @@ export class ApiService {
       });
     return res;
   }
+
+
+  // get permisos roles
+
+
+  // update permisos roles 
+
+  
 
   // crear area
 
