@@ -55,6 +55,11 @@ export interface usersInterface {
   de_tokenPush: string;
 }
 
+export interface BaseFacebookInterface {
+  nb_Base: string;
+  nu_Pixel: string;
+}
+
 export default function New(): any {
   const colSpan = { base: 2, md: 1 };
   const router = useRouter();

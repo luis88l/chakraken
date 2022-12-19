@@ -23,6 +23,7 @@ export default function UserProfile(this: any): any {
   const { data: session } = useSession();
   const [show, setShow] = useState(false);
   const [fechacumple, setFechaCumple] = useState("");
+  const [userphoto, setUserPhoto] = useState("");
 
   if (session == null) {
     return;
@@ -36,6 +37,7 @@ export default function UserProfile(this: any): any {
     nb_nombre,
     id_rol,
     cl_password,
+    user_photo,
   } =
     // @ts-expect-error
     session.user.user;
@@ -80,7 +82,7 @@ export default function UserProfile(this: any): any {
     return <KSkeletonPage />;
   }
 
-  console.log(data.data.data.fh_cumpleanios);
+  console.log(setUserPhoto);
 
   return (
     <KPage title={"Perfil de Usuario"}>
@@ -113,7 +115,11 @@ export default function UserProfile(this: any): any {
               display={"none"}
               id="file-up"
             />
-            <KAvatar size={"2xl"} name={"Admin"} src={""}></KAvatar>
+            <KAvatar
+              size={"2xl"}
+              name={nb_nombre}
+              src={data.data.data.user_photo}
+            ></KAvatar>
             <KText content={de_rol}></KText>
             <Box color={"gray.500"}>
               <KText content={nb_area}></KText>
@@ -130,7 +136,7 @@ export default function UserProfile(this: any): any {
           <Box as="span" color="gray.500" fontSize="lg">
             <KText content={"nombre de usuario"}></KText>
             <Box color={"black"} fontSize={"md"} pb={4}>
-              <KText content={data.nb_usuario}></KText>
+              <KText content={nb_usuario}></KText>
             </Box>
           </Box>
 
