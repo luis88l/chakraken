@@ -1,55 +1,25 @@
-import { getSession } from "next-auth/react";
-import { useState } from "react";
-import { useMutation } from "react-query";
-import ApiService from "../../../../data/services/ApiService";
-import { useRouter } from "next/router";
-import KPage from "../../../components/page/KPage";
 import {
-  Box,
-  Button,
-  CircularProgress,
   Divider,
+  SimpleGrid,
+  GridItem,
   FormControl,
   FormLabel,
-  GridItem,
   Input,
-  SimpleGrid,
+  Button,
+  CircularProgress,
+  Box,
   Text,
 } from "@chakra-ui/react";
+import { getSession } from "next-auth/react";
+import { useState } from "react";
+import KPage from "../../../components/page/KPage";
 
 export default function New(): any {
   const colSpan = { base: 2, md: 2 };
-  const router = useRouter();
-  const [updating, setUpdating] = useState(false);
-  const [nombreBase, setNombreBase] = useState("");
-  const [nombrePixel, setNombrePixel] = useState("");
-
-  const crearBase = useMutation(
-    async (formData: any) => {
-      return await ApiService.saveBases(formData);
-    },
-    {
-      onSuccess: () => {
-        router.back();
-      },
-    }
-  );
-
-  const handleSubmit = async (event: {
-    preventDefault: () => void;
-  }): Promise<any> => {
-    event.preventDefault();
-    setUpdating(true);
-    const formData = new FormData();
-    formData.append("name", nombreBase);
-    formData.append("nu_Pixel", nombrePixel);
-    crearBase.mutate(formData);
-  };
-
-  console.log();
+  const [updating] = useState(false);
 
   return (
-    <KPage title={"Crear Base"}>
+    <KPage title={"Crear Afore"}>
       <Box>
         <Text fontSize={"l"} fontWeight="bold">
           Registra los datos correctamente
@@ -57,27 +27,20 @@ export default function New(): any {
       </Box>
       <Divider mt={5} mb={2}></Divider>
       <Box>
-        <form onSubmit={handleSubmit}>
+        <form>
           <SimpleGrid columns={2} spacing={5}>
             <Box>
               <GridItem colSpan={colSpan}>
                 <FormControl isRequired>
                   <FormLabel>Base</FormLabel>
-                  <Input
-                    onChange={(event) => {
-                      setNombreBase(event.currentTarget.value);
-                    }}
-                  />
+                  <Input></Input>
                 </FormControl>
               </GridItem>
+
               <GridItem colSpan={colSpan} mt={3}>
                 <FormControl isRequired>
                   <FormLabel>Pixel</FormLabel>
-                  <Input
-                    onChange={(event) => {
-                      setNombrePixel(event.currentTarget.value);
-                    }}
-                  />
+                  <Input></Input>
                 </FormControl>
               </GridItem>
             </Box>

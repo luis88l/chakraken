@@ -31,6 +31,13 @@ export interface rolesInterface {
   sn_activo: boolean;
 }
 
+export interface basesInterface {
+  id_Base: string;
+  nu_Pixel: string;
+  nb_Base: string;
+  sn_activo: boolean;
+}
+
 export interface areasInterface {
   id_area: string;
   nb_area: string;
@@ -53,11 +60,6 @@ export interface usersInterface {
   nb_area: string;
   id_area: string;
   de_tokenPush: string;
-}
-
-export interface BaseFacebookInterface {
-  nb_Base: string;
-  nu_Pixel: string;
 }
 
 export default function New(): any {

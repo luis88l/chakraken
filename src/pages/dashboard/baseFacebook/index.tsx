@@ -1,40 +1,32 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Flex,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-} from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, Select } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
+import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 
-export interface BaseFacebookTable {
+export interface areasTable {
   id_Base: string;
   nb_Base: string;
   nu_Pixel: string;
-  sn_Activo: string;
 }
 
 export default function BaseFacebook(): any {
   const {
     isLoading,
-    data: bases,
+    data: basesFaceBook,
     isSuccess,
-  } = useQuery("basesFaceBook", async () => await ApiService.getBases);
+  } = useQuery("Bases", async () => await ApiService.getBases());
 
-  const columnHelper = createColumnHelper<BaseFacebookTable>();
+  if (isLoading) {
+    return <KSkeletonPage />;
+  }
+
+  const columnHelper = createColumnHelper<areasTable>();
 
   const columns = [
     columnHelper.accessor("nb_Base", {
@@ -70,7 +62,7 @@ export default function BaseFacebook(): any {
   if (isSuccess) {
     return (
       <KPage title="Bases Facebook">
-        <Box m={20} borderRadius="lg" outline={"100"} outlineColor="red">
+        <Box>
           <Flex mb={4} display="grid" justifyItems={"flex-end"}>
             <Link href={"/dashboard/baseFacebook/new"}>
               <Button
@@ -84,7 +76,16 @@ export default function BaseFacebook(): any {
               </Button>
             </Link>
           </Flex>
-          <KTableLayout columns={columns} data={[]} />
+          {Array.isArray(basesFaceBook) && (
+            <KTableLayout
+              columns={columns}
+              data={basesFaceBook.map(({ id_Base, nb_Base, nu_Pixel }) => ({
+                id_Base,
+                nb_Base,
+                nu_Pixel,
+              }))}
+            />
+          )}
         </Box>
       </KPage>
     );

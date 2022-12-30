@@ -1,9 +1,9 @@
 import axios, { AxiosError } from "axios";
 import { getSession } from "next-auth/react";
-import { BaseFacebookTable } from "../../src/pages/dashboard/baseFacebook";
+import { BasesTable } from "../../src/pages/dashboard/baseFacebook/[id]";
 import {
   areasInterface,
-  BaseFacebookInterface,
+  basesInterface,
   rolesInterface,
 } from "../../src/pages/dashboard/usuarios/new";
 
@@ -166,7 +166,7 @@ export class ApiService {
   }
 
   //get facebook
-  public async getBases(): Promise<BaseFacebookInterface> {
+  public async getBases(): Promise<any> {
     const res = await axios
       .get(`${pathServer}/BI/get`, await this.defaults())
       .then((response) => {
@@ -176,6 +176,32 @@ export class ApiService {
         return error.response;
       });
     return res.data.data;
+  }
+
+  //crear base facebook
+  public async saveBases(user: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/BI/save`, user, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  //base
+  public async updateBases(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/BI/Update`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
   // get opciones rol
