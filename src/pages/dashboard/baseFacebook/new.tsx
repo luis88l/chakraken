@@ -13,9 +13,11 @@ import {
   FormLabel,
   GridItem,
   Input,
+  Link,
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
+import { CloseIcon } from "@chakra-ui/icons";
 
 export default function New(): any {
   const colSpan = { base: 2, md: 2 };
@@ -50,6 +52,11 @@ export default function New(): any {
 
   return (
     <KPage title={"Crear Base"}>
+      <Box textAlign={"right"} color="red">
+        <Link href={"/dashboard/baseFacebook/"}>
+          <CloseIcon fontSize={"2xl"} borderRadius="4px" cursor={"pointer"} />
+        </Link>
+      </Box>
       <Box>
         <Text fontSize={"l"} fontWeight="bold">
           Registra los datos correctamente

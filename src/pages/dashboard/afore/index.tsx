@@ -76,27 +76,36 @@ export default function Afore(): any {
 
   return (
     <KPage title="Afore">
-      <Box m={5}>
-        <Box textAlign={"center"}>
-          <Link href={"/dashboard/afore/new"}>
-            <Button
-              alignItems={"center"}
-              size="lg"
-              bg="blue.500"
-              textColor={"white"}
-            >
-              + Agregar Datos
-            </Button>
-          </Link>
-        </Box>
-        <Box textAlign="left">
+      <Box m={5} mt="10">
+        <Box ml={"56"} mb="10">
           <Button
+            mr={"10"}
+            alignItems={"center"}
+            size="lg"
+            bg="blue.500"
+            textColor={"white"}
+            rounded="0"
+          >
+            Marcar enviados
+          </Button>
+          <Button
+            rounded="0"
             size={"lg"}
             bg="blue.500"
             textColor={"white"}
             alignItems="center"
           >
             Descargar Csv
+          </Button>
+          <Button
+            rounded="0"
+            ml={"10"}
+            size={"lg"}
+            bg="blue.500"
+            textColor={"white"}
+            alignItems="center"
+          >
+            Actualizar lista
           </Button>
         </Box>
         <KTableLayout data={[]} columns={columns} />

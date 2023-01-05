@@ -1,9 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { getSession } from "next-auth/react";
-import { BasesTable } from "../../src/pages/dashboard/baseFacebook/[id]";
 import {
   areasInterface,
-  basesInterface,
   rolesInterface,
 } from "../../src/pages/dashboard/usuarios/new";
 
@@ -204,6 +202,18 @@ export class ApiService {
     return res;
   }
 
+  //eliminar base
+  public async basesDelete(data: {}) {
+    return axios
+      .post(`${pathServer}/BI/delete`, data, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   // get opciones rol
   public async getOpcionesRol(form: {}): Promise<any> {
     const res = await axios.post(
@@ -390,6 +400,18 @@ export class ApiService {
     );
 
     return res;
+  }
+
+  public async getSmartLink(): Promise<any> {
+    const res = await axios
+      .get(`${pathServer}/smart-links/get`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res.data.data;
   }
 }
 

@@ -8,14 +8,25 @@ import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
+import { useRouter } from "next/router";
 
 export interface areasTable {
   id_Base: string;
   nb_Base: string;
   nu_Pixel: string;
+  sn_activo: boolean;
+}
+
+export interface baseFacebookProps {
+  id_Base: string;
+  nb_Base: string;
+  nu_Pixel: string;
+  sn_activo: boolean;
 }
 
 export default function BaseFacebook(): any {
+  const router = useRouter();
+
   const {
     isLoading,
     data: basesFaceBook,
@@ -51,7 +62,14 @@ export default function BaseFacebook(): any {
             </Link>
           </Box>
           <Box m={2} cursor="pointer">
-            <DeleteIcon />
+            <Link
+              href={{
+                // eslint-disable-next-line react/prop-types
+                pathname: "/dashboard/baseFacebook/delete/" + props.getValue(),
+              }}
+            >
+              <DeleteIcon />
+            </Link>
           </Box>
         </ButtonGroup>
       ),
@@ -79,11 +97,14 @@ export default function BaseFacebook(): any {
           {Array.isArray(basesFaceBook) && (
             <KTableLayout
               columns={columns}
-              data={basesFaceBook.map(({ id_Base, nb_Base, nu_Pixel }) => ({
-                id_Base,
-                nb_Base,
-                nu_Pixel,
-              }))}
+              data={basesFaceBook.map(
+                ({ id_Base, nb_Base, nu_Pixel, sn_activo }) => ({
+                  id_Base,
+                  nb_Base,
+                  nu_Pixel,
+                  sn_activo,
+                })
+              )}
             />
           )}
         </Box>

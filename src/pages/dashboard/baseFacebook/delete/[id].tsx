@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getSession } from "next-auth/react";
-import KPage from "../../../components/page/KPage";
-import ApiService from "../../../../data/services/ApiService";
+import KPage from "../../../../components/page/KPage";
+import ApiService from "../../../../../data/services/ApiService";
 import { useMutation, useQuery } from "react-query";
 import {
   Box,
@@ -15,9 +15,10 @@ import {
   Link,
   SimpleGrid,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { CloseIcon } from "@chakra-ui/icons";
+import { CloseIcon, WarningIcon } from "@chakra-ui/icons";
 
 export interface BasesTable {
   id_Base: string;
@@ -34,19 +35,22 @@ interface BaseFacebookProps {
 }
 
 export default function Bases(): any {
+  const colSpan = { base: 2, md: 2 };
   const router = useRouter();
   const [nombreBase, setNombreBase] = useState("");
   const [numeroPixel, setNombrePixel] = useState("");
+  const [activo, setActivo] = useState(false);
   const [updating, setUpdating] = useState(false);
 
-  const { isLoading, data: basesFaceBook } = useQuery(
-    "Bases",
-    async () => await ApiService.getBases()
-  );
+  const {
+    isLoading,
+    data: basesFaceBook,
+    isSuccess,
+  } = useQuery("Bases", async () => await ApiService.getBases());
 
   const updateBase = useMutation(
     async (formData: any) => {
-      return await ApiService.updateBases(formData);
+      return await ApiService.basesDelete(formData);
     },
     {
       onSuccess: () => {
@@ -69,31 +73,24 @@ export default function Bases(): any {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    setUpdating(true);
+    setActivo(true);
     const formData = new FormData();
     formData.append("id", basesDetails.id_Base);
-    formData.append(
-      "name",
-      nombreBase === "" ? basesDetails.nb_Base : nombreBase
-    );
-    formData.append(
-      "nu_Pixel",
-      numeroPixel === "" ? basesDetails.nu_Pixel : numeroPixel
-    );
     updateBase.mutate(formData);
   };
 
   return (
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    <KPage title={"Bases " + basesDetails.nb_Base}>
+    <KPage title={"Base: " + basesDetails.nb_Base}>
       <Box textAlign={"right"} color="red">
         <Link href={"/dashboard/baseFacebook/"}>
           <CloseIcon fontSize={"2xl"} borderRadius="4px" cursor={"pointer"} />
         </Link>
       </Box>
       <Box>
-        <Text fontSize="l" fontWeight="bold">
-          Actualizar Base
+        <Text fontSize="lg" fontWeight="bold" color={"#E02020"}>
+          ¿Estas seguro de que deseas eliminar la Base?
+          <WarningIcon alignItems={"center"} ml="3" />
         </Text>
       </Box>
       <Divider mt={5} mb={3} />
@@ -104,7 +101,7 @@ export default function Bases(): any {
               <FormControl isRequired>
                 <FormLabel>Base</FormLabel>
                 <Input
-                  defaultValue={basesDetails.nb_Base}
+                  value={basesDetails.nb_Base}
                   onChange={(event) => {
                     setNombreBase(event.currentTarget.value);
                   }}
@@ -116,7 +113,7 @@ export default function Bases(): any {
               <FormControl isRequired>
                 <FormLabel>Pixel</FormLabel>
                 <Input
-                  defaultValue={basesDetails.nu_Pixel}
+                  value={basesDetails.nu_Pixel}
                   onChange={(event) => {
                     setNombrePixel(event.currentTarget.value);
                   }}
@@ -130,11 +127,11 @@ export default function Bases(): any {
                 variant="primary"
                 size="lg"
                 type="submit"
-                bg="#3a47bd"
+                bg="#E02020"
                 borderRadius={15}
                 color="#fff"
                 rightIcon={
-                  updating ? (
+                  activo ? (
                     <CircularProgress
                       isIndeterminate
                       color="white"
@@ -143,7 +140,7 @@ export default function Bases(): any {
                   ) : undefined
                 }
               >
-                Actualizar
+                Eliminar
               </Button>
             </GridItem>
           </SimpleGrid>
