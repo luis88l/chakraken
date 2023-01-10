@@ -66,7 +66,7 @@ export default function Areas(): any {
               _hover={{ bg: "#238152" }}
               leftIcon={<AddIcon />}
             >
-              Nuevo área
+              Nueva área
             </Button>
           </Link>
         </Flex>

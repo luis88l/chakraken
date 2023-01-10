@@ -9,7 +9,6 @@ interface DashboardProps {
 }
 
 export default function Dashboard(props: DashboardProps): any {
-  console.log(props);
   return (
     <Flex
       w={["100%", "100%", "15%", "15%", "15%"]}

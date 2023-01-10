@@ -197,18 +197,14 @@ export class ApiService {
   // get feed list
   public async getFeedList(data: {}): Promise<any> {
     const res = await axios
-      .post(
-        `${pathServer}/productfeed/getFeedList`,
-        data,
-        await this.defaults()
-      )
+      .get(`${pathServer}/productfeed/getFeedList`, await this.defaults())
       .then((response) => {
         return response;
       })
       .catch((error) => {
         return error.response;
       });
-    return res.feed;
+    return res;
   }
 
   // orden de modulos
