@@ -249,13 +249,9 @@ export class ApiService {
     return res;
   }
 
-
   // get permisos roles
 
-
-  // update permisos roles 
-
-  
+  // update permisos roles
 
   // crear area
 
@@ -315,6 +311,16 @@ export class ApiService {
     const res = await axios.post(
       `${pathServer}/users/update`,
       user,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  // crear carruseles
+  public async crearCarrusel(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/creadorCarrusel/crearCarrusel`,
+      form,
       await this.defaults()
     );
     return res;
