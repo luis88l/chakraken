@@ -4,7 +4,8 @@ import { Box } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
-import { useReactTable } from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
+import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 
 export interface productFeedListTable {
   id_product_feed: string;
@@ -19,65 +20,94 @@ export interface productFeedListTable {
 }
 
 export default function ProductFeed(): any {
+  const filters: any = [{}];
+
   const {
     data: productFeedList,
     isLoading,
     isSuccess,
-  } = useQuery("productFeedList", async () => await ApiService.getFeedList({}));
+  } = useQuery(
+    "productFeedList",
+    async () => await ApiService.getFeedList({ filters })
+  );
 
   if (isLoading && !isSuccess) {
     return <KSkeletonPage />;
   }
 
-  // use React Table to create a table with the productFeedList data
-  const { Table, Pagination } = useReactTable({
-    data: productFeedList,
-    columns: [
-      {
-        Header: "ID",
-        accessor: "id_product_feed",
-      },
-      {
-        Header: "Created At",
-        accessor: "created_at",
-      },
-      {
-        Header: "Updated At",
-        accessor: "updated_at",
-      },
-      {
-        Header: "Version",
-        accessor: "version",
-      },
-      {
-        Header: "Status",
-        accessor: "status",
-      },
-      {
-        Header: "Description",
-        accessor: "description",
-      },
-      {
-        Header: "Item Count",
-        accessor: "item_count",
-      },
-      {
-        Header: "Mkp Item Count",
-        accessor: "mkp_item_count",
-      },
-      {
-        Header: "Processed Item Count",
-        accessor: "processed_item_count",
-      },
-    ],
-  });
-
   if (isSuccess && typeof productFeedList !== "undefined") {
+    console.log("hola jajaj", typeof productFeedList);
+    const columnHelper = createColumnHelper<productFeedListTable>();
+
+    const columns = [
+      columnHelper.accessor("id_product_feed", {
+        cell: (info) => info.getValue(),
+        header: "ID",
+      }),
+      columnHelper.accessor("created_at", {
+        cell: (info) => info.getValue(),
+        header: "Created At",
+      }),
+      columnHelper.accessor("updated_at", {
+        cell: (info) => info.getValue(),
+        header: "Updated At",
+      }),
+      columnHelper.accessor("version", {
+        cell: (info) => info.getValue(),
+        header: "Version",
+      }),
+      columnHelper.accessor("status", {
+        cell: (info) => info.getValue(),
+        header: "Status",
+      }),
+      columnHelper.accessor("description", {
+        cell: (info) => info.getValue(),
+        header: "Description",
+      }),
+      columnHelper.accessor("item_count", {
+        cell: (info) => info.getValue(),
+        header: "Item Count",
+      }),
+      columnHelper.accessor("mkp_item_count", {
+        cell: (info) => info.getValue(),
+        header: "Mkp Item Count",
+      }),
+      columnHelper.accessor("processed_item_count", {
+        cell: (info) => info.getValue(),
+        header: "Processed Item Count",
+      }),
+    ];
+
     return (
-      <KPage title="Product Feed">
-        <Box>hi</Box>
-        {Table}
-        {Pagination}
+      <KPage title="Feeds">
+        <Box>
+          <KTableLayout
+            columns={columns}
+            data={productFeedList.map(
+              ({
+                id_product_feed,
+                status,
+                created_at,
+                updated_at,
+                version,
+                description,
+                item_count,
+                mkp_item_count,
+                processed_item_count,
+              }: productFeedListTable) => ({
+                id_product_feed,
+                status,
+                created_at,
+                updated_at,
+                version,
+                description,
+                item_count,
+                mkp_item_count,
+                processed_item_count,
+              })
+            )}
+          />
+        </Box>
       </KPage>
     );
   }

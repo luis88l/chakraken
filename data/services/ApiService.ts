@@ -71,6 +71,7 @@ export class ApiService {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   public async defaults() {
     const session: any = await getSession();
+
     const defaults = {
       headers: {
         "Request-Source": "kraken",
@@ -78,7 +79,15 @@ export class ApiService {
         authorization: session.user.data,
       },
     };
+
     return defaults;
+  }
+
+  public async token(): Promise<any> {
+    const session: any = await getSession();
+    const token = session.user.data;
+
+    return token;
   }
 
   // opciones usuarios menu
@@ -186,27 +195,20 @@ export class ApiService {
   }
 
   // get feed list
-
   public async getFeedList(data: {}): Promise<any> {
-    console.log("data", data);
-    const result = await axios
-      .get(`${pathServer}/productfeed/getFeedList`, {
-        params: {
-          data,
-        },
-        headers: {
-          authorization: await (await this.defaults()).headers.authorization,
-        },
-      })
+    const res = await axios
+      .post(
+        `${pathServer}/productfeed/getFeedList`,
+        data,
+        await this.defaults()
+      )
       .then((response) => {
         return response;
       })
       .catch((error) => {
         return error.response;
       });
-
-    console.log(result);
-    return result;
+    return res.feed;
   }
 
   // orden de modulos

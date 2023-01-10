@@ -74,7 +74,6 @@ export default function New(): any {
   const handleSubmit = async (event: {
     preventDefault: () => void;
   }): Promise<any> => {
-    console.log("hiiii");
     event.preventDefault();
     setUpdating(true);
     const formData = new FormData();
