@@ -404,7 +404,7 @@ export class ApiService {
 
   public async getSmartLink(): Promise<any> {
     const res = await axios
-      .get(`${pathServer}/smart-links/get`, await this.defaults())
+      .get(`${pathServer}/smart-links`, await this.defaults())
       .then((response) => {
         return response;
       })
@@ -412,6 +412,44 @@ export class ApiService {
         return error.response;
       });
     return res.data.data;
+  }
+
+  // crear formulario smart-link
+  public async saveSmartLink(user: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/smart-links`, user, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  //update smartlinks
+  public async updateSmartLinks(data: {}) {
+    return axios
+      .put(`${pathServer}/smart-links`, data, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  //delete smart link
+  public async deleteSmartLinks(id: string) {
+    const result = await axios
+      .delete(`${pathServer}/smart-links/${id}`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return result;
   }
 }
 
