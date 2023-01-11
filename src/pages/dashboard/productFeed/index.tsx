@@ -6,6 +6,7 @@ import ApiService from "../../../../data/services/ApiService";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 import { createColumnHelper } from "@tanstack/react-table";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
+import { DateTime } from "luxon";
 
 export interface productFeedListTable {
   created_at: string;
@@ -33,7 +34,10 @@ export default function ProductFeed(): any {
 
   const columns = [
     columnHelper.accessor("created_at", {
-      cell: (info) => info.getValue(),
+      cell: (info) =>
+        DateTime.fromISO(info.getValue()).toFormat("dd MMMM yyyy, h:mm a", {
+          locale: "es",
+        }),
       header: "Created At",
     }),
     columnHelper.accessor("status", {
