@@ -299,9 +299,6 @@ export class ApiService {
     return res;
   }
 
-  // get permisos roles
-
-  // update permisos roles
 
   // crear area
 
@@ -376,6 +373,75 @@ export class ApiService {
       await this.defaults()
     );
     return res;
+  }
+  public async getTokenUser(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/pushNotifications/getTokenUser`,
+      form,
+      await this.defaults()
+    )
+    return res
+  }
+
+  public async pushNotificationsGet(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/pushNotifications/get`,
+      form,
+      await this.defaults()
+    )
+    return res
+  }
+
+  public async pushNotificationsTest(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/pushNotifications/pushTest`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
+  public async getMedios() {
+    const res = await axios.get(
+      `${pathServer}/medios/get`,
+      await this.defaults()
+    )
+    return res
+  }
+
+  public async getFuentes() {
+    const res = await axios.get(
+      `${pathServer}/fuentes/get`,
+      await this.defaults()
+    )
+    return res
+  }
+
+  public async pushNotificationsSave(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/pushNotifications/save`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
+  public async getTopics() {
+    const res = await axios.get(
+      `${pathServer}/topics/get`,
+      await this.defaults()
+    )
+    return res
   }
 
   // update user birthday
@@ -452,5 +518,7 @@ export class ApiService {
     return result;
   }
 }
+
+
 
 export default new ApiService();
