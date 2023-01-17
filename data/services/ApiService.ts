@@ -299,7 +299,6 @@ export class ApiService {
     return res;
   }
 
-
   // crear area
 
   public async saveAreas(user: {}): Promise<any> {
@@ -374,6 +373,7 @@ export class ApiService {
     );
     return res;
   }
+  
   public async getTokenUser(form: {}) {
     const res = await axios.post(
       `${pathServer}/pushNotifications/getTokenUser`,
@@ -516,6 +516,16 @@ export class ApiService {
         return error.response;
       });
     return result;
+  }
+  
+   // crear carruseles
+  public async crearCarrusel(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/creadorCarrusel/crearCarrusel`,
+      form,
+      await this.defaults()
+    );
+    return res;
   }
 }
 
