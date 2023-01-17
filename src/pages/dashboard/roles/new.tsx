@@ -44,6 +44,8 @@ export default function New(): any {
     crearRol.mutate(formData);
   };
 
+  console.log();
+
   return (
     <KPage title="Crear rol">
       <Box>
@@ -68,9 +70,9 @@ export default function New(): any {
             <GridItem colSpan={1}></GridItem>
             <GridItem colSpan={1}>
               <Button
+                type="submit"
                 variant="primary"
                 size="lg"
-                type="submit"
                 bg="#3a47bd"
                 borderRadius={15}
                 color="#fff"
@@ -93,7 +95,6 @@ export default function New(): any {
     </KPage>
   );
 }
-
 export async function getServerSideProps(context: { req: any }): Promise<any> {
   const session = await getSession({ req: context.req });
 

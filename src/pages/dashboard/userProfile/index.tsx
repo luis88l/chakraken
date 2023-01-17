@@ -3,8 +3,6 @@ import {
   Box,
   Button,
   Center,
-  CloseButton,
-  Flex,
   IconButton,
   Input,
   Spacer,
@@ -12,42 +10,80 @@ import {
 } from "@chakra-ui/react";
 import { KAvatar } from "../../../components/react";
 import KText from "../../../components/text/KText";
-import { EditIcon } from "@chakra-ui/icons";
+import { EditIcon, CloseIcon } from "@chakra-ui/icons";
 import { DateTime } from "luxon";
 import React, { useState } from "react";
 import KPage from "../../../components/page/KPage";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import ApiService from "../../../../data/services/ApiService";
+import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 
 export default function UserProfile(this: any): any {
+  const queryClient = useQueryClient();
   const { data: session } = useSession();
   const [show, setShow] = useState(false);
-  const [showinp, setShowinp] = useState(false);
+  const [fechacumple, setFechaCumple] = useState("");
+  const [userphoto, setUserPhoto] = useState("");
 
   if (session == null) {
-    return null;
+    return;
   }
-  const { nb_usuario, de_email, fh_cumpleanios, fh_registro, de_rol, nb_area } =
+  const {
+    nb_usuario,
+    de_email,
+    fh_cumpleanios,
+    de_rol,
+    nb_area,
+    nb_nombre,
+    id_rol,
+    cl_password,
+    user_photo,
+  } =
     // @ts-expect-error
-
     session.user.user;
-  /*
-  const [datos, setDatos] = useState({
-    fechac: "",
-  });
 
-  const guardado = (event) => {
-    setDatos({
-      ...datos,
-      [event.target.name] : event.target.value
-    })
-  }
-  
+  const { isLoading, data } = useQuery(
+    "profile",
+    async () => await ApiService.getProfile()
+  );
 
-  const enviarDatos = (event) => {
+  const updateUser = useMutation(
+    async (formData: any) => {
+      return await ApiService.userCumple(formData);
+    },
+    {
+      onSuccess: () => {
+        // window.location.reload();
+        void queryClient.invalidateQueries("profile");
+      },
+    }
+  );
+
+  // @ts-expect-error
+  const userDetails: usersInterface = session.user.user;
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append("id", userDetails.id_usuario);
+    let cumple = "";
+    cumple = fechacumple + " 00:00:00";
+    formData.append("fh_cumpleanios", cumple);
+    formData.append("name", nb_nombre);
+    formData.append("email", de_email);
+    formData.append("user", nb_usuario);
+    formData.append("password", cl_password);
+    formData.append("rol", id_rol);
+    updateUser.mutate(formData);
   };
-  */
 
-  <Flex overflow={"scroll"}></Flex>;
+  if (isLoading) {
+    return <KSkeletonPage />;
+  }
+
+  console.log(setUserPhoto);
+
   return (
     <KPage title={"Perfil de Usuario"}>
       <Box
@@ -65,14 +101,25 @@ export default function UserProfile(this: any): any {
           <Box textAlign={"center"}>
             <IconButton
               onClick={() => {
-                setShowinp(!showinp);
+                document.getElementById("file-up")?.click();
               }}
               aria-label={"files"}
               icon={<EditIcon />}
               colorScheme={undefined}
               rounded={"100"}
             ></IconButton>
-            <KAvatar size={"2xl"} name={"Admin"} src={""}></KAvatar>
+            <Input
+              type="file"
+              aria-hidden="true"
+              accept="image/*"
+              display={"none"}
+              id="file-up"
+            />
+            <KAvatar
+              size={"2xl"}
+              name={nb_nombre}
+              src={data.data.data.user_photo}
+            ></KAvatar>
             <KText content={de_rol}></KText>
             <Box color={"gray.500"}>
               <KText content={nb_area}></KText>
@@ -104,9 +151,12 @@ export default function UserProfile(this: any): any {
             <KText content={"Fecha de Registro"}></KText>
             <Box color={"black"} fontSize={"md"} pb={3}>
               <Text>
-                {DateTime.fromISO(fh_registro).toFormat("dd MMMM, yyyy", {
-                  locale: "es",
-                })}
+                {DateTime.fromISO(data.data.data.fh_registro).toFormat(
+                  "dd MMMM, yyyy",
+                  {
+                    locale: "es",
+                  }
+                )}
               </Text>
             </Box>
           </Box>
@@ -132,37 +182,16 @@ export default function UserProfile(this: any): any {
             </Box>
           </Box>
           <Box fontSize={"md"}>
-            <Text>
-              {DateTime.fromISO(fh_cumpleanios).toFormat("dd MMMM, yyyy", {
-                locale: "es",
-              })}
-            </Text>
+            <Box>
+              {DateTime.fromISO(data.data.data.fh_cumpleanios).toFormat(
+                "dd MMMM, yyyy",
+                {
+                  locale: "es",
+                }
+              )}
+            </Box>
           </Box>
         </Box>
-
-        {showinp ? (
-          <>
-            <Box>
-              <Input
-                onClick={() => {
-                  setShowinp(!showinp);
-                }}
-                type="file"
-                height="100%"
-                width="100%"
-                position="absolute"
-                top="0"
-                left="0"
-                opacity="0"
-                aria-hidden="true"
-                accept="image/*"
-              />
-            </Box>
-          </>
-        ) : (
-          ""
-        )}
-
         {show ? (
           <>
             <Box bg={"gray.200"} mt={"5"}>
@@ -173,12 +202,12 @@ export default function UserProfile(this: any): any {
                   }}
                   size="xs"
                   aria-label={""}
-                  icon={<CloseButton />}
+                  icon={<CloseIcon />}
                   bg={"red.400"}
                   color={"gray.100"}
                   rounded={"0"}
                   name="fechac"
-                ></IconButton>
+                />
               </Box>
               <Box p={3} alignItems="center" textAlign={"center"}>
                 <KText content={"¿Cual es tu fecha de nacimiento?"}></KText>
@@ -188,15 +217,18 @@ export default function UserProfile(this: any): any {
                   placeholder="Select date"
                   size={"md"}
                   type="date"
+                  defaultValue={fh_cumpleanios}
+                  onChange={(event) => {
+                    setFechaCumple(event.currentTarget.value);
+                  }}
                 ></Input>
               </Box>
               <Box p={3} textAlign={"center"}>
                 <Button
-                  onClick={() => {
-                    setShow(!show);
-                  }}
                   colorScheme={"green"}
                   size={"sm"}
+                  type="submit"
+                  onClick={handleSubmit}
                 >
                   Guardar
                 </Button>
