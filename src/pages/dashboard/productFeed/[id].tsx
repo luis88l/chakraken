@@ -1,15 +1,23 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box, ButtonGroup } from "@chakra-ui/react";
+import { Box, Button, Flex, Spacer } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 import { createColumnHelper } from "@tanstack/react-table";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
-import Link from "next/link";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import KTextToogle from "../../../components/text/KTextToogle";
+import Link from "next/link";
+import KTableLayoutPaginator from "../../../components/tableLayout/KTableLayoutPaginator";
+import {
+  FiAlertCircle,
+  FiClock,
+  FiFacebook,
+  FiChrome,
+  FiBarChart,
+} from "react-icons/fi";
 
 export interface productFeedItemTable {
   id: string | undefined;
@@ -52,13 +60,13 @@ export default function ProductFeed(): any {
     return <KSkeletonPage />;
   }
 
-  console.log(productFeedItems);
+  console.log("aqui items", productFeedItems);
   const columnHelper = createColumnHelper<productFeedItemTable>();
 
   const columns = [
     columnHelper.accessor("image_link", {
       cell: (info) => (
-        <Image src={info.getValue()} width={100} height={100} alt={""} />
+        <Image src={info.getValue()} width={60} height={60} alt={""} />
       ),
       header: "Imagen",
     }),
@@ -75,7 +83,7 @@ export default function ProductFeed(): any {
       header: "Tallas",
     }),
     columnHelper.accessor("description", {
-      cell: (info) => info.getValue(),
+      cell: (info) => <KTextToogle text={info.getValue()} maxLength={100} />,
       header: "Description",
     }),
     columnHelper.accessor("price", {
@@ -90,57 +98,146 @@ export default function ProductFeed(): any {
       cell: (info) => info.getValue(),
       header: "Disponibilidad",
     }),
-    columnHelper.accessor("id_product_feed", {
-      cell: (props) => (
-        <ButtonGroup gap="2">
-          <Box m={2} cursor="pointer">
-            <Link
-              href={{
-                // eslint-disable-next-line react/prop-types
-                pathname: "/dashboard/productFeed/" + props.getValue(),
-              }}
-            >
-              <ArrowForwardIcon />
-            </Link>
-          </Box>
-        </ButtonGroup>
+    columnHelper.accessor("additional_image_link", {
+      cell: (info) => <KTextToogle text={info.getValue()} maxLength={100} />,
+      header: "Imagenes adicionales",
+    }),
+    columnHelper.accessor("link", {
+      cell: (info) => (
+        <Link href={info.getValue()} target={"_blank"}>
+          {info.getValue()}
+        </Link>
       ),
-      header: "Acciones",
+      header: "Link",
+    }),
+    columnHelper.accessor("condition", {
+      cell: (info) => info.getValue(),
+      header: "Condición",
+    }),
+    columnHelper.accessor("product_type", {
+      cell: (info) => info.getValue(),
+      header: "Tipo de producto",
+    }),
+    columnHelper.accessor("store", {
+      cell: (info) => info.getValue(),
+      header: "Tienda",
+    }),
+    columnHelper.accessor("brand", {
+      cell: (info) => info.getValue(),
+      header: "Marca",
     }),
   ];
 
   return (
-    <KPage title="Feeds">
-      <Box>
-        <h1>Feed Items</h1>
-        {Array.isArray(productFeedItems.data.items) && (
-          <KTableLayout
-            columns={columns}
-            data={productFeedItems.data.items.map(
-              ({
-                sku,
-                price,
-                id_product_feed,
-                title,
-                description,
-                sale_price,
-                availability,
-                image_link,
-              }: productFeedItemTable) => ({
-                sku,
-                title,
-                id_product_feed,
-                description,
-                price,
-                sale_price,
-                availability,
-                image_link,
-              })
-            )}
-          />
-        )}
-      </Box>
-    </KPage>
+    <>
+      <KPage title="Feeds">
+        <Flex paddingBottom={5} position={"sticky"}>
+          <Box>
+            <Link href={"/dashboard/productFeed/exclusiones"}>
+              <Button
+                marginRight={3}
+                leftIcon={<FiAlertCircle />}
+                colorScheme="orange"
+                variant="outline"
+              >
+                Exclusiones
+              </Button>
+            </Link>
+            <Link href={"/dashboard/productFeed/alertas"}>
+              <Button
+                marginRight={3}
+                leftIcon={<FiClock />}
+                colorScheme="yellow"
+                variant="outline"
+              >
+                Alertas
+              </Button>
+            </Link>
+            <Link href={"/dashboard/productFeed/stats"}>
+              <Button
+                leftIcon={<FiBarChart />}
+                colorScheme="purple"
+                variant="outline"
+              >
+                Estadísticas
+              </Button>
+            </Link>
+          </Box>
+          <Spacer />
+          <Box>
+            <Button marginRight={5} leftIcon={<FiChrome />}>
+              Descargar Google
+            </Button>
+            <Button marginRight={5} leftIcon={<FiFacebook />}>
+              Descargar Facebook
+            </Button>
+            <Button colorScheme="blue">Publica feed</Button>
+          </Box>
+        </Flex>
+        <Box>
+          {Array.isArray(productFeedItems.data.items) && (
+            <KTableLayout
+              columns={columns}
+              data={productFeedItems.data.items.map(
+                ({
+                  sku,
+                  price,
+                  id_product_feed,
+                  title,
+                  description,
+                  sale_price,
+                  availability,
+                  image_link,
+                  additional_image_link,
+                  link,
+                  condition,
+                  product_type,
+                  store,
+                  brand,
+                }: productFeedItemTable) => ({
+                  sku,
+                  title,
+                  id_product_feed,
+                  description,
+                  price,
+                  sale_price,
+                  availability,
+                  image_link,
+                  additional_image_link,
+                  link,
+                  condition,
+                  product_type,
+                  store,
+                  brand,
+                })
+              )}
+            />
+          )}
+        </Box>
+        <Box>
+          {productFeedItems.data.total > 1 && (
+            <Box>
+              <KTableLayoutPaginator
+                canPreviousPage={false}
+                canNextPage={false}
+                pageCount={productFeedItems.data.total}
+                gotoPage={function (page: number): void {
+                  throw new Error("Function not implemented.");
+                }}
+                nextPage={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+                previousPage={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+                pageIndex={0}
+                pageOptions={[]}
+              />
+            </Box>
+          )}
+        </Box>
+      </KPage>
+    </>
   );
 }
 

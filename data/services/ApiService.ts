@@ -236,6 +236,93 @@ export class ApiService {
     return res;
   }
 
+  // get feed exclusion list
+
+  public async getFeedExclusions(data: any): Promise<any> {
+    const result = await axios
+      .get(`${pathServer}/productfeed/getExclusionsList`, {
+        params: {
+          data,
+        },
+        headers: {
+          "Request-Source": "kraken",
+          "Content-Type": "multipart/form-data",
+          authorization: await this.token(),
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error.response;
+      });
+    return result;
+  }
+
+  // create feed exclusion
+
+  public async addExclusion(data: {}): Promise<any> {
+    console.log(data);
+    return await axios
+      .post(`${pathServer}/productfeed/addExclusion`, data, {
+        headers: {
+          "Request-Source": "kraken",
+          "Content-Type": "multipart/form-data",
+          authorization: await this.token(),
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // delete feed exclusion
+
+  public async deleteExclusion(data: {}): Promise<any> {
+    return await axios
+      .post(`${pathServer}/productfeed/deleteExclusion`, data, {
+        headers: {
+          "Request-Source": "kraken",
+          "Content-Type": "multipart/form-data",
+          authorization: await this.token(),
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // get feed alerts list
+
+  public async getAlertList(data: any): Promise<any> {
+    const result = await axios
+      .get(`${pathServer}/productfeed/getAlertList`, {
+        params: {
+          data,
+        },
+        headers: {
+          "Request-Source": "kraken",
+          "Content-Type": "multipart/form-data",
+          authorization: await this.token(),
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error.response;
+      });
+    return result;
+  }
+
   // orden de modulos
 
   public async updateOrdenModulos(form: {}): Promise<any> {

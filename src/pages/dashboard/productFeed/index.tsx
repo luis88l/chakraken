@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box, ButtonGroup } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, Spacer } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
@@ -9,6 +9,7 @@ import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import { DateTime } from "luxon";
 import Link from "next/link";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { FiAlertCircle, FiBarChart, FiClock } from "react-icons/fi";
 
 export interface productFeedListTable {
   created_at: string;
@@ -44,7 +45,20 @@ export default function ProductFeed(): any {
       header: "Created At",
     }),
     columnHelper.accessor("status", {
-      cell: (info) => info.getValue(),
+      cell: (info) => (
+        <>
+          {info.getValue() === "ok" && (
+            <Button colorScheme="green" variant="outline" size="sm">
+              Exitoso
+            </Button>
+          )}
+          {info.getValue() === "published" && (
+            <Button colorScheme="blue" variant="outline" size="sm">
+              Publicado
+            </Button>
+          )}
+        </>
+      ),
       header: "Status",
     }),
     columnHelper.accessor("description", {
@@ -84,6 +98,43 @@ export default function ProductFeed(): any {
 
   return (
     <KPage title="Feeds">
+      <Flex paddingBottom={5} position={"sticky"}>
+        <Box>
+          <Link href={"/dashboard/productFeed/exclusiones"}>
+            <Button
+              marginRight={3}
+              leftIcon={<FiAlertCircle />}
+              colorScheme="orange"
+              variant="outline"
+            >
+              Exclusiones
+            </Button>
+          </Link>
+          <Link href={"/dashboard/productFeed/alertas"}>
+            <Button
+              marginRight={3}
+              leftIcon={<FiClock />}
+              colorScheme="yellow"
+              variant="outline"
+            >
+              Alertas
+            </Button>
+          </Link>
+          <Link href={"/dashboard/productFeed/stats"}>
+            <Button
+              leftIcon={<FiBarChart />}
+              colorScheme="purple"
+              variant="outline"
+            >
+              Estadísticas
+            </Button>
+          </Link>
+        </Box>
+        <Spacer />
+        <Box>
+          <Button colorScheme="blue">Procesar feed</Button>
+        </Box>
+      </Flex>
       <Box>
         <KTableLayout
           columns={columns}
