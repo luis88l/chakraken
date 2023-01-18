@@ -1,12 +1,14 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box } from "@chakra-ui/react";
+import { Box, ButtonGroup } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 import { createColumnHelper } from "@tanstack/react-table";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import { DateTime } from "luxon";
+import Link from "next/link";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 export interface productFeedListTable {
   created_at: string;
@@ -16,6 +18,7 @@ export interface productFeedListTable {
   item_count: number;
   mkp_item_count: number;
   processed_item_count: number;
+  id_product_feed: string;
 }
 
 export default function ProductFeed(): any {
@@ -60,6 +63,23 @@ export default function ProductFeed(): any {
       cell: (info) => info.getValue(),
       header: "Processed Item Count",
     }),
+    columnHelper.accessor("id_product_feed", {
+      cell: (props) => (
+        <ButtonGroup gap="2">
+          <Box m={2} cursor="pointer">
+            <Link
+              href={{
+                // eslint-disable-next-line react/prop-types
+                pathname: "/dashboard/productFeed/" + props.getValue(),
+              }}
+            >
+              <ArrowForwardIcon />
+            </Link>
+          </Box>
+        </ButtonGroup>
+      ),
+      header: "Acciones",
+    }),
   ];
 
   return (
@@ -69,6 +89,7 @@ export default function ProductFeed(): any {
           columns={columns}
           data={productFeedList.data.feed.map(
             ({
+              id_product_feed,
               status,
               created_at,
               description,
@@ -76,6 +97,7 @@ export default function ProductFeed(): any {
               mkp_item_count,
               processed_item_count,
             }: productFeedListTable) => ({
+              id_product_feed,
               status,
               created_at,
               description,

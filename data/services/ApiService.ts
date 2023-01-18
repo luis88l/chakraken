@@ -207,6 +207,35 @@ export class ApiService {
     return res;
   }
 
+  public async getFeedItems(data: any): Promise<any> {
+    /// productfeed/getPaginatedFeedItems/
+
+    console.log("entra aqui", data);
+    const res = await axios
+      .get(`${pathServer}/productfeed/getPaginatedFeedItems`, {
+        params: {
+          feedId: data.idFeed,
+          page: data.page,
+          pageSize: data.pageSize,
+          search: data.search,
+          sort: data.sort,
+          sortDirection: data.sortDirection,
+        },
+        headers: {
+          "Request-Source": "kraken",
+          "Content-Type": "multipart/form-data",
+          authorization: await this.token(),
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
   // orden de modulos
 
   public async updateOrdenModulos(form: {}): Promise<any> {
