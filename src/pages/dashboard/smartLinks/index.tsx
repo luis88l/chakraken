@@ -1,7 +1,7 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
 import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
-import { createColumnHelper } from "@tanstack/react-table";
+import { createColumnHelper, Pagination } from "@tanstack/react-table";
 import Link from "next/link";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useQuery } from "react-query";
@@ -96,29 +96,27 @@ export default function SmartLinks(): any {
             </Button>
           </Link>
         </Flex>
-        <Box display={"table-row"}>
-          {Array.isArray(SmartLinks) && (
-            <KTableLayout
-              columns={columns}
-              data={SmartLinks.map(
-                ({
-                  id_page,
-                  nb_nombre,
 
-                  nb_description,
-                  nb_url,
-                  nb_keyWords,
-                }) => ({
-                  id_page,
-                  nb_nombre,
-                  nb_description,
-                  nb_url,
-                  nb_keyWords,
-                })
-              )}
-            />
-          )}
-        </Box>
+        {Array.isArray(SmartLinks) && (
+          <KTableLayout
+            columns={columns}
+            data={SmartLinks.map(
+              ({
+                id_page,
+                nb_nombre,
+                nb_description,
+                nb_url,
+                nb_keyWords,
+              }) => ({
+                id_page,
+                nb_nombre,
+                nb_description,
+                nb_url,
+                nb_keyWords,
+              })
+            )}
+          />
+        )}
       </Box>
     </KPage>
   );

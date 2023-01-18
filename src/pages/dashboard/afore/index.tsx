@@ -1,12 +1,17 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Checkbox, Text } from "@chakra-ui/react";
 import Link from "next/link";
-import { useQueries, useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
-import { createColumnHelper } from "@tanstack/react-table";
+import { createColumnHelper, Pagination } from "@tanstack/react-table";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
+import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
+import router from "next/router";
+import { render } from "react-dom";
+import React, { useState } from "react";
+import { Props } from "next/script";
 
 export interface aforeTable {
   id: string;
@@ -14,20 +19,46 @@ export interface aforeTable {
   correo: string;
   curp: string;
   telefono: string;
-  nu_cliente: string;
-  enviado: string;
+}
+
+export interface aforeTableProps {
+  id: string;
+  nombre_completo: string;
+  correo: string;
+  curp: string;
+  telefono: string;
+  enviado: boolean;
 }
 
 export default function Afore(): any {
+  const [afo, setafo] = useState(null);
+
   const {
     isLoading,
-    data: afore,
+    data: aforeModulo,
     isSuccess,
-  } = useQuery("afore", async () => await ApiService);
+  } = useQuery("Afore", async () => await ApiService.aforeGet(true));
 
+  if (isLoading) {
+    return <KSkeletonPage />;
+  }
+
+  const aforeData = aforeModulo.data.data;
   const columnHelper = createColumnHelper<aforeTable>();
 
+  const handleClick = async (event: { preventDefault: () => void }) => {
+    ApiService.aforeGet(true).then((response) => {
+      const datos = response.data.data;
+      setafo(datos);
+    });
+  };
+
+  const datos = afo == null ? aforeData : afo;
   const columns = [
+    columnHelper.accessor("id", {
+      cell: (info) => info.getValue(),
+      header: "id",
+    }),
     columnHelper.accessor("nombre_completo", {
       cell: (info) => info.getValue(),
       header: "Nombres",
@@ -44,14 +75,6 @@ export default function Afore(): any {
       cell: (info) => info.getValue(),
       header: "Telefono",
     }),
-    columnHelper.accessor("nu_cliente", {
-      cell: (info) => info.getValue(),
-      header: "id",
-    }),
-    columnHelper.accessor("enviado", {
-      cell: (info) => info.getValue(),
-      header: "Enviado",
-    }),
     columnHelper.accessor("id", {
       cell: (props) => (
         <ButtonGroup gap={"2"}>
@@ -62,11 +85,8 @@ export default function Afore(): any {
                 pathname: "/dashboard/afore/" + props.getValue(),
               }}
             >
-              <EditIcon />
+              <DeleteIcon />
             </Link>
-          </Box>
-          <Box m={2} cursor="pointer">
-            <DeleteIcon />
           </Box>
         </ButtonGroup>
       ),
@@ -74,23 +94,23 @@ export default function Afore(): any {
     }),
   ];
 
-  return (
-    <KPage title="Afore">
-      <Box m={5} mt="10">
-        <Box ml={"56"} mb="10">
+  if (isSuccess) {
+    return (
+      <KPage title="Afore">
+        <Box ml={"52"} mb="5" mt={3}>
           <Button
-            mr={"10"}
+            mr={"5"}
             alignItems={"center"}
-            size="lg"
+            size="md"
             bg="blue.500"
             textColor={"white"}
-            rounded="0"
+            rounded="5"
           >
             Marcar enviados
           </Button>
           <Button
-            rounded="0"
-            size={"lg"}
+            rounded="5"
+            size={"md"}
             bg="blue.500"
             textColor={"white"}
             alignItems="center"
@@ -98,20 +118,45 @@ export default function Afore(): any {
             Descargar Csv
           </Button>
           <Button
-            rounded="0"
-            ml={"10"}
-            size={"lg"}
+            onClick={handleClick}
+            rounded="5"
+            ml={"5"}
+            size={"md"}
             bg="blue.500"
             textColor={"white"}
             alignItems="center"
           >
             Actualizar lista
           </Button>
+          <Checkbox
+            alignContent={"center"}
+            size="lg"
+            ml={5}
+            mt={1.5}
+            spacing={"3"}
+          >
+            Todos
+          </Checkbox>
         </Box>
-        <KTableLayout data={[]} columns={columns} />
-      </Box>
-    </KPage>
-  );
+        <Box bg={"ButtonShadow"} alignItems="center">
+          {Array.isArray(datos) && (
+            <KTableLayout
+              columns={columns}
+              data={datos.map(
+                ({ id, nombre_completo, correo, curp, telefono }) => ({
+                  id,
+                  nombre_completo,
+                  correo,
+                  curp,
+                  telefono,
+                })
+              )}
+            />
+          )}
+        </Box>
+      </KPage>
+    );
+  }
 }
 
 export async function getServerSideProps(context: { req: any }): Promise<any> {

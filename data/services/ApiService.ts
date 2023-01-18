@@ -451,6 +451,45 @@ export class ApiService {
       });
     return result;
   }
+
+  //get afore
+  public async aforeGet(sn: boolean) {
+    const res = await axios
+      .get(`${pathServer}/afore?sn=${sn}`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  //delete afore
+  public async aforeDelete(id: string) {
+    const res = await axios
+      .delete(`${pathServer}/afore?id=${id}`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  //update afore
+  public async aforeUpdate(data: {}) {
+    const res = await axios
+      .put(`${pathServer}/afore`, data, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
 }
 
 export default new ApiService();
