@@ -44,6 +44,8 @@ export default function New(): any {
     crearRol.mutate(formData);
   };
 
+  console.log();
+
   return (
     <KPage title="Crear rol">
       <Box overflow="scroll" max-height="100%" width="100%">
@@ -95,7 +97,6 @@ export default function New(): any {
     </KPage>
   );
 }
-
 export async function getServerSideProps(context: { req: any }): Promise<any> {
   const session = await getSession({ req: context.req });
 

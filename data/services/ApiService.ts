@@ -172,8 +172,58 @@ export class ApiService {
     return res.data.data;
   }
 
-  // get opciones rol
+  // get facebook
+  public async getBases(): Promise<any> {
+    const res = await axios
+      .get(`${pathServer}/BI/get`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res.data.data;
+  }
 
+  // crear base facebook
+  public async saveBases(user: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/BI/save`, user, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  // base
+  public async updateBases(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/BI/Update`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  // eliminar base
+  public async basesDelete(data: {}): Promise<any> {
+    return await axios
+      .post(`${pathServer}/BI/delete`, data, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // get opciones rol
   public async getOpcionesRol(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/modulos/getOpcionesRol`,
@@ -361,10 +411,6 @@ export class ApiService {
     return res;
   }
 
-  // get permisos roles
-
-  // update permisos roles
-
   // crear area
 
   public async saveAreas(user: {}): Promise<any> {
@@ -419,6 +465,16 @@ export class ApiService {
     return res;
   }
 
+  // get profile
+
+  public async getProfile(): Promise<any> {
+    const res = await axios.get(
+      `${pathServer}/users/getprofile`,
+      await this.defaults()
+    );
+    return res;
+  }
+
   // update user
 
   public async updateUser(user: {}): Promise<any> {
@@ -435,6 +491,160 @@ export class ApiService {
   public async downloadSitemap(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/productfeed/downloadSitemap`,
+      form,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  public async getTokenUser(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/pushNotifications/getTokenUser`,
+      form,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  public async pushNotificationsGet(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/pushNotifications/get`,
+      form,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  public async pushNotificationsTest(form: {}): Promise<any> {
+    const res = await axios
+      .post(
+        `${pathServer}/pushNotifications/pushTest`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async getMedios(): Promise<any> {
+    const res = await axios.get(
+      `${pathServer}/medios/get`,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  public async getFuentes(): Promise<any> {
+    const res = await axios.get(
+      `${pathServer}/fuentes/get`,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  public async pushNotificationsSave(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/pushNotifications/save`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async getTopics(): Promise<any> {
+    const res = await axios.get(
+      `${pathServer}/topics/get`,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  // update user birthday
+
+  public async userCumple(user: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/users/cumple`,
+      user,
+      await this.defaults()
+    );
+
+    return res;
+  }
+
+  // update user photo
+
+  public async userPhoto(user: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/users/photo`,
+      user,
+      await this.defaults()
+    );
+
+    return res;
+  }
+
+  public async getSmartLink(): Promise<any> {
+    const res = await axios
+      .get(`${pathServer}/smart-links`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res.data.data;
+  }
+
+  // crear formulario smart-link
+  public async saveSmartLink(user: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/smart-links`, user, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  // update smartlinks
+  public async updateSmartLinks(data: {}): Promise<any> {
+    return await axios
+      .put(`${pathServer}/smart-links`, data, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // delete smart link
+  public async deleteSmartLinks(id: string): Promise<any> {
+    const result = await axios
+      .delete(`${pathServer}/smart-links/${id}`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return result;
+  }
+
+  // crear carruseles
+  public async crearCarrusel(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/creadorCarrusel/crearCarrusel`,
       form,
       await this.defaults()
     );
