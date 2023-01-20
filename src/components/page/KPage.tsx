@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 export interface KPageProps {
   title: string;
@@ -19,22 +19,22 @@ export default function KPage(props: KPageProps): any {
       flexDir={"column"}
     >
       <Box mt={4} mb={5} width="100%">
-        <Text fontSize="2xl">{props.title}</Text>
+        <Text fontSize={["2xl", "2xl", "xl", "xl", "2xl"]} fontWeight="bold">
+          {props.title}
+        </Text>
       </Box>
       <Box width="100%">
-        <Flex
+        <Box
+          p={6}
           bgColor="#fff"
           borderRadius={15}
           width="100%"
           minH="calc(87vh)"
           maxH="calc(87vh)"
-          overflowY="scroll"
-          flex="auto"
+          display="flex"
         >
-          <Box p={6} width="100%">
-            {props.children}
-          </Box>
-        </Flex>
+          {props.children}
+        </Box>
       </Box>
     </Box>
   );

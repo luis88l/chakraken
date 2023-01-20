@@ -25,7 +25,7 @@ export interface productFeedAlertsTable {
 export default function ProductFeedAlerts(): any {
   const { data: productFeedExclusions, isLoading } = useQuery(
     ["productFeedAlerts"],
-    async () => await ApiService.getFeedExclusions({})
+    async () => await ApiService.getAlertList({})
   );
 
   if (isLoading) {

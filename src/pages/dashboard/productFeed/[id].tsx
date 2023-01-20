@@ -5,12 +5,10 @@ import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 import { createColumnHelper } from "@tanstack/react-table";
-import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import KTextToogle from "../../../components/text/KTextToogle";
 import Link from "next/link";
-import KTableLayoutPaginator from "../../../components/tableLayout/KTableLayoutPaginator";
 import {
   FiAlertCircle,
   FiClock,
@@ -18,6 +16,7 @@ import {
   FiChrome,
   FiBarChart,
 } from "react-icons/fi";
+import { KPaginatedTable } from "../../../components/tableLayout/KPaginatedTable";
 
 export interface productFeedItemTable {
   id: string | undefined;
@@ -53,22 +52,40 @@ export default function ProductFeed(): any {
   const { data: productFeedItems, isLoading } = useQuery(
     ["productFeedItems", feedId],
     async () =>
-      await ApiService.getFeedItems({ idFeed: feedId, page: 1, pageSize: 10 })
+      await ApiService.getFeedItems({
+        idFeed: feedId,
+      })
   );
 
   if (isLoading) {
     return <KSkeletonPage />;
   }
-
-  console.log("aqui items", productFeedItems);
   const columnHelper = createColumnHelper<productFeedItemTable>();
 
   const columns = [
     columnHelper.accessor("image_link", {
       cell: (info) => (
-        <Image src={info.getValue()} width={60} height={60} alt={""} />
+        <Image src={info.getValue()} width={100} height={100} alt={""} />
       ),
       header: "Imagen",
+    }),
+    columnHelper.accessor("availability", {
+      cell: (info) => (
+        <>
+          {info.getValue() === "in stock" && (
+            <Button colorScheme="green" variant="outline" size="xs">
+              Disponible
+            </Button>
+          )}
+
+          {info.getValue() === "out of stock" && (
+            <Button colorScheme="red" variant="outline" size="xs">
+              Sin stock
+            </Button>
+          )}
+        </>
+      ),
+      header: "Disponibilidad",
     }),
     columnHelper.accessor("sku", {
       cell: (info) => info.getValue(),
@@ -83,7 +100,7 @@ export default function ProductFeed(): any {
       header: "Tallas",
     }),
     columnHelper.accessor("description", {
-      cell: (info) => <KTextToogle text={info.getValue()} maxLength={100} />,
+      cell: (info) => <KTextToogle text={info.getValue()} maxLength={50} />,
       header: "Description",
     }),
     columnHelper.accessor("price", {
@@ -94,12 +111,8 @@ export default function ProductFeed(): any {
       cell: (info) => info.getValue(),
       header: "Precio en oferta",
     }),
-    columnHelper.accessor("availability", {
-      cell: (info) => info.getValue(),
-      header: "Disponibilidad",
-    }),
     columnHelper.accessor("additional_image_link", {
-      cell: (info) => <KTextToogle text={info.getValue()} maxLength={100} />,
+      cell: (info) => <KTextToogle text={info.getValue()} maxLength={50} />,
       header: "Imagenes adicionales",
     }),
     columnHelper.accessor("link", {
@@ -131,52 +144,52 @@ export default function ProductFeed(): any {
   return (
     <>
       <KPage title="Feeds">
-        <Flex paddingBottom={5} position={"sticky"}>
-          <Box>
-            <Link href={"/dashboard/productFeed/exclusiones"}>
-              <Button
-                marginRight={3}
-                leftIcon={<FiAlertCircle />}
-                colorScheme="orange"
-                variant="outline"
-              >
-                Exclusiones
+        <Box overflow="scroll" max-height="100%" width="100%">
+          <Flex paddingBottom={5} position={"sticky"}>
+            <Box>
+              <Link href={"/dashboard/productFeed/exclusiones"}>
+                <Button
+                  marginRight={3}
+                  leftIcon={<FiAlertCircle />}
+                  colorScheme="orange"
+                  variant="outline"
+                >
+                  Exclusiones
+                </Button>
+              </Link>
+              <Link href={"/dashboard/productFeed/alertas"}>
+                <Button
+                  marginRight={3}
+                  leftIcon={<FiClock />}
+                  colorScheme="yellow"
+                  variant="outline"
+                >
+                  Alertas
+                </Button>
+              </Link>
+              <Link href={"/dashboard/productFeed/stats"}>
+                <Button
+                  leftIcon={<FiBarChart />}
+                  colorScheme="purple"
+                  variant="outline"
+                >
+                  Estadísticas
+                </Button>
+              </Link>
+            </Box>
+            <Spacer />
+            <Box>
+              <Button marginRight={5} leftIcon={<FiChrome />}>
+                Descargar Google
               </Button>
-            </Link>
-            <Link href={"/dashboard/productFeed/alertas"}>
-              <Button
-                marginRight={3}
-                leftIcon={<FiClock />}
-                colorScheme="yellow"
-                variant="outline"
-              >
-                Alertas
+              <Button marginRight={5} leftIcon={<FiFacebook />}>
+                Descargar Facebook
               </Button>
-            </Link>
-            <Link href={"/dashboard/productFeed/stats"}>
-              <Button
-                leftIcon={<FiBarChart />}
-                colorScheme="purple"
-                variant="outline"
-              >
-                Estadísticas
-              </Button>
-            </Link>
-          </Box>
-          <Spacer />
-          <Box>
-            <Button marginRight={5} leftIcon={<FiChrome />}>
-              Descargar Google
-            </Button>
-            <Button marginRight={5} leftIcon={<FiFacebook />}>
-              Descargar Facebook
-            </Button>
-            <Button colorScheme="blue">Publica feed</Button>
-          </Box>
-        </Flex>
-        <Box>
+              <Button colorScheme="blue">Publicar feed</Button>
+            </Box>
+          </Flex>
           {Array.isArray(productFeedItems.data.items) && (
-            <KTableLayout
+            <KPaginatedTable
               columns={columns}
               data={productFeedItems.data.items.map(
                 ({
@@ -212,28 +225,6 @@ export default function ProductFeed(): any {
                 })
               )}
             />
-          )}
-        </Box>
-        <Box>
-          {productFeedItems.data.total > 1 && (
-            <Box>
-              <KTableLayoutPaginator
-                canPreviousPage={false}
-                canNextPage={false}
-                pageCount={productFeedItems.data.total}
-                gotoPage={function (page: number): void {
-                  throw new Error("Function not implemented.");
-                }}
-                nextPage={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
-                previousPage={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
-                pageIndex={0}
-                pageOptions={[]}
-              />
-            </Box>
           )}
         </Box>
       </KPage>

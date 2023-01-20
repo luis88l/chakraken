@@ -209,12 +209,11 @@ export class ApiService {
 
   public async getFeedItems(data: any): Promise<any> {
     /// productfeed/getPaginatedFeedItems/
-
-    console.log("entra aqui", data);
     const res = await axios
       .get(`${pathServer}/productfeed/getPaginatedFeedItems`, {
         params: {
           feedId: data.idFeed,
+          filters: data.filters,
           page: data.page,
           pageSize: data.pageSize,
           search: data.search,
@@ -263,7 +262,6 @@ export class ApiService {
   // create feed exclusion
 
   public async addExclusion(data: {}): Promise<any> {
-    console.log(data);
     return await axios
       .post(`${pathServer}/productfeed/addExclusion`, data, {
         headers: {

@@ -98,66 +98,68 @@ export default function ProductFeed(): any {
 
   return (
     <KPage title="Feeds">
-      <Flex paddingBottom={5} position={"sticky"}>
+      <Box overflow="scroll" max-height="100%" width="100%">
+        <Flex paddingBottom={5} position={"sticky"}>
+          <Box>
+            <Link href={"/dashboard/productFeed/exclusiones"}>
+              <Button
+                marginRight={3}
+                leftIcon={<FiAlertCircle />}
+                colorScheme="orange"
+                variant="outline"
+              >
+                Exclusiones
+              </Button>
+            </Link>
+            <Link href={"/dashboard/productFeed/alertas"}>
+              <Button
+                marginRight={3}
+                leftIcon={<FiClock />}
+                colorScheme="yellow"
+                variant="outline"
+              >
+                Alertas
+              </Button>
+            </Link>
+            <Link href={"/dashboard/productFeed/stats"}>
+              <Button
+                leftIcon={<FiBarChart />}
+                colorScheme="purple"
+                variant="outline"
+              >
+                Estadísticas
+              </Button>
+            </Link>
+          </Box>
+          <Spacer />
+          <Box>
+            <Button colorScheme="blue">Procesar feed</Button>
+          </Box>
+        </Flex>
         <Box>
-          <Link href={"/dashboard/productFeed/exclusiones"}>
-            <Button
-              marginRight={3}
-              leftIcon={<FiAlertCircle />}
-              colorScheme="orange"
-              variant="outline"
-            >
-              Exclusiones
-            </Button>
-          </Link>
-          <Link href={"/dashboard/productFeed/alertas"}>
-            <Button
-              marginRight={3}
-              leftIcon={<FiClock />}
-              colorScheme="yellow"
-              variant="outline"
-            >
-              Alertas
-            </Button>
-          </Link>
-          <Link href={"/dashboard/productFeed/stats"}>
-            <Button
-              leftIcon={<FiBarChart />}
-              colorScheme="purple"
-              variant="outline"
-            >
-              Estadísticas
-            </Button>
-          </Link>
+          <KTableLayout
+            columns={columns}
+            data={productFeedList.data.feed.map(
+              ({
+                id_product_feed,
+                status,
+                created_at,
+                description,
+                item_count,
+                mkp_item_count,
+                processed_item_count,
+              }: productFeedListTable) => ({
+                id_product_feed,
+                status,
+                created_at,
+                description,
+                item_count,
+                mkp_item_count,
+                processed_item_count,
+              })
+            )}
+          />
         </Box>
-        <Spacer />
-        <Box>
-          <Button colorScheme="blue">Procesar feed</Button>
-        </Box>
-      </Flex>
-      <Box>
-        <KTableLayout
-          columns={columns}
-          data={productFeedList.data.feed.map(
-            ({
-              id_product_feed,
-              status,
-              created_at,
-              description,
-              item_count,
-              mkp_item_count,
-              processed_item_count,
-            }: productFeedListTable) => ({
-              id_product_feed,
-              status,
-              created_at,
-              description,
-              item_count,
-              mkp_item_count,
-              processed_item_count,
-            })
-          )}
-        />
       </Box>
     </KPage>
   );
