@@ -101,133 +101,135 @@ export default function New(): any {
   if (typeof areas !== "undefined" && typeof roles !== "undefined")
     return (
       <KPage title="Crear usuario">
-        <Box>
-          <Text fontSize="l" fontWeight="bold">
-            Crear usuario
-          </Text>
-        </Box>
-        <Divider mt={2} mb={2} />
-        <Box>
-          <form onSubmit={handleSubmit}>
-            <SimpleGrid columns={2} spacing={5}>
-              <GridItem colSpan={colSpan}>
-                <FormControl isRequired>
-                  <FormLabel>Nombre</FormLabel>
-                  <Input
-                    onChange={(event) => {
-                      setNombre(event.currentTarget.value);
-                    }}
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem colSpan={colSpan}>
-                <FormControl isRequired>
-                  <FormLabel>Email</FormLabel>
-                  <Input
-                    onChange={(event) => {
-                      setEmail(event.currentTarget.value);
-                    }}
-                  />
-                </FormControl>
-              </GridItem>
-
-              <GridItem colSpan={colSpan}>
-                <FormControl isRequired>
-                  <FormLabel>Rol</FormLabel>
-                  <Select
-                    placeholder="Selecciona rol"
-                    defaultValue={roles[0].id_rol}
-                    // @ts-expect-error
-                    onChange={handleRol}
-                  >
-                    {roles?.map((rol: rolesInterface) => (
-                      <option key={rol.id_rol} value={rol.id_rol}>
-                        {rol.de_rol}
-                      </option>
-                    ))}
-                  </Select>
-                </FormControl>
-              </GridItem>
-
-              <GridItem colSpan={colSpan}>
-                <FormControl isRequired>
-                  <FormLabel>Área</FormLabel>
-                  <Select
-                    placeholder="Selecciona area"
-                    defaultValue={areas[0].id_area}
-                    // @ts-expect-error
-                    onChange={handleArea}
-                  >
-                    {areas?.map((area: areasInterface) => (
-                      <option key={area.id_area} value={area.id_area}>
-                        {area.nb_area}
-                      </option>
-                    ))}
-                  </Select>
-                </FormControl>
-              </GridItem>
-
-              <GridItem colSpan={colSpan}>
-                <FormControl isRequired>
-                  <FormLabel>Username</FormLabel>
-                  <Input
-                    name="newUsername"
-                    onChange={(event) => {
-                      setUsername(event.currentTarget.value);
-                    }}
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem colSpan={colSpan}>
-                <FormControl isRequired>
-                  <FormLabel>Contraseña</FormLabel>
-                  <InputGroup>
+        <Box overflow="scroll" max-height="100%" width="100%">
+          <Box>
+            <Text fontSize="l" fontWeight="bold">
+              Crear usuario
+            </Text>
+          </Box>
+          <Divider mt={2} mb={2} />
+          <Box>
+            <form onSubmit={handleSubmit}>
+              <SimpleGrid columns={2} spacing={5}>
+                <GridItem colSpan={colSpan}>
+                  <FormControl isRequired>
+                    <FormLabel>Nombre</FormLabel>
                     <Input
-                      name="newPassword"
-                      color="#333"
-                      type={showPassword ? "text" : "password"}
-                      placeholder="*******"
-                      onChange={(event) =>
-                        setPassword(event.currentTarget.value)
-                      }
+                      onChange={(event) => {
+                        setNombre(event.currentTarget.value);
+                      }}
                     />
-                    <InputRightElement width="4.5rem">
-                      <Button
-                        h="1.75rem"
-                        size="sm"
-                        onClick={handleShowClick}
-                        color="#555050"
-                      >
-                        {showPassword ? <FiEyeOff /> : <FiEye />}
-                      </Button>
-                    </InputRightElement>
-                  </InputGroup>
-                </FormControl>
-              </GridItem>
+                  </FormControl>
+                </GridItem>
+                <GridItem colSpan={colSpan}>
+                  <FormControl isRequired>
+                    <FormLabel>Email</FormLabel>
+                    <Input
+                      onChange={(event) => {
+                        setEmail(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
 
-              <GridItem colSpan={1}>
-                <Button
-                  variant="primary"
-                  size="lg"
-                  type="submit"
-                  bg="#3a47bd"
-                  borderRadius={15}
-                  color="#fff"
-                  rightIcon={
-                    updating ? (
-                      <CircularProgress
-                        isIndeterminate
-                        color="white"
-                        size={"20px"}
+                <GridItem colSpan={colSpan}>
+                  <FormControl isRequired>
+                    <FormLabel>Rol</FormLabel>
+                    <Select
+                      placeholder="Selecciona rol"
+                      defaultValue={roles[0].id_rol}
+                      // @ts-expect-error
+                      onChange={handleRol}
+                    >
+                      {roles?.map((rol: rolesInterface) => (
+                        <option key={rol.id_rol} value={rol.id_rol}>
+                          {rol.de_rol}
+                        </option>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={colSpan}>
+                  <FormControl isRequired>
+                    <FormLabel>Área</FormLabel>
+                    <Select
+                      placeholder="Selecciona area"
+                      defaultValue={areas[0].id_area}
+                      // @ts-expect-error
+                      onChange={handleArea}
+                    >
+                      {areas?.map((area: areasInterface) => (
+                        <option key={area.id_area} value={area.id_area}>
+                          {area.nb_area}
+                        </option>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={colSpan}>
+                  <FormControl isRequired>
+                    <FormLabel>Username</FormLabel>
+                    <Input
+                      name="newUsername"
+                      onChange={(event) => {
+                        setUsername(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+                <GridItem colSpan={colSpan}>
+                  <FormControl isRequired>
+                    <FormLabel>Contraseña</FormLabel>
+                    <InputGroup>
+                      <Input
+                        name="newPassword"
+                        color="#333"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="*******"
+                        onChange={(event) =>
+                          setPassword(event.currentTarget.value)
+                        }
                       />
-                    ) : undefined
-                  }
-                >
-                  Crear usuario
-                </Button>
-              </GridItem>
-            </SimpleGrid>
-          </form>
+                      <InputRightElement width="4.5rem">
+                        <Button
+                          h="1.75rem"
+                          size="sm"
+                          onClick={handleShowClick}
+                          color="#555050"
+                        >
+                          {showPassword ? <FiEyeOff /> : <FiEye />}
+                        </Button>
+                      </InputRightElement>
+                    </InputGroup>
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={1}>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    type="submit"
+                    bg="#3a47bd"
+                    borderRadius={15}
+                    color="#fff"
+                    rightIcon={
+                      updating ? (
+                        <CircularProgress
+                          isIndeterminate
+                          color="white"
+                          size={"20px"}
+                        />
+                      ) : undefined
+                    }
+                  >
+                    Crear usuario
+                  </Button>
+                </GridItem>
+              </SimpleGrid>
+            </form>
+          </Box>
         </Box>
       </KPage>
     );

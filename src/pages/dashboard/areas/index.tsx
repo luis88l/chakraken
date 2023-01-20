@@ -55,7 +55,7 @@ export default function Areas(): any {
 
   return (
     <KPage title="Áreas">
-      <Box>
+      <Box overflow="scroll" max-height="100%" width="100%">
         <Flex mb={4} display="grid" justifyItems="flex-end">
           <Link href={"/dashboard/areas/new"}>
             <Button

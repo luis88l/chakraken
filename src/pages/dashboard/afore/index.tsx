@@ -5,7 +5,9 @@ import { Box } from "@chakra-ui/react";
 export default function Afore(): any {
   return (
     <KPage title="Afore">
-      <Box>hi</Box>
+      <Box overflow="scroll" max-height="100%" width="100%">
+        hi
+      </Box>
     </KPage>
   );
 }
