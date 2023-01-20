@@ -29,7 +29,9 @@ export default function DashboardMenuItem(props: DashboardMenuItemProps): any {
         onClick={onToggle}
       >
         <Box mr={3}>
-          <Text className="active">{props.title}</Text>
+          <Text className="active" fontSize="medium">
+            {props.title}
+          </Text>
         </Box>
         <Box>
           {!isOpen && <FiChevronDown />}

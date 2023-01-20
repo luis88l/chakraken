@@ -21,67 +21,69 @@ export default function StatsPage(): any {
   if (!isLoading && isSuccess) {
     return (
       <KPage title="Product Feed Stats">
-        <Box>
-          <Text fontSize="xl">Flujo de productos (entries)</Text>
-        </Box>
-        <Box>
-          <KLineChart
-            data={{
-              labels: feed.data.feed.map((item: { created_at: any }) =>
-                DateTime.fromISO(item.created_at).toFormat("MMMM dd, yyyy", {
-                  locale: "es",
-                })
-              ),
-              datasets: [
-                {
-                  label: "Total de productos Coppel",
-                  data: feed.data.feed.map(
-                    (item: { item_count: any }) => item.item_count
-                  ),
-                  borderWidth: 2,
-                  borderColor: "#dd65b9",
-                  backgroundColor: ["#dd65b9"],
-                },
-                {
-                  label: "Total de productos Marketplace",
-                  data: feed.data.feed.map(
-                    (item: { mkp_item_count: any }) => item.mkp_item_count
-                  ),
+        <Box overflow="scroll" max-height="100%" width="100%">
+          <Box>
+            <Text fontSize="xl">Flujo de productos (entries)</Text>
+          </Box>
+          <Box>
+            <KLineChart
+              data={{
+                labels: feed.data.feed.map((item: { created_at: any }) =>
+                  DateTime.fromISO(item.created_at).toFormat("MMMM dd, yyyy", {
+                    locale: "es",
+                  })
+                ),
+                datasets: [
+                  {
+                    label: "Total de productos Coppel",
+                    data: feed.data.feed.map(
+                      (item: { item_count: any }) => item.item_count
+                    ),
+                    borderWidth: 2,
+                    borderColor: "#dd65b9",
+                    backgroundColor: ["#dd65b9"],
+                  },
+                  {
+                    label: "Total de productos Marketplace",
+                    data: feed.data.feed.map(
+                      (item: { mkp_item_count: any }) => item.mkp_item_count
+                    ),
 
-                  borderWidth: 2,
-                  borderColor: "#5cd93d",
-                  backgroundColor: ["#5cd93d"],
-                },
-                {
-                  label: "Total de entries",
-                  data: feed.data.feed.map(
-                    (item: { processed_item_count: any }) =>
-                      item.processed_item_count
-                  ),
-                  borderWidth: 2,
-                  borderColor: "#656fdd",
-                  backgroundColor: ["#656fdd"],
-                },
-              ],
-            }}
-            options={{
-              responsive: true,
-              scales: {
-                x: {
-                  display: true,
-                  grid: {
-                    display: false,
+                    borderWidth: 2,
+                    borderColor: "#5cd93d",
+                    backgroundColor: ["#5cd93d"],
                   },
-                },
-                y: {
-                  display: true,
-                  grid: {
+                  {
+                    label: "Total de entries",
+                    data: feed.data.feed.map(
+                      (item: { processed_item_count: any }) =>
+                        item.processed_item_count
+                    ),
+                    borderWidth: 2,
+                    borderColor: "#656fdd",
+                    backgroundColor: ["#656fdd"],
+                  },
+                ],
+              }}
+              options={{
+                responsive: true,
+                scales: {
+                  x: {
                     display: true,
+                    grid: {
+                      display: false,
+                    },
+                  },
+                  y: {
+                    display: true,
+                    grid: {
+                      display: true,
+                    },
                   },
                 },
-              },
-            }}
-          />
+              }}
+            />
+          </Box>
         </Box>
       </KPage>
     );

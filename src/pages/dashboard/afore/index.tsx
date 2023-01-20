@@ -37,7 +37,11 @@ export default function Afore(): any {
     isLoading,
     data: aforeModulo,
     isSuccess,
+<<<<<<< HEAD
   } = useQuery("Afore", async () => await ApiService.aforeGet(true));
+=======
+  } = useQuery("afore", async () => ApiService);
+>>>>>>> origin/product-feed
 
   if (isLoading) {
     return <KSkeletonPage />;
@@ -94,10 +98,17 @@ export default function Afore(): any {
     }),
   ];
 
+<<<<<<< HEAD
   if (isSuccess) {
     return (
       <KPage title="Afore">
         <Box ml={"52"} mb="5" mt={3}>
+=======
+  return (
+    <KPage title="Afore">
+      <Box m={5} mt="10" overflow="scroll" max-height="100%" width="100%">
+        <Box ml={"56"} mb="10">
+>>>>>>> origin/product-feed
           <Button
             mr={"5"}
             alignItems={"center"}

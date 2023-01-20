@@ -8,6 +8,8 @@ import {
   chakra,
   Flex,
   TableContainer,
+  Box,
+  Tfoot,
 } from "@chakra-ui/react";
 import {
   useReactTable,
@@ -26,7 +28,7 @@ export interface KTableLayoutProps<Data extends object> {
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function KTableLayout<Data extends object>({
+export function KPaginatedTable<Data extends object>({
   data,
   columns,
 }: KTableLayoutProps<Data>) {
@@ -44,9 +46,17 @@ export function KTableLayout<Data extends object>({
 
   return (
     <Flex width="100%">
-      <TableContainer width="100%">
-        <Table variant="simple">
-          <Thead>
+      <TableContainer display="flex" overflowY="scroll">
+        <Table variant="simple" display="block">
+          <Thead
+            style={{
+              position: "sticky",
+              top: 0,
+              insetBlockStart: 0,
+              backgroundColor: "#fff",
+              zIndex: 1,
+            }}
+          >
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -103,6 +113,15 @@ export function KTableLayout<Data extends object>({
               </Tr>
             ))}
           </Tbody>
+          <Tfoot style={{ position: "sticky", bottom: 0, insetBlockEnd: 0 }}>
+            <Tr>
+              <Th>
+                <Box display="flex" justifyContent="flex-end">
+                  hi
+                </Box>
+              </Th>
+            </Tr>
+          </Tfoot>
         </Table>
       </TableContainer>
     </Flex>

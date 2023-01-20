@@ -80,50 +80,52 @@ export default function Role(): any {
   return (
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     <KPage title={"Rol " + moduloDetails.nb_modulo}>
-      <Box>
-        <Text fontSize="l" fontWeight="bold">
-          Actualizar rol
-        </Text>
-      </Box>
-      <Divider mt={2} mb={2} />
-      <Box>
-        <form onSubmit={handleSubmit}>
-          <SimpleGrid columns={2} spacing={5}>
-            <GridItem colSpan={colSpan}>
-              <FormControl isRequired>
-                <FormLabel>Nombre</FormLabel>
-                <Input
-                  defaultValue={moduloDetails.nb_modulo}
-                  onChange={(event) => {
-                    setNombreModulo(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-            <GridItem colSpan={1}></GridItem>
-            <GridItem colSpan={1}>
-              <Button
-                variant="primary"
-                size="lg"
-                type="submit"
-                bg="#3a47bd"
-                borderRadius={15}
-                color="#fff"
-                rightIcon={
-                  updating ? (
-                    <CircularProgress
-                      isIndeterminate
-                      color="white"
-                      size={"20px"}
-                    />
-                  ) : undefined
-                }
-              >
-                Actualizar
-              </Button>
-            </GridItem>
-          </SimpleGrid>
-        </form>
+      <Box overflow="scroll" max-height="100%" width="100%">
+        <Box>
+          <Text fontSize="l" fontWeight="bold">
+            Actualizar rol
+          </Text>
+        </Box>
+        <Divider mt={2} mb={2} />
+        <Box>
+          <form onSubmit={handleSubmit}>
+            <SimpleGrid columns={2} spacing={5}>
+              <GridItem colSpan={colSpan}>
+                <FormControl isRequired>
+                  <FormLabel>Nombre</FormLabel>
+                  <Input
+                    defaultValue={moduloDetails.nb_modulo}
+                    onChange={(event) => {
+                      setNombreModulo(event.currentTarget.value);
+                    }}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={1}></GridItem>
+              <GridItem colSpan={1}>
+                <Button
+                  variant="primary"
+                  size="lg"
+                  type="submit"
+                  bg="#3a47bd"
+                  borderRadius={15}
+                  color="#fff"
+                  rightIcon={
+                    updating ? (
+                      <CircularProgress
+                        isIndeterminate
+                        color="white"
+                        size={"20px"}
+                      />
+                    ) : undefined
+                  }
+                >
+                  Actualizar
+                </Button>
+              </GridItem>
+            </SimpleGrid>
+          </form>
+        </Box>
       </Box>
     </KPage>
   );
