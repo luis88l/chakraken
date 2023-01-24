@@ -267,6 +267,7 @@ export class ApiService {
           search: data.search,
           sort: data.sort,
           sortDirection: data.sortDirection,
+          offset: data.offset,
         },
         headers: {
           "Request-Source": "kraken",

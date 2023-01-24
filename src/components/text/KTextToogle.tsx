@@ -21,14 +21,12 @@ const KTextToogle: React.FC<Props> = ({ text, maxLength }) => {
   }
 
   if (isTruncated) {
-    console.log("es truncado");
     return (
       <Text onClick={handleTruncate} cursor="pointer">
         {text.slice(0, maxLength)} ...
       </Text>
     );
   } else {
-    console.log("no es truncado");
     return (
       <Text onClick={handleTruncate} cursor="pointer">
         {text}
