@@ -8,17 +8,13 @@ import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 import { DateTime } from "luxon";
 
 export default function StatsPage(): any {
-  const {
-    isLoading,
-    data: feed,
-    isSuccess,
-  } = useQuery(
+  const { data: feed, isSuccess } = useQuery(
     "modulos",
     async () =>
       await ApiService.getFeedList(JSON.stringify({ data: { filters: [] } }))
   );
 
-  if (!isLoading && isSuccess) {
+  if (isSuccess && feed.data?.feed.length > 0) {
     return (
       <KPage title="Product Feed Stats">
         <Box overflow="scroll" max-height="100%" width="100%">

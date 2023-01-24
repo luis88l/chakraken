@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import KTextToogle from "../../../components/text/KTextToogle";
 import Link from "next/link";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import {
   FiAlertCircle,
   FiClock,
@@ -57,6 +57,7 @@ export default function ProductFeed(): any {
     isSuccess,
     isPreviousData,
     refetch,
+    // @ts-expect-error
   } = useQuery({
     queryKey: ["productFeedItems", feedId],
     queryFn: async () =>
@@ -66,7 +67,9 @@ export default function ProductFeed(): any {
         offset: page * 15,
       }),
     config: {
-      onSettled: (responseData) => {
+      onSettled: (responseData: {
+        data: { total: SetStateAction<number> };
+      }) => {
         setItemCount(responseData.data.total);
       },
     },
