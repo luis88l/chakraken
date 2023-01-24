@@ -23,7 +23,7 @@ export default function UserProfile(this: any): any {
   const { data: session } = useSession();
   const [show, setShow] = useState(false);
   const [fechacumple, setFechaCumple] = useState("");
-  const [userphoto, setUserPhoto] = useState("");
+  const [setUserPhoto] = useState("");
 
   if (session == null) {
     return;
@@ -37,7 +37,6 @@ export default function UserProfile(this: any): any {
     nb_nombre,
     id_rol,
     cl_password,
-    user_photo,
   } =
     // @ts-expect-error
     session.user.user;

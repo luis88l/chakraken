@@ -105,43 +105,45 @@ export default function ProductFeedExclusions(): any {
 
   return (
     <KPage title="Exclusiones">
-      <Flex mb={4} display="grid" justifyItems="flex-end">
-        <Link href={"/dashboard/productFeed/addExclusion"}>
-          <Button
-            w="200px"
-            alignSelf="flex-end"
-            color="#fff"
-            bg="#1cb35b"
-            _hover={{ bg: "#238152" }}
-            leftIcon={<AddIcon />}
-          >
-            Agregar exclusiones
-          </Button>
-        </Link>
-      </Flex>
-      <Box>
-        {Array.isArray(productFeedExclusions.data.result) && (
-          <KTableLayout
-            columns={columns}
-            data={productFeedExclusions.data.result.map(
-              ({
-                sku,
-                created_at,
-                updated_at,
-                created_by,
-                updated_by,
-                active,
-              }: productFeedExclusionsTable) => ({
-                sku,
-                created_at,
-                updated_at,
-                created_by,
-                updated_by,
-                active,
-              })
-            )}
-          />
-        )}
+      <Box overflow="scroll" max-height="100%" width="100%">
+        <Flex mb={4} display="grid" justifyItems="flex-end">
+          <Link href={"/dashboard/productFeed/addExclusion"}>
+            <Button
+              w="200px"
+              alignSelf="flex-end"
+              color="#fff"
+              bg="#1cb35b"
+              _hover={{ bg: "#238152" }}
+              leftIcon={<AddIcon />}
+            >
+              Agregar exclusiones
+            </Button>
+          </Link>
+        </Flex>
+        <Box>
+          {Array.isArray(productFeedExclusions.data.result) && (
+            <KTableLayout
+              columns={columns}
+              data={productFeedExclusions.data.result.map(
+                ({
+                  sku,
+                  created_at,
+                  updated_at,
+                  created_by,
+                  updated_by,
+                  active,
+                }: productFeedExclusionsTable) => ({
+                  sku,
+                  created_at,
+                  updated_at,
+                  created_by,
+                  updated_by,
+                  active,
+                })
+              )}
+            />
+          )}
+        </Box>
       </Box>
     </KPage>
   );

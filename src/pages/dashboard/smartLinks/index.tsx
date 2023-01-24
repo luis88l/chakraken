@@ -1,7 +1,7 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
 import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
-import { createColumnHelper, Pagination } from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useQuery } from "react-query";
