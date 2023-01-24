@@ -484,8 +484,6 @@ export class ApiService {
     return res;
   }
 
-  // download xml sitemap
-
   public async downloadSitemap(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/productfeed/downloadSitemap`,
