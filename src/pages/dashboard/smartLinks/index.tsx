@@ -96,29 +96,27 @@ export default function SmartLinks(): any {
             </Button>
           </Link>
         </Flex>
-        <Box display={"table-row"}>
-          {Array.isArray(SmartLinks) && (
-            <KTableLayout
-              columns={columns}
-              data={SmartLinks.map(
-                ({
-                  id_page,
-                  nb_nombre,
 
-                  nb_description,
-                  nb_url,
-                  nb_keyWords,
-                }) => ({
-                  id_page,
-                  nb_nombre,
-                  nb_description,
-                  nb_url,
-                  nb_keyWords,
-                })
-              )}
-            />
-          )}
-        </Box>
+        {Array.isArray(SmartLinks) && (
+          <KTableLayout
+            columns={columns}
+            data={SmartLinks.map(
+              ({
+                id_page,
+                nb_nombre,
+                nb_description,
+                nb_url,
+                nb_keyWords,
+              }) => ({
+                id_page,
+                nb_nombre,
+                nb_description,
+                nb_url,
+                nb_keyWords,
+              })
+            )}
+          />
+        )}
       </Box>
     </KPage>
   );

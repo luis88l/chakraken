@@ -48,49 +48,51 @@ export default function New(): any {
 
   return (
     <KPage title="Crear rol">
-      <Box>
-        <Text fontSize="l" fontWeight="bold">
-          Crear rol
-        </Text>
-      </Box>
-      <Divider mt={2} mb={2} />
-      <Box>
-        <form onSubmit={handleSubmit}>
-          <SimpleGrid columns={2} spacing={5}>
-            <GridItem colSpan={colSpan}>
-              <FormControl isRequired>
-                <FormLabel>Nombre</FormLabel>
-                <Input
-                  onChange={(event) => {
-                    setNombreRol(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-            <GridItem colSpan={1}></GridItem>
-            <GridItem colSpan={1}>
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                bg="#3a47bd"
-                borderRadius={15}
-                color="#fff"
-                rightIcon={
-                  updating ? (
-                    <CircularProgress
-                      isIndeterminate
-                      color="white"
-                      size={"20px"}
-                    />
-                  ) : undefined
-                }
-              >
-                Crear rol
-              </Button>
-            </GridItem>
-          </SimpleGrid>
-        </form>
+      <Box overflow="scroll" max-height="100%" width="100%">
+        <Box>
+          <Text fontSize="l" fontWeight="bold">
+            Crear rol
+          </Text>
+        </Box>
+        <Divider mt={2} mb={2} />
+        <Box>
+          <form onSubmit={handleSubmit}>
+            <SimpleGrid columns={2} spacing={5}>
+              <GridItem colSpan={colSpan}>
+                <FormControl isRequired>
+                  <FormLabel>Nombre</FormLabel>
+                  <Input
+                    onChange={(event) => {
+                      setNombreRol(event.currentTarget.value);
+                    }}
+                  />
+                </FormControl>
+              </GridItem>
+              <GridItem colSpan={1}></GridItem>
+              <GridItem colSpan={1}>
+                <Button
+                  variant="primary"
+                  size="lg"
+                  type="submit"
+                  bg="#3a47bd"
+                  borderRadius={15}
+                  color="#fff"
+                  rightIcon={
+                    updating ? (
+                      <CircularProgress
+                        isIndeterminate
+                        color="white"
+                        size={"20px"}
+                      />
+                    ) : undefined
+                  }
+                >
+                  Crear rol
+                </Button>
+              </GridItem>
+            </SimpleGrid>
+          </form>
+        </Box>
       </Box>
     </KPage>
   );

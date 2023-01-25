@@ -7,7 +7,6 @@ import { useQuery } from "react-query";
 
 export default function Layout(props: { children: any }): any {
   const form = new FormData();
-
   const {
     isLoading,
     error,
@@ -16,8 +15,6 @@ export default function Layout(props: { children: any }): any {
     "opcionesModulos",
     async () => await ApiService.getOpcionesUsuario(form)
   );
-
-  console.log(userOptions);
 
   if (isLoading) {
     return <p>loading...</p>;

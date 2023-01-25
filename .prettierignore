@@ -7,3 +7,4 @@ coverage
 .husky
 public
 next-env.d.ts
+next.config.js
