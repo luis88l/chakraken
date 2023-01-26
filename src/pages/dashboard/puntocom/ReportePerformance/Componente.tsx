@@ -1,48 +1,71 @@
 import { getSession } from "next-auth/react";
+import { KTableLayout } from "../../../../components/tableLayout/KTableLayout";
+import { createColumnHelper } from "@tanstack/react-table";
 import {
   Box,
-  Table,
-  TableCaption,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
 } from "@chakra-ui/react";
 
 export function Contenido(): any {
+  const columnHelper = createColumnHelper<any>();
+  const modules: any[] = [];
+  const columns = [
+    columnHelper.accessor("nb_modulo", {
+      cell: (info) => info.getValue(),
+      header: "Nombre",
+    }),
+    columnHelper.accessor("nu_orden", {
+      cell: (info) => info.getValue(),
+      header: "Orden",
+    })
+    /*     columnHelper.accessor("id_modulo", {
+          cell: (props) => (
+            <ButtonGroup gap="2" display="flex" justifyContent="space-between">
+              <Box>
+                <Select
+                  // eslint-disable-next-line react/prop-types
+                  defaultValue={props.row.original.nu_orden}
+                  onChange={async (event) =>
+                    // eslint-disable-next-line react/prop-types
+                    await orderHandler(event, props.row.original.id_modulo)
+                  }
+                >
+                  {modules?.map((value) => (
+                    <option key={value.id_modulo} value={value.nu_orden}>
+                      {value.nu_orden}
+                    </option>
+                  ))}
+                </Select>
+              </Box>
+              <Box>
+                <Box m={1} cursor="pointer">
+                  <Link
+                    href={{
+                      // eslint-disable-next-line react/prop-types
+                      pathname:
+                        // eslint-disable-next-line react/prop-types
+                        "/dashboard/modulos/" + props.row.original.id_modulo,
+                    }}
+                  >
+                    <EditIcon mr={6} />
+                  </Link>
+                  <DeleteIcon />
+                </Box>
+              </Box>
+            </ButtonGroup>
+          ),
+          header: "Acciones",
+        }), */
+  ];
   return (
-    <Box p={6} width="98%" height={"98%"} margin={"4%"}>
-      <TableContainer>
-        <Table variant="striped" colorScheme="teal">
-          <TableCaption>Imperial to metric conversion factors</TableCaption>
-          <Thead>
-            <Tr>
-              <Th>To convert</Th>
-              <Th>into</Th>
-              <Th isNumeric>multiply by</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            <Tr>
-              <Td>inches</Td>
-              <Td>millimetres (mm)</Td>
-              <Td isNumeric>25.4</Td>
-            </Tr>
-            <Tr>
-              <Td>feet</Td>
-              <Td>centimetres (cm)</Td>
-              <Td isNumeric>30.48</Td>
-            </Tr>
-            <Tr>
-              <Td>yards</Td>
-              <Td>metres (m)</Td>
-              <Td isNumeric>0.91444</Td>
-            </Tr>
-          </Tbody>
-        </Table>
-      </TableContainer>
+    <Box overflow="scroll" h={'700px'} width="100%" >
+      <KTableLayout
+        columns={columns}
+        data={modules.map(({ nb_modulo, id_modulo, nu_orden }) => ({
+          id_modulo,
+          nb_modulo,
+          nu_orden,
+        }))}
+      />
     </Box>
   );
 }

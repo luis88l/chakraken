@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 export interface KPagePerformanceProps {
   title: string;
@@ -6,6 +6,7 @@ export interface KPagePerformanceProps {
   Filtros?: any;
   Menu?: any;
   VisibleFiltros: boolean;
+  TamañoContenedor?: string;
 }
 
 export default function KPagePerformance(props: KPagePerformanceProps): any {
@@ -33,7 +34,8 @@ export default function KPagePerformance(props: KPagePerformanceProps): any {
         <Box
           bgColor="#fff"
           p={10}
-          maxW="99%"
+          width="99%"
+          h={'200px'}
           borderWidth="3px"
           borderRadius="sm"
           marginBottom={"1%"}
@@ -44,18 +46,9 @@ export default function KPagePerformance(props: KPagePerformanceProps): any {
         </Box>
       )}
 
-      <Box width="100%">
-        <Flex
-          bgColor="#fff"
-          borderRadius={15}
-          width="100%"
-          minH="calc(87vh)"
-          maxH="calc(87vh)"
-          overflowY="scroll"
-          flex="auto"
-        >
-          {props.children}
-        </Flex>
+     { /* eslint-disable-next-line @typescript-eslint/strict-boolean-expressions */}
+      <Box width="100%" bgColor="#fff" h={!props.TamañoContenedor ? props.TamañoContenedor : 'auto'}>
+        {props.children}
       </Box>
     </Box>
   );

@@ -22,7 +22,7 @@ export default function Web(): any {
   const [OpcionAct, setOpcionAct] = useState<number>(4);
   const [TieneFiltros, setTieneFiltros] = useState<boolean>(true);
   const [Componente, setComponente] = useState<any>(<Contenido />);
-  const [CmpFiltros, setCmpFiltros] = useState<any>(<Filtros />);
+  const [CmpFiltros, setCmpFiltros] = useState<any>(<Filtros />); 
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const RedirigirMantenimineto = (Opcion: number) => {

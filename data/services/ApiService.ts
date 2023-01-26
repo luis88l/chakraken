@@ -688,6 +688,33 @@ export class ApiService {
     );
     return res;
   }
+
+  // Velocidad - WEB
+  public async getDominios(ids: string[]): Promise<any> {
+    const res = await axios
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      .get(`${pathServer}/wallet/dominios?ids=${ids}`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async getPaginasWithBudget(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/wallet/getPaginasWithBudget`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  }
 }
 
 export default new ApiService();
