@@ -626,6 +626,20 @@ export class ApiService {
     return res
   }
 
+  //    function dehash() {
+  //   let diccionario = "abehimoprstuv";
+  //   let seed = 83503320370387;
+  //   let str = "";
+  //   for (let i = 0; i < 10; i++) {
+  //     let realNumber = seed % 17;
+  //     seed = (seed - realNumber) / 17;
+
+  //     str += diccionario[realNumber];
+  //   }
+
+  //   return str;
+  // }
+
 
   public async getRevisoresPeticion(form: {}) {
     const res = await axios.post(

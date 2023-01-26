@@ -1,8 +1,6 @@
 import { getSession } from "next-auth/react";
 import React, { useState, useEffect, useRef } from "react";
 import KPage from "../../../components/page/KPage";
-
-import { motion, useAnimation } from "framer-motion";
 import {
   Box,
   Stack,

@@ -308,7 +308,6 @@ export default function controlCambios(): any {
 
     ApiService.GetPeticionesFiltros(form).then((items: any) => {
       if (items.data.status === 200) {
-        debugger;
         setStateObject({
           ...stateObj,
           abrirAgregar: false,
