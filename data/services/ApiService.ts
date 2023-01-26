@@ -83,6 +83,25 @@ export class ApiService {
     return defaults;
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  public async commerceDefaults() {
+    const defaults = {
+      headers: {
+        accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+        "accept-language": "es-ES,es;q=0.9",
+        "cache-control": "max-age=86400",
+        "upgrade-insecure-requests": "1",
+        "Access-Control-Allow-Origin":
+          "https://search-slave-prodlive.coppel.com",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+      },
+    };
+
+    return defaults;
+  }
+
   public async token(): Promise<any> {
     const session: any = await getSession();
     const token = session.user.data;
@@ -684,6 +703,16 @@ export class ApiService {
     const res = await axios.post(
       `${pathServer}/creadorCarrusel/crearCarrusel`,
       form,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  // rest api get categories
+
+  public async getSiteCategories(): Promise<any> {
+    const res = await axios.get(
+      `${pathServer}/search/resources/store/10151/categoryview/@top`,
       await this.defaults()
     );
     return res;
