@@ -705,7 +705,11 @@ export class ApiService {
 
   public async getPaginasWithBudget(form: {}): Promise<any> {
     const res = await axios
-      .post(`${pathServer}/wallet/getPaginasWithBudget`, form, await this.defaults())
+      .post(
+        `${pathServer}/wallet/getPaginasWithBudget`,
+        form,
+        await this.defaults()
+      )
       .then((response) => {
         return response;
       })

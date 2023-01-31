@@ -1,13 +1,8 @@
 import { getSession } from "next-auth/react";
 import Mantenimineto from "../../../components/mantenimiento";
-import KPage from "../../../components/page/KPage";
 
 export default function Tienda(): any {
-  return (
-    <KPage title={"Tienda"}>
-      <Mantenimineto />
-    </KPage>
-  );
+  return <Mantenimineto />;
 }
 
 export async function getServerSideProps(context: { req: any }): Promise<any> {

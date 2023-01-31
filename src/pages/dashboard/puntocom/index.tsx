@@ -1,5 +1,4 @@
 import { getSession } from "next-auth/react";
-import KPage from "../../../components/page/KPagePerformance";
 import {
   Button,
   Drawer,
@@ -10,41 +9,15 @@ import {
   useDisclosure,
   Box,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Mantenimiento from "../../../components/mantenimiento";
-import { Contenido } from "./ReportePerformance/Componente";
-import Filtros from "./ReportePerformance/FiltrosRpt";
+import ReportePerformance from "./ReportePerformance";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
 export default function Web(): any {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [Titulo, setTitulo] = useState<string>("Reporte performance");
   const [OpcionAct, setOpcionAct] = useState<number>(4);
-  const [TieneFiltros, setTieneFiltros] = useState<boolean>(true);
-  const [Componente, setComponente] = useState<any>(<Contenido />);
-  const [CmpFiltros, setCmpFiltros] = useState<any>(<Filtros />); 
-
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const RedirigirMantenimineto = (Opcion: number) => {
-    console.log(
-      "🚀 ~ file: index.tsx:30 ~ RedirigirMantenimineto ~ Opcion",
-      Opcion
-    );
-    if (Opcion === 4) {
-      setOpcionAct(Opcion);
-      setTitulo("Reporte Performance");
-      setTieneFiltros(true);
-      setComponente(<Contenido />);
-      setCmpFiltros(<Filtros />);
-    } else {
-      setOpcionAct(Opcion);
-      setComponente("");
-      setTieneFiltros(false);
-      setTitulo("Mantenimiento");
-    }
-    console.log(Opcion, OpcionAct);
-  };
-
+  const [Componente, setComponente] = useState<any>();
   const FocusSubmenu = {
     ".my-box:hover &": {
       color: "#ea4c89",
@@ -56,15 +29,26 @@ export default function Web(): any {
     </Button>
   );
 
+  useEffect(() => {
+    setComponente(<ReportePerformance MenuWeb={MenuWeb} />);
+  }, []);
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const RedirigirMantenimineto = (Opcion: number) => {
+    if (Opcion === 4) {
+      setOpcionAct(Opcion);
+      setComponente(<ReportePerformance MenuWeb={MenuWeb} />);
+    } else {
+      setOpcionAct(Opcion);
+      setComponente(<Mantenimiento />);
+    }
+    console.log(Opcion, OpcionAct);
+  };
+
   return (
     // eslint-disable-next-line react/no-children-prop
-    <KPage
-      title={Titulo}
-      Menu={MenuWeb}
-      Filtros={CmpFiltros}
-      VisibleFiltros={TieneFiltros}
-    >
-      {Componente !== "" ? Componente : <Mantenimiento />}
+    <div>
+      {Componente}
       <Drawer placement={"right"} onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent bgColor={"#020202"}>
@@ -115,7 +99,7 @@ export default function Web(): any {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-    </KPage>
+    </div>
   );
 }
 

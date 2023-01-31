@@ -11,58 +11,80 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import ApiService from "../../../../../data/services/ApiService";
-import { orderBy } from 'lodash'
+import { orderBy } from "lodash";
 
-export default function Filtros(): any {
-  const ID_DOMINIO_COPPEL = '3e22ec12-cdc3-11ea-863b-4b2d45d43637'
+export interface KFiltorsProps {
+  setDataTabla: any;
+  DataTabla: any[];
+}
+
+export default function Filtros(props: KFiltorsProps): any {
+  const ID_DOMINIO_COPPEL = "3e22ec12-cdc3-11ea-863b-4b2d45d43637";
   /*   const ID_ROL_ADMINISTRADOR = 'f2320fd2-fd6f-4876-a8a5-e2c2d71f09aa'
     const KEY_CODE_ENTER = 13 */
-  const ID_DOMINIO_PACO_EL_CHATO = '1dad3da1-4417-49db-8ecb-a583dc4a584e'
-  const ID_ROL_PACO_EL_CHATO = 'ac20691d-4818-4d08-8b2b-123e67108093'
+  const ID_DOMINIO_PACO_EL_CHATO = "1dad3da1-4417-49db-8ecb-a583dc4a584e";
+  const ID_ROL_PACO_EL_CHATO = "ac20691d-4818-4d08-8b2b-123e67108093";
   const [DataDominios, setDataDominios] = useState<any>([]);
-  const [Dominio, setDominio] = useState<any>([]);
+  const [Dominio, setDominio] = useState<any>("");
+  const [Busqueda, setBusqueda] = useState<any>([]);
 
   useEffect(() => {
-    void CargarDominios()
-  }, [])
+    void CargarDominios();
+  }, []);
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const CargarPaginas = async () => {
+    const form = new FormData();
+    form.append("id_dominio", Dominio);
+    form.append("numeroPagina", "0");
+    form.append("registrosPorPagina", "1000");
+    form.append("busqueda", Busqueda);
+
+    await ApiService.getPaginasWithBudget(form).then((res: any) => {
+      if (res.data.status === 200) {
+        props.setDataTabla(orderBy(res.data.data, "sn_auditar", "desc"));
+      } else {
+        console.log("Ocurrio algo");
+      }
+    });
+  };
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const CargarDominios = async () => {
-    const usuarioLocal = localStorage.getItem('_user');
-    console.log("🚀 ~ file: FiltrosRpt.tsx:33 ~ CargarDominios ~ usuarioLocal", usuarioLocal)
+    const usuarioLocal = localStorage.getItem("_user");
 
     let dominioSlc = {
       idDominio: ID_DOMINIO_COPPEL,
-      dominio: 'Coppel'
-    }
+      dominio: "Coppel",
+    };
     let usuario = {
-      nb_usuario: '',
-      id_rol: ''
-    }
+      nb_usuario: "",
+      id_rol: "",
+    };
 
     if (usuarioLocal != null) {
-      usuario = JSON.parse(usuarioLocal)
+      usuario = JSON.parse(usuarioLocal);
       if (usuario.id_rol === ID_ROL_PACO_EL_CHATO) {
         dominioSlc = {
           idDominio: ID_DOMINIO_PACO_EL_CHATO,
-          dominio: 'Paco el Chato'
-        }
+          dominio: "Paco el Chato",
+        };
       }
     }
-    const dominiosIds = usuario.id_rol === ID_ROL_PACO_EL_CHATO ? [ID_DOMINIO_PACO_EL_CHATO] : [];
+    const dominiosIds =
+      usuario.id_rol === ID_ROL_PACO_EL_CHATO ? [ID_DOMINIO_PACO_EL_CHATO] : [];
 
     await ApiService.getDominios(dominiosIds).then((res: any) => {
-      console.log("🚀 ~ file: FiltrosRpt.tsx:28 ~ awaitApiService.getDominios ~ res", res)
       if (res.data.status === 200) {
-        console.log(orderBy(res.data.data, 'nb_dominio', 'asc'));
-        setDataDominios(orderBy(res.data.data, 'nb_dominio', 'asc'))
-        setDominio(ID_DOMINIO_COPPEL)
+        setDataDominios(orderBy(res.data.data, "nb_dominio", "asc"));
+        setDominio(ID_DOMINIO_COPPEL);
       } else {
-        setDataDominios([dominioSlc])
-        setDominio(ID_DOMINIO_COPPEL)
+        setDataDominios([dominioSlc]);
+        setDominio(ID_DOMINIO_COPPEL);
       }
-    })
-  }
+      void CargarPaginas();
+    });
+  };
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const TabDispositivos = (Opcion?: number) => {
@@ -82,20 +104,25 @@ export default function Filtros(): any {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const ComboDominio = (e: any) => {
     const { value } = e.target;
-    console.log("🚀 ~ file: FiltrosRpt.tsx:85 ~ ComboDominio ~ value", value)
-    setDominio(value)
+    setDominio(value);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  const handleChange = (e: any) => {
+    const { value } = e.target;
+    setBusqueda(value);
   };
 
   const SelectTabColor = { color: "white", bg: "blue.500" };
   return (
     <Flex width="100%">
-      <div style={{ contain: 'flex-wrap', width: '100%' }}>
-        <Grid width={'99%'} templateColumns='repeat(6, 1fr)' gap={4}>
-          <GridItem margin={'5px'} colSpan={2}>
-            <Tabs size={"sm"} variant="soft-rounded" colorScheme="blue" >
+      <div style={{ contain: "flex-wrap", width: "100%" }}>
+        <Grid width={"99%"} templateColumns="repeat(6, 1fr)" gap={4}>
+          <GridItem margin={"5px"} colSpan={2}>
+            <Tabs size={"sm"} variant="soft-rounded" colorScheme="blue">
               <TabList>
                 <Tab
-                  fontSize={'inherit'}
+                  fontSize={"inherit"}
                   border={"1px"}
                   onClick={() => TabDispositivos(1)}
                   key={1}
@@ -122,8 +149,8 @@ export default function Filtros(): any {
               </TabList>
             </Tabs>
           </GridItem>
-          <GridItem margin={'5px'} colStart={5} colEnd={7}>
-            <Tabs size={"sm"} variant="soft-rounded" colorScheme="blue" >
+          <GridItem margin={"5px"} colStart={5} colEnd={7}>
+            <Tabs size={"sm"} variant="soft-rounded" colorScheme="blue">
               <TabList>
                 <Tab
                   border={"1px"}
@@ -134,7 +161,7 @@ export default function Filtros(): any {
                   {"Score"}
                 </Tab>
                 <Tab
-                  fontSize={'inherit'}
+                  fontSize={"inherit"}
                   border={"1px"}
                   onClick={() => TabReporte(2)}
                   key={2}
@@ -158,25 +185,31 @@ export default function Filtros(): any {
           style={{ marginTop: "2%", marginBottom: "3%" }}
           templateColumns="repeat(18, 1fr)"
           gap={18}
-          width={'99%'}
-          height={'-moz-max-content'}
+          width={"99%"}
+          height={"-moz-max-content"}
         >
           <GridItem colSpan={1}>
-            <FormLabel alignContent={'flex-end'} textAlign={'right'}>Dominio: </FormLabel>
+            <FormLabel alignContent={"flex-end"} textAlign={"right"}>
+              Dominio:{" "}
+            </FormLabel>
           </GridItem>
-          <GridItem alignContent={'flex-start'} colSpan={4}>
-            <Select placeholder="" value={Dominio} onChange={(e: any) => ComboDominio(e)}>
-              {
-                DataDominios.map((Dominio: any, Index: number) =>
-                  <option key={'1' + String(Index)} value={Dominio.idDominio}>{Dominio.dominio}</option>
-                )
-              }
+          <GridItem alignContent={"flex-start"} colSpan={4}>
+            <Select
+              placeholder=""
+              value={Dominio}
+              onChange={(e: any) => ComboDominio(e)}
+            >
+              {DataDominios.map((Dominio: any, Index: number) => (
+                <option key={"1" + String(Index)} value={Dominio.idDominio}>
+                  {Dominio.dominio}
+                </option>
+              ))}
             </Select>
           </GridItem>
           <GridItem colSpan={1}>
-            <FormLabel textAlign={'right'}>Red:</FormLabel>
+            <FormLabel textAlign={"right"}>Red:</FormLabel>
           </GridItem>
-          <GridItem alignContent={'flex-start'} colSpan={2}>
+          <GridItem alignContent={"flex-start"} colSpan={2}>
             <Tabs size={"sm"} variant="soft-rounded" colorScheme="blue">
               <TabList>
                 <Tab
@@ -228,8 +261,8 @@ export default function Filtros(): any {
           </GridItem>
           <GridItem colSpan={4}>
             <Input
-              // value={value}
-              // onChange={handleChange}
+              value={Busqueda}
+              onChange={(e: any) => handleChange(e)}
               size="md"
             />
           </GridItem>
