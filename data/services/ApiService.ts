@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { getSession } from "next-auth/react";
 import {
   areasInterface,
@@ -75,6 +75,18 @@ export class ApiService {
       headers: {
         "Request-Source": "kraken",
         "Content-Type": "multipart/form-data",
+        authorization: session.user.data,
+      },
+    };
+    return defaults;
+  }
+
+  public async defaultsJSON() {
+    const session: any = await getSession();
+    const defaults = {
+      headers: {
+        "Request-Source": "kraken",
+        "Content-Type": "application/json",
         authorization: session.user.data,
       },
     };
@@ -299,7 +311,6 @@ export class ApiService {
     return res;
   }
 
-
   // crear area
 
   public async saveAreas(user: {}): Promise<any> {
@@ -379,8 +390,8 @@ export class ApiService {
       `${pathServer}/pushNotifications/getTokenUser`,
       form,
       await this.defaults()
-    )
-    return res
+    );
+    return res;
   }
 
   public async pushNotificationsGet(form: {}) {
@@ -388,60 +399,142 @@ export class ApiService {
       `${pathServer}/pushNotifications/get`,
       form,
       await this.defaults()
-    )
-    return res
+    );
+    return res;
   }
 
   public async pushNotificationsTest(form: {}) {
-    const res = await axios.post(
-      `${pathServer}/pushNotifications/pushTest`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .post(
+        `${pathServer}/pushNotifications/pushTest`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
   public async getMedios() {
     const res = await axios.get(
       `${pathServer}/medios/get`,
       await this.defaults()
-    )
-    return res
+    );
+    return res;
+  }
+
+  public async deleteMedios(form: {}) {
+    const res = await axios
+      .post(`${pathServer}/medios/delete`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log("ERROR EN AXIOS");
+        return error.response;
+      });
+    return res;
+  }
+
+  public async saveMedios(form: {}) {
+    const res = await axios
+      .post(`${pathServer}/medios/save`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log("ERROR EN AXIOS");
+        return error.response;
+      });
+    return res;
   }
 
   public async getFuentes() {
     const res = await axios.get(
       `${pathServer}/fuentes/get`,
       await this.defaults()
-    )
-    return res
+    );
+    return res;
+  }
+
+  public async deleteFuentes(form: {}) {
+    const res = await axios
+      .post(`${pathServer}/fuentes/delete`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log("ERROR EN AXIOS");
+        return error.response;
+      });
+    return res;
+  }
+
+  public async saveFuentes(form: {}) {
+    const res = await axios
+      .post(`${pathServer}/fuentes/save`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log("ERROR EN AXIOS");
+        return error.response;
+      });
+    return res;
   }
 
   public async pushNotificationsSave(form: {}) {
-    const res = await axios.post(
-      `${pathServer}/pushNotifications/save`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .post(
+        `${pathServer}/pushNotifications/save`,
+        form,
+        await this.defaultsJSON()
+      )
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
   public async getTopics() {
-    const res = await axios.get(
-      `${pathServer}/topics/get`,
+    const res = await axios
+      .get(`${pathServer}/topics/get`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async deleteTopics(form: {}) {
+    const res = await axios
+      .post(`${pathServer}/topics/delete`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log("ERROR EN AXIOS");
+        return error.response;
+      });
+    return res;
+  }
+
+  public async saveTopics(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/topics/save`,
+      form,
       await this.defaults()
-    )
-    return res
+    );
+    return res;
   }
 
   // update user birthday
@@ -480,7 +573,5 @@ export class ApiService {
     return res.data.data;
   }
 }
-
-
 
 export default new ApiService();
