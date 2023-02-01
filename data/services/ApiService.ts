@@ -922,6 +922,20 @@ export class ApiService {
     return res
   }
 
+  public async analizarTexto(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/textanalitycs/analizartexto`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
 }
 
 export default new ApiService();
