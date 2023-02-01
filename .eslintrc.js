@@ -29,5 +29,5 @@ module.exports = {
       version: "detect",
     },
   },
-  ignorePatterns: [".eslintrc.js", "next-env.d.ts"],
+  ignorePatterns: [".eslintrc.js", "next-env.d.ts", "next.config.js"],
 };
