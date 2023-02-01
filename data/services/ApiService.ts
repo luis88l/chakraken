@@ -71,6 +71,7 @@ export class ApiService {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   public async defaults() {
     const session: any = await getSession();
+
     const defaults = {
       headers: {
         "Request-Source": "kraken",
@@ -78,7 +79,34 @@ export class ApiService {
         authorization: session.user.data,
       },
     };
+
     return defaults;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  public async commerceDefaults() {
+    const defaults = {
+      headers: {
+        accept:
+          "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+        "accept-language": "es-ES,es;q=0.9",
+        "cache-control": "max-age=86400",
+        "upgrade-insecure-requests": "1",
+        "Access-Control-Allow-Origin":
+          "https://search-slave-prodlive.coppel.com",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+      },
+    };
+
+    return defaults;
+  }
+
+  public async token(): Promise<any> {
+    const session: any = await getSession();
+    const token = session.user.data;
+
+    return token;
   }
 
   // opciones usuarios menu
@@ -150,7 +178,6 @@ export class ApiService {
   }
 
   // get roles
-
   public async getRoles(): Promise<rolesInterface[]> {
     const res = await axios
       .get(`${pathServer}/roles/get`, await this.defaults())
@@ -163,7 +190,6 @@ export class ApiService {
     return res.data.data;
   }
 
-  //get facebook
   public async getBases(): Promise<any> {
     const res = await axios
       .get(`${pathServer}/BI/get`, await this.defaults())
@@ -176,7 +202,7 @@ export class ApiService {
     return res.data.data;
   }
 
-  //crear base facebook
+  // crear base facebook
   public async saveBases(user: {}): Promise<any> {
     const res = await axios
       .post(`${pathServer}/BI/save`, user, await this.defaults())
@@ -189,7 +215,7 @@ export class ApiService {
     return res;
   }
 
-  //base
+  // base
   public async updateBases(form: {}): Promise<any> {
     const res = await axios
       .post(`${pathServer}/BI/Update`, form, await this.defaults())
@@ -202,9 +228,9 @@ export class ApiService {
     return res;
   }
 
-  //eliminar base
-  public async basesDelete(data: {}) {
-    return axios
+  // eliminar base
+  public async basesDelete(data: {}): Promise<any> {
+    return await axios
       .post(`${pathServer}/BI/delete`, data, await this.defaults())
       .then((response) => {
         return response;
@@ -236,16 +262,36 @@ export class ApiService {
   }
 
   // get feed list
-
   public async getFeedList(data: {}): Promise<any> {
-    console.log("data", data);
-    const result = await axios
-      .get(`${pathServer}/productfeed/getFeedList`, {
+    const res = await axios
+      .get(`${pathServer}/productfeed/getFeedList`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async getFeedItems(data: any): Promise<any> {
+    /// productfeed/getPaginatedFeedItems/
+    const res = await axios
+      .get(`${pathServer}/productfeed/getPaginatedFeedItems`, {
         params: {
-          data,
+          feedId: data.idFeed,
+          filters: data.filters,
+          page: data.page,
+          pageSize: data.pageSize,
+          search: data.search,
+          sort: data.sort,
+          sortDirection: data.sortDirection,
+          offset: data.offset,
         },
         headers: {
-          authorization: await (await this.defaults()).headers.authorization,
+          "Request-Source": "kraken",
+          "Content-Type": "multipart/form-data",
+          authorization: await this.token(),
         },
       })
       .then((response) => {
@@ -254,8 +300,92 @@ export class ApiService {
       .catch((error) => {
         return error.response;
       });
+    return res;
+  }
 
-    console.log(result);
+  // get feed exclusion list
+
+  public async getFeedExclusions(data: any): Promise<any> {
+    const result = await axios
+      .get(`${pathServer}/productfeed/getExclusionsList`, {
+        params: {
+          data,
+        },
+        headers: {
+          "Request-Source": "kraken",
+          "Content-Type": "multipart/form-data",
+          authorization: await this.token(),
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error.response;
+      });
+    return result;
+  }
+
+  // create feed exclusion
+
+  public async addExclusion(data: {}): Promise<any> {
+    return await axios
+      .post(`${pathServer}/productfeed/addExclusion`, data, {
+        headers: {
+          "Request-Source": "kraken",
+          "Content-Type": "multipart/form-data",
+          authorization: await this.token(),
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // delete feed exclusion
+
+  public async deleteExclusion(data: {}): Promise<any> {
+    return await axios
+      .post(`${pathServer}/productfeed/deleteExclusion`, data, {
+        headers: {
+          "Request-Source": "kraken",
+          "Content-Type": "multipart/form-data",
+          authorization: await this.token(),
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // get feed alerts list
+
+  public async getAlertList(data: any): Promise<any> {
+    const result = await axios
+      .get(`${pathServer}/productfeed/getAlertList`, {
+        params: {
+          data,
+        },
+        headers: {
+          "Request-Source": "kraken",
+          "Content-Type": "multipart/form-data",
+          authorization: await this.token(),
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log(error);
+        return error.response;
+      });
     return result;
   }
 
@@ -298,7 +428,6 @@ export class ApiService {
       });
     return res;
   }
-
 
   // crear area
 
@@ -374,74 +503,84 @@ export class ApiService {
     );
     return res;
   }
-  public async getTokenUser(form: {}) {
+
+  public async downloadSitemap(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/productfeed/downloadSitemap`,
+      form,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  public async getTokenUser(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/pushNotifications/getTokenUser`,
       form,
       await this.defaults()
-    )
-    return res
+    );
+    return res;
   }
 
-  public async pushNotificationsGet(form: {}) {
+  public async pushNotificationsGet(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/pushNotifications/get`,
       form,
       await this.defaults()
-    )
-    return res
+    );
+    return res;
   }
 
-  public async pushNotificationsTest(form: {}) {
-    const res = await axios.post(
-      `${pathServer}/pushNotifications/pushTest`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+  public async pushNotificationsTest(form: {}): Promise<any> {
+    const res = await axios
+      .post(
+        `${pathServer}/pushNotifications/pushTest`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
-  public async getMedios() {
+  public async getMedios(): Promise<any> {
     const res = await axios.get(
       `${pathServer}/medios/get`,
       await this.defaults()
-    )
-    return res
+    );
+    return res;
   }
 
-  public async getFuentes() {
+  public async getFuentes(): Promise<any> {
     const res = await axios.get(
       `${pathServer}/fuentes/get`,
       await this.defaults()
-    )
-    return res
+    );
+    return res;
   }
 
-  public async pushNotificationsSave(form: {}) {
-    const res = await axios.post(
-      `${pathServer}/pushNotifications/save`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+  public async pushNotificationsSave(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/pushNotifications/save`, form, await this.defaults())
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
-  public async getTopics() {
+  public async getTopics(): Promise<any> {
     const res = await axios.get(
       `${pathServer}/topics/get`,
       await this.defaults()
-    )
-    return res
+    );
+    return res;
   }
 
   // update user birthday
@@ -456,7 +595,7 @@ export class ApiService {
     return res;
   }
 
-  //update user photo
+  // update user photo
 
   public async userPhoto(user: {}): Promise<any> {
     const res = await axios.post(
@@ -470,7 +609,7 @@ export class ApiService {
 
   public async getSmartLink(): Promise<any> {
     const res = await axios
-      .get(`${pathServer}/smart-links/get`, await this.defaults())
+      .get(`${pathServer}/smart-links`, await this.defaults())
       .then((response) => {
         return response;
       })
@@ -668,9 +807,121 @@ export class ApiService {
   }
 
 
+
+
+  // crear formulario smart-link
+  public async saveSmartLink(user: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/smart-links`, user, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  // update smartlinks
+  public async updateSmartLinks(data: {}): Promise<any> {
+    return await axios
+      .put(`${pathServer}/smart-links`, data, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
+  // delete smart link
+  public async deleteSmartLinks(id: string): Promise<any> {
+    const result = await axios
+      .delete(`${pathServer}/smart-links/${id}`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return result;
+  }
+
+  // get afore
+  public async aforeGet(sn: boolean): Promise<any> {
+    const res = await axios
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      .get(`${pathServer}/afore?sn=${sn}`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  // delete afore
+  public async aforeDelete(id: string): Promise<any> {
+    const res = await axios
+      .delete(`${pathServer}/afore?id=${id}`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  // update afore
+  public async aforeUpdate(data: {}): Promise<any> {
+    const res = await axios
+      .put(`${pathServer}/afore`, data, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  // crear carruseles
+
+  public async crearCarrusel(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/creadorCarrusel/crearCarrusel`,
+      form,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  // rest api get categories
+
+  public async getSiteCategories(): Promise<any> {
+    const res = await axios.get(
+      `${pathServer}/search/resources/store/10151/categoryview/@top`,
+      await this.defaults()
+    );
+    return res;
+  }
+
+  public async acortarUrl(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/herramientas/acortarurl`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
 }
-
-
-
 
 export default new ApiService();

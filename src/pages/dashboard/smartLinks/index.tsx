@@ -1,12 +1,13 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box, ButtonGroup } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
+import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 
 export interface SmartTable {
   id_page: string;
@@ -14,15 +15,13 @@ export interface SmartTable {
   nb_url: string;
   nb_description: string;
   nb_keyWords: string;
-  sn_activo: boolean;
 }
 
 export default function SmartLinks(): any {
-  const {
-    isLoading,
-    data: SmartLinks,
-    isSuccess,
-  } = useQuery("SmartLinks", async () => await ApiService.getSmartLink());
+  const { isLoading, data: SmartLinks } = useQuery(
+    "SmartLinks",
+    async () => await ApiService.getSmartLink()
+  );
 
   if (isLoading) {
     return <KSkeletonPage />;
@@ -49,12 +48,17 @@ export default function SmartLinks(): any {
     }),
     columnHelper.accessor("id_page", {
       cell: (props) => (
-        <ButtonGroup gap={"2"}>
-          <Box m={2} cursor="pointer">
+        <ButtonGroup
+          gap={"2"}
+          display={"flex"}
+          justifyContent="space-around"
+          alignItems="center"
+        >
+          <Box>
             <Link
               href={{
                 // eslint-disable-next-line react/prop-types
-                pathname: "/dashboard/smartLinks/",
+                pathname: "/dashboard/smartLinks/" + props.getValue(),
               }}
             >
               <EditIcon />
@@ -64,7 +68,7 @@ export default function SmartLinks(): any {
             <Link
               href={{
                 // eslint-disable-next-line react/prop-types
-                pathname: "/dashboard/smartLinks/",
+                pathname: "/dashboard/smartLinks/delete/" + props.getValue(),
               }}
             >
               <DeleteIcon />
@@ -78,7 +82,42 @@ export default function SmartLinks(): any {
 
   return (
     <KPage title="Smart Links">
-      <Box></Box>
+      <Box>
+        <Flex mb={4} display="grid" justifyItems={"flex-end"}>
+          <Link href={"/dashboard/smartLinks/new"}>
+            <Button
+              alignItems={"center"}
+              size="lg"
+              mb={"5"}
+              bg="blue.500"
+              textColor={"whiteAlpha.900"}
+            >
+              + Agregar Formulario
+            </Button>
+          </Link>
+        </Flex>
+
+        {Array.isArray(SmartLinks) && (
+          <KTableLayout
+            columns={columns}
+            data={SmartLinks.map(
+              ({
+                id_page,
+                nb_nombre,
+                nb_description,
+                nb_url,
+                nb_keyWords,
+              }) => ({
+                id_page,
+                nb_nombre,
+                nb_description,
+                nb_url,
+                nb_keyWords,
+              })
+            )}
+          />
+        )}
+      </Box>
     </KPage>
   );
 }

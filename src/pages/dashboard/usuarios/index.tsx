@@ -78,7 +78,7 @@ export default function Usuarios(): any {
 
   return (
     <KPage title="Usuarios">
-      <Box>
+      <Box overflow="scroll" max-height="100%" width="100%">
         <Flex mb={4} display="grid" justifyItems="flex-end">
           <Link href={"/dashboard/usuarios/new"}>
             <Button

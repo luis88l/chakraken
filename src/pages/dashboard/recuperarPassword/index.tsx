@@ -208,7 +208,7 @@ export default function RecuperarPassword(props: UploaderProps): any {
 
   return (
     <KPage title="Recuperar contraseña">
-      <Box>
+      <Box max-height="100%" width="100%">
         <Grid templateColumns="repeat(1, 1fr)" gap={1}>
           <GridItem w="100%" h="10">
             <Stack spacing={4} direction="row" justifyContent="end">

@@ -385,75 +385,85 @@ export default function controlCambios(): any {
 
   return (
     <KPage title="Web Developers > Control de Cambios">
-      <Container maxW="container.sm">
-        <SimpleGrid columns={4} gap={2}>
-          <Box w="100%" h="10">
-            <Input placeholder="Folio" size="md" />
-          </Box>
+      <Box max-height="100%" width="100%">
+        <Container maxW="container.sm">
+          <SimpleGrid columns={4} gap={2}>
+            <Box w="100%" h="10">
+              <Input placeholder="Folio" size="md" />
+            </Box>
 
-          <Box w="100%" h="10">
-            <Input placeholder="Solicitante" size="md" />
-          </Box>
-          <Box w="100%" h="10">
-            <Input placeholder="Tipo de peticion" size="md" />
-          </Box>
-          <Box w="100%" h="10">
-            <Input placeholder="Responsable" size="md" />
-          </Box>
-          <Box w="100%" h="10">
-            <Text mb="8px"> Fecha reg inicial:</Text>
-            <Input placeholder="Fecha inicio" size="md" type="datetime-local" />
-          </Box>
-          <Box w="100%" h="10">
-            <Text mb="8px"> Fecha reg final:</Text>
-            <Input placeholder="Fecha inicio" size="md" type="datetime-local" />
-          </Box>
-          <Box w="100%" h="10" mt={8}>
-            <Input placeholder="Estatus" size="md" />
-          </Box>
-          <Box w="100%" h="10" mt={8}>
-            <Button colorScheme="teal" variant="solid" bg={"#f50057"}>
-              <Icon as={RepeatIcon} />
-            </Button>
-            <Button colorScheme="teal" variant="solid" marginLeft={2}>
-              Filtrar
+            <Box w="100%" h="10">
+              <Input placeholder="Solicitante" size="md" />
+            </Box>
+            <Box w="100%" h="10">
+              <Input placeholder="Tipo de peticion" size="md" />
+            </Box>
+            <Box w="100%" h="10">
+              <Input placeholder="Responsable" size="md" />
+            </Box>
+            <Box w="100%" h="10">
+              <Text mb="8px"> Fecha reg inicial:</Text>
+              <Input
+                placeholder="Fecha inicio"
+                size="md"
+                type="datetime-local"
+              />
+            </Box>
+            <Box w="100%" h="10">
+              <Text mb="8px"> Fecha reg final:</Text>
+              <Input
+                placeholder="Fecha inicio"
+                size="md"
+                type="datetime-local"
+              />
+            </Box>
+            <Box w="100%" h="10" mt={8}>
+              <Input placeholder="Estatus" size="md" />
+            </Box>
+            <Box w="100%" h="10" mt={8}>
+              <Button colorScheme="teal" variant="solid" bg={"#f50057"}>
+                <Icon as={RepeatIcon} />
+              </Button>
+              <Button colorScheme="teal" variant="solid" marginLeft={2}>
+                Filtrar
+              </Button>
+            </Box>
+          </SimpleGrid>
+        </Container>
+
+        <Divider mt={10} mb={10} />
+
+        <SimpleGrid>
+          <Box w="100%" h="10" textAlign="end">
+            <Button
+              colorScheme="teal"
+              variant="solid"
+              marginLeft={2}
+              bg={"#f50057"}
+              leftIcon={<CalendarIcon />}
+            >
+              Calendario
             </Button>
           </Box>
         </SimpleGrid>
-      </Container>
-      <Divider mt={10} mb={10} />
 
-      <SimpleGrid>
-        <Box w="100%" h="10" textAlign="end">
-          <Button
-            colorScheme="teal"
-            variant="solid"
-            marginLeft={2}
-            bg={"#f50057"}
-            leftIcon={<CalendarIcon />}
-          >
-            Calendario
-          </Button>
-        </Box>
-      </SimpleGrid>
-
-      <Container maxW="container.lg">
-        <TableContainer>
-          <Table>
-            <Thead>
-              <Tr>
-                <Th>Folio</Th>
-                <Th>Solicitante</Th>
-                <Th>Tipo</Th>
-                <Th>Responsable</Th>
-                <Th>Requerido</Th>
-                <Th>Registro</Th>
-                <Th>Estatus</Th>
-                <Th>Acciones</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {/* {stableSort(stateObj.Peticiones, getSorting("asc", "createdAt"))
+        <Container maxW="container.lg">
+          <TableContainer>
+            <Table>
+              <Thead>
+                <Tr>
+                  <Th>Folio</Th>
+                  <Th>Solicitante</Th>
+                  <Th>Tipo</Th>
+                  <Th>Responsable</Th>
+                  <Th>Requerido</Th>
+                  <Th>Registro</Th>
+                  <Th>Estatus</Th>
+                  <Th>Acciones</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {/* {stableSort(stateObj.Peticiones, getSorting("asc", "createdAt"))
                 .slice(
                   stateObj.page * stateObj.rowsPerPage,
                   stateObj.page * stateObj.rowsPerPage + stateObj.rowsPerPage
@@ -474,10 +484,11 @@ export default function controlCambios(): any {
                     </Tr>
                   );
                 })} */}
-            </Tbody>
-          </Table>
-        </TableContainer>
-      </Container>
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </Container>
+      </Box>
     </KPage>
   );
 }

@@ -141,7 +141,7 @@ export default function Modulos(): any {
     ];
     return (
       <KPage title="Módulos">
-        <Box>
+        <Box overflow="scroll" max-height="100%" width="100%">
           <Flex mb={4} display="grid" justifyItems="flex-end">
             <Link href={"/dashboard/modulos/new"}>
               <Button

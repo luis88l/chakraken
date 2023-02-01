@@ -4,7 +4,6 @@ import KPage from "../../../components/page/KPage";
 import ApiService from "../../../../data/services/ApiService";
 import { useQuery } from "react-query";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
-import FileBase64 from "react-file-base64";
 import { FiUpload } from "react-icons/fi";
 
 import {
@@ -34,6 +33,7 @@ import {
 } from "@chakra-ui/react";
 import { PlusSquareIcon } from "@chakra-ui/icons";
 import { OPTIMIZED_FONT_PROVIDERS } from "next/dist/shared/lib/constants";
+import { FILE } from "dns";
 
 // interface Props {
 //   onRef?: Function;
@@ -237,113 +237,192 @@ export default function Manuales(): any {
     return seed;
   }
 
+  const onChangeHandle = async (
+    e: React.ChangeEvent<HTMLInputElement & HTMLTextAreaElement>
+  ) => {
+    setStateObject({
+      ...stateObj,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  //  const onChangeHandleTextArea = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //    setStateObject({
+  //      ...stateObj,
+  //      [e.target.name]: e.target.value,
+  //    });
+  //  };
+  console.log(stateObj);
+
+  const subirPortada = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files, "JALA PA");
+
+    let files = e.target.files;
+    let file = { File: {}, name: "", size: 0, type: "" };
+
+    for (var i = 0; i < 1; i++) {
+      if (files != null) file = files[i];
+
+      let reader = new FileReader();
+
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        var fileInfo = {
+          name: file.name,
+          type: file.type,
+          size: Math.round(file.size / 1000) + " kB",
+          base64: reader.result as string,
+          // file: file,
+        };
+        console.log(fileInfo);
+
+        setStateObject({
+          ...stateObj,
+          nombreportada: fileInfo.name,
+          portada: fileInfo.base64,
+        });
+      };
+    }
+  };
+
   if (isSuccess) {
     return (
       <KPage title="Manuales">
-        <Box textAlign="end">
-          <Button
-            colorScheme="blue"
-            variant="solid"
-            marginLeft={2}
-            leftIcon={<PlusSquareIcon />}
-            onClick={onOpen}
-            //onClick={() => hash("perseverar")}
-          >
-            Agregar manual
-          </Button>
-        </Box>
-        <Divider mt={10} />
-
-        <SimpleGrid columns={4} gap={2}>
-          <Box w="100%" h="10">
-            <Card
-              direction={{ base: "column", sm: "row" }}
-              overflow="hidden"
-              variant="outline"
+        <Box max-height="100%" width="100%">
+          <Box textAlign="end">
+            <Button
+              colorScheme="blue"
+              variant="solid"
+              marginLeft={2}
+              leftIcon={<PlusSquareIcon />}
+              onClick={onOpen}
+              //onClick={() => hash("perseverar")}
             >
-              <Image
-                objectFit="cover"
-                maxW={{ base: "100%", sm: "200px" }}
-                src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-                alt="Caffe Latte"
-              />
-
-              <Stack>
-                <CardBody>
-                  <Heading size="md">The perfect latte</Heading>
-
-                  <Text py="2">
-                    Caffè latte is a coffee beverage of Italian origin made with
-                    espresso and steamed milk.
-                  </Text>
-                </CardBody>
-
-                <CardFooter>
-                  <Button variant="solid" colorScheme="blue">
-                    Buy Latte
-                  </Button>
-                </CardFooter>
-              </Stack>
-            </Card>
+              Agregar manual
+            </Button>
           </Box>
-        </SimpleGrid>
+          <Divider mt={10} />
 
-        {/* // MODAL */}
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Agregar</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Input placeholder="Nombre" />
-              <Textarea placeholder="Descripción" mt={10} />
-              <Stack mt="7" spacing="5" textAlign="center">
-                <Button
-                  colorScheme="blue"
-                  onClick={onClose}
-                  placeholder="nanda"
-                  textAlign="center"
-                  leftIcon={<FiUpload />}
-                >
-                  Subir portada
-                </Button>
-                <Button
-                  colorScheme="blue"
-                  textAlign="center"
-                  leftIcon={<FiUpload />}
-                >
-                  <Input
-                    type="file"
-                    height="100%"
-                    width="100%"
-                    position="absolute"
-                    top="0"
-                    left="0"
-                    opacity="0"
-                    aria-hidden="true"
-                    accept=".xml, .csv"
-                    onChange={handleFileSelect}
-                  />
-                  Subir archivo
-                </Button>
-              </Stack>
-            </ModalBody>
-
-            <ModalFooter>
-              <Button
-                colorScheme="gray"
-                mr={3}
-                onClick={onClose}
-                variant={"outline"}
+          <SimpleGrid columns={2} gap={2} mt={10}>
+            <Box w="100%" h="10">
+              <Card
+                direction={{ base: "column", sm: "row" }}
+                overflow="hidden"
+                variant="outline"
               >
-                Cerrar
-              </Button>
-              <Button variant="outline" colorScheme={"teal"}>
-                Guardar
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
+                <Image
+                  objectFit="cover"
+                  maxW={{ base: "100%", sm: "200px" }}
+                  src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+                  alt="Caffe Latte"
+                />
+
+                <Stack>
+                  <CardBody>
+                    <Heading size="md">The perfect latte</Heading>
+
+                    <Text py="2">
+                      Caffè latte is a coffee beverage of Italian origin made
+                      with espresso and steamed milk.
+                    </Text>
+                  </CardBody>
+
+                  <CardFooter>
+                    <Button variant="solid" colorScheme="blue">
+                      Buy Latte
+                    </Button>
+                  </CardFooter>
+                </Stack>
+              </Card>
+            </Box>
+          </SimpleGrid>
+
+          {/* // MODAL */}
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Agregar</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Input
+                  placeholder="Nombre"
+                  value={stateObj.nombre}
+                  onChange={onChangeHandle}
+                  name="nombre"
+                />
+                <Textarea
+                  placeholder="Descripción"
+                  mt={10}
+                  value={stateObj.descripcion}
+                  onChange={onChangeHandle}
+                  name="descripcion"
+                />
+                <Stack mt="7" spacing="5" textAlign="center">
+                  {/* <Button
+                    colorScheme="blue"
+                    onClick={subirPortada}
+                    placeholder="nanda"
+                    textAlign="center"
+                    leftIcon={<FiUpload />}
+                  >
+                    Subir portada
+                  </Button> */}
+                  <Button>
+                    <Input
+                      type="file"
+                      height="100%"
+                      width="100%"
+                      position="absolute"
+                      top="0"
+                      left="0"
+                      opacity="0"
+                      aria-hidden="true"
+                      accept="image/*"
+                      colorScheme="blue"
+                      onChange={subirPortada}
+                      multiple
+                    />
+                    Subir archivo
+                  </Button>
+                  {/* <Button
+                    colorScheme="blue"
+                    textAlign="center"
+                    leftIcon={<FiUpload />}
+                  >
+                    <Input
+                      type="file"
+                      height="100%"
+                      width="100%"
+                      position="absolute"
+                      top="0"
+                      left="0"
+                      opacity="0"
+                      aria-hidden="true"
+                      accept=".xml, .csv"
+                      onChange={handleFileSelect}
+                    />
+                    Subir archivo
+                  </Button> */}
+                </Stack>
+              </ModalBody>
+
+              <ModalFooter>
+                <Button
+                  colorScheme="gray"
+                  mr={3}
+                  onClick={onClose}
+                  variant={"outline"}
+                >
+                  Cerrar
+                </Button>
+                <Button variant="outline" colorScheme={"teal"}>
+                  Guardar
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </Box>
       </KPage>
     );
   }
