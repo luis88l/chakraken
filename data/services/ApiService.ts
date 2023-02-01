@@ -83,7 +83,6 @@ export class ApiService {
     return defaults;
   }
 
-<<<<<<< HEAD
   public async defaultsJSON() {
     const session: any = await getSession();
     const defaults = {
@@ -96,7 +95,6 @@ export class ApiService {
     return defaults;
   }
 
-=======
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   public async commerceDefaults() {
     const defaults = {
@@ -123,7 +121,6 @@ export class ApiService {
     return token;
   }
 
->>>>>>> 0181c2486f42d89f2a4c404f110e9ca2d95c1649
   // opciones usuarios menu
 
   public async getOpcionesUsuario(form: {}): Promise<void> {
@@ -546,11 +543,7 @@ export class ApiService {
     return res;
   }
 
-<<<<<<< HEAD
   public async pushNotificationsTest(form: {}) {
-=======
-  public async pushNotificationsTest(form: {}): Promise<any> {
->>>>>>> 0181c2486f42d89f2a4c404f110e9ca2d95c1649
     const res = await axios
       .post(
         `${pathServer}/pushNotifications/pushTest`,
@@ -572,7 +565,6 @@ export class ApiService {
       await this.defaults()
     );
     return res;
-<<<<<<< HEAD
   }
 
   public async deleteMedios(form: {}) {
@@ -599,8 +591,6 @@ export class ApiService {
         return error.response;
       });
     return res;
-=======
->>>>>>> 0181c2486f42d89f2a4c404f110e9ca2d95c1649
   }
 
   public async getFuentes(): Promise<any> {
@@ -609,7 +599,6 @@ export class ApiService {
       await this.defaults()
     );
     return res;
-<<<<<<< HEAD
   }
 
   public async deleteFuentes(form: {}) {
@@ -645,13 +634,6 @@ export class ApiService {
         form,
         await this.defaultsJSON()
       )
-=======
-  }
-
-  public async pushNotificationsSave(form: {}): Promise<any> {
-    const res = await axios
-      .post(`${pathServer}/pushNotifications/save`, form, await this.defaults())
->>>>>>> 0181c2486f42d89f2a4c404f110e9ca2d95c1649
       .then((response) => {
         return response;
       })
@@ -661,7 +643,6 @@ export class ApiService {
     return res;
   }
 
-<<<<<<< HEAD
   public async getTopics() {
     const res = await axios
       .get(`${pathServer}/topics/get`, await this.defaults())
@@ -691,11 +672,6 @@ export class ApiService {
     const res = await axios.post(
       `${pathServer}/topics/save`,
       form,
-=======
-  public async getTopics(): Promise<any> {
-    const res = await axios.get(
-      `${pathServer}/topics/get`,
->>>>>>> 0181c2486f42d89f2a4c404f110e9ca2d95c1649
       await this.defaults()
     );
     return res;
@@ -738,149 +714,157 @@ export class ApiService {
   }
 
   public async getCorreoRecuperarPassword(): Promise<any> {
-    const res = await axios.get(
-      `${pathServer}/clienteDigital/getCorreoRecuperarPassword`,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .get(
+        `${pathServer}/clienteDigital/getCorreoRecuperarPassword`,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
+      .catch((error) => {
+        return error.response;
+      });
 
-    return res
+    return res;
   }
   public async getProceso(form: {}) {
-    const res = await axios.post(
-      `${pathServer}/procesos/get`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .post(`${pathServer}/procesos/get`, form, await this.defaults())
+      .then((response) => {
+        return response;
       })
+      .catch((error) => {
+        return error.response;
+      });
 
-    return res
+    return res;
   }
 
   public async importRecoverPassword(form: {}) {
-    const res = await axios.post(
-      `${pathServer}/clienteDigital/importRecoverPassword`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .post(
+        `${pathServer}/clienteDigital/importRecoverPassword`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
+      .catch((error) => {
+        return error.response;
+      });
 
-    return res
+    return res;
   }
   public async GetUserInfo(form: {}) {
-    const res = await axios.post(
-      `${pathServer}/users/GetUserInfo`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .post(`${pathServer}/users/GetUserInfo`, form, await this.defaults())
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
-
   public async GetEstatusPeticiones() {
-    const res = await axios.get(
-      `${pathServer}/peticionesUsuarios/GetEstatusPeticiones`,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .get(
+        `${pathServer}/peticionesUsuarios/GetEstatusPeticiones`,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
   public async GetTiposPeticiones() {
-    const res = await axios.get(
-      `${pathServer}/peticionesUsuarios/GetTiposPeticiones`,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .get(
+        `${pathServer}/peticionesUsuarios/GetTiposPeticiones`,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
   public async getByRol(form: {}) {
     const res = await axios.post(
       `${pathServer}/users/getByRol`,
       form,
       await this.defaults()
-    )
-    return res
+    );
+    return res;
   }
 
   public async GetPeticionesFiltros(form: {}) {
-    const res = await axios.post(
-      `${pathServer}/peticionesUsuarios/getPeticionesFiltros`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .post(
+        `${pathServer}/peticionesUsuarios/getPeticionesFiltros`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
   public async getPeticionId(form: {}) {
-    const res = await axios.post(
-      `${pathServer}/peticionesUsuarios/getPeticionId`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .post(
+        `${pathServer}/peticionesUsuarios/getPeticionId`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
   public async getUserName() {
-    const res = await axios.get(
-      `${pathServer}/users/getUserName`,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .get(`${pathServer}/users/getUserName`, await this.defaults())
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
   public async getComentarios(form: {}) {
-    const res = await axios.post(
-      `${pathServer}/peticionesUsuarios/getComentarios`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .post(
+        `${pathServer}/peticionesUsuarios/getComentarios`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
   //    function dehash() {
@@ -897,35 +881,32 @@ export class ApiService {
   //   return str;
   // }
 
-
   public async getRevisoresPeticion(form: {}) {
-    const res = await axios.post(
-      `${pathServer}/peticionesUsuarios/getRevisores`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .post(
+        `${pathServer}/peticionesUsuarios/getRevisores`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
   public async getManuales() {
-    const res = await axios.get(
-      `${pathServer}/manuales/get`,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .get(`${pathServer}/manuales/get`, await this.defaults())
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
-
-
-
 
   // crear formulario smart-link
   public async saveSmartLink(user: {}): Promise<any> {
@@ -1027,33 +1008,36 @@ export class ApiService {
   }
 
   public async acortarUrl(form: {}): Promise<any> {
-    const res = await axios.post(
-      `${pathServer}/herramientas/acortarurl`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .post(
+        `${pathServer}/herramientas/acortarurl`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
 
   public async analizarTexto(form: {}): Promise<any> {
-    const res = await axios.post(
-      `${pathServer}/textanalitycs/analizartexto`,
-      form,
-      await this.defaults()
-    ).then(response => {
-      return response
-    })
-      .catch(error => {
-        return error.response
+    const res = await axios
+      .post(
+        `${pathServer}/textanalitycs/analizartexto`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
       })
-    return res
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
   }
-
 }
 
 export default new ApiService();
