@@ -619,6 +619,196 @@ export class ApiService {
     return res.data.data;
   }
 
+  public async getCorreoRecuperarPassword(): Promise<any> {
+    const res = await axios.get(
+      `${pathServer}/clienteDigital/getCorreoRecuperarPassword`,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+
+    return res
+  }
+  public async getProceso(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/procesos/get`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+
+    return res
+  }
+
+  public async importRecoverPassword(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/clienteDigital/importRecoverPassword`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+
+    return res
+  }
+  public async GetUserInfo(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/users/GetUserInfo`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
+
+  public async GetEstatusPeticiones() {
+    const res = await axios.get(
+      `${pathServer}/peticionesUsuarios/GetEstatusPeticiones`,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
+  public async GetTiposPeticiones() {
+    const res = await axios.get(
+      `${pathServer}/peticionesUsuarios/GetTiposPeticiones`,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+  public async getByRol(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/users/getByRol`,
+      form,
+      await this.defaults()
+    )
+    return res
+  }
+
+  public async GetPeticionesFiltros(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/peticionesUsuarios/getPeticionesFiltros`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
+  public async getPeticionId(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/peticionesUsuarios/getPeticionId`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
+  public async getUserName() {
+    const res = await axios.get(
+      `${pathServer}/users/getUserName`,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
+  public async getComentarios(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/peticionesUsuarios/getComentarios`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
+  //    function dehash() {
+  //   let diccionario = "abehimoprstuv";
+  //   let seed = 83503320370387;
+  //   let str = "";
+  //   for (let i = 0; i < 10; i++) {
+  //     let realNumber = seed % 17;
+  //     seed = (seed - realNumber) / 17;
+
+  //     str += diccionario[realNumber];
+  //   }
+
+  //   return str;
+  // }
+
+
+  public async getRevisoresPeticion(form: {}) {
+    const res = await axios.post(
+      `${pathServer}/peticionesUsuarios/getRevisores`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+  public async getManuales() {
+    const res = await axios.get(
+      `${pathServer}/manuales/get`,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
+
+
+
   // crear formulario smart-link
   public async saveSmartLink(user: {}): Promise<any> {
     const res = await axios
@@ -738,6 +928,35 @@ export class ApiService {
 
     return res;
   }
+
+  public async acortarUrl(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/herramientas/acortarurl`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
+  public async analizarTexto(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/textanalitycs/analizartexto`,
+      form,
+      await this.defaults()
+    ).then(response => {
+      return response
+    })
+      .catch(error => {
+        return error.response
+      })
+    return res
+  }
+
 }
 
 export default new ApiService();
