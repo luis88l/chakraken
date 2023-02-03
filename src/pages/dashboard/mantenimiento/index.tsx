@@ -1,7 +1,7 @@
 import { getSession } from "next-auth/react";
-import Kimagen from "../image/KImage";
+import Kimagen from "../../../components/image/KImage";
 import { Box } from "@chakra-ui/react";
-import KPage from "../page/KPage";
+import KPage from "../../../components/page/KPage";
 
 export default function Mantenimiento(): any {
   return (

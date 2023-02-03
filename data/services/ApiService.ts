@@ -321,7 +321,6 @@ export class ApiService {
         return response;
       })
       .catch((error) => {
-        console.log(error);
         return error.response;
       });
     return result;
@@ -383,7 +382,6 @@ export class ApiService {
         return response;
       })
       .catch((error) => {
-        console.log(error);
         return error.response;
       });
     return result;
@@ -616,6 +614,7 @@ export class ApiService {
       .catch((error) => {
         return error.response;
       });
+
     return res.data.data;
   }
 
@@ -624,59 +623,68 @@ export class ApiService {
       `${pathServer}/clienteDigital/getCorreoRecuperarPassword`,
       await this.defaults()
     ).then(response => {
-      return response
+      return response;
     })
       .catch(error => {
-        return error.response
+        return error.response;
       })
 
-    return res
+    return res;
   }
-  public async getProceso(form: {}) {
+
+  public async getProceso(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/procesos/get`,
       form,
       await this.defaults()
     ).then(response => {
-      return response
+      return response;
     })
-      .catch(error => {
-        return error.response
-      })
+    .catch(error => {
 
-    return res
+      return error.response;
+
+    })
+
+    return res;
   }
 
-  public async importRecoverPassword(form: {}) {
-    const res = await axios.post(
+  public async importRecoverPassword(form: {}): Promise<any> {
+  const res = await axios
+      .post(
       `${pathServer}/clienteDigital/importRecoverPassword`,
       form,
       await this.defaults()
     ).then(response => {
-      return response
+      return response;
     })
       .catch(error => {
-        return error.response
+        return error.response;
       })
 
-    return res
+    return res;
   }
-  public async GetUserInfo(form: {}) {
+
+  public async GetUserInfo(form: {}): Promise<any> {
+
     const res = await axios.post(
+
       `${pathServer}/users/GetUserInfo`,
       form,
       await this.defaults()
-    ).then(response => {
+    )
+    .then(response => {
       return response
     })
-      .catch(error => {
-        return error.response
-      })
+    .catch(error => {
+      return error.response
+    })
+
     return res
   }
 
 
-  public async GetEstatusPeticiones() {
+  public async GetEstatusPeticiones(): Promise<any> {
     const res = await axios.get(
       `${pathServer}/peticionesUsuarios/GetEstatusPeticiones`,
       await this.defaults()
@@ -689,7 +697,7 @@ export class ApiService {
     return res
   }
 
-  public async GetTiposPeticiones() {
+  public async GetTiposPeticiones(): Promise<any> {
     const res = await axios.get(
       `${pathServer}/peticionesUsuarios/GetTiposPeticiones`,
       await this.defaults()
@@ -701,7 +709,8 @@ export class ApiService {
       })
     return res
   }
-  public async getByRol(form: {}) {
+
+  public async getByRol(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/users/getByRol`,
       form,
@@ -710,7 +719,7 @@ export class ApiService {
     return res
   }
 
-  public async GetPeticionesFiltros(form: {}) {
+  public async GetPeticionesFiltros(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/peticionesUsuarios/getPeticionesFiltros`,
       form,
@@ -724,7 +733,7 @@ export class ApiService {
     return res
   }
 
-  public async getPeticionId(form: {}) {
+  public async getPeticionId(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/peticionesUsuarios/getPeticionId`,
       form,
@@ -738,7 +747,7 @@ export class ApiService {
     return res
   }
 
-  public async getUserName() {
+  public async getUserName(): Promise<any> {
     const res = await axios.get(
       `${pathServer}/users/getUserName`,
       await this.defaults()
@@ -751,7 +760,7 @@ export class ApiService {
     return res
   }
 
-  public async getComentarios(form: {}) {
+  public async getComentarios(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/peticionesUsuarios/getComentarios`,
       form,
@@ -765,22 +774,7 @@ export class ApiService {
     return res
   }
 
-  //    function dehash() {
-  //   let diccionario = "abehimoprstuv";
-  //   let seed = 83503320370387;
-  //   let str = "";
-  //   for (let i = 0; i < 10; i++) {
-  //     let realNumber = seed % 17;
-  //     seed = (seed - realNumber) / 17;
-
-  //     str += diccionario[realNumber];
-  //   }
-
-  //   return str;
-  // }
-
-
-  public async getRevisoresPeticion(form: {}) {
+  public async getRevisoresPeticion(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/peticionesUsuarios/getRevisores`,
       form,
@@ -793,20 +787,20 @@ export class ApiService {
       })
     return res
   }
-  public async getManuales() {
+
+  public async getManuales(): Promise<any> {
+
     const res = await axios.get(
       `${pathServer}/manuales/get`,
       await this.defaults()
     ).then(response => {
-      return response
+      return response;
     })
       .catch(error => {
-        return error.response
+        return error.response;
       })
-    return res
+    return res;
   }
-
-
 
 
   // crear formulario smart-link
@@ -897,7 +891,7 @@ export class ApiService {
     );
     return res;
   }
-  
+
   // Velocidad - WEB
   public async getDominios(ids: string[]): Promise<any> {
     const res = await axios
@@ -929,6 +923,7 @@ export class ApiService {
     return res;
   }
 
+
   public async acortarUrl(form: {}): Promise<any> {
     const res = await axios.post(
       `${pathServer}/herramientas/acortarurl`,
@@ -957,6 +952,84 @@ export class ApiService {
     return res
   }
 
+  public async GetBudgetData(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/wallet/getBudgetData`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async deletePagina(data: {}): Promise<any> {
+    const result = await axios
+      .post(`${pathServer}/wallet/deletePagina`, data, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return result;
+  }
+
+  public async savePagina(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/wallet/savePagina`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  }
+
+  public async updatePagina(data: {}): Promise<any> {
+    const result = await axios
+      .post(`${pathServer}/wallet/updatePagina`, data, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return result;
+  }
+
+  public async GetConfLightWallet(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/wallet/getAll`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  }
+
+  public async getBudgetPagina(form: {}): Promise<any>  {
+    const res = await axios
+      .post(
+        `${pathServer}/wallet/performance-budget-pagina`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  }
 }
 
 export default new ApiService();

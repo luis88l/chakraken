@@ -1,34 +1,47 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { getSession } from "next-auth/react";
-import { KTableLayout } from "../../../../components/tableLayout/KTableLayout";
-import { createColumnHelper } from "@tanstack/react-table";
-import { Box, Stack, Switch } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { DataGrid } from "devextreme-react";
+import { Scrolling, Column, ColumnFixing } from "devextreme-react/data-grid";
+import { Switch } from "devextreme-react/switch";
+import 'devextreme/dist/css/dx.light.css' ; 
+
 
 export interface KTablaProps {
   DataTabla: any[];
 }
 
 export function Contenido(props: KTablaProps): any {
-  // console.log("🚀 ~ file: Componente.tsx:14 ~ props", props)
-  const columnHelper = createColumnHelper<any>();
-  const columns = [
-    columnHelper.accessor("sn_auditar", {
-      cell: (info) => {
-        return (
-          <Stack align="center" direction="row">
-            <Switch size="sm" isChecked={info.getValue()} />
-          </Stack>
-        );
-      },
-      header: "Auditar",
-    }),
-    columnHelper.accessor("nb_pagina", {
-      cell: (info) => info.getValue(),
-      header: "Pagina",
-    }),
-  ];
+  console.log("🚀 ~ file: Componente.tsx:14 ~ props", props)
+
+  const onChangeEstatusAuditoria = (e: any) => {
+    console.log(e)
+  }
+
+  const AuditoriaRender = (cell: any) => {
+    return <Switch id={cell.data.id_pagina} value={cell.value} onValueChanged={onChangeEstatusAuditoria} />
+  }
+
   return (
-    <Box overflow="scroll" h={"700px"} width="100%">
-      <KTableLayout columns={columns} data={props.DataTabla} />
+    <Box width="100%" h='auto'>
+      <DataGrid
+        height={'600'}
+        dataSource={props.DataTabla}
+        showBorders
+      >
+        <Scrolling mode="virtual" />
+        <ColumnFixing enabled={true} />
+        <Column
+          caption={'Auditar'}
+          dataField={"sn_auditar"}
+          editCellRender={AuditoriaRender}
+          fixed
+          width={'10%'}
+        />
+        <Column dataField={"nb_pagina"} caption='Pagina' fixed width={'30%'}/>
+        <Column dataField={"de_ruta"} caption='Ruta' />
+      </DataGrid>
+
     </Box>
   );
 }

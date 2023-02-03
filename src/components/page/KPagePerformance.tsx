@@ -1,12 +1,11 @@
 import { Box, Text } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 export interface KPagePerformanceProps {
   title: string;
   children?: any;
-  Filtros?: any;
   Menu?: any;
-  VisibleFiltros: boolean;
-  TamañoContenedor?: string;
+  Color?: string;
 }
 
 export default function KPagePerformance(props: KPagePerformanceProps): any {
@@ -30,25 +29,26 @@ export default function KPagePerformance(props: KPagePerformanceProps): any {
           {props.Menu}
         </Box>
       </Box>
-      {props.VisibleFiltros && (
-        <Box
-          bgColor="#fff"
-          p={10}
-          width="99%"
-          h={'200px'}
-          borderWidth="3px"
-          borderRadius="sm"
-          marginBottom={"1%"}
-          marginTop={"1%"}
-          letterSpacing={1}
-        >
-          {props.Filtros}
-        </Box>
-      )}
 
-     { /* eslint-disable-next-line @typescript-eslint/strict-boolean-expressions */}
-      <Box width="100%" bgColor="#fff" h={!props.TamañoContenedor ? props.TamañoContenedor : 'auto'}>
-        {props.children}
+      <Box width="100%">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.99 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.333 }}
+          style={{ width: "100%" }}
+        >
+          <Box
+            p={6}
+            bgColor="#fff"
+            borderRadius={15}
+            width="100%"
+            minH="calc(87vh)"
+            maxH="calc(87vh)"
+            display="flex"
+          >
+            {props.children}
+          </Box>
+        </motion.div>
       </Box>
     </Box>
   );
