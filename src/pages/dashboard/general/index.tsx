@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import Mantenimiento from "../../../components/mantenimiento";
+import Mantenimiento from "../mantenimiento";
 
 export default function Genereal(): any {
   return <Mantenimiento />;

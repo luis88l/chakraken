@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import Mantenimineto from "../../../components/mantenimiento";
+import Mantenimineto from "../mantenimiento";
 
 export default function App(): any {
   return <Mantenimineto />;

@@ -321,7 +321,6 @@ export class ApiService {
         return response;
       })
       .catch((error) => {
-        console.log(error);
         return error.response;
       });
     return result;
@@ -383,7 +382,6 @@ export class ApiService {
         return response;
       })
       .catch((error) => {
-        console.log(error);
         return error.response;
       });
     return result;
@@ -707,7 +705,7 @@ export class ApiService {
     );
     return res;
   }
-  
+
   // Velocidad - WEB
   public async getDominios(ids: string[]): Promise<any> {
     const res = await axios
@@ -738,6 +736,86 @@ export class ApiService {
 
     return res;
   }
+
+  public async GetBudgetData(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/wallet/getBudgetData`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async deletePagina(data: {}): Promise<any> {
+    const result = await axios
+      .post(`${pathServer}/wallet/deletePagina`, data, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return result;
+  }
+
+  public async savePagina(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/wallet/savePagina`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  }
+
+  public async updatePagina(data: {}): Promise<any> {
+    const result = await axios
+      .post(`${pathServer}/wallet/updatePagina`, data, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return result;
+  }
+
+  public async GetConfLightWallet(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/wallet/getAll`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  }
+
+  public async getBudgetPagina(form: {}): Promise<any>  {
+    const res = await axios
+      .post(
+        `${pathServer}/wallet/performance-budget-pagina`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  }
+  
 }
 
 export default new ApiService();
