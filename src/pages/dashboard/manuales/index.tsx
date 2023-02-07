@@ -4,7 +4,6 @@ import KPage from "../../../components/page/KPage";
 import ApiService from "../../../../data/services/ApiService";
 import { useQuery } from "react-query";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
-import { FiUpload } from "react-icons/fi";
 
 import {
   Box,
@@ -19,8 +18,6 @@ import {
   Image,
   Heading,
   SimpleGrid,
-  Th,
-  Td,
   CardFooter,
   Modal,
   ModalBody,
@@ -32,8 +29,6 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { PlusSquareIcon } from "@chakra-ui/icons";
-import { OPTIMIZED_FONT_PROVIDERS } from "next/dist/shared/lib/constants";
-import { FILE } from "dns";
 
 // interface Props {
 //   onRef?: Function;
@@ -76,18 +71,9 @@ import { FILE } from "dns";
 //     nombreportadaaux: string
 //     eliminando: string
 // }
-interface IFile {
-  file: File;
-  uploadProgress: number;
-  uploadError: string;
-}
 
 export default function Manuales(): any {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const [selectedFiles, setSelectedFiles] = useState<
-    IFile[] | undefined | null
-  >([]);
 
   const [stateObj, setStateObject] = useState<any>({
     rowsPerPage: 10,
@@ -113,12 +99,9 @@ export default function Manuales(): any {
     eliminando: "",
   });
 
-  const {
-    isLoading,
-    data: tableros,
-    isSuccess,
-  } = useQuery("manuales", async () => {
+  const { isLoading, isSuccess } = useQuery("manuales", async () => {
     window.addEventListener("keydown", (e) => {
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (e.key === "Escape" && stateObj.openSave) {
         closeAdd();
       }
@@ -127,8 +110,8 @@ export default function Manuales(): any {
     Get();
   });
 
-  const Get = () => {
-    ApiService.getManuales().then(
+  const Get = (): any => {
+    return ApiService.getManuales().then(
       (item: { data: { status: number; data: [] } }) => {
         if (item.data.status === 200) {
           setStateObject({
@@ -140,7 +123,8 @@ export default function Manuales(): any {
     );
   };
 
-  const closeAdd = () => {
+  const closeAdd = (): any => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     setStateObject({
       ...stateObj,
       name: "",
@@ -152,13 +136,14 @@ export default function Manuales(): any {
       nombreportada: "",
       portadaaux: "",
       nombreportadaaux: "",
+      // eslint-disable-next-line no-sequences
     }),
       () => {
         openAdd();
       };
   };
 
-  const openAdd = () => {
+  const openAdd = (): any => {
     setStateObject({
       ...stateObj,
       openSave: stateObj.openSave,
@@ -169,76 +154,25 @@ export default function Manuales(): any {
     return <KSkeletonPage />;
   }
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const currentSelected: File[] = Array.prototype.slice.call(
-      event?.target?.files
-    );
-    const modified = currentSelected.map((file) => {
-      return {
-        file,
-        uploadError: "test",
-        uploadProgress: 20,
-      };
-    });
+  // const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>):any => {
+  //   const currentSelected: File[] = Array.prototype.slice.call(
+  //     event?.target?.files
+  //   );
+  //   const modified = currentSelected.map((file) => {
+  //     return {
+  //       file,
+  //       uploadError: "test",
+  //       uploadProgress: 20,
+  //     };
+  //   });
 
-    setSelectedFiles(modified);
-    Save(modified[0].file);
-  };
-
-  const Save = (file: any) => {
-    console.log(file, " el archvonn babababb");
-
-    const filesCaptura = new FormData();
-    filesCaptura.append("fileToImport", file);
-
-    ApiService.importRecoverPassword(filesCaptura).then((response) => {
-      if (response.data.status === 200) {
-        console.log("Archivo guardado correctamente");
-        Get();
-        return;
-      }
-      console.log("Tuvimos algun problema al guardar el archivo");
-    });
-  };
-
-  function dehash() {
-    const diccionario = "abehimoprstuv";
-    let seed = 83503320370387;
-    let str = "";
-    for (let i = 0; i < 10; i++) {
-      const realNumber = seed % 17;
-      console.log(realNumber, "REALNUMBER");
-      console.log(seed);
-      seed = (seed - realNumber) / 17;
-      // console.log(seed);
-
-      str += diccionario[realNumber];
-      console.log(str);
-    }
-
-    return str;
-  }
-
-  // console.log(dehash());
-
-  // 83503320370387;
-  function hash(x: any) {
-    let seed = 41;
-    const diccionario = "abehimoprstuv";
-    for (let i = 0; i < x.length; i++) {
-      console.log(seed * 17);
-      console.log(diccionario.indexOf(x[i]));
-
-      seed = seed * 17 + diccionario.indexOf(x[i]);
-    }
-    console.log(seed, "pedro");
-
-    return seed;
-  }
+  //   setSelectedFiles(modified);
+  //   Save(modified[0].file);
+  // };
 
   const onChangeHandle = async (
     e: React.ChangeEvent<HTMLInputElement & HTMLTextAreaElement>
-  ) => {
+  ): Promise<any> => {
     setStateObject({
       ...stateObj,
       [e.target.name]: e.target.value,
@@ -253,11 +187,11 @@ export default function Manuales(): any {
   //  };
   console.log(stateObj);
 
-  const subirPortada = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const subirPortada = (e: React.ChangeEvent<HTMLInputElement>): any => {
     console.log(e.target.files, "JALA PA");
 
     const files = e.target.files;
-    let file = { File: {}, name: "", size: 0, type: "" };
+    let file: any = { File: {}, name: "", size: 0, type: "" };
 
     for (let i = 0; i < 1; i++) {
       if (files != null) file = files[i];
@@ -270,6 +204,7 @@ export default function Manuales(): any {
         const fileInfo = {
           name: file.name,
           type: file.type,
+          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
           size: Math.round(file.size / 1000) + " kB",
           base64: reader.result as string,
           // file: file,

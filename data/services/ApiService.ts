@@ -68,12 +68,16 @@ if (hostname === "localhost") {
 }
 
 export class ApiService {
-  static getTokenUser(form: FormData) {
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  static getTokenUser() {
     throw new Error("Method not implemented.");
   }
-  static pushNotificationsGet(form: FormData) {
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  static pushNotificationsGet() {
     throw new Error("Method not implemented.");
   }
+
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   public async defaults() {
     const session: any = await getSession();

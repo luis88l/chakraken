@@ -158,9 +158,10 @@ export default function controlCambios(): any {
   };
 
   const openEdit = (item: any): any => {
-    const objUsuario = JSON.parse(
-      localStorage.getItem("_user") != null || "{}"
-    );
+    // const objUsuario = JSON.parse(
+    //   localStorage.getItem("_user")
+    // );
+    const objUsuario = { id_usuario: "" };
     let snBloquear = true;
     let snBloquearEstatus = true;
     if (item.id_estatusPeticion !== 105 && item.id_estatusPeticion !== 102) {
