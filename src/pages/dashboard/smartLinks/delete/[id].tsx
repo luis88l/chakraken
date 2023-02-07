@@ -79,7 +79,7 @@ export default function Bases(): any {
     setActivo(true);
     const formData = new FormData();
     formData.append("id_page", smartDetails.id_page);
-    var id = smartDetails.id_page;
+    const id = smartDetails.id_page;
     deleteSmartLink.mutate(id);
   };
 

@@ -79,7 +79,7 @@ export default function TabEnvio(): any {
     ApiService.getMedios().then((item: any) => {
       if (item.data.status === 200) {
         setItemsMedio(item.data.data);
-        return;
+        
       }
     });
 
@@ -87,21 +87,21 @@ export default function TabEnvio(): any {
       if (item.data.status === 200) {
         setItemsFuente(item.data.data);
 
-        return;
+        
       }
     });
 
     ApiService.getTopics().then((item: any) => {
       if (item.data.status === 200) {
         setItemsTopic(item.data.data);
-        return;
+        
       }
     });
 
     ApiService.getFuentes().then((item: any) => {
       if (item.data.status === 200) {
         setItemsFuente(item.data.data);
-        return;
+        
       }
     });
   }, []);
@@ -154,13 +154,13 @@ export default function TabEnvio(): any {
     // }
 
     let deMmedio: string = "";
-    for (var i = 0; i < itemsMedio.length; i++) {
+    for (let i = 0; i < itemsMedio.length; i++) {
       if (itemsMedio[i].id_medio === id_medioPush) {
         deMmedio = itemsMedio[i].de_medio;
       }
     }
     let deFuente = "";
-    for (var x = 0; x < itemsFuente.length; x++) {
+    for (let x = 0; x < itemsFuente.length; x++) {
       if (itemsFuente[x].id_fuente === id_fuentePush) {
         deFuente = itemsFuente[x].de_fuente;
       }
@@ -256,7 +256,7 @@ export default function TabEnvio(): any {
         // );
         Get();
         closeAdd();
-        return;
+        
       }
       // toast.error(
       //   <div>
@@ -276,18 +276,18 @@ export default function TabEnvio(): any {
       if (item.data.status === 200) {
         if (items.length < numeroregistros) {
           console.log("entro en el primer if");
-          var itemsArray = items;
+          const itemsArray = items;
 
-          var nuevoitems = itemsArray.concat(item.data.data.rows);
+          const nuevoitems = itemsArray.concat(item.data.data.rows);
 
           setItems(nuevoitems);
-          return;
+          
         } else {
           if (items.length === 0) {
             setItems(item.data.data.rows);
             setNumeroRegistros(item.data.data.count);
           }
-          return;
+          
         }
       }
     });
@@ -316,10 +316,10 @@ export default function TabEnvio(): any {
 
     ApiService.getTokenUser(form).then((item: any) => {
       if (item.status === 200) {
-        let token = item.data.data[0].de_tokenPush;
+        const token = item.data.data[0].de_tokenPush;
 
         setTokenUsuarioPrueba(token);
-        return;
+        
       }
       // toast.error(<div><i className="uil uil-exclamation-triangle"></i>Problema al enviar notificación</div>)
     });

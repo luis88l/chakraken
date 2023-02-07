@@ -140,7 +140,7 @@ export default function Web(): any {
             });
             innerHtml += "</tbody>";
             const tableRoot = tooltipEl.querySelector("#tableToolTip");
-            // @ts-ignore
+            // @ts-expect-error
             tableRoot.innerHTML = innerHtml;
           }
           const position = this._chart.canvas.getBoundingClientRect();

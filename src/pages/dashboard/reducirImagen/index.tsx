@@ -89,16 +89,16 @@ export default function ShortUrl(): any {
   console.log(imagenAReducir);
 
   const descargarImagen = () => {
-    let byteCharacters = atob(imagenReducida.replace(/^[^,]+,/, ""));
+    const byteCharacters = atob(imagenReducida.replace(/^[^,]+,/, ""));
 
-    let byteNumbers = new Array(byteCharacters.length);
-    for (var i = 0; i < byteCharacters.length; i++) {
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
       byteNumbers[i] = byteCharacters.charCodeAt(i);
     }
 
-    let byteArray = new Uint8Array(byteNumbers);
+    const byteArray = new Uint8Array(byteNumbers);
 
-    let blob = new Blob([byteArray], {
+    const blob = new Blob([byteArray], {
       type: infoImagenReducida.type,
     });
     let newVariable: any;
@@ -106,10 +106,10 @@ export default function ShortUrl(): any {
     newVariable = window.navigator;
 
     if (newVariable.msSaveBlob) {
-      let filename = infoImagenReducida.name;
+      const filename = infoImagenReducida.name;
       newVariable.msSaveBlob(blob, filename);
     } else {
-      let link = document.createElement("a");
+      const link = document.createElement("a");
 
       link.href = URL.createObjectURL(blob);
 

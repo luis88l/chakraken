@@ -135,7 +135,7 @@ export default function Manuales(): any {
             ...stateObj,
             items: item.data.data,
           });
-          return;
+          
         }
       }
     );
@@ -203,15 +203,15 @@ export default function Manuales(): any {
   };
 
   function dehash() {
-    let diccionario = "abehimoprstuv";
+    const diccionario = "abehimoprstuv";
     let seed = 83503320370387;
     let str = "";
     for (let i = 0; i < 10; i++) {
-      let realNumber = seed % 17;
+      const realNumber = seed % 17;
       console.log(realNumber, "REALNUMBER");
       console.log(seed);
       seed = (seed - realNumber) / 17;
-      //console.log(seed);
+      // console.log(seed);
 
       str += diccionario[realNumber];
       console.log(str);
@@ -225,7 +225,7 @@ export default function Manuales(): any {
   // 83503320370387;
   function hash(x: any) {
     let seed = 41;
-    let diccionario = "abehimoprstuv";
+    const diccionario = "abehimoprstuv";
     for (let i = 0; i < x.length; i++) {
       console.log(seed * 17);
       console.log(diccionario.indexOf(x[i]));
@@ -257,18 +257,18 @@ export default function Manuales(): any {
   const subirPortada = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.files, "JALA PA");
 
-    let files = e.target.files;
+    const files = e.target.files;
     let file = { File: {}, name: "", size: 0, type: "" };
 
-    for (var i = 0; i < 1; i++) {
+    for (let i = 0; i < 1; i++) {
       if (files != null) file = files[i];
 
-      let reader = new FileReader();
+      const reader = new FileReader();
 
       reader.readAsDataURL(file);
 
       reader.onload = () => {
-        var fileInfo = {
+        const fileInfo = {
           name: file.name,
           type: file.type,
           size: Math.round(file.size / 1000) + " kB",
@@ -297,7 +297,7 @@ export default function Manuales(): any {
               marginLeft={2}
               leftIcon={<PlusSquareIcon />}
               onClick={onOpen}
-              //onClick={() => hash("perseverar")}
+              // onClick={() => hash("perseverar")}
             >
               Agregar manual
             </Button>

@@ -61,9 +61,9 @@ export default function Tendencias(): any {
 
     ApiService.getTwitter(form).then((item: any) => {
       if (item.data.status === 200) {
-        var i = data.concat(item.data.data);
+        const i = data.concat(item.data.data);
         setData(i);
-        return;
+        
       }
     });
   };

@@ -59,7 +59,7 @@ export default function ShortUrl(): any {
         setFrasesclave(item.data.fclaves);
         setSentiment(item.data.sentiment);
         setCargando(false);
-        return;
+        
       }
     });
   };
