@@ -126,6 +126,7 @@ export default function RptPerformance(props: KReportePerformanceProps): any {
     <KPage
       title={"Reporte performance"}
       Menu={props.MenuWeb}
+      // @ts-expect-error
       Filtros={
         <Flex width="100%">
           <div style={{ contain: "flex-wrap", width: "100%" }}>
