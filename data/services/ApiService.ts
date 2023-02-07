@@ -83,6 +83,18 @@ export class ApiService {
     return defaults;
   }
 
+  public async defaultsJSON(): Promise<any> {
+    const session: any = await getSession();
+    const defaults = {
+      headers: {
+        "Request-Source": "kraken",
+        "Content-Type": "application/json",
+        authorization: session.user.data,
+      },
+    };
+    return defaults;
+  }
+
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   public async commerceDefaults() {
     const defaults = {
@@ -553,6 +565,32 @@ export class ApiService {
     return res;
   }
 
+  public async deleteMedios(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/medios/delete`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log("ERROR EN AXIOS");
+        return error.response;
+      });
+    return res;
+  }
+
+  public async saveMedios(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/medios/save`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log("ERROR EN AXIOS");
+        return error.response;
+      });
+    return res;
+  }
+
   public async getFuentes(): Promise<any> {
     const res = await axios.get(
       `${pathServer}/fuentes/get`,
@@ -561,9 +599,39 @@ export class ApiService {
     return res;
   }
 
+  public async deleteFuentes(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/fuentes/delete`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log("ERROR EN AXIOS");
+        return error.response;
+      });
+    return res;
+  }
+
+  public async saveFuentes(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/fuentes/save`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log("ERROR EN AXIOS");
+        return error.response;
+      });
+    return res;
+  }
+
   public async pushNotificationsSave(form: {}): Promise<any> {
     const res = await axios
-      .post(`${pathServer}/pushNotifications/save`, form, await this.defaults())
+      .post(
+        `${pathServer}/pushNotifications/save`,
+        form,
+        await this.defaultsJSON()
+      )
       .then((response) => {
         return response;
       })
@@ -574,8 +642,34 @@ export class ApiService {
   }
 
   public async getTopics(): Promise<any> {
-    const res = await axios.get(
-      `${pathServer}/topics/get`,
+    const res = await axios
+      .get(`${pathServer}/topics/get`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async deleteTopics(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/topics/delete`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        console.log("ERROR EN AXIOS");
+        return error.response;
+      });
+    return res;
+  }
+
+  public async saveTopics(form: {}): Promise<any> {
+    const res = await axios.post(
+      `${pathServer}/topics/save`,
+      form,
       await this.defaults()
     );
     return res;
@@ -635,6 +729,7 @@ export class ApiService {
   }
 
   public async getProceso(form: {}): Promise<any> {
+
     const res = await axios
       .post(`${pathServer}/procesos/get`, form, await this.defaults())
       .then((response) => {
@@ -673,7 +768,6 @@ export class ApiService {
       .catch((error) => {
         return error.response;
       });
-
     return res;
   }
 
@@ -689,8 +783,13 @@ export class ApiService {
       .catch((error) => {
         return error.response;
       });
+
     return res;
   }
+
+
+
+
 
   public async GetTiposPeticiones(): Promise<any> {
     const res = await axios
@@ -749,6 +848,7 @@ export class ApiService {
   }
 
   public async getUserName(): Promise<any> {
+
     const res = await axios
       .get(`${pathServer}/users/getUserName`, await this.defaults())
       .then((response) => {
@@ -1036,4 +1136,4 @@ export class ApiService {
   }
 }
 
-export default new ApiService();
+export default new ApiService()

@@ -5,9 +5,9 @@ import TabEnvio from "./TabEnvio";
 import TabHistorial from "./TabHistorial";
 import TabAjustes from "./TabAjustes";
 import { Box, Tab, Tabs, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
-import ApiService from "../../../../data/services/ApiService";
 
 export default function PushNotifications(): any {
+<<<<<<< HEAD
   const [tokenUsuarioPrueba, setTokenUsuarioPrueba] = useState("");
   const [numeroregistros, setNumeroRegistros] = useState(0);
   const [items, setItems] = useState([]);
@@ -63,6 +63,8 @@ export default function PushNotifications(): any {
   //   void GetTwitter();
   // }, [company]);
 
+=======
+>>>>>>> 6e26512723a5e3883024d87e19034c025ddd5931
   return (
     <KPage title="Notificaciones Push">
       <Box>
@@ -76,9 +78,7 @@ export default function PushNotifications(): any {
             <TabPanel>
               <TabEnvio />
             </TabPanel>
-            <TabPanel>
-              <TabHistorial />{" "}
-            </TabPanel>
+            <TabPanel></TabPanel>
             <TabPanel>
               <TabAjustes />
             </TabPanel>
