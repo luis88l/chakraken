@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getSession } from "next-auth/react";
 import React, { useState, useEffect } from "react";
 import KPage from "../../../components/page/KPage";
@@ -11,7 +12,6 @@ export default function PushNotifications(): any {
   const [tokenUsuarioPrueba, setTokenUsuarioPrueba] = useState("");
   const [numeroregistros, setNumeroRegistros] = useState(0);
   const [items, setItems] = useState([]);
-  const d = "";
   useEffect(() => {
     void GetTokenUser();
     void Get();
@@ -36,17 +36,16 @@ export default function PushNotifications(): any {
 
     // form.append("numeropagina", this.state.pageEnvio as any);
     // form.append("filaspagina", this.state.rowsPerPageEnvio as any);
-    ApiService.pushNotificationsGet(form).then((item: any) => {
+    return await ApiService.pushNotificationsGet(form).then((item: any) => {
       if (item.data.status === 200) {
         // console.log('DATA de push', item.data)
         // this.setState({
         //     items: item.data.data.rows,
         //     numeroregistros: item.data.data.count
         // })
+        const itemsArray: any = items;
 
         if (items.length < numeroregistros) {
-          var itemsArray: any = items;
-
           const nuevoitems = items.concat(item.data.data.rows);
 
           setItems(nuevoitems);
@@ -59,9 +58,6 @@ export default function PushNotifications(): any {
       }
     });
   };
-  //   useEffect(() => {
-  //   void GetTwitter();
-  // }, [company]);
 
   return (
     <KPage title="Notificaciones Push">

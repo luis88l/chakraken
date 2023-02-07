@@ -17,7 +17,6 @@ import {
   Tbody,
   Tr,
   Th,
-  Td,
   TableContainer,
 } from "@chakra-ui/react";
 import ApiService from "../../../../data/services/ApiService";

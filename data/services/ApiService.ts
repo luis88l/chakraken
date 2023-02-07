@@ -735,7 +735,6 @@ export class ApiService {
   }
 
   public async getProceso(form: {}): Promise<any> {
-
     const res = await axios
       .post(`${pathServer}/procesos/get`, form, await this.defaults())
       .then((response) => {
@@ -792,10 +791,6 @@ export class ApiService {
 
     return res;
   }
-
-
-
-
 
   public async GetTiposPeticiones(): Promise<any> {
     const res = await axios
@@ -854,7 +849,6 @@ export class ApiService {
   }
 
   public async getUserName(): Promise<any> {
-
     const res = await axios
       .get(`${pathServer}/users/getUserName`, await this.defaults())
       .then((response) => {
@@ -1142,4 +1136,4 @@ export class ApiService {
   }
 }
 
-export default new ApiService()
+export default new ApiService();

@@ -1,5 +1,6 @@
 import { getSession } from "next-auth/react";
-import React, { useState } from "react";
+
+import React from "react";
 // import KPage from "../../../components/page/KPage";
 import {
   TableContainer,
@@ -15,25 +16,17 @@ import {
 } from "@chakra-ui/react";
 
 export default function TabHistorial(): any {
-  const [notification, setNotificatiion] = useState({
-    titulo: "",
-    topic: "",
-    horas: "",
-    url: "",
-    mensaje: "",
-    url_imagen: "",
-    campa: "",
-    fecha: "",
-    tokenUsuario: "",
-  });
-
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unused-vars
-  const onChangeHandle = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNotificatiion({
-      ...notification,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const [notification, setNotificatiion] = useState({
+  //   titulo: "",
+  //   topic: "",
+  //   horas: "",
+  //   url: "",
+  //   mensaje: "",
+  //   url_imagen: "",
+  //   campa: "",
+  //   fecha: "",
+  //   tokenUsuario: "",
+  // });
 
   return (
     <Box>
