@@ -49,19 +49,17 @@ export default function Tendencias(): any {
     });
   };
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const GetMas = () => {
+  const GetMas = (): any => {
     setOffset(offset + 10);
     GetRoles();
   };
 
-  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const GetRoles = () => {
+  const GetRoles = (): any => {
     const form = new FormData();
     form.append("company", company);
     form.append("offset", offset.toString());
 
-    void ApiService.getTwitter(form).then((item: any) => {
+    return ApiService.getTwitter(form).then((item: any) => {
       if (item.data.status === 200) {
         const i = data.concat(item.data.data);
         setData(i);

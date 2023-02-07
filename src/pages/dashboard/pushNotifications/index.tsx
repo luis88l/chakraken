@@ -8,10 +8,10 @@ import { Box, Tab, Tabs, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
 import ApiService from "../../../../data/services/ApiService";
 
 export default function PushNotifications(): any {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [tokenUsuarioPrueba, setTokenUsuarioPrueba] = useState("");
   const [numeroregistros, setNumeroRegistros] = useState(0);
   const [items, setItems] = useState([]);
+  const d = "";
   useEffect(() => {
     void GetTokenUser();
     void Get();
@@ -36,7 +36,7 @@ export default function PushNotifications(): any {
 
     // form.append("numeropagina", this.state.pageEnvio as any);
     // form.append("filaspagina", this.state.rowsPerPageEnvio as any);
-    void ApiService.pushNotificationsGet(form).then((item: any) => {
+    ApiService.pushNotificationsGet(form).then((item: any) => {
       if (item.data.status === 200) {
         // console.log('DATA de push', item.data)
         // this.setState({
@@ -44,9 +44,9 @@ export default function PushNotifications(): any {
         //     numeroregistros: item.data.data.count
         // })
 
-        const itemsArray: any = items;
-
         if (items.length < numeroregistros) {
+          var itemsArray: any = items;
+
           const nuevoitems = items.concat(item.data.data.rows);
 
           setItems(nuevoitems);

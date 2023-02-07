@@ -1,5 +1,6 @@
 import { getSession } from "next-auth/react";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
 import KPage from "../../../components/page/KPage";
 import {
   Box,
@@ -34,40 +35,18 @@ import { AddIcon, RepeatIcon } from "@chakra-ui/icons";
 
 import ApiService from "../../../../data/services/ApiService";
 
-interface UploaderProps {
-  fileType?: string | AcceptedFileType[];
-}
-
-enum AcceptedFileType {
-  Text = ".txt",
-  Gif = ".gif",
-  Jpeg = ".jpg",
-  Png = ".png",
-  Doc = ".doc",
-  Pdf = ".pdf",
-  AllImages = "image/*",
-  AllVideos = "video/*",
-  AllAudios = "audio/*",
-}
-
 interface IFile {
   file: File;
   uploadProgress: number;
   uploadError: string;
 }
 
-export default function RecuperarPassword(props: UploaderProps): any {
-  const { fileType } = props;
-  const acceptedFormats: string | AcceptedFileType[] | undefined =
-    typeof fileType === "string"
-      ? fileType
-      : Array.isArray(fileType)
-      ? fileType?.join(",")
-      : Object.values(AcceptedFileType);
+export default function RecuperarPassword(): any {
   const [selectedFiles, setSelectedFiles] = useState<
     IFile[] | undefined | null
   >([]);
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currentSelected: File[] = Array.prototype.slice.call(
       event?.target?.files
@@ -107,44 +86,39 @@ export default function RecuperarPassword(props: UploaderProps): any {
     sincronizarActivo: false,
   });
 
-  // const [items, setItems] = useState([]);
-  // const [file, setFile] = useState("");
-  useEffect(() => {
+  useQuery("correoActivacion", async () => {
     Get();
-    GetProceso();
-  }, []);
+    // GetProceso();
+  });
 
-  const [fileSelected, setFileSelected] = React.useState<File>(); // also tried <string | Blob>
-
-  const handleImageChange = function (e: React.ChangeEvent<HTMLInputElement>) {
-    const fileList = e.target.files;
-
-    if (fileList == null) return;
-
-    setFileSelected(fileList[0]);
-  };
-
-  const uploadFile = function (
-    e: React.MouseEvent<HTMLSpanElement, MouseEvent>
-  ) {
-    console.log(fileSelected);
-
-    if (fileSelected != null) {
-      const formData = new FormData();
-      formData.append("image", fileSelected, fileSelected.name);
-    }
-  };
-
-  const Get = () => {
-    ApiService.getCorreoRecuperarPassword().then((item: any) => {
+  const Get = (): any => {
+    return ApiService.getCorreoRecuperarPassword().then((item: any) => {
       if (item.data.status === 200) {
         console.log(item.data);
 
         const data = item.data.data;
-        const obj = {
+        const obj: {
+          pendings: number;
+          rowsPerPage: number;
+          page: number;
+          pendingOther: number;
+          sent: number;
+          gmail: number;
+          outlook: number;
+          hotmail: number;
+          other: number;
+          pendingGmail: number;
+          pendingOutlook: number;
+          pendingHotmail: number;
+          openSave: boolean;
+          isVisible: boolean;
+          isEdit: boolean;
+          file: string;
+          sincronizarActivo: boolean;
+        } = {
+          pendings: data.pendings[0].countItem,
           rowsPerPage: 0,
           page: 0,
-          pendings: data.pendings[0].countItem,
           pendingOther: 0,
           sent: data.sent[0].countItem,
           gmail: data.gmail[0].countItem,
@@ -170,33 +144,32 @@ export default function RecuperarPassword(props: UploaderProps): any {
     });
   };
 
-  const GetProceso = () => {
-    const form = new FormData();
-    form.append("proceso", "recuperarPasswordSincronizar");
-    ApiService.getProceso(form).then((item: any) => {
-      if (item.data.status === 200) {
-        const data = item.data.data;
-        // this.setState({
-        //     sincronizarActivo: data.activo,
-        // })
-        console.log(data);
-      }
-    });
-  };
+  // const GetProceso = () => {
+  //   const form = new FormData();
+  //   form.append("proceso", "recuperarPasswordSincronizar");
+  //   ApiService.getProceso(form).then((item: any) => {
+  //     if (item.data.status === 200) {
+  //       const data = item.data.data;
+  //       // this.setState({
+  //       //     sincronizarActivo: data.activo,
+  //       // })
+  //       console.log(data);
+  //     }
+  //   });
+  // };
 
-  const Save = (file: any) => {
+  const Save = (file: any): void => {
     console.log(file, " el archvonn babababb");
 
     const filesCaptura = new FormData();
     filesCaptura.append("fileToImport", file);
 
-    ApiService.importRecoverPassword(filesCaptura).then((response) => {
+    void ApiService.importRecoverPassword(filesCaptura).then((response) => {
       if (response.data.status === 200) {
-        console.log("Archivo guardado correctamente");
         Get();
-        return;
+        return console.log("Archivo guardado correctamente");
       }
-      console.log("Tuvimos algun problema al guardar el archivo");
+      return console.log("Tuvimos algun problema al guardar el archivo");
     });
   };
 

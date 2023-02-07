@@ -2,7 +2,6 @@ import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
 import ApiService from "../../../../data/services/ApiService";
 import { CopyIcon } from "@chakra-ui/icons";
-
 import {
   Box,
   Button,
@@ -14,7 +13,7 @@ import {
   Input,
   CardFooter,
   GridItem,
-  useToast,
+  // useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
@@ -24,16 +23,23 @@ export interface areasTable {
 }
 
 export default function ShortUrl(): any {
-  const toast = useToast();
-  const toastIdRef = React.useRef({});
+  // const toast = useToast();
+  // const toastIdRef = React.useRef();
   const [url, setUrl] = useState("");
   const [urlcorta, setUrlcorta] = useState("");
+  // const [cargando, setCargador] = useState(false);
+  // const [error, setError] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const acortarUrl = (): any => {
+    if (url === "") {
+      return;
+    }
+
     const form = new FormData();
     form.append("url", url);
 
-    void ApiService.acortarUrl(form).then(async (item: any): Promise<any> => {
+    return ApiService.acortarUrl(form).then((item: any) => {
       if (item.data.status === 200) {
         if (item.data.url === "Error") {
           return;
@@ -43,6 +49,8 @@ export default function ShortUrl(): any {
       }
     });
   };
+
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 
   const copiar = (): any => {
     // navigator.clipboard.writeText(this.state.urlcorta)
@@ -55,17 +63,17 @@ export default function ShortUrl(): any {
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
-    const status = document.execCommand("copy");
+    // const status = document.execCommand("copy");
     document.body.removeChild(selBox);
 
-    if (status) {
-      toastIdRef.current = toast({ description: "Url copiada con exito" });
-    } else {
-      toastIdRef.current = toast({
-        description: " Error al guardar url",
-        status: "error",
-      });
-    }
+    // if (status) {
+    //   toastIdRef.current = toast({ description: "Url copiada con exito" });
+    // } else {
+    //   toastIdRef.current = toast({
+    //     description: " Error al guardar url",
+    //     status: "error",
+    //   });
+    // }
   };
 
   return (
