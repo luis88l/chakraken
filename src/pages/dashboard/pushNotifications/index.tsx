@@ -50,13 +50,11 @@ export default function PushNotifications(): any {
           const nuevoitems = items.concat(item.data.data.rows);
 
           setItems(nuevoitems);
-          
         } else {
           if (itemsArray.length === 0) {
             setItems(item.data.data.rows);
             setNumeroRegistros(item.data.data.count);
           }
-          
         }
       }
     });

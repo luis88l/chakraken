@@ -166,8 +166,6 @@ export default function RecuperarPassword(props: UploaderProps): any {
         };
 
         setStateObject(obj);
-
-        
       }
     });
   };
@@ -182,7 +180,6 @@ export default function RecuperarPassword(props: UploaderProps): any {
         //     sincronizarActivo: data.activo,
         // })
         console.log(data);
-        
       }
     });
   };

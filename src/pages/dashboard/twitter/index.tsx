@@ -63,7 +63,6 @@ export default function Tendencias(): any {
       if (item.data.status === 200) {
         const i = data.concat(item.data.data);
         setData(i);
-        
       }
     });
   };

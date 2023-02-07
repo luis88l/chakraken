@@ -79,29 +79,24 @@ export default function TabEnvio(): any {
     ApiService.getMedios().then((item: any) => {
       if (item.data.status === 200) {
         setItemsMedio(item.data.data);
-        
       }
     });
 
     ApiService.getFuentes().then((item: any) => {
       if (item.data.status === 200) {
         setItemsFuente(item.data.data);
-
-        
       }
     });
 
     ApiService.getTopics().then((item: any) => {
       if (item.data.status === 200) {
         setItemsTopic(item.data.data);
-        
       }
     });
 
     ApiService.getFuentes().then((item: any) => {
       if (item.data.status === 200) {
         setItemsFuente(item.data.data);
-        
       }
     });
   }, []);
@@ -256,7 +251,6 @@ export default function TabEnvio(): any {
         // );
         Get();
         closeAdd();
-        
       }
       // toast.error(
       //   <div>
@@ -281,13 +275,11 @@ export default function TabEnvio(): any {
           const nuevoitems = itemsArray.concat(item.data.data.rows);
 
           setItems(nuevoitems);
-          
         } else {
           if (items.length === 0) {
             setItems(item.data.data.rows);
             setNumeroRegistros(item.data.data.count);
           }
-          
         }
       }
     });
@@ -319,7 +311,6 @@ export default function TabEnvio(): any {
         const token = item.data.data[0].de_tokenPush;
 
         setTokenUsuarioPrueba(token);
-        
       }
       // toast.error(<div><i className="uil uil-exclamation-triangle"></i>Problema al enviar notificación</div>)
     });

@@ -157,7 +157,6 @@ export default function controlCambios(): any {
     ApiService.getPeticionId(form).then((item: any) => {
       if (item.data.status === 200) {
         openEdit(item.data.data);
-        
       }
     });
   };
@@ -228,7 +227,6 @@ export default function controlCambios(): any {
           ...stateObj,
           revisoresSeleccionados: item.data.data,
         });
-        
       }
       // toast.error(
       //   <div>
@@ -253,7 +251,6 @@ export default function controlCambios(): any {
           ...stateObj,
           comentarios: item.data.data,
         });
-        
       }
       // toast.error(
       //   <div>
@@ -271,7 +268,6 @@ export default function controlCambios(): any {
           ...stateObj,
           usuarios: item.data.data,
         });
-        
       }
       // toast.error(
       //   <div>
@@ -315,7 +311,6 @@ export default function controlCambios(): any {
           Peticiones: items.data.data[0],
         }),
           () => GetPenticionesResponsables(items.data.data[0]);
-        
       }
       // toast.error(<div><i className="uil uil-exclamation-triangle"></i>
       //     &nbsp;&nbsp;Error al listar peticiones

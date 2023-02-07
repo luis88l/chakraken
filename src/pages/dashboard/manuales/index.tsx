@@ -135,7 +135,6 @@ export default function Manuales(): any {
             ...stateObj,
             items: item.data.data,
           });
-          
         }
       }
     );
