@@ -8,11 +8,11 @@ import {
   Box,
   Link,
   Button,
-  useDisclosure
+  useDisclosure,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
-export default function MenuWeb(props:any): any {
+export default function MenuWeb(props: any): any {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

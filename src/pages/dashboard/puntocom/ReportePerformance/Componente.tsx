@@ -4,44 +4,44 @@ import { Box } from "@chakra-ui/react";
 import { DataGrid } from "devextreme-react";
 import { Scrolling, Column, ColumnFixing } from "devextreme-react/data-grid";
 import { Switch } from "devextreme-react/switch";
-import 'devextreme/dist/css/dx.light.css' ; 
-
+import "devextreme/dist/css/dx.light.css";
 
 export interface KTablaProps {
   DataTabla: any[];
 }
 
 export function Contenido(props: KTablaProps): any {
-  console.log("🚀 ~ file: Componente.tsx:14 ~ props", props)
+  console.log("🚀 ~ file: Componente.tsx:14 ~ props", props);
 
   const onChangeEstatusAuditoria = (e: any) => {
-    console.log(e)
-  }
+    console.log(e);
+  };
 
   const AuditoriaRender = (cell: any) => {
-    return <Switch id={cell.data.id_pagina} value={cell.value} onValueChanged={onChangeEstatusAuditoria} />
-  }
+    return (
+      <Switch
+        id={cell.data.id_pagina}
+        value={cell.value}
+        onValueChanged={onChangeEstatusAuditoria}
+      />
+    );
+  };
 
   return (
-    <Box width="100%" h='auto'>
-      <DataGrid
-        height={'600'}
-        dataSource={props.DataTabla}
-        showBorders
-      >
+    <Box width="100%" h="auto">
+      <DataGrid height={"600"} dataSource={props.DataTabla} showBorders>
         <Scrolling mode="virtual" />
         <ColumnFixing enabled={true} />
         <Column
-          caption={'Auditar'}
+          caption={"Auditar"}
           dataField={"sn_auditar"}
           editCellRender={AuditoriaRender}
           fixed
-          width={'10%'}
+          width={"10%"}
         />
-        <Column dataField={"nb_pagina"} caption='Pagina' fixed width={'30%'}/>
-        <Column dataField={"de_ruta"} caption='Ruta' />
+        <Column dataField={"nb_pagina"} caption="Pagina" fixed width={"30%"} />
+        <Column dataField={"de_ruta"} caption="Ruta" />
       </DataGrid>
-
     </Box>
   );
 }
