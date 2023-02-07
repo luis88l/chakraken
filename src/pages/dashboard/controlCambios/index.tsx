@@ -110,23 +110,19 @@ export default function controlCambios(): any {
     eliminando: "",
   });
 
-  const {
-    isLoading,
-    data: dataControlCambios,
-    isSuccess,
-  } = useQuery("dataControlCambios", async () => getConf());
+  useQuery("dataControlCambios", async () => getConf());
 
-  const getConf = () => {
+  const getConf = (): any => {
     console.log(localStorage.getItem("idpeticion"), "HOLAAAAAA");
     const form = new FormData();
     filtrarPeticiones();
     console.log(stateObj, "ESTADOOOOO");
 
-    ApiService.GetUserInfo(form).then((itemsInfo: any) => {
-      ApiService.GetEstatusPeticiones().then((itemsE: any) => {
-        ApiService.GetTiposPeticiones().then((itemsP: any) => {
+    return ApiService.GetUserInfo(form).then((itemsInfo: any): any => {
+      return ApiService.GetEstatusPeticiones().then((itemsE: any): any => {
+        return ApiService.GetTiposPeticiones().then((itemsP: any): any => {
           form.append("id_rol", "9cba1d03-71b0-4027-9037-bab15f5447fe"); // rol web Dev
-          ApiService.getByRol(form).then((itemsUR: any) => {
+          return ApiService.getByRol(form).then((itemsUR: any) => {
             setStateObject({
               ...stateObj,
               EstatusPeticiones: itemsE.data.data,
@@ -137,6 +133,7 @@ export default function controlCambios(): any {
             });
 
             if (localStorage.getItem("idpeticion") !== null) {
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
               GetPeticionId(localStorage.getItem("idpeticion")!);
               // this.getAllUsers()
               // this.filtrarPeticiones()
@@ -149,19 +146,21 @@ export default function controlCambios(): any {
     });
   };
 
-  const GetPeticionId = (id: string) => {
+  const GetPeticionId = (id: string): any => {
     const form = new FormData();
     form.append("id", id);
 
-    ApiService.getPeticionId(form).then((item: any) => {
+    return ApiService.getPeticionId(form).then((item: any) => {
       if (item.data.status === 200) {
         openEdit(item.data.data);
       }
     });
   };
 
-  const openEdit = (item: any) => {
-    const objUsuario = JSON.parse(localStorage.getItem("_user") || "{}");
+  const openEdit = (item: any): any => {
+    const objUsuario = JSON.parse(
+      localStorage.getItem("_user") != null || "{}"
+    );
     let snBloquear = true;
     let snBloquearEstatus = true;
     if (item.id_estatusPeticion !== 105 && item.id_estatusPeticion !== 102) {
@@ -181,21 +180,29 @@ export default function controlCambios(): any {
       }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     setStateObject({
       ...stateObj,
       abrirAgregar: true,
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       de_Area: item.nb_area ? item.nb_area : "sin asignar area",
       id_tipoPeticion: item.id_tipoPeticion,
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       de_Descripcion: item.de_descripcion ? item.de_descripcion : "",
       fh_Requerido: item.fh_requerido.split("T")[0],
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       url_Alts: item.url_alts ? item.url_alts : "",
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       url_Enlaces: item.url_enlaces ? item.url_enlaces : "",
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       url_Imagenes: item.url_imagenes ? item.url_imagenes : "",
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       url_copy: item.url_copy ? item.url_copy : "",
       bloquear: snBloquear,
       de_tipoPeticion: "",
       id_peticion: item.id_peticion,
       snBloquearEstatus,
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       id_responsable: item.id_responsable ? item.id_responsable : "",
       de_comentario: "",
       comentarios: [],
@@ -205,6 +212,7 @@ export default function controlCambios(): any {
       id_estatusOriginal: String(item.id_estatusPeticion),
       id_autorPeticion: item.id_usuarioPeticion,
       id_usuarioActual: objUsuario.id_usuario,
+      // eslint-disable-next-line no-sequences
     }),
       () => {
         getComentarios();
@@ -212,15 +220,16 @@ export default function controlCambios(): any {
       };
   };
 
-  const getRevisoresPeticion = () => {
+  const getRevisoresPeticion = (): any => {
     const { id_peticion } = stateObj;
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!id_peticion) {
       return;
     }
     const form = new FormData();
     form.append("id_peticion", id_peticion);
 
-    ApiService.getRevisoresPeticion(form).then((item: any) => {
+    return ApiService.getRevisoresPeticion(form).then((item: any) => {
       if (item.data.status === 200) {
         setStateObject({
           ...stateObj,
@@ -236,15 +245,16 @@ export default function controlCambios(): any {
     });
   };
 
-  const getComentarios = () => {
+  const getComentarios = (): any => {
     const { id_peticion } = stateObj;
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!id_peticion) {
       return;
     }
     const form = new FormData();
     form.append("id_peticion", id_peticion);
 
-    ApiService.getComentarios(form).then((item: any) => {
+    return ApiService.getComentarios(form).then((item: any) => {
       if (item.data.status === 200) {
         setStateObject({
           ...stateObj,
@@ -260,8 +270,8 @@ export default function controlCambios(): any {
     });
   };
 
-  const getAllUsers = () => {
-    ApiService.getUserName().then((item: any) => {
+  const getAllUsers = (): any => {
+    return ApiService.getUserName().then((item: any) => {
       if (item.data.status === 200) {
         setStateObject({
           ...stateObj,
@@ -277,7 +287,7 @@ export default function controlCambios(): any {
     });
   };
 
-  const filtrarPeticiones = () => {
+  const filtrarPeticiones = (): any => {
     const {
       id_filtroEstatus,
       de_filtroResponsable,
@@ -301,13 +311,15 @@ export default function controlCambios(): any {
     form.append("de_usuario", de_filtroUsuario);
     form.append("id_tipo", id_filtroTipo);
 
-    ApiService.GetPeticionesFiltros(form).then((items: any) => {
+    return ApiService.GetPeticionesFiltros(form).then((items: any) => {
       if (items.data.status === 200) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         setStateObject({
           ...stateObj,
           abrirAgregar: false,
           abrirMensaje: true,
           Peticiones: items.data.data[0],
+          // eslint-disable-next-line no-sequences
         }),
           () => GetPenticionesResponsables(items.data.data[0]);
       }
@@ -317,7 +329,7 @@ export default function controlCambios(): any {
     });
   };
 
-  const GetPenticionesResponsables = (peticiones: any) => {
+  const GetPenticionesResponsables = (peticiones: any): any => {
     const peticionesaux = [];
     for (let i = 0; i < peticiones.length; i++) {
       // var fechainicio = moment(peticiones[i].fh_requerido.split('T')[0]).hour(8)
@@ -329,6 +341,7 @@ export default function controlCambios(): any {
       peticionesaux.push({
         startDate: fechainicio,
         endDate: fechaFin,
+        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
         title: "Folio " + peticiones[i].id_peticion,
         type: peticiones[i].id_estatusPeticion.toString(),
         descripcion: peticiones[i].de_descripcion,
@@ -343,7 +356,8 @@ export default function controlCambios(): any {
     });
   };
 
-  const stableSort = (array: any, cmp: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const stableSort = (array: any, cmp: any): any => {
     const stabilizedThis = array.map((el: any, index: any) => [el, index]);
     stabilizedThis.sort((a: any, b: any) => {
       const order = cmp(a[0], b[0]);
@@ -356,7 +370,7 @@ export default function controlCambios(): any {
     return stabilizedThis.map((el: any) => el[0]);
   };
 
-  const desc = (a: any, b: any, orderBy: any) => {
+  const desc = (a: any, b: any, orderBy: any): any => {
     if (b[orderBy] < a[orderBy]) {
       return -1;
     }
@@ -367,7 +381,8 @@ export default function controlCambios(): any {
 
     return 0;
   };
-  const getSorting = (order: any, orderBy: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const getSorting = (order: any, orderBy: any): any => {
     return order === "desc"
       ? (a: any, b: any) => {
           desc(a, b, orderBy);

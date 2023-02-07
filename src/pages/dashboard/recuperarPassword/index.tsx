@@ -1,12 +1,11 @@
 import { getSession } from "next-auth/react";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import KPage from "../../../components/page/KPage";
 import {
   Box,
   Stack,
   Card,
   CardBody,
-  Image,
   Heading,
   Text,
   Divider,
@@ -26,11 +25,9 @@ import {
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
-  Th,
   Td,
-  TableCaption,
+  Th,
   TableContainer,
 } from "@chakra-ui/react";
 import { AddIcon, RepeatIcon } from "@chakra-ui/icons";
@@ -61,6 +58,7 @@ interface IFile {
 
 export default function RecuperarPassword(props: UploaderProps): any {
   const { fileType } = props;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const acceptedFormats: string | AcceptedFileType[] | undefined =
     typeof fileType === "string"
       ? fileType
@@ -71,7 +69,9 @@ export default function RecuperarPassword(props: UploaderProps): any {
     IFile[] | undefined | null
   >([]);
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): any => {
     const currentSelected: File[] = Array.prototype.slice.call(
       event?.target?.files
     );
@@ -117,29 +117,16 @@ export default function RecuperarPassword(props: UploaderProps): any {
     GetProceso();
   }, []);
 
-  const [fileSelected, setFileSelected] = React.useState<File>(); // also tried <string | Blob>
+  // const handleImageChange = function (e: React.ChangeEvent<HTMLInputElement>) {
+  //   const fileList = e.target.files;
 
-  const handleImageChange = function (e: React.ChangeEvent<HTMLInputElement>) {
-    const fileList = e.target.files;
+  //   if (fileList == null) return;
 
-    if (fileList == null) return;
+  //   setFileSelected(fileList[0]);
+  // };
 
-    setFileSelected(fileList[0]);
-  };
-
-  const uploadFile = function (
-    e: React.MouseEvent<HTMLSpanElement, MouseEvent>
-  ) {
-    console.log(fileSelected);
-
-    if (fileSelected != null) {
-      const formData = new FormData();
-      formData.append("image", fileSelected, fileSelected.name);
-    }
-  };
-
-  const Get = () => {
-    ApiService.getCorreoRecuperarPassword().then((item: any) => {
+  const Get = (): any => {
+    return ApiService.getCorreoRecuperarPassword().then((item: any) => {
       if (item.data.status === 200) {
         console.log(item.data);
 
@@ -173,10 +160,10 @@ export default function RecuperarPassword(props: UploaderProps): any {
     });
   };
 
-  const GetProceso = () => {
+  const GetProceso = (): any => {
     const form = new FormData();
     form.append("proceso", "recuperarPasswordSincronizar");
-    ApiService.getProceso(form).then((item: any) => {
+    return ApiService.getProceso(form).then((item: any) => {
       if (item.data.status === 200) {
         const data = item.data.data;
         // this.setState({
@@ -187,13 +174,13 @@ export default function RecuperarPassword(props: UploaderProps): any {
     });
   };
 
-  const Save = (file: any) => {
+  const Save = (file: any): any => {
     console.log(file, " el archvonn babababb");
 
     const filesCaptura = new FormData();
     filesCaptura.append("fileToImport", file);
 
-    ApiService.importRecoverPassword(filesCaptura).then((response) => {
+    return ApiService.importRecoverPassword(filesCaptura).then((response) => {
       if (response.data.status === 200) {
         console.log("Archivo guardado correctamente");
         Get();
