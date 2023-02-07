@@ -5,13 +5,12 @@ import TabEnvio from "./TabEnvio";
 import TabHistorial from "./TabHistorial";
 import TabAjustes from "./TabAjustes";
 import { Box, Tab, Tabs, TabList, TabPanels, TabPanel } from "@chakra-ui/react";
+import ApiService from "../../../../data/services/ApiService";
 
 export default function PushNotifications(): any {
-<<<<<<< HEAD
   const [tokenUsuarioPrueba, setTokenUsuarioPrueba] = useState("");
   const [numeroregistros, setNumeroRegistros] = useState(0);
   const [items, setItems] = useState([]);
-  const d = "";
   useEffect(() => {
     void GetTokenUser();
     void Get();
@@ -36,17 +35,16 @@ export default function PushNotifications(): any {
 
     // form.append("numeropagina", this.state.pageEnvio as any);
     // form.append("filaspagina", this.state.rowsPerPageEnvio as any);
-    ApiService.pushNotificationsGet(form).then((item: any) => {
+    return await ApiService.pushNotificationsGet(form).then((item: any) => {
       if (item.data.status === 200) {
         // console.log('DATA de push', item.data)
         // this.setState({
         //     items: item.data.data.rows,
         //     numeroregistros: item.data.data.count
         // })
+        const itemsArray: any = items;
 
         if (items.length < numeroregistros) {
-          var itemsArray: any = items;
-
           const nuevoitems = items.concat(item.data.data.rows);
 
           setItems(nuevoitems);
@@ -59,12 +57,7 @@ export default function PushNotifications(): any {
       }
     });
   };
-  //   useEffect(() => {
-  //   void GetTwitter();
-  // }, [company]);
-
-=======
->>>>>>> 6e26512723a5e3883024d87e19034c025ddd5931
+  console.log(tokenUsuarioPrueba);
   return (
     <KPage title="Notificaciones Push">
       <Box>
@@ -78,7 +71,9 @@ export default function PushNotifications(): any {
             <TabPanel>
               <TabEnvio />
             </TabPanel>
-            <TabPanel></TabPanel>
+            <TabPanel>
+              <TabHistorial />{" "}
+            </TabPanel>
             <TabPanel>
               <TabAjustes />
             </TabPanel>

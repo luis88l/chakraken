@@ -1,43 +1,38 @@
 import { getSession } from "next-auth/react";
-import React, { useState, useEffect } from "react";
+import React from "react";
 // import KPage from "../../../components/page/KPage";
-import KPage from "../../../components/page/KPage";
 import {
   TableContainer,
-  GridItem,
   Table,
   Thead,
   Th,
   Td,
-  Wrap,
-  WrapItem,
   Tr,
   Flex,
   Box,
   Tbody,
   TableCaption,
-  Tfoot,
 } from "@chakra-ui/react";
 
 export default function TabHistorial(): any {
-  const [notification, setNotificatiion] = useState({
-    titulo: "",
-    topic: "",
-    horas: "",
-    url: "",
-    mensaje: "",
-    url_imagen: "",
-    campa: "",
-    fecha: "",
-    tokenUsuario: "",
-  });
+  // const [notification, setNotificatiion] = useState({
+  //   titulo: "",
+  //   topic: "",
+  //   horas: "",
+  //   url: "",
+  //   mensaje: "",
+  //   url_imagen: "",
+  //   campa: "",
+  //   fecha: "",
+  //   tokenUsuario: "",
+  // });
 
-  const onChangeHandle = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNotificatiion({
-      ...notification,
-      [e.target.name]: e.target.value,
-    });
-  };
+  // const onChangeHandle = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setNotificatiion({
+  //     ...notification,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   return (
     <Box>

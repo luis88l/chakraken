@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useQuery, useMutation } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
-import { createColumnHelper, Row } from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
 import {
   Button,
   ButtonGroup,
