@@ -2,7 +2,6 @@ import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
 import ApiService from "../../../../data/services/ApiService";
 import { CopyIcon } from "@chakra-ui/icons";
-
 import {
   Box,
   Button,
@@ -14,7 +13,7 @@ import {
   Input,
   CardFooter,
   GridItem,
-  useToast,
+  // useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
@@ -24,44 +23,37 @@ export interface areasTable {
 }
 
 export default function ShortUrl(): any {
-  const toast = useToast();
-  const toastIdRef = React.useRef();
-  const [openSave, setOpenSave] = useState(true);
-  const [isVisible, setImagenInfoReducir] = useState(false);
-  const [isEdit, setIsEdit] = useState(true);
-  const [sn_editado, setSn_editado] = useState(true);
+  // const toast = useToast();
+  // const toastIdRef = React.useRef();
   const [url, setUrl] = useState("");
   const [urlcorta, setUrlcorta] = useState("");
-  const [cargando, setCargador] = useState(false);
-  const [error, setError] = useState(false);
+  // const [cargando, setCargador] = useState(false);
+  // const [error, setError] = useState(false);
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const acortarUrl = () => {
     if (url === "") {
-      setError(true);
       return;
     }
 
-    setCargador(true);
     const form = new FormData();
     form.append("url", url);
 
-    ApiService.acortarUrl(form).then((item: any) => {
+    return ApiService.acortarUrl(form).then((item: any) => {
       if (item.data.status === 200) {
         if (item.data.url === "Error") {
-          setError(true);
-          setCargador(false);
           return;
         }
 
         setUrlcorta(item.data.url);
-        setCargador(false);
       }
     });
   };
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const copiar = () => {
     // navigator.clipboard.writeText(this.state.urlcorta)
-    let selBox = document.createElement("textarea");
+    const selBox = document.createElement("textarea");
     selBox.style.position = "fixed";
     selBox.style.left = "0";
     selBox.style.top = "0";
@@ -70,17 +62,17 @@ export default function ShortUrl(): any {
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();
-    const status = document.execCommand("copy");
+    // const status = document.execCommand("copy");
     document.body.removeChild(selBox);
 
-    if (status) {
-      toastIdRef.current = toast({ description: "Url copiada con exito" });
-    } else {
-      toastIdRef.current = toast({
-        description: " Error al guardar url",
-        status: "error",
-      });
-    }
+    // if (status) {
+    //   toastIdRef.current = toast({ description: "Url copiada con exito" });
+    // } else {
+    //   toastIdRef.current = toast({
+    //     description: " Error al guardar url",
+    //     status: "error",
+    //   });
+    // }
   };
 
   return (
@@ -111,7 +103,7 @@ export default function ShortUrl(): any {
               {urlcorta}
             </Box>
             <Box>
-              {urlcorta != "" ? (
+              {urlcorta !== "" ? (
                 <CopyIcon boxSize={6} onClick={copiar} cursor="pointer" />
               ) : null}
             </Box>

@@ -1,13 +1,11 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import ApiService from "../../../../data/services/ApiService";
 import { useQuery } from "react-query";
 import Compressor from "compressorjs";
 
 import {
   Box,
   Button,
-  Divider,
   Card,
   CardHeader,
   CardBody,
@@ -17,7 +15,6 @@ import {
   SimpleGrid,
   UnorderedList,
   ListItem,
-  Image,
 } from "@chakra-ui/react";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 import { FiUpload } from "react-icons/fi";
@@ -41,18 +38,14 @@ export default function ShortUrl(): any {
     size: 0,
   });
   const [imagenReducida, seImagenReducida] = useState("");
-  const {
-    isLoading,
-    data: roles,
-    isSuccess,
-  } = useQuery("roles", async () => await ApiService.getRoles());
+  const { isLoading, isSuccess } = useQuery("correoActivacion", async () => {});
 
   if (isLoading) {
     return <KSkeletonPage />;
   }
 
-  const subirImagen = (imagen: any) => {
-    const reader = new FileReader();
+  const subirImagen = (imagen: any): any => {
+    const reader: any = new FileReader();
 
     reader.onload = function () {
       if (reader.readyState === 2 || reader.readyState === 0) {
@@ -62,10 +55,11 @@ export default function ShortUrl(): any {
 
     // reader.readAsDataURL(imagen.target.files[0]);
 
+    // eslint-disable-next-line no-new
     new Compressor(imagen.target.files[0], {
       quality: 0.6,
       success: (result: any) => {
-        const readers = new FileReader();
+        const readers: any = new FileReader();
 
         readers.onload = function () {
           if (reader.readyState === 2 || reader.readyState === 0) {
@@ -88,28 +82,30 @@ export default function ShortUrl(): any {
 
   console.log(imagenAReducir);
 
-  const descargarImagen = () => {
-    let byteCharacters = atob(imagenReducida.replace(/^[^,]+,/, ""));
+  const descargarImagen = (): any => {
+    const byteCharacters = atob(imagenReducida.replace(/^[^,]+,/, ""));
 
-    let byteNumbers = new Array(byteCharacters.length);
-    for (var i = 0; i < byteCharacters.length; i++) {
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
       byteNumbers[i] = byteCharacters.charCodeAt(i);
     }
 
-    let byteArray = new Uint8Array(byteNumbers);
+    const byteArray = new Uint8Array(byteNumbers);
 
-    let blob = new Blob([byteArray], {
+    const blob = new Blob([byteArray], {
       type: infoImagenReducida.type,
     });
     let newVariable: any;
 
+    // eslint-disable-next-line prefer-const
     newVariable = window.navigator;
 
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (newVariable.msSaveBlob) {
-      let filename = infoImagenReducida.name;
+      const filename = infoImagenReducida.name;
       newVariable.msSaveBlob(blob, filename);
     } else {
-      let link = document.createElement("a");
+      const link = document.createElement("a");
 
       link.href = URL.createObjectURL(blob);
 
@@ -157,7 +153,7 @@ export default function ShortUrl(): any {
                   </CardHeader>
                   <CardBody>
                     <Box mb={5}>
-                      {imagenReducida != "" ? (
+                      {imagenReducida !== "" ? (
                         <img src={imagenReducida} alt="" className="mw-100" />
                       ) : null}
                     </Box>
@@ -175,14 +171,16 @@ export default function ShortUrl(): any {
                           <ListItem>
                             <strong>Tamaño: </strong> &nbsp;
                             {imagenInfoAReducir.size > 1048576
-                              ? Math.round(
+                              ? // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                                Math.round(
                                   (imagenInfoAReducir.size / 1048576 +
                                     Number.EPSILON) *
                                     100
                                 ) /
                                   100 +
                                 " MB"
-                              : Math.round(
+                              : // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                                Math.round(
                                   (imagenInfoAReducir.size / 1024 +
                                     Number.EPSILON) *
                                     100
@@ -201,7 +199,7 @@ export default function ShortUrl(): any {
                   </CardHeader>
                   <CardBody>
                     <Box mb={5}>
-                      {imagenReducida != "" ? (
+                      {imagenReducida !== "" ? (
                         <img src={imagenReducida} alt="" className="mw-100" />
                       ) : null}
                     </Box>
@@ -220,14 +218,16 @@ export default function ShortUrl(): any {
                           <ListItem>
                             <strong>Tamaño: </strong> &nbsp;
                             {infoImagenReducida.size > 1048576
-                              ? Math.round(
+                              ? // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                                Math.round(
                                   (infoImagenReducida.size / 1048576 +
                                     Number.EPSILON) *
                                     100
                                 ) /
                                   100 +
                                 " MB"
-                              : Math.round(
+                              : // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+                                Math.round(
                                   (infoImagenReducida.size / 1024 +
                                     Number.EPSILON) *
                                     100
