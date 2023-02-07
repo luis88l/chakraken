@@ -1,22 +1,17 @@
 import { getSession } from "next-auth/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // import KPage from "../../../components/page/KPage";
-import KPage from "../../../components/page/KPage";
 import {
   TableContainer,
-  GridItem,
   Table,
   Thead,
   Th,
   Td,
-  Wrap,
-  WrapItem,
   Tr,
   Flex,
   Box,
   Tbody,
   TableCaption,
-  Tfoot,
 } from "@chakra-ui/react";
 
 export default function TabHistorial(): any {
@@ -32,6 +27,7 @@ export default function TabHistorial(): any {
     tokenUsuario: "",
   });
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/no-unused-vars
   const onChangeHandle = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setNotificatiion({
       ...notification,

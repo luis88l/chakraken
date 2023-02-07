@@ -6,11 +6,10 @@ import { Box } from "@chakra-ui/react";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 
 export default function Tableros(): any {
-  const {
-    isLoading,
-    data: tableros,
-    isSuccess,
-  } = useQuery("tableros", async () => await ApiService.getRoles());
+  const { isLoading, isSuccess } = useQuery(
+    "tableros",
+    async () => await ApiService.getRoles()
+  );
 
   if (isLoading) {
     return <KSkeletonPage />;

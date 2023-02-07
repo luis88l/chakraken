@@ -44,7 +44,6 @@ export default function Bases(): any {
   const [nombreDescripcion, setNombreDescripcion] = useState("");
   const [URL, setURL] = useState("");
   const [Keywords, setKeywords] = useState("");
-  const colSpan = { base: 2, md: 2 };
 
   const { isLoading, data: smartLinks } = useQuery(
     "Smart",

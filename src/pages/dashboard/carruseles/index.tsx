@@ -125,7 +125,7 @@ export default function Carruseles(): any {
                 width={40}
                 alignSelf="center"
                 onClick={() => {
-                  navigator.clipboard.writeText(carruseles);
+                  void navigator.clipboard.writeText(carruseles);
                   toast({
                     title: "Carrusel copiado exitosamente",
                     status: "success",

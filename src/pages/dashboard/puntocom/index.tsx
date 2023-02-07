@@ -83,7 +83,7 @@ export default function Web(): any {
         intersect: false,
         position: "nearest",
         enabled: false,
-        external: function (context) {
+        external: function (context: { tooltip: any }) {
           // Tooltip Element
           let tooltipEl = document.getElementById("chartjs-tooltip");
           // Create element on first render
@@ -125,17 +125,21 @@ export default function Web(): any {
 
             titleLines.forEach(function (title: any) {
               innerHtml +=
+                // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
                 '<tr><th style="padding: 0px 16px 8px">' + title + "</th></tr>";
             });
             innerHtml += "</thead><tbody>";
+            // @ts-expect-error
             const items = this._chart;
             bodyLines.forEach(function (body: any, i: any) {
               const bgColor = tooltipModel.labelColors[i].borderColor;
               const text = items.data.datasets[i].text || "";
               let span =
                 '<div style="width: 8px;height: 8px;border-radius: 2px;margin-right: 12px;';
+              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
               span += `background-color: ${bgColor}; display: inline-flex"></div>`;
               // let kb = text
+              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
               innerHtml += `<tr><td style="padding: 0px 16px 8px">${span}${body} ${text}</td></tr>`;
             });
             innerHtml += "</tbody>";
@@ -143,20 +147,26 @@ export default function Web(): any {
             // @ts-expect-error
             tableRoot.innerHTML = innerHtml;
           }
+          // @ts-expect-error
           const position = this._chart.canvas.getBoundingClientRect();
           const tablaHeight =
+            // @ts-expect-error
             tooltipEl.querySelector("#tableToolTip").offsetHeight;
           tooltipEl.style.opacity = "1";
           tooltipEl.style.position = "absolute";
           tooltipEl.style.zIndex = "1";
           tooltipEl.style.left =
+            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
             position.left + window.pageXOffset + tooltipModel.caretX + "px";
           tooltipEl.style.top =
+            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
             position.top + tooltipModel.caretY - tablaHeight / 2 + "px";
           tooltipEl.style.fontFamily = tooltipModel._bodyFontFamily;
+          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
           tooltipEl.style.fontSize = tooltipModel.bodyFontSize + "px";
           tooltipEl.style.fontStyle = tooltipModel._bodyFontStyle;
           tooltipEl.style.padding =
+            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
             tooltipModel.yPadding + "px " + tooltipModel.xPadding + "px";
           tooltipEl.style.pointerEvents = "none";
         },

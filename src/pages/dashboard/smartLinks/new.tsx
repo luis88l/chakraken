@@ -2,7 +2,7 @@ import { getSession } from "next-auth/react";
 import { useState } from "react";
 import { useMutation } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
-import router, { useRouter } from "next/router";
+import router from "next/router";
 import KPage from "../../../components/page/KPage";
 import {
   Box,

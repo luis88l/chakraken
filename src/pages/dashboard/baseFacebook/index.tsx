@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box, Button, ButtonGroup, Flex, Select } from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
@@ -8,7 +8,6 @@ import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
-import { useRouter } from "next/router";
 
 export interface areasTable {
   id_Base: string;
@@ -25,8 +24,6 @@ export interface baseFacebookProps {
 }
 
 export default function BaseFacebook(): any {
-  const router = useRouter();
-
   const {
     isLoading,
     data: basesFaceBook,

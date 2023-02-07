@@ -15,7 +15,6 @@ import {
   Link,
   SimpleGrid,
   Text,
-  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { CloseIcon, WarningIcon } from "@chakra-ui/icons";
@@ -42,8 +41,8 @@ export default function Bases(): any {
   const router = useRouter();
   const [nombreLanding, setNombreLanding] = useState("");
   const [nombreDescripcion, setNombreDescripcion] = useState("");
+  const [keywords, setKeywords] = useState("");
   const [URL, setURL] = useState("");
-  const [Keywords, setKeywords] = useState("");
   const [activo, setActivo] = useState(false);
 
   const { isLoading, data: smartLinks } = useQuery(
@@ -79,6 +78,10 @@ export default function Bases(): any {
     setActivo(true);
     const formData = new FormData();
     formData.append("id_page", smartDetails.id_page);
+    formData.append("nb_nombre", nombreLanding);
+    formData.append("nb_url", URL);
+    formData.append("nb_description", nombreDescripcion);
+    formData.append("nb_keyWords", keywords);
     const id = smartDetails.id_page;
     deleteSmartLink.mutate(id);
   };

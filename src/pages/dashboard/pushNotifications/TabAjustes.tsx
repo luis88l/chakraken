@@ -1,23 +1,9 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getSession } from "next-auth/react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // import KPage from "../../../components/page/KPage";
-import KPage from "../../../components/page/KPage";
-import {
-  TableContainer,
-  GridItem,
-  Table,
-  Thead,
-  Th,
-  Td,
-  Wrap,
-  WrapItem,
-  Tr,
-  Flex,
-  Box,
-  Tbody,
-  TableCaption,
-  Tfoot,
-} from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
 
 export default function TabAjustes(): any {
   const [notification, setNotificatiion] = useState({

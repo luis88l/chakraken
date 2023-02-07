@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getSession } from "next-auth/react";
 import React, { useState, useEffect } from "react";
 import {
@@ -43,6 +46,7 @@ export default function TabEnvio(): any {
 
   const [tokenUsuarioPrueba, setTokenUsuarioPrueba] = useState("");
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [testBtnDisabled, setTestBtnDisabled] = useState(false);
   const [itemsMedio, setItemsMedio] = useState([
     { id_medio: "", de_medio: "" },
@@ -51,6 +55,7 @@ export default function TabEnvio(): any {
     { id_fuente: "", de_fuente: "" },
   ]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [id_push, setId_push] = useState("");
   const [id_estatusPush, setId_estatusPush] = useState("");
 
@@ -240,7 +245,7 @@ export default function TabEnvio(): any {
     form.append("nu_HorasVida", nu_HorasVida.toString());
 
     ApiService.pushNotificationsSave(form).then((item: any) => {
-      if (item && item.status === 200) {
+      if (Boolean(item) && item.status === 200) {
         setId_push(item.data.data.id_push);
         setId_estatusPush(item.data.data.id_estatus);
 
