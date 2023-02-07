@@ -14,7 +14,6 @@ import {
   Link,
   SimpleGrid,
   Text,
-  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { CloseIcon, WarningIcon } from "@chakra-ui/icons";
@@ -30,18 +29,15 @@ export interface aforeTable {
 }
 
 export default function Bases(): any {
-  const colSpan = { base: 2, md: 2 };
   const router = useRouter();
   const [nombreBase, setNombreBase] = useState("");
   const [numeroPixel, setNombrePixel] = useState("");
   const [activo, setActivo] = useState(false);
-  const [updating, setUpdating] = useState(false);
 
-  const {
-    isLoading,
-    data: aforeModulo,
-    isSuccess,
-  } = useQuery("Afore", async () => await ApiService.aforeGet(true));
+  const { isLoading, data: aforeModulo } = useQuery(
+    "Afore",
+    async () => await ApiService.aforeGet(true)
+  );
 
   const updateAfore = useMutation(
     async (formData: any) => {
@@ -73,7 +69,9 @@ export default function Bases(): any {
     setActivo(true);
     const formData = new FormData();
     formData.append("id", aforeDetails.id);
-    var Id = aforeDetails.id;
+    formData.append("nombre_completo", nombreBase);
+    formData.append("pixel", numeroPixel);
+    const Id = aforeDetails.id;
     updateAfore.mutate(Id);
   };
 

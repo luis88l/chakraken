@@ -1,70 +1,85 @@
 import { getSession } from "next-auth/react";
 import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Button,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
   Box,
-  MenuGroup,
-  MenuDivider,
+  Link,
+  Button,
+  useDisclosure,
 } from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
-export default function MenuWeb(): any {
+export default function MenuWeb(props: any): any {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-  const RedirigirMantenimineto = (url: string) => {
-    // eslint-disable-next-line no-return-assign
-    return (window.location.href = url);
-  };
+
   return (
-    <div style={{ width: "100%" }}>
-      <Box mt={4} mb={5} width="100%">
-        <Menu>
-          <MenuButton as={Button} colorScheme="pink">
-            Menú{" "}
-          </MenuButton>
-          <MenuList>
-            <MenuGroup title="Catalogos">
-              <MenuItem onClick={() => RedirigirMantenimineto("mantenimiento")}>
-                Dominios
-              </MenuItem>
-              <MenuItem onClick={() => RedirigirMantenimineto("mantenimiento")}>
-                Paginas{" "}
-              </MenuItem>
-              <MenuItem onClick={() => RedirigirMantenimineto("mantenimiento")}>
-                Wallet{" "}
-              </MenuItem>
-            </MenuGroup>
-            <MenuDivider />
-            <MenuGroup title="Reportes">
-              <MenuItem
-                onClick={() =>
-                  RedirigirMantenimineto("puntocom/ReportePerformance")
-                }
-              >
-                Performance
-              </MenuItem>
-              <MenuItem onClick={() => RedirigirMantenimineto("mantenimineto")}>
-                Kpis
-              </MenuItem>
-              <MenuItem onClick={() => RedirigirMantenimineto("mantenimineto")}>
-                BenchMark
-              </MenuItem>
-              <MenuItem onClick={() => RedirigirMantenimineto("mantenimineto")}>
-                Semanal
-              </MenuItem>
-              <MenuItem onClick={() => RedirigirMantenimineto("mantenimineto")}>
+    <div>
+      <Button borderWidth="3px" borderColor={"#020202"} onClick={onOpen}>
+        <HamburgerIcon />
+      </Button>
+      <Drawer placement={"right"} onClose={onClose} isOpen={isOpen}>
+        <DrawerOverlay />
+        <DrawerContent bgColor={"#020202"}>
+          <DrawerHeader
+            textColor={"white"}
+            fontWeight={"bold"}
+            borderBottomWidth="1px"
+          >
+            Catálogos
+          </DrawerHeader>
+          <DrawerBody>
+            <Box className="my-box">
+              <Link href="/dashboard/mantenimiento" color={"white"}>
+                Dominio
+              </Link>
+            </Box>
+            <Box className="my-box">
+              <Link href="/dashboard/mantenimiento" color={"white"}>
+                Wallet
+              </Link>
+            </Box>
+            <Box className="my-box">
+              <Link href="/dashboard/mantenimiento" color={"white"}>
+                Páginas
+              </Link>
+            </Box>
+          </DrawerBody>
+          <DrawerHeader
+            textColor={"white"}
+            fontWeight={"bold"}
+            borderBottomWidth="1px"
+          >
+            Reportes
+          </DrawerHeader>
+          <DrawerBody>
+            <Box className="my-box">
+              <Link href="/dashboard/mantenimiento" color={"white"}>
                 Auditorias
-              </MenuItem>
-            </MenuGroup>
-            <MenuGroup title="Herramientas">
-              <MenuItem onClick={() => RedirigirMantenimineto("mantenimineto")}>
-                Calculadora
-              </MenuItem>
-            </MenuGroup>
-          </MenuList>
-        </Menu>
-      </Box>
+              </Link>
+            </Box>
+            <Box className="my-box">
+              <Link href="/dashboard/mantenimiento" color={"white"}>
+                Benchmark
+              </Link>
+            </Box>
+            <Box className="my-box">
+              <Link href="/dashboard/mantenimiento" color={"white"}>
+                Performance
+              </Link>
+            </Box>
+            <Box className="my-box">
+              <Link href="/dashboard/mantenimiento" color={"white"}>
+                Wallet
+              </Link>
+            </Box>
+          </DrawerBody>
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 }

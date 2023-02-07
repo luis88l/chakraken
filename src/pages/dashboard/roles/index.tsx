@@ -27,6 +27,8 @@ export default function Roles(): any {
 
   const columnHelper = createColumnHelper<areasTable>();
 
+  console.log(roles);
+
   const columns = [
     columnHelper.accessor("de_rol", {
       cell: (info) => info.getValue(),

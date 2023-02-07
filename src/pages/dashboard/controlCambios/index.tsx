@@ -115,7 +115,7 @@ export default function controlCambios(): any {
     isLoading,
     data: dataControlCambios,
     isSuccess,
-  } = useQuery("dataControlCambios", async () => await getConf());
+  } = useQuery("dataControlCambios", async () => getConf());
 
   const getConf = () => {
     console.log(localStorage.getItem("idpeticion"), "HOLAAAAAA");
@@ -157,13 +157,12 @@ export default function controlCambios(): any {
     ApiService.getPeticionId(form).then((item: any) => {
       if (item.data.status === 200) {
         openEdit(item.data.data);
-        return;
       }
     });
   };
 
   const openEdit = (item: any) => {
-    let objUsuario = JSON.parse(localStorage.getItem("_user") || "{}");
+    const objUsuario = JSON.parse(localStorage.getItem("_user") || "{}");
     let snBloquear = true;
     let snBloquearEstatus = true;
     if (item.id_estatusPeticion !== 105 && item.id_estatusPeticion !== 102) {
@@ -197,7 +196,7 @@ export default function controlCambios(): any {
       bloquear: snBloquear,
       de_tipoPeticion: "",
       id_peticion: item.id_peticion,
-      snBloquearEstatus: snBloquearEstatus,
+      snBloquearEstatus,
       id_responsable: item.id_responsable ? item.id_responsable : "",
       de_comentario: "",
       comentarios: [],
@@ -228,7 +227,6 @@ export default function controlCambios(): any {
           ...stateObj,
           revisoresSeleccionados: item.data.data,
         });
-        return;
       }
       // toast.error(
       //   <div>
@@ -253,7 +251,6 @@ export default function controlCambios(): any {
           ...stateObj,
           comentarios: item.data.data,
         });
-        return;
       }
       // toast.error(
       //   <div>
@@ -271,7 +268,6 @@ export default function controlCambios(): any {
           ...stateObj,
           usuarios: item.data.data,
         });
-        return;
       }
       // toast.error(
       //   <div>
@@ -315,7 +311,6 @@ export default function controlCambios(): any {
           Peticiones: items.data.data[0],
         }),
           () => GetPenticionesResponsables(items.data.data[0]);
-        return;
       }
       // toast.error(<div><i className="uil uil-exclamation-triangle"></i>
       //     &nbsp;&nbsp;Error al listar peticiones
@@ -324,14 +319,14 @@ export default function controlCambios(): any {
   };
 
   const GetPenticionesResponsables = (peticiones: any) => {
-    var peticionesaux = [];
+    const peticionesaux = [];
     for (let i = 0; i < peticiones.length; i++) {
       // var fechainicio = moment(peticiones[i].fh_requerido.split('T')[0]).hour(8)
       // var fechaFin = moment(peticiones[i].fh_requerido.split('T')[0]).hour(18)
-      var fechainicio = DateTime.local(
+      const fechainicio = DateTime.local(
         peticiones[i].fh_requerido.split("T")[0]
       );
-      var fechaFin = DateTime.local(peticiones[i].fh_requerido.split("T")[0]);
+      const fechaFin = DateTime.local(peticiones[i].fh_requerido.split("T")[0]);
       peticionesaux.push({
         startDate: fechainicio,
         endDate: fechaFin,

@@ -1,13 +1,8 @@
 import { getSession } from "next-auth/react";
-import Mantenimiento from "../../../components/mantenimiento";
-import KPage from "../../../components/page/KPage";
+import Mantenimiento from "../mantenimiento";
 
 export default function Genereal(): any {
-  return (
-    <KPage title={"General"}>
-      <Mantenimiento />
-    </KPage>
-  );
+  return <Mantenimiento />;
 }
 
 export async function getServerSideProps(context: { req: any }): Promise<any> {

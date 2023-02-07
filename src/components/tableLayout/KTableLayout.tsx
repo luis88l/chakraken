@@ -41,7 +41,7 @@ export function KTableLayout<Data extends object>({
       sorting,
     },
   });
-
+  console.log(table.getHeaderGroups());
   return (
     <Flex width="100%">
       <TableContainer width="100%">

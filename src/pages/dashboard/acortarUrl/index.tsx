@@ -23,6 +23,7 @@ export interface areasTable {
 }
 
 export default function ShortUrl(): any {
+<<<<<<< HEAD
   // const toast = useToast();
   // const toastIdRef = React.useRef();
   const [url, setUrl] = useState("");
@@ -40,6 +41,18 @@ export default function ShortUrl(): any {
     form.append("url", url);
 
     return ApiService.acortarUrl(form).then((item: any) => {
+=======
+  const toast = useToast();
+  const toastIdRef = React.useRef({});
+  const [url, setUrl] = useState("");
+  const [urlcorta, setUrlcorta] = useState("");
+
+  const acortarUrl = (): any => {
+    const form = new FormData();
+    form.append("url", url);
+
+    void ApiService.acortarUrl(form).then(async (item: any): Promise<any> => {
+>>>>>>> e4f7ea3741b8727c58ef8d012d8ddfe8ea4ac36a
       if (item.data.status === 200) {
         if (item.data.url === "Error") {
           return;
@@ -50,8 +63,12 @@ export default function ShortUrl(): any {
     });
   };
 
+<<<<<<< HEAD
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const copiar = () => {
+=======
+  const copiar = (): any => {
+>>>>>>> e4f7ea3741b8727c58ef8d012d8ddfe8ea4ac36a
     // navigator.clipboard.writeText(this.state.urlcorta)
     const selBox = document.createElement("textarea");
     selBox.style.position = "fixed";

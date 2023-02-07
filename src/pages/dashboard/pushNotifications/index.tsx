@@ -26,7 +26,7 @@ export default function PushNotifications(): any {
       if (item.data.status === 200) {
         setTokenUsuarioPrueba(item.data.data[0].de_tokenPush);
 
-        //setData(item.data.data);
+        // setData(item.data.data);
       }
     });
   };
@@ -47,16 +47,14 @@ export default function PushNotifications(): any {
         if (items.length < numeroregistros) {
           var itemsArray: any = items;
 
-          var nuevoitems = items.concat(item.data.data.rows);
+          const nuevoitems = items.concat(item.data.data.rows);
 
           setItems(nuevoitems);
-          return;
         } else {
           if (itemsArray.length === 0) {
             setItems(item.data.data.rows);
             setNumeroRegistros(item.data.data.count);
           }
-          return;
         }
       }
     });

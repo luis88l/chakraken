@@ -122,7 +122,7 @@ export default function RecuperarPassword(props: UploaderProps): any {
   const handleImageChange = function (e: React.ChangeEvent<HTMLInputElement>) {
     const fileList = e.target.files;
 
-    if (!fileList) return;
+    if (fileList == null) return;
 
     setFileSelected(fileList[0]);
   };
@@ -132,7 +132,7 @@ export default function RecuperarPassword(props: UploaderProps): any {
   ) {
     console.log(fileSelected);
 
-    if (fileSelected) {
+    if (fileSelected != null) {
       const formData = new FormData();
       formData.append("image", fileSelected, fileSelected.name);
     }
@@ -143,8 +143,8 @@ export default function RecuperarPassword(props: UploaderProps): any {
       if (item.data.status === 200) {
         console.log(item.data);
 
-        let data = item.data.data;
-        let obj = {
+        const data = item.data.data;
+        const obj = {
           rowsPerPage: 0,
           page: 0,
           pendings: data.pendings[0].countItem,
@@ -169,8 +169,6 @@ export default function RecuperarPassword(props: UploaderProps): any {
         };
 
         setStateObject(obj);
-
-        return;
       }
     });
   };
@@ -180,12 +178,11 @@ export default function RecuperarPassword(props: UploaderProps): any {
     form.append("proceso", "recuperarPasswordSincronizar");
     ApiService.getProceso(form).then((item: any) => {
       if (item.data.status === 200) {
-        let data = item.data.data;
+        const data = item.data.data;
         // this.setState({
         //     sincronizarActivo: data.activo,
         // })
         console.log(data);
-        return;
       }
     });
   };

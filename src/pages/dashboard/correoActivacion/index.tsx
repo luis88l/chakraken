@@ -60,7 +60,7 @@ export default function RecuperarPassword(): any {
     });
 
     setSelectedFiles(modified);
-    return Save(modified[0].file);
+    Save(modified[0].file);
   };
 
   console.log(selectedFiles);
@@ -91,8 +91,8 @@ export default function RecuperarPassword(): any {
     // GetProceso();
   });
 
-  const Get = (): void => {
-    void ApiService.getCorreoRecuperarPassword().then((item: any) => {
+  const Get = (): any => {
+    return ApiService.getCorreoRecuperarPassword().then((item: any) => {
       if (item.data.status === 200) {
         console.log(item.data);
 

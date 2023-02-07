@@ -154,6 +154,7 @@ export default function ShortUrl(): any {
                   <CardBody>
                     <Box mb={5}>
                       {imagenReducida !== "" ? (
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img src={imagenReducida} alt="" className="mw-100" />
                       ) : null}
                     </Box>
@@ -200,6 +201,7 @@ export default function ShortUrl(): any {
                   <CardBody>
                     <Box mb={5}>
                       {imagenReducida !== "" ? (
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img src={imagenReducida} alt="" className="mw-100" />
                       ) : null}
                     </Box>

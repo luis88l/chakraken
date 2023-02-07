@@ -114,7 +114,7 @@ export default function Carruseles(): any {
                 </Button>
               </Box>
             </form>
-            {carruseles !== "" && updating === false && (
+            {carruseles !== "" && !updating && (
               <Button
                 variant="primary"
                 size="lg"
