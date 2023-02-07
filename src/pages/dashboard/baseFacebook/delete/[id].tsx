@@ -15,7 +15,6 @@ import {
   Link,
   SimpleGrid,
   Text,
-  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { CloseIcon, WarningIcon } from "@chakra-ui/icons";
@@ -35,18 +34,15 @@ interface BaseFacebookProps {
 }
 
 export default function Bases(): any {
-  const colSpan = { base: 2, md: 2 };
   const router = useRouter();
   const [nombreBase, setNombreBase] = useState("");
   const [numeroPixel, setNombrePixel] = useState("");
   const [activo, setActivo] = useState(false);
-  const [updating, setUpdating] = useState(false);
 
-  const {
-    isLoading,
-    data: basesFaceBook,
-    isSuccess,
-  } = useQuery("Bases", async () => await ApiService.getBases());
+  const { isLoading, data: basesFaceBook } = useQuery(
+    "Bases",
+    async () => await ApiService.getBases()
+  );
 
   const updateBase = useMutation(
     async (formData: any) => {
@@ -76,6 +72,8 @@ export default function Bases(): any {
     setActivo(true);
     const formData = new FormData();
     formData.append("id", basesDetails.id_Base);
+    formData.append("nb_Base", nombreBase);
+    formData.append("nu_Pixel", numeroPixel);
     updateBase.mutate(formData);
   };
 
