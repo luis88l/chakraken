@@ -4,15 +4,7 @@ import { useQuery } from "react-query";
 import React, { useState } from "react";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import { DateTime } from "luxon";
-// import KPage from "../../../components/page/KPage";
-import {
-  Flex,
-  Box,
-  ButtonGroup,
-  Select,
-  Grid,
-  GridItem,
-} from "@chakra-ui/react";
+import { Box, ButtonGroup, Select, Grid, GridItem } from "@chakra-ui/react";
 import {
   EditIcon,
   ChevronLeftIcon,
@@ -20,7 +12,6 @@ import {
   RepeatIcon,
 } from "@chakra-ui/icons";
 import ApiService from "../../../../data/services/ApiService";
-import { Props } from "next/script";
 
 export interface Push {
   id_push: string;
@@ -46,7 +37,6 @@ export default function TabHistorial(props: { parentF: Function }): any {
   // TOPICS
   const { refetch: refetchList } = useQuery("updateListaPush", {
     queryFn: async () => {
-      console.log("numeropagina", numeropagina);
       return await ApiService.pushNotificationsGet({
         numeropagina,
         filaspagina,
@@ -127,13 +117,19 @@ export default function TabHistorial(props: { parentF: Function }): any {
   const editPush = (id: string) => {
     props.parentF(id);
   };
+
+  const UpdateLista = async () => {
+    await setPagina(0);
+    refetchList();
+  };
+
   return (
     <Grid templateColumns="repeat(12, 1fr)">
       <GridItem colSpan={11}></GridItem>
       <GridItem colSpan={1}>
         <ButtonGroup gap="1" display="flex" justifyContent="center">
           <Box m={1} cursor="pointer">
-            <RepeatIcon onClick={() => refetchList()} />
+            <RepeatIcon onClick={() => UpdateLista()} />
           </Box>
         </ButtonGroup>
       </GridItem>
