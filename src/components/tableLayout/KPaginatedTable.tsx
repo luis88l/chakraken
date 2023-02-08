@@ -8,8 +8,6 @@ import {
   chakra,
   Flex,
   TableContainer,
-  Box,
-  Tfoot,
 } from "@chakra-ui/react";
 import {
   useReactTable,
@@ -100,7 +98,7 @@ export function KPaginatedTable<Data extends object>({
                       key={cell.id}
                       isNumeric={meta?.isNumeric}
                       fontSize="xs"
-                      minWidth={210}
+                      minWidth={180}
                       whiteSpace={"break-spaces"}
                     >
                       {flexRender(
@@ -113,15 +111,6 @@ export function KPaginatedTable<Data extends object>({
               </Tr>
             ))}
           </Tbody>
-          <Tfoot style={{ position: "sticky", bottom: 0, insetBlockEnd: 0 }}>
-            <Tr>
-              <Th>
-                <Box display="flex" justifyContent="flex-end">
-                  hi
-                </Box>
-              </Th>
-            </Tr>
-          </Tfoot>
         </Table>
       </TableContainer>
     </Flex>

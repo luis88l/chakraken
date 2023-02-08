@@ -49,9 +49,6 @@ export default function ProductFeed(): any {
   const feedId = router.query.id;
   const [page, setPage] = useState(0);
   const [itemCount, setItemCount] = useState(0);
-  const [filters, setFilters] = useState<productFeedItemsFilter>(
-    {} as productFeedItemsFilter
-  );
 
   const {
     data: productFeedItems,
@@ -126,7 +123,7 @@ export default function ProductFeed(): any {
         enableSorting: false,
       }),
       columnHelper.accessor("title", {
-        cell: (info) => info.getValue(),
+        cell: (info) => <KTextToogle text={info.getValue()} maxLength={50} />,
         header: () => (
           <Box>
             <Box>
@@ -164,10 +161,6 @@ export default function ProductFeed(): any {
       columnHelper.accessor("sale_price", {
         cell: (info) => info.getValue(),
         header: "Precio en oferta",
-      }),
-      columnHelper.accessor("additional_image_link", {
-        cell: (info) => <KTextToogle text={info.getValue()} maxLength={50} />,
-        header: "Imagenes adicionales",
       }),
       columnHelper.accessor("link", {
         cell: (info) => (
@@ -265,7 +258,6 @@ export default function ProductFeed(): any {
                     sale_price,
                     availability,
                     image_link,
-                    additional_image_link,
                     link,
                     condition,
                     product_type,
@@ -280,7 +272,6 @@ export default function ProductFeed(): any {
                     sale_price,
                     availability,
                     image_link,
-                    additional_image_link,
                     link,
                     condition,
                     product_type,

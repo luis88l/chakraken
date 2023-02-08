@@ -543,11 +543,30 @@ export class ApiService {
   }
 
   public async pushNotificationsGet(form: {}): Promise<any> {
-    const res = await axios.post(
-      `${pathServer}/pushNotifications/get`,
-      form,
-      await this.defaults()
-    );
+    const res = await axios
+      .post(`${pathServer}/pushNotifications/get`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async cancelPush(form: {}): Promise<any> {
+    const res = await axios
+      .post(
+        `${pathServer}/pushNotifications/cancelPush`,
+        form,
+        await this.defaultsJSON()
+      )
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
     return res;
   }
 

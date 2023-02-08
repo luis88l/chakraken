@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import { getSession } from "next-auth/react";
 import React, { useState } from "react";
 import {
@@ -20,6 +21,7 @@ import {
 } from "@chakra-ui/react";
 import ApiService from "../../../../data/services/ApiService";
 import { useQuery, useMutation } from "react-query";
+import { DateTime } from "luxon";
 
 export interface topics {
   id_topic: string;
@@ -36,10 +38,13 @@ export interface fuentes {
   de_fuente: string;
 }
 
-export default function TabEnvio(): any {
+export default function TabEnvio(props: {
+  id_push: string;
+  updateId: Function;
+}): any {
   const [notification, setNotificatiion] = useState({
     titulo: "",
-    url: "",
+    url: "/",
     mensaje: "",
     url_imagen: "",
     tokenRef: "",
@@ -49,6 +54,7 @@ export default function TabEnvio(): any {
     id_medio: "",
     nu_HorasVida: 24,
     fh_programado: "",
+    id_estatus: 101,
     de_estatus: "Nueva",
     id_push: "",
     icon: "https://cdn2.coppel.com/wcsstore/AuroraStorefrontAssetStore/emarketing/pwa/logo-coppel-512.png",
@@ -62,6 +68,51 @@ export default function TabEnvio(): any {
   const [tipoSubmit, setSubmit] = useState("");
 
   // FETCH
+  const { refetch: actualizarPush } = useQuery(["searchPush", props.id_push], {
+    queryFn: async () => {
+      console.log("props.id_push", props.id_push);
+      if (!props.id_push) {
+        return "";
+      } else {
+        return await ApiService.pushNotificationsGet({
+          id_push: props.id_push,
+          numeropagina: 0,
+          filaspagina: 1,
+        });
+      }
+    },
+    onSuccess: async (res) => {
+      if (res?.status !== 200) {
+        return;
+      }
+
+      const objP = res.data.data.rows[0];
+      console.log("objP", objP);
+      setNotificatiion((prevState) => ({
+        ...prevState,
+        titulo: objP.de_titulo,
+        url: objP.de_url,
+        mensaje: objP.de_mensaje,
+        url_imagen: objP.url_imagen,
+        campania: objP.de_campania,
+        fuente: objP.id_fuente,
+        id_topic: objP.id_topic,
+        id_medio: objP.id_medio,
+        nu_HorasVida: objP.nu_HorasVida,
+        fh_programado: objP.fh_programado
+          ? DateTime.fromISO(objP.fh_programado).toISO({
+              includeOffset: false,
+              suppressSeconds: true,
+              suppressMilliseconds: true,
+            })
+          : "",
+        id_estatus: objP.id_estatus,
+        de_estatus: objP.Estatus.de_estatus,
+        id_push: objP.id_push,
+      }));
+    },
+  });
+
   // TOPICS
   useQuery("updateTopics", async () => await ApiService.getTopics(), {
     onSuccess: (res) => {
@@ -84,7 +135,10 @@ export default function TabEnvio(): any {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): any => {
-    const { name, value } = e.currentTarget;
+    let { name, value } = e.currentTarget;
+    if (name === "url" && (!value || !value.startsWith("/"))) {
+      value = "/";
+    }
     setNotificatiion((prevState) => ({
       ...prevState,
       [name]: value,
@@ -106,8 +160,11 @@ export default function TabEnvio(): any {
 
   const handleSubmit = async (event: React.SyntheticEvent): Promise<any> => {
     event.preventDefault();
+    setDisable(true);
     if (tipoSubmit === "save") {
       savePush.mutate();
+    } else if (tipoSubmit === "cancelar") {
+      cancelarPush.mutate();
     } else {
       testPush.mutate();
     }
@@ -127,24 +184,26 @@ export default function TabEnvio(): any {
       id_medio: "",
       nu_HorasVida: 24,
       fh_programado: "",
+      id_estatus: 101,
       de_estatus: "Nueva",
       id_push: "",
     }));
+
+    props.updateId("");
   };
 
   const savePush = useMutation("addPush", {
     mutationFn: async () => {
-      setDisable(true);
       return await ApiService.pushNotificationsSave(notification);
     },
     onSuccess: (res) => {
       setDisable(false);
+      console.log("RES", res);
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-      if (notification.id_push) return;
-      setNotificatiion((prevState) => ({
-        ...prevState,
-        id_push: res.data.data.id_push,
-      }));
+      if (!notification.id_push) {
+        props.updateId(res.data.data.id_push);
+      }
+      void actualizarPush();
     },
     onError(error, variables, context) {
       setDisable(false);
@@ -154,13 +213,31 @@ export default function TabEnvio(): any {
 
   const testPush = useMutation("testPush", {
     mutationFn: async () => {
-      setDisable(true);
-
-      return await ApiService.pushNotificationsTest(notification);
+      const jsonPeticion = {
+        ...notification,
+        tokenUsuarioPrueba: tokenUsuario,
+      };
+      return await ApiService.pushNotificationsTest(jsonPeticion);
     },
     onSuccess: (res) => {
       setDisable(false);
-      console.log(res);
+    },
+    onError(error, variables, context) {
+      setDisable(false);
+      console.error("ERROR", error);
+    },
+  });
+
+  const cancelarPush = useMutation("cancelarPush", {
+    mutationFn: async () => {
+      const jsonPeticion = {
+        id_push: notification.id_push,
+      };
+      return await ApiService.cancelPush(jsonPeticion);
+    },
+    onSuccess: (res) => {
+      setDisable(false);
+      void actualizarPush();
     },
     onError(error, variables, context) {
       setDisable(false);
@@ -177,7 +254,7 @@ export default function TabEnvio(): any {
             <br />
             <form onSubmit={handleSubmit}>
               <Grid templateColumns="repeat(6, 1fr)" gap={2}>
-                <GridItem colSpan={2}>
+                <GridItem colSpan={6}>
                   <FormControl isRequired>
                     <FormLabel>Título</FormLabel>
                     <Input
@@ -190,7 +267,7 @@ export default function TabEnvio(): any {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={2}>
+                <GridItem colSpan={3}>
                   <FormControl isRequired>
                     <FormLabel>Topic</FormLabel>
                     <Select
@@ -211,7 +288,7 @@ export default function TabEnvio(): any {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={2}>
+                <GridItem colSpan={3}>
                   <FormControl isRequired>
                     <FormLabel>Horas de vida</FormLabel>
                     <Input
@@ -328,6 +405,7 @@ export default function TabEnvio(): any {
                       type="datetime-local"
                       onChange={handleChange}
                       name="fh_programado"
+                      value={notification.fh_programado}
                     />
                   </FormControl>
                 </GridItem>
@@ -387,19 +465,43 @@ export default function TabEnvio(): any {
                     >
                       Nueva
                     </Button>
-                    <Button
-                      colorScheme="blue"
-                      width="200px"
-                      borderRadius={50}
-                      size="md"
-                      variant="solid"
-                      marginLeft={5}
-                      type="submit"
-                      disabled={disableButtons}
-                      onClick={() => setSubmit("save")}
-                    >
-                      Guardar
-                    </Button>
+                    {notification.id_estatus === 101 ? (
+                      <Button
+                        colorScheme="blue"
+                        width="200px"
+                        borderRadius={50}
+                        size="md"
+                        variant="solid"
+                        marginLeft={5}
+                        type="submit"
+                        disabled={disableButtons}
+                        onClick={() => setSubmit("save")}
+                      >
+                        Guardar
+                      </Button>
+                    ) : (
+                      ""
+                    )}
+
+                    {notification.id_push &&
+                    (notification.id_estatus === 101 ||
+                      notification.id_estatus === 102) ? (
+                      <Button
+                        colorScheme="red"
+                        width="200px"
+                        borderRadius={50}
+                        size="md"
+                        variant="solid"
+                        marginLeft={5}
+                        type="submit"
+                        disabled={disableButtons}
+                        onClick={() => setSubmit("cancelar")}
+                      >
+                        Cancelar
+                      </Button>
+                    ) : (
+                      ""
+                    )}
                   </Center>
                 </GridItem>
               </Grid>
