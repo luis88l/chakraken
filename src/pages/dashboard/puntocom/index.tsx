@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/promise-function-async */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
@@ -14,14 +15,7 @@ import DateBox from "devextreme-react/date-box";
 import moment from "moment";
 import ButtonGroup from "devextreme-react/button-group";
 import { AcortarNewDate, ReturnFechaLetra } from "../../../Utilerias/Fechas";
-import Box, {
-  Item as ItemBox,
-} from "devextreme-react/box";
-
-
-
-
-
+import Box, { Item as ItemBox } from "devextreme-react/box";
 
 import {
   Chart as ChartJS,
@@ -66,7 +60,7 @@ export default function Web(): any {
   const [Red, setRed] = useState<any>("3G");
   const [RedFocus, setRedFocus] = useState<any>(["left"]);
   const [Cache, setCache] = useState<any>("No");
-  const [CacheFocus, setCacheFocus] = useState<any>(['right']);
+  const [CacheFocus, setCacheFocus] = useState<any>(["right"]);
   const OptionsChartLabel: any = {
     scales: {
       y: {
@@ -146,12 +140,12 @@ export default function Web(): any {
               // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
               span += `background-color: ${bgColor}; display: inline-flex"></div>`;
               // let kb = text
-              innerHtml += `<tr><td style="padding: 0px 16px 8px">${span}${body} ${text}</td></tr>`
-            })
-            innerHtml += '</tbody>'
-            const tableRoot = tooltipEl.querySelector('#tableToolTip')
+              innerHtml += `<tr><td style="padding: 0px 16px 8px">${span}${body} ${text}</td></tr>`;
+            });
+            innerHtml += "</tbody>";
+            const tableRoot = tooltipEl.querySelector("#tableToolTip");
             // @ts-expect-error
-            tableRoot.innerHTML = innerHtml
+            tableRoot.innerHTML = innerHtml;
           }
           // @ts-expect-error
           const position = this._chart.canvas.getBoundingClientRect();
@@ -260,36 +254,44 @@ export default function Web(): any {
       Cache === "Si" && Red === "3G"
         ? 1
         : Cache === "No" && Red === "3G"
-          ? 0
-          : Cache === "si" && Red === "4G"
-            ? 3
-            : 2;
+        ? 0
+        : Cache === "si" && Red === "4G"
+        ? 3
+        : 2;
     const form = new FormData();
     form.append("id_dominio", Dominio);
-    form.append('fh_Inicio', AcortarNewDate(FechaInicio))
-    form.append('fh_Fin', AcortarNewDate(FechaFinal))
-    form.append('id_pagina', Pagina)
-    form.append('id_tipoAuditoria', String(Tipo))
-    form.append('id_tipoDato', 'Kb')
-    form.append('isMobile', Dispositivo === 'Mobile' ? '1' : '0')
+    form.append("fh_Inicio", AcortarNewDate(FechaInicio));
+    form.append("fh_Fin", AcortarNewDate(FechaFinal));
+    form.append("id_pagina", Pagina);
+    form.append("id_tipoAuditoria", String(Tipo));
+    form.append("id_tipoDato", "Kb");
+    form.append("isMobile", Dispositivo === "Mobile" ? "1" : "0");
     /*    console.log("🚀 ~ file: index.tsx:99 ~ CargarScore ~ form", Tipo, Dispositivo, Red, Cache, Dispositivo === 'Mobile' ? '1' : '0')
        console.log("🚀 ~ file: index.tsx:99 ~ CargarScore ~ form", Dominio, AcortarNewDate(FechaInicio), AcortarNewDate(FechaFinal), Pagina) */
 
     await ApiService.GetBudgetData(form).then((res: any) => {
       if (res.data.status === 200) {
-        setDataScores(res.data.data[0].Detalles)
-        const OrdenadoFecha = orderBy(res.data.data[0].Detalles, "fh_registro", "asc")
+        setDataScores(res.data.data[0].Detalles);
+        const OrdenadoFecha = orderBy(
+          res.data.data[0].Detalles,
+          "fh_registro",
+          "asc"
+        );
         setDataChart({
-          labels: [...new Set(OrdenadoFecha.map((x: any) => ReturnFechaLetra(x.fh_registro)))],
+          labels: [
+            ...new Set(
+              OrdenadoFecha.map((x: any) => ReturnFechaLetra(x.fh_registro))
+            ),
+          ],
           datasets: [
             {
-              label: 'Performance',
-              data: [...(OrdenadoFecha.map((x: any) => x.pj_performance))],
-              borderColor: 'rgb(255, 99, 132)',
-              backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            }
+              label: "Performance",
+              data: [...OrdenadoFecha.map((x: any) => x.pj_performance)],
+              borderColor: "rgb(255, 99, 132)",
+              backgroundColor: "rgba(255, 99, 132, 0.5)",
+            },
           ],
-        })
+        });
         // console.log(res.data.data[0].Detalles)
       } else {
         console.log("Ocurrio algo");

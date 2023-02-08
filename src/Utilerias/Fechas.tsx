@@ -14,9 +14,9 @@ export function AcortarNewDate(Fecha: Date): any {
 }
 // Regresa el mes y año , Formato a mandar a la funcion yyyy-MM-dd fh_registro "2023-01-09"
 export function ReturnFechaLetra(Fecha: string): any {
-  const date = new Date(Fecha + ' 00:00')
-  let mes = date.toLocaleString('es-MX', { month: 'long' })
-  mes = mes.charAt(0).toUpperCase() + mes.slice(1)
-  const dia = date.toLocaleString('es-MX', { day: 'numeric' })
-  return `${dia} ${mes}`
+  const date = new Date(Fecha + " 00:00");
+  let mes = date.toLocaleString("es-MX", { month: "long" });
+  mes = mes.charAt(0).toUpperCase() + mes.slice(1);
+  const dia = date.toLocaleString("es-MX", { day: "numeric" });
+  return `${dia} ${mes}`;
 }
