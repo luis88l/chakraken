@@ -55,17 +55,7 @@ interface GetUserResponse {
   Data: User;
 }
 
-let pathServer = "http://localhost:8080";
-
-const hostname = "localhost";
-
-if (hostname === "localhost") {
-  pathServer = "http://localhost:8080";
-} else if (hostname === "178.128.100.37") {
-  pathServer = "http://178.128.100.37:8080";
-} else {
-  pathServer = "https://apikraken.coppel.com";
-}
+const pathServer = String(process.env.REACT_APP_URL_API);
 
 export class ApiService {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

@@ -14,10 +14,11 @@ import {
 import { FiLock, FiUser, FiArrowRight, FiEye, FiEyeOff } from "react-icons/fi";
 import { useRouter } from "next/router";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import KAlert from "../../components/alert/KAlert";
 import { getSession, signIn } from "next-auth/react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Index = (): any => {
   const router = useRouter();
@@ -27,16 +28,24 @@ const Index = (): any => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [captchaRef, setCaptchaRef] = useState(React.createRef<ReCAPTCHA>());
+  const [captchaKey, setCaptchaKey] = useState(
+    "6Lc9N6saAAAAANrk3U3umM-mhKw4zcvObGqL5_ln"
+  );
 
   const handleSubmit = async (event: any): Promise<any> => {
     event.preventDefault();
     setError(false);
     setIsLoading(true);
 
+    const tokenCaptcha = await captchaRef.current?.executeAsync();
+    captchaRef.current?.reset();
+
     const result = await signIn("credentials", {
       redirect: false,
       username,
       password,
+      tokenCaptcha,
     });
 
     if (result?.ok === true) {
@@ -154,6 +163,8 @@ const Index = (): any => {
                 )}
               </Box>
             </Stack>
+            {captchaKey}
+            <ReCAPTCHA ref={captchaRef} sitekey={captchaKey} size="invisible" />
           </form>
         </Box>
       </Stack>
