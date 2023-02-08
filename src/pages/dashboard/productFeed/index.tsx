@@ -96,6 +96,18 @@ export default function ProductFeed(): any {
     }),
   ];
 
+  const fetchFeed = async (): Promise<any> => {
+    if (confirm("Este proceso puede tardar varios minutos, desea continuar?")) {
+      ApiService.fetchFeed({})
+        .then(() => {
+          console.log("Feed generado");
+        })
+        .finally(() => {
+          window.location.reload();
+        });
+    }
+  };
+
   return (
     <KPage title="Feeds">
       <Box overflow="scroll" max-height="100%" width="100%">
@@ -133,7 +145,9 @@ export default function ProductFeed(): any {
           </Box>
           <Spacer />
           <Box>
-            <Button colorScheme="blue">Procesar feed</Button>
+            <Button onClick={fetchFeed} colorScheme="blue">
+              Procesar feed
+            </Button>
           </Box>
         </Flex>
         <Box>

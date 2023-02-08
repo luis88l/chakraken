@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box, Button, Flex, Spacer, Text, Input } from "@chakra-ui/react";
+import { Box, Button, Flex, Spacer, Input } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
@@ -10,11 +10,12 @@ import Image from "next/image";
 import KTextToogle from "../../../components/text/KTextToogle";
 import Link from "next/link";
 import { SetStateAction, useState } from "react";
+import { motion } from "framer-motion";
 import {
   FiAlertCircle,
   FiClock,
-  FiFacebook,
-  FiChrome,
+  /*   FiFacebook,
+  FiChrome, */
   FiBarChart,
 } from "react-icons/fi";
 import { KPaginatedTable } from "../../../components/tableLayout/KPaginatedTable";
@@ -32,7 +33,6 @@ export interface productFeedItemTable {
   image_link: string;
   additional_image_link: string;
   link: string;
-  condition: string;
   availability: string;
   sale_price: number;
   product_type: string;
@@ -40,15 +40,17 @@ export interface productFeedItemTable {
 }
 
 export interface productFeedItemsFilter {
-  idFeed: string;
-  page: number;
+  column: string;
+  value: string;
+  min?: number;
+  max?: number;
 }
 
 export default function ProductFeed(): any {
   const router = useRouter();
   const feedId = router.query.id;
   const [page, setPage] = useState(0);
-  const [itemCount, setItemCount] = useState(0);
+  const [filters, setFilters] = useState([]);
 
   const {
     data: productFeedItems,
@@ -65,14 +67,12 @@ export default function ProductFeed(): any {
         idFeed: feedId,
         page,
         offset: page * 15,
-        filters: {},
+        filters,
       }),
     config: {
       onSettled: (responseData: {
         data: { total: SetStateAction<number> };
-      }) => {
-        setItemCount(responseData.data.total);
-      },
+      }) => {},
     },
   });
 
@@ -80,13 +80,37 @@ export default function ProductFeed(): any {
     return <KSkeletonPage />;
   }
 
+  const fetchFeed = async (): Promise<any> => {
+    if (confirm("Este proceso puede tardar varios minutos, desea continuar?")) {
+      ApiService.fetchFeed({})
+        .then(() => {
+          console.log("Feed generado");
+        })
+        .finally(() => {
+          window.location.reload();
+        });
+    }
+  };
+
+  const handleChange = (value: string): any => {
+    setFilters([
+      // @ts-expect-error
+      {
+        column: "id",
+        value,
+      },
+    ]);
+    console.log(filters);
+    void refetch();
+  };
+
   if (isSuccess) {
     const columnHelper = createColumnHelper<productFeedItemTable>();
 
     const columns = [
       columnHelper.accessor("image_link", {
         cell: (info) => (
-          <Image src={info.getValue()} width={60} height={60} alt={""} />
+          <Image src={info.getValue()} width={50} height={50} alt={""} />
         ),
         header: "Imagen",
       }),
@@ -110,30 +134,12 @@ export default function ProductFeed(): any {
       }),
       columnHelper.accessor("sku", {
         cell: (info) => info.getValue(),
-        header: () => (
-          <Box>
-            <Box>
-              <Text>ID</Text>
-            </Box>
-            <Box mt={3}>
-              <Input placeholder="Buscar por ID" fontSize="s" />
-            </Box>
-          </Box>
-        ),
+        header: "ID",
         enableSorting: false,
       }),
       columnHelper.accessor("title", {
         cell: (info) => <KTextToogle text={info.getValue()} maxLength={50} />,
-        header: () => (
-          <Box>
-            <Box>
-              <Text>Título</Text>
-            </Box>
-            <Box mt={3}>
-              <Input placeholder="Buscar por título" fontSize="s" />
-            </Box>
-          </Box>
-        ),
+        header: () => "Título",
         enableSorting: false,
       }),
       columnHelper.accessor("size", {
@@ -142,16 +148,7 @@ export default function ProductFeed(): any {
       }),
       columnHelper.accessor("description", {
         cell: (info) => <KTextToogle text={info.getValue()} maxLength={50} />,
-        header: () => (
-          <Box>
-            <Box>
-              <Text>Descripción</Text>
-            </Box>
-            <Box mt={3}>
-              <Input placeholder="Buscar por descripción" fontSize="s" />
-            </Box>
-          </Box>
-        ),
+        header: () => "Descripción",
         enableSorting: false,
       }),
       columnHelper.accessor("price", {
@@ -165,27 +162,14 @@ export default function ProductFeed(): any {
       columnHelper.accessor("link", {
         cell: (info) => (
           <Link href={info.getValue()} target={"_blank"}>
-            {info.getValue()}
+            <KTextToogle text={info.getValue()} maxLength={50} />
           </Link>
         ),
         header: "Link",
       }),
-      columnHelper.accessor("condition", {
-        cell: (info) => info.getValue(),
-        header: "Condición",
-      }),
       columnHelper.accessor("product_type", {
-        cell: (info) => info.getValue(),
-        header: () => (
-          <Box>
-            <Box>
-              <Text>Descripción</Text>
-            </Box>
-            <Box mt={3}>
-              <Input placeholder="Buscar por tipo de producto" fontSize="s" />
-            </Box>
-          </Box>
-        ),
+        cell: (info) => <KTextToogle text={info.getValue()} maxLength={50} />,
+        header: () => "Descripción (Categoría)",
         enableSorting: false,
       }),
       columnHelper.accessor("store", {
@@ -199,53 +183,80 @@ export default function ProductFeed(): any {
     ];
 
     return (
-      <>
-        <KPage title="Feeds">
-          <Box overflow="scroll" max-height="100%" width="100%">
-            <Flex paddingBottom={5} position={"sticky"}>
-              <Box>
-                <Link href={"/dashboard/productFeed/exclusiones"}>
-                  <Button
-                    marginRight={3}
-                    leftIcon={<FiAlertCircle />}
-                    colorScheme="orange"
-                    variant="outline"
-                  >
-                    Exclusiones
-                  </Button>
-                </Link>
-                <Link href={"/dashboard/productFeed/alertas"}>
-                  <Button
-                    marginRight={3}
-                    leftIcon={<FiClock />}
-                    colorScheme="yellow"
-                    variant="outline"
-                  >
-                    Alertas
-                  </Button>
-                </Link>
-                <Link href={"/dashboard/productFeed/stats"}>
-                  <Button
-                    leftIcon={<FiBarChart />}
-                    colorScheme="purple"
-                    variant="outline"
-                  >
-                    Estadísticas
-                  </Button>
-                </Link>
-              </Box>
-              <Spacer />
-              <Box>
-                <Button marginRight={5} leftIcon={<FiChrome />}>
+      <KPage title="Feeds">
+        <Box overflow="scroll" max-height="100%" width="100%">
+          <Flex paddingBottom={5}>
+            <Box>
+              <Link href={"/dashboard/productFeed/exclusiones"}>
+                <Button
+                  marginRight={3}
+                  leftIcon={<FiAlertCircle />}
+                  colorScheme="orange"
+                  variant="outline"
+                >
+                  Exclusiones
+                </Button>
+              </Link>
+              <Link href={"/dashboard/productFeed/alertas"}>
+                <Button
+                  marginRight={3}
+                  leftIcon={<FiClock />}
+                  colorScheme="yellow"
+                  variant="outline"
+                >
+                  Alertas
+                </Button>
+              </Link>
+              <Link href={"/dashboard/productFeed/stats"}>
+                <Button
+                  leftIcon={<FiBarChart />}
+                  colorScheme="purple"
+                  variant="outline"
+                >
+                  Estadísticas
+                </Button>
+              </Link>
+            </Box>
+            <Spacer />
+            <Input
+              mr={3}
+              placeholder={"Buscar por ID"}
+              width="auto"
+              defaultValue={""}
+              onChange={(e) => {
+                handleChange(e.target.value);
+              }}
+            />
+            <Box>
+              {/* <Button marginRight={5} leftIcon={<FiChrome />}>
                   Descargar Google
                 </Button>
                 <Button marginRight={5} leftIcon={<FiFacebook />}>
                   Descargar Facebook
-                </Button>
-                <Button colorScheme="blue">Publicar feed</Button>
-              </Box>
-            </Flex>
-            {Array.isArray(productFeedItems.data.items) && (
+                </Button> */}
+
+              <Button onClick={fetchFeed} colorScheme="blue">
+                Publicar feed
+              </Button>
+            </Box>
+          </Flex>
+          {isFetching && (
+            <motion.div
+              initial={{ backgroundPosition: "0%" }}
+              animate={{ backgroundPosition: "100%" }}
+              transition={{ duration: 2, ease: "linear" }}
+              style={{
+                width: "100%",
+                height: "100%",
+                background:
+                  "linear-gradient(90deg, #00b09b, #96c93d, #ffdd00, #ff7bac)",
+                backgroundSize: "400% 400%",
+                opacity: 0.3,
+              }}
+            />
+          )}
+          {Array.isArray(productFeedItems.data.items) && !isFetching && (
+            <Flex>
               <KPaginatedTable
                 columns={columns}
                 data={productFeedItems.data.items.map(
@@ -259,7 +270,6 @@ export default function ProductFeed(): any {
                     availability,
                     image_link,
                     link,
-                    condition,
                     product_type,
                     store,
                     brand,
@@ -273,43 +283,41 @@ export default function ProductFeed(): any {
                     availability,
                     image_link,
                     link,
-                    condition,
                     product_type,
                     store,
                     brand,
                   })
                 )}
               />
-            )}
-            <Box>
-              <span>Current Page: {page + 1}</span>
-              <button
-                onClick={() => {
-                  setPage((old) => Math.max(old - 1, 0));
+            </Flex>
+          )}
+          <Box>
+            <span>Current Page: {page + 1}</span>
+            <button
+              onClick={() => {
+                setPage((old) => Math.max(old - 1, 0));
+                void refetch();
+              }}
+              disabled={page === 0}
+            >
+              Anterior
+            </button>{" "}
+            <button
+              onClick={() => {
+                if (!isPreviousData) {
+                  setPage((old) => old + 1);
                   void refetch();
-                }}
-                disabled={page === 0}
-              >
-                Anterior
-              </button>{" "}
-              <button
-                onClick={() => {
-                  if (!isPreviousData) {
-                    setPage((old) => old + 1);
-                    void refetch();
-                  }
-                }}
-                // Disable the Next Page button until we know a next page is available
-                disabled={isPreviousData}
-              >
-                Siguiente
-              </button>
-              {isFetching ? <span> Cargando...</span> : null}{" "}
-            </Box>
-            <p>{itemCount}</p>
+                }
+              }}
+              // Disable the Next Page button until we know a next page is available
+              disabled={isPreviousData}
+            >
+              Siguiente
+            </button>
+            {isFetching ? <span> Cargando...</span> : null}{" "}
           </Box>
-        </KPage>
-      </>
+        </Box>
+      </KPage>
     );
   }
 }

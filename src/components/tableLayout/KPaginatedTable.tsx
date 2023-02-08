@@ -5,8 +5,8 @@ import {
   Tr,
   Th,
   Td,
-  chakra,
   Flex,
+  chakra,
   TableContainer,
 } from "@chakra-ui/react";
 import {
@@ -44,11 +44,10 @@ export function KPaginatedTable<Data extends object>({
 
   return (
     <Flex width="100%">
-      <TableContainer display="flex" overflowY="scroll">
-        <Table variant="simple" display="block">
+      <TableContainer width="100%">
+        <Table variant="simple">
           <Thead
             style={{
-              position: "sticky",
               top: 0,
               insetBlockStart: 0,
               backgroundColor: "#fff",
@@ -70,7 +69,7 @@ export function KPaginatedTable<Data extends object>({
                         header.getContext()
                       )}
 
-                      <chakra.span pl="4">
+                      <chakra.span>
                         {
                           // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
                           header.column.getIsSorted() ? (
@@ -89,16 +88,16 @@ export function KPaginatedTable<Data extends object>({
             ))}
           </Thead>
           <Tbody>
-            {table.getRowModel().rows.map((row) => (
-              <Tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
+            {table.getRowModel().rows.map((row, index) => (
+              <Tr key={index}>
+                {row.getVisibleCells().map((cell, index) => {
                   const meta: any = cell.column.columnDef.meta;
                   return (
                     <Td
-                      key={cell.id}
+                      key={index}
                       isNumeric={meta?.isNumeric}
                       fontSize="xs"
-                      minWidth={180}
+                      minWidth={130}
                       whiteSpace={"break-spaces"}
                     >
                       {flexRender(

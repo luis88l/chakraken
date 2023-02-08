@@ -296,6 +296,24 @@ export class ApiService {
     return res;
   }
 
+  // publicar feed
+
+  public async fetchFeed(data: {}): Promise<any> {
+    return await axios
+      .post(`${pathServer}/productfeed/fetch`, data, {
+        headers: {
+          "Request-Source": "kraken",
+          authorization: await this.token(),
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+  }
+
   public async getFeedItems(data: any): Promise<any> {
     /// productfeed/getPaginatedFeedItems/
     const res = await axios

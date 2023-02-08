@@ -17,7 +17,7 @@ export default function KPage(props: KPageProps): any {
       margin={0}
       display="flex"
       flexDir={"column"}
-      width="100%"
+      maxWidth="100%"
     >
       <Box mt={4} mb={5} width="100%">
         <Text fontSize={["2xl", "2xl", "xl", "xl", "2xl"]} fontWeight="bold">
