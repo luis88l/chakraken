@@ -28,24 +28,21 @@ const Index = (): any => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [captchaRef, setCaptchaRef] = useState(React.createRef<ReCAPTCHA>());
-  const [captchaKey, setCaptchaKey] = useState(
-    "6Lc9N6saAAAAANrk3U3umM-mhKw4zcvObGqL5_ln"
-  );
+  const [captchaRef] = useState(React.createRef<ReCAPTCHA>());
 
   const handleSubmit = async (event: any): Promise<any> => {
     event.preventDefault();
     setError(false);
     setIsLoading(true);
 
-    const tokenCaptcha = await captchaRef.current?.executeAsync();
+    const token = await captchaRef.current?.executeAsync();
     captchaRef.current?.reset();
 
     const result = await signIn("credentials", {
       redirect: false,
       username,
       password,
-      tokenCaptcha,
+      token,
     });
 
     if (result?.ok === true) {
@@ -163,8 +160,11 @@ const Index = (): any => {
                 )}
               </Box>
             </Stack>
-            {captchaKey}
-            <ReCAPTCHA ref={captchaRef} sitekey={captchaKey} size="invisible" />
+            <ReCAPTCHA
+              ref={captchaRef}
+              sitekey={String(process.env.NEXT_PUBLIC_CAPTCHA_KEY)}
+              size="invisible"
+            />
           </form>
         </Box>
       </Stack>

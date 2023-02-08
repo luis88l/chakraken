@@ -55,7 +55,7 @@ interface GetUserResponse {
   Data: User;
 }
 
-const pathServer = String(process.env.REACT_APP_URL_API);
+const pathServer = String(process.env.NEXT_PUBLIC_URL_API);
 
 export class ApiService {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -523,10 +523,9 @@ export class ApiService {
     return res;
   }
 
-  public async getTokenUser(form: {}): Promise<any> {
-    const res = await axios.post(
+  public async getTokenUser(): Promise<any> {
+    const res = await axios.get(
       `${pathServer}/pushNotifications/getTokenUser`,
-      form,
       await this.defaults()
     );
     return res;

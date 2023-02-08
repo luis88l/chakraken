@@ -14,7 +14,7 @@ export default NextAuth({
       credentials: {
         username: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
-        tokenCaptcha: { label: "tokenCaptcha", type: "text" },
+        token: { label: "token", type: "text" },
       },
       async authorize(credentials, req) {
         // You need to provide your own logic here that takes the credentials
@@ -23,7 +23,8 @@ export default NextAuth({
         // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
-        const url = String(process.env.URL_API);
+
+        const url = String(process.env.NEXT_PUBLIC_URL_API);
         const res = await fetch(`${url}/users/login`, {
           method: "POST",
           body: JSON.stringify(credentials),

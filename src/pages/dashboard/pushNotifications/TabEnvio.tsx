@@ -67,10 +67,19 @@ export default function TabEnvio(props: {
   const [arrFuentes, setFuentes] = useState([]);
   const [tipoSubmit, setSubmit] = useState("");
 
+  // GET USER TOKEN
+  // TOPICS
+  useQuery("UserToken", async () => await ApiService.getTokenUser(), {
+    onSuccess: (res) => {
+      if (res?.data?.data[0]?.de_tokenPush) {
+        setTokenUsuario(res?.data?.data[0]?.de_tokenPush);
+      }
+    },
+  });
+
   // FETCH
   const { refetch: actualizarPush } = useQuery(["searchPush", props.id_push], {
     queryFn: async () => {
-      console.log("props.id_push", props.id_push);
       if (!props.id_push) {
         return "";
       } else {
@@ -87,7 +96,6 @@ export default function TabEnvio(props: {
       }
 
       const objP = res.data.data.rows[0];
-      console.log("objP", objP);
       setNotificatiion((prevState) => ({
         ...prevState,
         titulo: objP.de_titulo,
@@ -198,7 +206,6 @@ export default function TabEnvio(props: {
     },
     onSuccess: (res) => {
       setDisable(false);
-      console.log("RES", res);
       // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
       if (!notification.id_push) {
         props.updateId(res.data.data.id_push);
