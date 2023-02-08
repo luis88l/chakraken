@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box, Button, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Button, Flex, Spacer, Text, Input } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
@@ -49,6 +49,9 @@ export default function ProductFeed(): any {
   const feedId = router.query.id;
   const [page, setPage] = useState(0);
   const [itemCount, setItemCount] = useState(0);
+  const [filters, setFilters] = useState<productFeedItemsFilter>(
+    {} as productFeedItemsFilter
+  );
 
   const {
     data: productFeedItems,
@@ -65,6 +68,7 @@ export default function ProductFeed(): any {
         idFeed: feedId,
         page,
         offset: page * 15,
+        filters: {},
       }),
     config: {
       onSettled: (responseData: {
@@ -109,11 +113,31 @@ export default function ProductFeed(): any {
       }),
       columnHelper.accessor("sku", {
         cell: (info) => info.getValue(),
-        header: "ID",
+        header: () => (
+          <Box>
+            <Box>
+              <Text>ID</Text>
+            </Box>
+            <Box mt={3}>
+              <Input placeholder="Buscar por ID" fontSize="s" />
+            </Box>
+          </Box>
+        ),
+        enableSorting: false,
       }),
       columnHelper.accessor("title", {
         cell: (info) => info.getValue(),
-        header: "Title",
+        header: () => (
+          <Box>
+            <Box>
+              <Text>Título</Text>
+            </Box>
+            <Box mt={3}>
+              <Input placeholder="Buscar por título" fontSize="s" />
+            </Box>
+          </Box>
+        ),
+        enableSorting: false,
       }),
       columnHelper.accessor("size", {
         cell: (info) => info.getValue(),
@@ -121,7 +145,17 @@ export default function ProductFeed(): any {
       }),
       columnHelper.accessor("description", {
         cell: (info) => <KTextToogle text={info.getValue()} maxLength={50} />,
-        header: "Description",
+        header: () => (
+          <Box>
+            <Box>
+              <Text>Descripción</Text>
+            </Box>
+            <Box mt={3}>
+              <Input placeholder="Buscar por descripción" fontSize="s" />
+            </Box>
+          </Box>
+        ),
+        enableSorting: false,
       }),
       columnHelper.accessor("price", {
         cell: (info) => info.getValue(),
@@ -149,7 +183,17 @@ export default function ProductFeed(): any {
       }),
       columnHelper.accessor("product_type", {
         cell: (info) => info.getValue(),
-        header: "Tipo de producto",
+        header: () => (
+          <Box>
+            <Box>
+              <Text>Descripción</Text>
+            </Box>
+            <Box mt={3}>
+              <Input placeholder="Buscar por tipo de producto" fontSize="s" />
+            </Box>
+          </Box>
+        ),
+        enableSorting: false,
       }),
       columnHelper.accessor("store", {
         cell: (info) => info.getValue(),
@@ -255,7 +299,7 @@ export default function ProductFeed(): any {
                 }}
                 disabled={page === 0}
               >
-                Previous Page
+                Anterior
               </button>{" "}
               <button
                 onClick={() => {
@@ -267,9 +311,9 @@ export default function ProductFeed(): any {
                 // Disable the Next Page button until we know a next page is available
                 disabled={isPreviousData}
               >
-                Next Page
+                Siguiente
               </button>
-              {isFetching ? <span> Loading...</span> : null}{" "}
+              {isFetching ? <span> Cargando...</span> : null}{" "}
             </Box>
             <p>{itemCount}</p>
           </Box>
