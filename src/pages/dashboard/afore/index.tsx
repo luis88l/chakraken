@@ -95,67 +95,69 @@ export default function Afore(): any {
 
   if (isSuccess) {
     return (
-      <KPage title="Afore">
-        <Box overflow="scroll" max-height="100%" width="100%">
-          <Box ml={"52"} mb="5" mt={3}>
-            <Button
-              mr={"5"}
-              alignItems={"center"}
-              size="md"
-              bg="blue.500"
-              textColor={"white"}
-              rounded="5"
-            >
-              Marcar enviados
-            </Button>
-            <Button
-              rounded="5"
-              size={"md"}
-              bg="blue.500"
-              textColor={"white"}
-              alignItems="center"
-            >
-              Descargar Csv
-            </Button>
-            <Button
-              onClick={handleClick}
-              rounded="5"
-              ml={"5"}
-              size={"md"}
-              bg="blue.500"
-              textColor={"white"}
-              alignItems="center"
-            >
-              Actualizar lista
-            </Button>
-            <Checkbox
-              alignContent={"center"}
-              size="lg"
-              ml={5}
-              mt={1.5}
-              spacing={"3"}
-            >
-              Todos
-            </Checkbox>
+      <Box w={"100%"}>
+        <KPage title="Afore">
+          <Box overflow="scroll" max-height="100%" width="100%">
+            <Box ml={"80"} mb="10" mt={3}>
+              <Button
+                mr={"5"}
+                alignItems={"center"}
+                size="md"
+                bg="blue.500"
+                textColor={"white"}
+                rounded="5"
+              >
+                Marcar enviados
+              </Button>
+              <Button
+                rounded="5"
+                size={"md"}
+                bg="blue.500"
+                textColor={"white"}
+                alignItems="center"
+              >
+                Descargar Csv
+              </Button>
+              <Button
+                onClick={handleClick}
+                rounded="5"
+                ml={"5"}
+                size={"md"}
+                bg="blue.500"
+                textColor={"white"}
+                alignItems="center"
+              >
+                Actualizar lista
+              </Button>
+              <Checkbox
+                alignContent={"center"}
+                size="lg"
+                ml={5}
+                mt={1.5}
+                spacing={"3"}
+              >
+                Todos
+              </Checkbox>
+            </Box>
+            <Box alignItems="center">
+              {Array.isArray(datos) && (
+                <KTableLayout
+                  columns={columns}
+                  data={datos.map(
+                    ({ id, nombre_completo, correo, curp, telefono }) => ({
+                      id,
+                      nombre_completo,
+                      correo,
+                      curp,
+                      telefono,
+                    })
+                  )}
+                />
+              )}
+            </Box>
           </Box>
-          <Box alignItems="center">
-            {Array.isArray(datos) && (
-              <KTableLayout
-                columns={columns}
-                data={datos.map(
-                  ({ id, nombre_completo, correo, curp, telefono }) => ({
-                    id,
-                    nombre_completo,
-                    correo,
-                    curp,
-                    telefono,
-                  })
-                )}
-              />
-            )}
-          </Box>
-        </Box>
-      </KPage>
+        </KPage>
+      </Box>
     );
   }
 }

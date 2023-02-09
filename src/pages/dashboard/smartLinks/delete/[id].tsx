@@ -88,96 +88,104 @@ export default function Bases(): any {
 
   return (
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    <KPage title={"Smart Link: " + smartDetails.nb_nombre}>
-      <Box textAlign={"right"} color="red">
-        <Link href={"/dashboard/smartLinks/"}>
-          <CloseIcon fontSize={"2xl"} borderRadius="4px" cursor={"pointer"} />
-        </Link>
-      </Box>
-      <Box>
-        <Text fontSize="lg" fontWeight="bold" color={"#E02020"}>
-          ¿Estas seguro de que deseas eliminar el Formulario?.
-          <WarningIcon alignItems={"center"} ml="3" />
-        </Text>
-      </Box>
-      <Divider mt={5} mb={3} />
-      <Box>
-        <form onSubmit={handleSubmit}>
-          <SimpleGrid columns={2} spacing={5}>
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>Nombre</FormLabel>
-                <Input
-                  value={smartDetails.nb_nombre}
-                  onChange={(event) => {
-                    setNombreLanding(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>Descripcion</FormLabel>
-                <Input
-                  value={smartDetails.nb_description}
-                  onChange={(event) => {
-                    setNombreDescripcion(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>URL</FormLabel>
-                <Input
-                  value={smartDetails.nb_url}
-                  onChange={(event) => {
-                    setURL(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>Keywords</FormLabel>
-                <Input
-                  value={smartDetails.nb_keyWords}
-                  onChange={(event) => {
-                    setKeywords(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={2}></GridItem>
-            <GridItem colSpan={1}>
-              <Button
-                variant="primary"
-                size="lg"
-                type="submit"
-                bg="#E02020"
-                borderRadius={15}
-                color="#fff"
-                rightIcon={
-                  activo ? (
-                    <CircularProgress
-                      isIndeterminate
-                      color="white"
-                      size={"20px"}
+    <Box w={"100%"}>
+      <KPage title={"Smart Link: " + smartDetails.nb_nombre}>
+        <Box>
+          <Box textAlign={"right"} color="red" marginRight={"-155%"}>
+            <Link href={"/dashboard/smartLinks/"}>
+              <CloseIcon
+                fontSize={"2xl"}
+                borderRadius="4px"
+                cursor={"pointer"}
+              />
+            </Link>
+          </Box>
+          <Box>
+            <Text fontSize="lg" fontWeight="bold" color={"#E02020"}>
+              ¿Estas seguro de que deseas eliminar el Formulario?.
+              <WarningIcon alignItems={"center"} ml="3" />
+            </Text>
+          </Box>
+          <Divider mt={5} mb={3} />
+          <Box>
+            <form onSubmit={handleSubmit}>
+              <SimpleGrid columns={2} spacing={5}>
+                <GridItem colSpan={2}>
+                  <FormControl isRequired>
+                    <FormLabel>Nombre</FormLabel>
+                    <Input
+                      value={smartDetails.nb_nombre}
+                      onChange={(event) => {
+                        setNombreLanding(event.currentTarget.value);
+                      }}
                     />
-                  ) : undefined
-                }
-              >
-                Eliminar
-              </Button>
-            </GridItem>
-          </SimpleGrid>
-        </form>
-      </Box>
-    </KPage>
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={2}>
+                  <FormControl isRequired>
+                    <FormLabel>Descripcion</FormLabel>
+                    <Input
+                      value={smartDetails.nb_description}
+                      onChange={(event) => {
+                        setNombreDescripcion(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={2}>
+                  <FormControl isRequired>
+                    <FormLabel>URL</FormLabel>
+                    <Input
+                      value={smartDetails.nb_url}
+                      onChange={(event) => {
+                        setURL(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={2}>
+                  <FormControl isRequired>
+                    <FormLabel>Keywords</FormLabel>
+                    <Input
+                      value={smartDetails.nb_keyWords}
+                      onChange={(event) => {
+                        setKeywords(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={2}></GridItem>
+                <GridItem colSpan={1}>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    type="submit"
+                    bg="#E02020"
+                    borderRadius={15}
+                    color="#fff"
+                    rightIcon={
+                      activo ? (
+                        <CircularProgress
+                          isIndeterminate
+                          color="white"
+                          size={"20px"}
+                        />
+                      ) : undefined
+                    }
+                  >
+                    Eliminar
+                  </Button>
+                </GridItem>
+              </SimpleGrid>
+            </form>
+          </Box>
+        </Box>
+      </KPage>
+    </Box>
   );
 }
 

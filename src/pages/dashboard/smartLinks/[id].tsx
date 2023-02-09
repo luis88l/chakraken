@@ -15,6 +15,7 @@ import {
   Link,
   SimpleGrid,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { CloseIcon } from "@chakra-ui/icons";
@@ -96,95 +97,101 @@ export default function Bases(): any {
 
   return (
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    <KPage title={"Smart Link " + smartDetails.nb_nombre}>
-      <Box textAlign={"right"} color="red">
-        <Link href={"/dashboard/smartLinks/"}>
-          <CloseIcon fontSize={"2xl"} borderRadius="4px" cursor={"pointer"} />
-        </Link>
-      </Box>
-      <Box>
-        <Text fontSize="l" fontWeight="bold">
-          Actualizar datos del formulario
-        </Text>
-      </Box>
-      <Divider mt={5} mb={3} />
-      <Box>
-        <form onSubmit={handleSubmit}>
-          <SimpleGrid columns={2} spacing={5}>
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>Nombre</FormLabel>
-                <Input
-                  defaultValue={smartDetails.nb_nombre}
-                  onChange={(event) => {
-                    setNombreLanding(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>Descripcion</FormLabel>
-                <Input
-                  defaultValue={smartDetails.nb_description}
-                  onChange={(event) => {
-                    setNombreDescripcion(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>URL</FormLabel>
-                <Input
-                  defaultValue={smartDetails.nb_url}
-                  onChange={(event) => {
-                    setURL(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>Keywords</FormLabel>
-                <Input
-                  defaultValue={smartDetails.nb_keyWords}
-                  onChange={(event) => {
-                    setKeywords(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={2}></GridItem>
-            <GridItem colSpan={1}>
-              <Button
-                variant="primary"
-                size="lg"
-                type="submit"
-                bg="#3a47bd"
-                borderRadius={15}
-                color="#fff"
-                rightIcon={
-                  updating ? (
-                    <CircularProgress
-                      isIndeterminate
-                      color="white"
-                      size={"20px"}
+    <Box w={"100%"}>
+      <KPage title={"Smart Link " + smartDetails.nb_nombre}>
+        <Box>
+          <Box textAlign={"right"} color="red" mr={"-330%"}>
+            <Link href={"/dashboard/smartLinks/"}>
+              <CloseIcon
+                fontSize={"2xl"}
+                borderRadius="4px"
+                cursor={"pointer"}
+              />
+            </Link>
+          </Box>
+          <Text fontSize="l" fontWeight="bold">
+            Actualizar datos del formulario
+          </Text>
+          <Divider mt={5} mb={3} />
+          <Box>
+            <form onSubmit={handleSubmit}>
+              <SimpleGrid columns={2} spacing={5}>
+                <GridItem colSpan={2}>
+                  <FormControl isRequired>
+                    <FormLabel>Nombre</FormLabel>
+                    <Input
+                      defaultValue={smartDetails.nb_nombre}
+                      onChange={(event) => {
+                        setNombreLanding(event.currentTarget.value);
+                      }}
                     />
-                  ) : undefined
-                }
-              >
-                Actualizar
-              </Button>
-            </GridItem>
-          </SimpleGrid>
-        </form>
-      </Box>
-    </KPage>
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={2}>
+                  <FormControl isRequired>
+                    <FormLabel>Descripcion</FormLabel>
+                    <Textarea
+                      defaultValue={smartDetails.nb_description}
+                      onChange={(event) => {
+                        setNombreDescripcion(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={2}>
+                  <FormControl isRequired>
+                    <FormLabel>URL</FormLabel>
+                    <Input
+                      defaultValue={smartDetails.nb_url}
+                      onChange={(event) => {
+                        setURL(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={2}>
+                  <FormControl isRequired>
+                    <FormLabel>Keywords</FormLabel>
+                    <Input
+                      defaultValue={smartDetails.nb_keyWords}
+                      onChange={(event) => {
+                        setKeywords(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={2}></GridItem>
+                <GridItem colSpan={1}>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    type="submit"
+                    bg="#3a47bd"
+                    borderRadius={15}
+                    color="#fff"
+                    rightIcon={
+                      updating ? (
+                        <CircularProgress
+                          isIndeterminate
+                          color="white"
+                          size={"20px"}
+                        />
+                      ) : undefined
+                    }
+                  >
+                    Actualizar
+                  </Button>
+                </GridItem>
+              </SimpleGrid>
+            </form>
+          </Box>
+        </Box>
+      </KPage>
+    </Box>
   );
 }
 

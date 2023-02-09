@@ -85,71 +85,79 @@ export default function Bases(): any {
 
   return (
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    <KPage title={"Bases " + basesDetails.nb_Base}>
-      <Box textAlign={"right"} color="red">
-        <Link href={"/dashboard/baseFacebook/"}>
-          <CloseIcon fontSize={"2xl"} borderRadius="4px" cursor={"pointer"} />
-        </Link>
-      </Box>
-      <Box>
-        <Text fontSize="l" fontWeight="bold">
-          Actualizar Base
-        </Text>
-      </Box>
-      <Divider mt={5} mb={3} />
-      <Box>
-        <form onSubmit={handleSubmit}>
-          <SimpleGrid columns={2} spacing={5}>
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>Base</FormLabel>
-                <Input
-                  defaultValue={basesDetails.nb_Base}
-                  onChange={(event) => {
-                    setNombreBase(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>Pixel</FormLabel>
-                <Input
-                  defaultValue={basesDetails.nu_Pixel}
-                  onChange={(event) => {
-                    setNombrePixel(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={2}></GridItem>
-            <GridItem colSpan={1}>
-              <Button
-                variant="primary"
-                size="lg"
-                type="submit"
-                bg="#3a47bd"
-                borderRadius={15}
-                color="#fff"
-                rightIcon={
-                  updating ? (
-                    <CircularProgress
-                      isIndeterminate
-                      color="white"
-                      size={"20px"}
+    <Box w={"100%"}>
+      <KPage title={"Bases " + basesDetails.nb_Base}>
+        <Box>
+          <Box textAlign={"right"} color="red">
+            <Link href={"/dashboard/baseFacebook/"} mr="-158%">
+              <CloseIcon
+                fontSize={"2xl"}
+                borderRadius="4px"
+                cursor={"pointer"}
+              />
+            </Link>
+          </Box>
+          <Box>
+            <Text fontSize="l" fontWeight="bold">
+              Actualizar Base
+            </Text>
+          </Box>
+          <Divider mt={5} mb={3} />
+          <Box>
+            <form onSubmit={handleSubmit}>
+              <SimpleGrid columns={2} spacing={5}>
+                <GridItem colSpan={1}>
+                  <FormControl isRequired>
+                    <FormLabel>Base</FormLabel>
+                    <Input
+                      defaultValue={basesDetails.nb_Base}
+                      onChange={(event) => {
+                        setNombreBase(event.currentTarget.value);
+                      }}
                     />
-                  ) : undefined
-                }
-              >
-                Actualizar
-              </Button>
-            </GridItem>
-          </SimpleGrid>
-        </form>
-      </Box>
-    </KPage>
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={1}>
+                  <FormControl isRequired>
+                    <FormLabel>Pixel</FormLabel>
+                    <Input
+                      defaultValue={basesDetails.nu_Pixel}
+                      onChange={(event) => {
+                        setNombrePixel(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={2}></GridItem>
+                <GridItem colSpan={1}>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    type="submit"
+                    bg="#3a47bd"
+                    borderRadius={15}
+                    color="#fff"
+                    rightIcon={
+                      updating ? (
+                        <CircularProgress
+                          isIndeterminate
+                          color="white"
+                          size={"20px"}
+                        />
+                      ) : undefined
+                    }
+                  >
+                    Actualizar
+                  </Button>
+                </GridItem>
+              </SimpleGrid>
+            </form>
+          </Box>
+        </Box>
+      </KPage>
+    </Box>
   );
 }
 

@@ -77,72 +77,80 @@ export default function Bases(): any {
 
   return (
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    <KPage title={"Afore: " + aforeDetails.nombre_completo}>
-      <Box textAlign={"right"} color="red">
-        <Link href={"/dashboard/afore/"}>
-          <CloseIcon fontSize={"2xl"} borderRadius="4px" cursor={"pointer"} />
-        </Link>
-      </Box>
-      <Box>
-        <Text fontSize="lg" fontWeight="bold" color={"#E02020"}>
-          ¿Estas seguro de que deseas eliminar el registro?
-          <WarningIcon alignItems={"center"} ml="3" />
-        </Text>
-      </Box>
-      <Divider mt={5} mb={3} />
-      <Box>
-        <form onSubmit={handleSubmit}>
-          <SimpleGrid columns={2} spacing={5}>
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>Nombre(s)</FormLabel>
-                <Input
-                  value={aforeDetails.nombre_completo}
-                  onChange={(event) => {
-                    setNombreBase(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={1}>
-              <FormControl isRequired>
-                <FormLabel>ID</FormLabel>
-                <Input
-                  value={aforeDetails.id}
-                  onChange={(event) => {
-                    setNombrePixel(event.currentTarget.value);
-                  }}
-                />
-              </FormControl>
-            </GridItem>
-
-            <GridItem colSpan={2}></GridItem>
-            <GridItem colSpan={1}>
-              <Button
-                variant="primary"
-                size="lg"
-                type="submit"
-                bg="#E02020"
-                borderRadius={15}
-                color="#fff"
-                rightIcon={
-                  activo ? (
-                    <CircularProgress
-                      isIndeterminate
-                      color="white"
-                      size={"20px"}
+    <Box w={"100%"}>
+      <KPage title={"Afore: " + aforeDetails.nombre_completo}>
+        <Box>
+          <Box textAlign={"right"} color="red" mr={"-158%"}>
+            <Link href={"/dashboard/afore/"}>
+              <CloseIcon
+                fontSize={"2xl"}
+                borderRadius="4px"
+                cursor={"pointer"}
+              />
+            </Link>
+          </Box>
+          <Box>
+            <Text fontSize="lg" fontWeight="bold" color={"#E02020"}>
+              ¿Estas seguro de que deseas eliminar el registro?
+              <WarningIcon alignItems={"center"} ml="3" />
+            </Text>
+          </Box>
+          <Divider mt={5} mb={3} />
+          <Box>
+            <form onSubmit={handleSubmit}>
+              <SimpleGrid columns={2} spacing={5}>
+                <GridItem colSpan={1}>
+                  <FormControl isRequired>
+                    <FormLabel>Nombre(s)</FormLabel>
+                    <Input
+                      value={aforeDetails.nombre_completo}
+                      onChange={(event) => {
+                        setNombreBase(event.currentTarget.value);
+                      }}
                     />
-                  ) : undefined
-                }
-              >
-                Eliminar
-              </Button>
-            </GridItem>
-          </SimpleGrid>
-        </form>
-      </Box>
-    </KPage>
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={1}>
+                  <FormControl isRequired>
+                    <FormLabel>ID</FormLabel>
+                    <Input
+                      value={aforeDetails.id}
+                      onChange={(event) => {
+                        setNombrePixel(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={2}></GridItem>
+                <GridItem colSpan={1}>
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    type="submit"
+                    bg="#E02020"
+                    borderRadius={15}
+                    color="#fff"
+                    rightIcon={
+                      activo ? (
+                        <CircularProgress
+                          isIndeterminate
+                          color="white"
+                          size={"20px"}
+                        />
+                      ) : undefined
+                    }
+                  >
+                    Eliminar
+                  </Button>
+                </GridItem>
+              </SimpleGrid>
+            </form>
+          </Box>
+        </Box>
+      </KPage>
+    </Box>
   );
 }
 
