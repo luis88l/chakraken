@@ -1,6 +1,15 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box, Button, Flex, Spacer, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  Spacer,
+  Input,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
@@ -18,6 +27,7 @@ import {
   FiChrome, */
   FiBarChart,
 } from "react-icons/fi";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { KPaginatedTable } from "../../../components/tableLayout/KPaginatedTable";
 
 export interface productFeedItemTable {
@@ -106,6 +116,8 @@ export default function ProductFeed(): any {
 
   if (isSuccess) {
     const columnHelper = createColumnHelper<productFeedItemTable>();
+
+    console.log(productFeedItems);
 
     const columns = [
       columnHelper.accessor("image_link", {
@@ -292,29 +304,38 @@ export default function ProductFeed(): any {
             </Flex>
           )}
           <Box>
-            <span>Current Page: {page + 1}</span>
-            <button
-              onClick={() => {
-                setPage((old) => Math.max(old - 1, 0));
-                void refetch();
-              }}
-              disabled={page === 0}
-            >
-              Anterior
-            </button>{" "}
-            <button
-              onClick={() => {
-                if (!isPreviousData) {
-                  setPage((old) => old + 1);
-                  void refetch();
-                }
-              }}
-              // Disable the Next Page button until we know a next page is available
-              disabled={isPreviousData}
-            >
-              Siguiente
-            </button>
-            {isFetching ? <span> Cargando...</span> : null}{" "}
+            <Grid templateColumns="repeat(12, 1fr)" pt={3} pb={3}>
+              <GridItem colSpan={2} textAlign={"center"}>
+                {productFeedItems.data.items === 0
+                  ? "Sin resultados"
+                  : // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                    `${page} de ${productFeedItems.data.total}`}
+              </GridItem>
+              <GridItem colSpan={1} textAlign={"center"}>
+                <ButtonGroup gap="1" display="flex" justifyContent="center">
+                  <Box cursor="pointer">
+                    <ChevronLeftIcon
+                      fontSize="xl"
+                      onClick={() => {
+                        setPage((old) => Math.max(old - 1, 0));
+                        void refetch();
+                      }}
+                    />
+                  </Box>
+                  <Box cursor="pointer">
+                    <ChevronRightIcon
+                      fontSize="xl"
+                      onClick={() => {
+                        if (!isPreviousData) {
+                          setPage((old) => old + 1);
+                          void refetch();
+                        }
+                      }}
+                    />
+                  </Box>
+                </ButtonGroup>
+              </GridItem>
+            </Grid>
           </Box>
         </Box>
       </KPage>
