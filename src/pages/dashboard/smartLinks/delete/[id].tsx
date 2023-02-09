@@ -90,7 +90,7 @@ export default function Bases(): any {
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     <KPage title={"Smart Link: " + smartDetails.nb_nombre}>
       <Box textAlign={"right"} color="red">
-        <Link href={"/dashboard/baseFacebook/"}>
+        <Link href={"/dashboard/smartLinks/"}>
           <CloseIcon fontSize={"2xl"} borderRadius="4px" cursor={"pointer"} />
         </Link>
       </Box>

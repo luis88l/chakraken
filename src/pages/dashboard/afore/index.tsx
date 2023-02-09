@@ -138,7 +138,7 @@ export default function Afore(): any {
               Todos
             </Checkbox>
           </Box>
-          <Box bg={"ButtonShadow"} alignItems="center">
+          <Box alignItems="center">
             {Array.isArray(datos) && (
               <KTableLayout
                 columns={columns}
