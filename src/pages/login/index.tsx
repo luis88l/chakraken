@@ -14,10 +14,11 @@ import {
 import { FiLock, FiUser, FiArrowRight, FiEye, FiEyeOff } from "react-icons/fi";
 import { useRouter } from "next/router";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import KAlert from "../../components/alert/KAlert";
 import { getSession, signIn } from "next-auth/react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Index = (): any => {
   const router = useRouter();
@@ -27,16 +28,21 @@ const Index = (): any => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [captchaRef] = useState(React.createRef<ReCAPTCHA>());
 
   const handleSubmit = async (event: any): Promise<any> => {
     event.preventDefault();
     setError(false);
     setIsLoading(true);
 
+    const token = await captchaRef.current?.executeAsync();
+    captchaRef.current?.reset();
+
     const result = await signIn("credentials", {
       redirect: false,
       username,
       password,
+      token,
     });
 
     if (result?.ok === true) {
@@ -154,6 +160,11 @@ const Index = (): any => {
                 )}
               </Box>
             </Stack>
+            <ReCAPTCHA
+              ref={captchaRef}
+              sitekey={String(process.env.NEXT_PUBLIC_CAPTCHA_KEY)}
+              size="invisible"
+            />
           </form>
         </Box>
       </Stack>
