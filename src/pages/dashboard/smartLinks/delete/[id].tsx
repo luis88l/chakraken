@@ -96,7 +96,7 @@ export default function Bases(): any {
       </Box>
       <Box>
         <Text fontSize="lg" fontWeight="bold" color={"#E02020"}>
-          ¿Estas seguro de que deseas eliminar el Formulario?
+          ¿Estas seguro de que deseas eliminar el Formulario?.
           <WarningIcon alignItems={"center"} ml="3" />
         </Text>
       </Box>
