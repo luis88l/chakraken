@@ -52,92 +52,94 @@ export default function New(): any {
   };
 
   return (
-    <KPage title={"Crear Formulario"}>
-      <Box textAlign={"right"} color="red">
-        <Link href={"/dashboard/smartLinks/"}>
-          <CloseIcon fontSize={"2xl"} borderRadius="4px" cursor={"pointer"} />
-        </Link>
-      </Box>
-      <Box>
-        <Text fontSize={"l"} fontWeight="bold">
-          Registra los datos correctamente
-        </Text>
-      </Box>
-      <Divider mt={5} mb={2}></Divider>
-      <Box>
-        <form onSubmit={handleSubmit}>
-          <SimpleGrid columns={2} spacing={5}>
-            <Box>
-              <GridItem colSpan={colSpan}>
-                <FormControl isRequired>
-                  <FormLabel>Nombre Landing</FormLabel>
-                  <Input
-                    onChange={(event) => {
-                      setNombreLanding(event.currentTarget.value);
-                    }}
-                  />
-                </FormControl>
-              </GridItem>
-              <GridItem colSpan={colSpan} mt={3}>
-                <FormControl isRequired>
-                  <FormLabel>Descripcion</FormLabel>
-                  <Input
-                    onChange={(event) => {
-                      setNombreDescripcion(event.currentTarget.value);
-                    }}
-                  />
-                </FormControl>
-              </GridItem>
-
-              <GridItem colSpan={colSpan} mt={3}>
-                <FormControl isRequired>
-                  <FormLabel>URL</FormLabel>
-                  <Input
-                    onChange={(event) => {
-                      setURL(event.currentTarget.value);
-                    }}
-                  />
-                </FormControl>
-              </GridItem>
-
-              <GridItem colSpan={colSpan} mt={3}>
-                <FormControl isRequired>
-                  <FormLabel>Keywords</FormLabel>
-                  <Input
-                    onChange={(event) => {
-                      setKeywords(event.currentTarget.value);
-                    }}
-                  />
-                </FormControl>
-              </GridItem>
-            </Box>
-
-            <GridItem colSpan={2}></GridItem>
-            <GridItem colSpan={1}>
-              <Button
-                type="submit"
-                size={"lg"}
-                bg="blue.400"
-                variant="primary"
-                borderRadius={15}
-                color="white"
-                rightIcon={
-                  updating ? (
-                    <CircularProgress
-                      isIndeterminate
-                      color="white"
-                      size={"20px"}
+    <Box w={"100%"}>
+      <KPage title={"Crear Formulario"}>
+        <Box>
+          <Box textAlign={"right"} mr="-160%" color={"red"}>
+            <Link href={"/dashboard/smartLinks/"}>
+              <CloseIcon
+                fontSize={"2xl"}
+                borderRadius="4px"
+                cursor={"pointer"}
+              />
+            </Link>
+          </Box>
+          <Text fontSize={"l"} fontWeight="bold" mb={10}>
+            Registra los datos correctamente
+          </Text>
+          <form onSubmit={handleSubmit}>
+            <SimpleGrid columns={2} spacing={3}>
+              <Box textAlign={"right"}>
+                <GridItem colSpan={colSpan}>
+                  <FormControl isRequired>
+                    <FormLabel>Nombre Landing</FormLabel>
+                    <Input
+                      onChange={(event) => {
+                        setNombreLanding(event.currentTarget.value);
+                      }}
                     />
-                  ) : undefined
-                }
-              >
-                Crear Formulario LUX
-              </Button>
-            </GridItem>
-          </SimpleGrid>
-        </form>
-      </Box>
-    </KPage>
+                  </FormControl>
+                </GridItem>
+                <GridItem colSpan={colSpan} mt={3}>
+                  <FormControl isRequired>
+                    <FormLabel>Descripcion</FormLabel>
+                    <Input
+                      onChange={(event) => {
+                        setNombreDescripcion(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={colSpan} mt={3}>
+                  <FormControl isRequired>
+                    <FormLabel>URL</FormLabel>
+                    <Input
+                      onChange={(event) => {
+                        setURL(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+
+                <GridItem colSpan={colSpan} mt={3}>
+                  <FormControl isRequired>
+                    <FormLabel>Keywords</FormLabel>
+                    <Input
+                      onChange={(event) => {
+                        setKeywords(event.currentTarget.value);
+                      }}
+                    />
+                  </FormControl>
+                </GridItem>
+              </Box>
+              <GridItem colSpan={2}></GridItem>
+              <GridItem colSpan={1}>
+                <Button
+                  type="submit"
+                  size={"lg"}
+                  bg="blue.400"
+                  variant="primary"
+                  borderRadius={15}
+                  color="white"
+                  rightIcon={
+                    updating ? (
+                      <CircularProgress
+                        isIndeterminate
+                        color="white"
+                        size={"20px"}
+                      />
+                    ) : undefined
+                  }
+                >
+                  Crear Formulario LUX
+                </Button>
+              </GridItem>
+            </SimpleGrid>
+          </form>
+        </Box>
+      </KPage>
+    </Box>
   );
 }
 
