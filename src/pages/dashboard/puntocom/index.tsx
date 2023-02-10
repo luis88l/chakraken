@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/promise-function-async */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
@@ -13,7 +14,7 @@ import { chain, orderBy } from "lodash";
 import DateBox from "devextreme-react/date-box";
 import moment from "moment";
 import ButtonGroup from "devextreme-react/button-group";
-import { AcortarNewDate } from "../../../Utilerias/Fechas";
+import { AcortarNewDate, ReturnFechaLetra } from "../../../Utilerias/Fechas";
 import Box, { Item as ItemBox } from "devextreme-react/box";
 
 import {
@@ -139,7 +140,6 @@ export default function Web(): any {
               // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
               span += `background-color: ${bgColor}; display: inline-flex"></div>`;
               // let kb = text
-              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
               innerHtml += `<tr><td style="padding: 0px 16px 8px">${span}${body} ${text}</td></tr>`;
             });
             innerHtml += "</tbody>";
@@ -267,23 +267,26 @@ export default function Web(): any {
     form.append("id_tipoDato", "Kb");
     form.append("isMobile", Dispositivo === "Mobile" ? "1" : "0");
     /*    console.log("🚀 ~ file: index.tsx:99 ~ CargarScore ~ form", Tipo, Dispositivo, Red, Cache, Dispositivo === 'Mobile' ? '1' : '0')
-    console.log("🚀 ~ file: index.tsx:99 ~ CargarScore ~ form", Dominio, AcortarNewDate(FechaInicio), AcortarNewDate(FechaFinal), Pagina) */
+       console.log("🚀 ~ file: index.tsx:99 ~ CargarScore ~ form", Dominio, AcortarNewDate(FechaInicio), AcortarNewDate(FechaFinal), Pagina) */
 
     await ApiService.GetBudgetData(form).then((res: any) => {
       if (res.data.status === 200) {
         setDataScores(res.data.data[0].Detalles);
+        const OrdenadoFecha = orderBy(
+          res.data.data[0].Detalles,
+          "fh_registro",
+          "asc"
+        );
         setDataChart({
           labels: [
             ...new Set(
-              res.data.data[0].Detalles.map((x: any) => x.fh_registro)
+              OrdenadoFecha.map((x: any) => ReturnFechaLetra(x.fh_registro))
             ),
           ],
           datasets: [
             {
               label: "Performance",
-              data: [
-                ...res.data.data[0].Detalles.map((x: any) => x.pj_performance),
-              ],
+              data: [...OrdenadoFecha.map((x: any) => x.pj_performance)],
               borderColor: "rgb(255, 99, 132)",
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             },

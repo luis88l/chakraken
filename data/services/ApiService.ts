@@ -55,17 +55,7 @@ interface GetUserResponse {
   Data: User;
 }
 
-let pathServer = "http://localhost:8080";
-
-const hostname = "localhost";
-
-if (hostname === "localhost") {
-  pathServer = "http://localhost:8080";
-} else if (hostname === "178.128.100.37") {
-  pathServer = "http://178.128.100.37:8080";
-} else {
-  pathServer = "https://apikraken.coppel.com";
-}
+const pathServer = String(process.env.NEXT_PUBLIC_URL_API);
 
 export class ApiService {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -294,6 +284,24 @@ export class ApiService {
         return error.response;
       });
     return res;
+  }
+
+  // publicar feed
+
+  public async fetchFeed(data: {}): Promise<any> {
+    return await axios
+      .post(`${pathServer}/productfeed/fetch`, data, {
+        headers: {
+          "Request-Source": "kraken",
+          authorization: await this.token(),
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
   }
 
   public async getFeedItems(data: any): Promise<any> {
@@ -533,21 +541,39 @@ export class ApiService {
     return res;
   }
 
-  public async getTokenUser(form: {}): Promise<any> {
-    const res = await axios.post(
+  public async getTokenUser(): Promise<any> {
+    const res = await axios.get(
       `${pathServer}/pushNotifications/getTokenUser`,
-      form,
       await this.defaults()
     );
     return res;
   }
 
   public async pushNotificationsGet(form: {}): Promise<any> {
-    const res = await axios.post(
-      `${pathServer}/pushNotifications/get`,
-      form,
-      await this.defaults()
-    );
+    const res = await axios
+      .post(`${pathServer}/pushNotifications/get`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async cancelPush(form: {}): Promise<any> {
+    const res = await axios
+      .post(
+        `${pathServer}/pushNotifications/cancelPush`,
+        form,
+        await this.defaultsJSON()
+      )
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
     return res;
   }
 

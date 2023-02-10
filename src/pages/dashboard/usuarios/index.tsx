@@ -4,10 +4,24 @@ import ApiService from "../../../../data/services/ApiService";
 import { useQuery } from "react-query";
 import { createColumnHelper } from "@tanstack/react-table";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
-import { EditIcon, DeleteIcon, AddIcon } from "@chakra-ui/icons";
-import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
+import {
+  EditIcon,
+  DeleteIcon,
+  AddIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@chakra-ui/icons";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
+import { useState } from "react";
 
 export interface areasTable {
   nb_nombre: string;
@@ -19,19 +33,26 @@ export interface areasTable {
 }
 
 export default function Usuarios(): any {
+  const [page, setPage] = useState(0);
+
   const form = new FormData();
-  form.append("numeropagina", "1");
+
+  form.append("numeropagina", page.toString());
   form.append("filaspagina", "10");
-  const { isLoading, data: usuarios } = useQuery(
-    "usuarios",
-    async () => await ApiService.getUsers(form)
-  );
+  const {
+    isLoading,
+    data: usuarios,
+    isPreviousData,
+    refetch,
+  } = useQuery("usuarios", async () => await ApiService.getUsers(form));
 
   if (isLoading) {
     return <KSkeletonPage />;
   }
 
   const columnHelper = createColumnHelper<areasTable>();
+
+  console.log(usuarios);
 
   const columns = [
     columnHelper.accessor("nb_nombre", {
@@ -119,6 +140,40 @@ export default function Usuarios(): any {
             })
           )}
         />
+        <Box>
+          <Grid templateColumns="repeat(12, 1fr)" pt={3} pb={3}>
+            <GridItem colSpan={2} textAlign={"center"}>
+              {usuarios.data.items === 0
+                ? "Sin resultados"
+                : // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                  `${page} de `}
+            </GridItem>
+            <GridItem colSpan={1} textAlign={"center"}>
+              <ButtonGroup gap="1" display="flex" justifyContent="center">
+                <Box cursor="pointer">
+                  <ChevronLeftIcon
+                    fontSize="xl"
+                    onClick={() => {
+                      setPage((old) => Math.max(old - 1, 0));
+                      void refetch();
+                    }}
+                  />
+                </Box>
+                <Box cursor="pointer">
+                  <ChevronRightIcon
+                    fontSize="xl"
+                    onClick={() => {
+                      if (!isPreviousData) {
+                        setPage((old) => old + 1);
+                        void refetch();
+                      }
+                    }}
+                  />
+                </Box>
+              </ButtonGroup>
+            </GridItem>
+          </Grid>
+        </Box>
       </Box>
     </KPage>
   );

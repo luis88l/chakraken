@@ -17,6 +17,7 @@ export default function KPage(props: KPageProps): any {
       margin={0}
       display="flex"
       flexDir={"column"}
+      maxWidth="100%"
       width="100%"
     >
       <Box mt={4} mb={5} width="100%">

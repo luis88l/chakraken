@@ -76,36 +76,38 @@ export default function BaseFacebook(): any {
 
   if (isSuccess) {
     return (
-      <KPage title="Bases Facebook">
-        <Box>
-          <Flex mb={4} display="grid" justifyItems={"flex-end"}>
-            <Link href={"/dashboard/baseFacebook/new"}>
-              <Button
-                alignItems={"center"}
-                size="lg"
-                mb={"5"}
-                bg="blue.500"
-                textColor={"whiteAlpha.900"}
-              >
-                + Agregar Base
-              </Button>
-            </Link>
-          </Flex>
-          {Array.isArray(basesFaceBook) && (
-            <KTableLayout
-              columns={columns}
-              data={basesFaceBook.map(
-                ({ id_Base, nb_Base, nu_Pixel, sn_activo }) => ({
-                  id_Base,
-                  nb_Base,
-                  nu_Pixel,
-                  sn_activo,
-                })
-              )}
-            />
-          )}
-        </Box>
-      </KPage>
+      <Box>
+        <KPage title="Bases Facebook">
+          <Box>
+            <Flex mb={4} display="grid" justifyItems={"flex-end"}>
+              <Link href={"/dashboard/baseFacebook/new"}>
+                <Button
+                  alignItems={"center"}
+                  size="lg"
+                  mb={"5"}
+                  bg="blue.500"
+                  textColor={"whiteAlpha.900"}
+                >
+                  + Agregar Base
+                </Button>
+              </Link>
+            </Flex>
+            {Array.isArray(basesFaceBook) && (
+              <KTableLayout
+                columns={columns}
+                data={basesFaceBook.map(
+                  ({ id_Base, nb_Base, nu_Pixel, sn_activo }) => ({
+                    id_Base,
+                    nb_Base,
+                    nu_Pixel,
+                    sn_activo,
+                  })
+                )}
+              />
+            )}
+          </Box>
+        </KPage>
+      </Box>
     );
   }
 }

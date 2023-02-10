@@ -1,8 +1,13 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../components/page/KPage";
+import { Box } from "@chakra-ui/react";
 
 export default function Index(): any {
-  return <KPage title="Inicio">hi</KPage>;
+  return (
+    <Box width="100%">
+      <KPage title="Inicio">hi</KPage>
+    </Box>
+  );
 }
 
 export async function getServerSideProps(context: { req: any }): Promise<any> {
