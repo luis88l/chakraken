@@ -12,7 +12,7 @@ export default NextAuth({
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        user: { label: "User", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
         token: { label: "token", type: "text" },
       },
@@ -25,7 +25,9 @@ export default NextAuth({
         // (i.e., the request IP address)
 
         const url = String(process.env.NEXT_PUBLIC_URL_API);
-        const res = await fetch(`${url}/users/loginNew`, {
+
+        console.log(credentials);
+        const res = await fetch(`${url}/users/login`, {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" },
