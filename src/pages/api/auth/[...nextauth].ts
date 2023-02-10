@@ -25,7 +25,7 @@ export default NextAuth({
         // (i.e., the request IP address)
 
         const url = String(process.env.NEXT_PUBLIC_URL_API);
-        const res = await fetch(`${url}/users/login`, {
+        const res = await fetch(`${url}/users/loginNew`, {
           method: "POST",
           body: JSON.stringify(credentials),
           headers: { "Content-Type": "application/json" },
