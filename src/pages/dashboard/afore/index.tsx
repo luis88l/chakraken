@@ -50,6 +50,7 @@ export default function Afore(): any {
 
   const {
     isLoading,
+    refetch,
     data: aforeModulo,
     isSuccess,
   } = useQuery("Afore", async () => await ApiService.aforeGet(verTodos));
@@ -142,6 +143,7 @@ export default function Afore(): any {
                 <Checkbox
                   onChange={(e) => {
                     setVerTodos(e.target.checked);
+                    void refetch();
                   }}
                 >
                   Ver todos
