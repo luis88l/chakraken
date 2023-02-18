@@ -8,7 +8,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 export interface aforeTable {
   id: string;
@@ -28,18 +28,17 @@ export interface aforeTableProps {
 }
 
 export default function Afore(): any {
-  const [items, setItems] = useState([]);
-
-  const Get = () => {
-    ApiService.aforeGet(true).then(
+  const Get = async (): Promise<any> => {
+    void ApiService.aforeGet(true).then(
       (item: { data: { status: number; data: [] } }) => {
         if (item.data.status === 200) {
-          setItems(item.data.data);
+          console.log("exito");
         }
       }
     );
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [afo, setafo] = useState(null);
 
   const {
@@ -54,15 +53,6 @@ export default function Afore(): any {
 
   const aforeData = aforeModulo.data.data;
   const columnHelper = createColumnHelper<aforeTable>();
-
-  const handleClick = async (event: {
-    preventDefault: () => void;
-  }): Promise<any> => {
-    void ApiService.aforeGet(true).then((response) => {
-      const datos = response.data.data;
-      setafo(datos);
-    });
-  };
 
   const datos = afo == null ? aforeData : afo;
   const columns = [
