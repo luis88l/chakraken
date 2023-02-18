@@ -8,7 +8,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export interface aforeTable {
   id: string;
@@ -28,6 +28,18 @@ export interface aforeTableProps {
 }
 
 export default function Afore(): any {
+  const [items, setItems] = useState([]);
+
+  const Get = () => {
+    ApiService.aforeGet(true).then(
+      (item: { data: { status: number; data: [] } }) => {
+        if (item.data.status === 200) {
+          setItems(item.data.data);
+        }
+      }
+    );
+  };
+
   const [afo, setafo] = useState(null);
 
   const {
@@ -119,7 +131,7 @@ export default function Afore(): any {
                 Descargar Csv
               </Button>
               <Button
-                onClick={handleClick}
+                onClick={Get}
                 rounded="5"
                 ml={"5"}
                 size={"md"}
