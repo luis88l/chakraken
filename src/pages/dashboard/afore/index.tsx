@@ -1,6 +1,12 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box, Button, ButtonGroup, Checkbox } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Checkbox,
+  CheckboxGroup,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
@@ -40,12 +46,13 @@ export default function Afore(): any {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [afo, setafo] = useState(null);
+  const [verTodos, setVerTodos] = useState(false);
 
   const {
     isLoading,
     data: aforeModulo,
     isSuccess,
-  } = useQuery("Afore", async () => await ApiService.aforeGet(true));
+  } = useQuery("Afore", async () => await ApiService.aforeGet(verTodos));
 
   if (isLoading) {
     return <KSkeletonPage />;
@@ -131,15 +138,15 @@ export default function Afore(): any {
               >
                 Actualizar lista
               </Button>
-              <Checkbox
-                alignContent={"center"}
-                size="lg"
-                ml={5}
-                mt={1.5}
-                spacing={"3"}
-              >
-                Todos
-              </Checkbox>
+              <CheckboxGroup>
+                <Checkbox
+                  onChange={(e) => {
+                    setVerTodos(e.target.checked);
+                  }}
+                >
+                  Ver todos
+                </Checkbox>
+              </CheckboxGroup>
             </Box>
             <Box alignItems="center">
               {Array.isArray(datos) && (
