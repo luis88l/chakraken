@@ -48,6 +48,17 @@ export default function Afore(): any {
   const [afo, setafo] = useState(null);
   const [verTodos, setVerTodos] = useState(false);
 
+  function handleClick(e) {
+    const isChecked = e.target.checked;
+    setVerTodos(isChecked);
+    void refetch().then(() => {
+      void refetch();
+    });
+    if (!isChecked) {
+      setVerTodos(false);
+    }
+  }
+
   const {
     isLoading,
     refetch,
@@ -111,6 +122,7 @@ export default function Afore(): any {
             <Box ml={"80"} mb="10" mt={3}>
               <Button
                 mr={"5"}
+                ml={"-10"}
                 alignItems={"center"}
                 size="md"
                 bg="blue.500"
@@ -132,6 +144,7 @@ export default function Afore(): any {
                 onClick={Get}
                 rounded="5"
                 ml={"5"}
+                mr={"12"}
                 size={"md"}
                 bg="blue.500"
                 textColor={"white"}
@@ -140,14 +153,7 @@ export default function Afore(): any {
                 Actualizar lista
               </Button>
               <CheckboxGroup>
-                <Checkbox
-                  onChange={(e) => {
-                    setVerTodos(e.target.checked);
-                    void refetch();
-                  }}
-                >
-                  Ver todos
-                </Checkbox>
+                <Checkbox onChange={handleClick}>Ver todos</Checkbox>
               </CheckboxGroup>
             </Box>
             <Box alignItems="center">
