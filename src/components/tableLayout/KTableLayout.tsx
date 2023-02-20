@@ -15,7 +15,6 @@ import {
   getCoreRowModel,
   ColumnDef,
   SortingState,
-  getSortedRowModel,
 } from "@tanstack/react-table";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useState } from "react";
@@ -36,16 +35,16 @@ export function KTableLayout<Data extends object>({
     data,
     getCoreRowModel: getCoreRowModel(),
     onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
+    enableColumnResizing: true,
+    columnResizeMode: "onChange",
     state: {
       sorting,
     },
   });
-  console.log(table.getHeaderGroups());
   return (
-    <Flex width="100%">
+    <Flex>
       <TableContainer width="100%">
-        <Table variant="simple">
+        <Table variant="simple" width="100%">
           <Thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <Tr key={headerGroup.id}>
@@ -56,13 +55,16 @@ export function KTableLayout<Data extends object>({
                       key={header.id}
                       onClick={header.column.getToggleSortingHandler()}
                       isNumeric={meta?.isNumeric}
+                      style={{ position: "relative", width: header.getSize() }}
+                      pr="0"
+                      pl="0"
                     >
                       {flexRender(
                         header.column.columnDef.header,
                         header.getContext()
                       )}
 
-                      <chakra.span pl="4">
+                      <chakra.span>
                         {
                           // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
                           header.column.getIsSorted() ? (
@@ -92,6 +94,9 @@ export function KTableLayout<Data extends object>({
                       fontSize="xs"
                       minWidth={210}
                       whiteSpace={"break-spaces"}
+                      style={{ width: cell.column.getSize() }}
+                      pr="0"
+                      pl="0"
                     >
                       {flexRender(
                         cell.column.columnDef.cell,

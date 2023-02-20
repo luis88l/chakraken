@@ -11,7 +11,7 @@ interface DashboardProps {
 export default function Dashboard(props: DashboardProps): any {
   return (
     <Flex
-      w={["15%"]}
+      w={["20%"]}
       flexDir="column"
       alignItems="center"
       backgroundColor="#020202"

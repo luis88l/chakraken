@@ -4,6 +4,7 @@ import Head from "next/head";
 import ApiService from "../../../data/services/ApiService";
 import FormData from "form-data";
 import { useQuery } from "react-query";
+import Content from "../dashboard/Content";
 
 export default function Layout(props: { children: any }): any {
   const form = new FormData();
@@ -31,7 +32,7 @@ export default function Layout(props: { children: any }): any {
         <title>Kraken</title>
       </Head>
       <Dashboard userOptions={userOptions} />
-      <>{props.children}</>
+      <Content> {props.children}</Content>
     </Flex>
   );
 }
