@@ -1,13 +1,26 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box, Button, ButtonGroup, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  Grid,
+  GridItem,
+} from "@chakra-ui/react";
 import { createColumnHelper } from "@tanstack/react-table";
 import Link from "next/link";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  DeleteIcon,
+  EditIcon,
+} from "@chakra-ui/icons";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
 import { KTableLayout } from "../../../components/tableLayout/KTableLayout";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
+import { useState } from "react";
 
 export interface areasTable {
   id_Base: string;
@@ -24,10 +37,19 @@ export interface baseFacebookProps {
 }
 
 export default function BaseFacebook(): any {
+  const [page, setPage] = useState(0);
+
+  const form = new FormData();
+
+  form.append("numeropagina", page.toString());
+  form.append("filaspagina", "10");
+
   const {
     isLoading,
     data: basesFaceBook,
     isSuccess,
+    isPreviousData,
+    refetch,
   } = useQuery("Bases", async () => await ApiService.getBases());
 
   if (isLoading) {
@@ -76,9 +98,9 @@ export default function BaseFacebook(): any {
 
   if (isSuccess) {
     return (
-      <Box>
+      <Box w="100%">
         <KPage title="Bases Facebook">
-          <Box>
+          <Box overflow={"scroll"} w="100%">
             <Flex mb={4} display="grid" justifyItems={"flex-end"}>
               <Link href={"/dashboard/baseFacebook/new"}>
                 <Button
@@ -105,6 +127,40 @@ export default function BaseFacebook(): any {
                 )}
               />
             )}
+            <Box alignContent={"center"}>
+              <Grid templateColumns="repeat(12, 1fr)" pt={3} pb={3}>
+                <GridItem colSpan={2} textAlign={"center"}>
+                  {basesFaceBook.items === 0
+                    ? "Sin resultados"
+                    : // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                      `${page} de `}
+                </GridItem>
+                <GridItem colSpan={1} textAlign={"center"}>
+                  <ButtonGroup gap="1" display="flex" justifyContent="center">
+                    <Box cursor="pointer">
+                      <ChevronLeftIcon
+                        fontSize="xl"
+                        onClick={() => {
+                          setPage((old) => Math.max(old - 1, 0));
+                          void refetch();
+                        }}
+                      />
+                    </Box>
+                    <Box cursor="pointer">
+                      <ChevronRightIcon
+                        fontSize="xl"
+                        onClick={() => {
+                          if (!isPreviousData) {
+                            setPage((old) => old + 1);
+                            void refetch();
+                          }
+                        }}
+                      />
+                    </Box>
+                  </ButtonGroup>
+                </GridItem>
+              </Grid>
+            </Box>
           </Box>
         </KPage>
       </Box>

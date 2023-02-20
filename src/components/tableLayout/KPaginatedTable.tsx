@@ -97,7 +97,6 @@ export function KPaginatedTable<Data extends object>({
                       key={index}
                       isNumeric={meta?.isNumeric}
                       fontSize="xs"
-                      minWidth={100}
                       whiteSpace={"break-spaces"}
                     >
                       {flexRender(

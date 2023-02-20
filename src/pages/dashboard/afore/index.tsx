@@ -1,6 +1,12 @@
 import { getSession } from "next-auth/react";
 import KPage from "../../../components/page/KPage";
-import { Box, Button, ButtonGroup, Checkbox } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Checkbox,
+  CheckboxGroup,
+} from "@chakra-ui/react";
 import Link from "next/link";
 import { useQuery } from "react-query";
 import ApiService from "../../../../data/services/ApiService";
@@ -28,13 +34,38 @@ export interface aforeTableProps {
 }
 
 export default function Afore(): any {
+  const Get = async (): Promise<any> => {
+    void ApiService.aforeGet(true).then(
+      (item: { data: { status: number; data: [] } }) => {
+        if (item.data.status === 200) {
+          console.log("exito");
+        }
+      }
+    );
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [afo, setafo] = useState(null);
+  const [verTodos, setVerTodos] = useState(false);
+
+  async function handleClick(e: any): Promise<any> {
+    const isChecked = e.target.checked;
+    setVerTodos(isChecked);
+    void refetch().then(() => {
+      void refetch();
+    });
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+    if (!isChecked) {
+      setVerTodos(false);
+    }
+  }
 
   const {
     isLoading,
+    refetch,
     data: aforeModulo,
     isSuccess,
-  } = useQuery("Afore", async () => await ApiService.aforeGet(true));
+  } = useQuery("Afore", async () => await ApiService.aforeGet(verTodos));
 
   if (isLoading) {
     return <KSkeletonPage />;
@@ -42,15 +73,6 @@ export default function Afore(): any {
 
   const aforeData = aforeModulo.data.data;
   const columnHelper = createColumnHelper<aforeTable>();
-
-  const handleClick = async (event: {
-    preventDefault: () => void;
-  }): Promise<any> => {
-    void ApiService.aforeGet(true).then((response) => {
-      const datos = response.data.data;
-      setafo(datos);
-    });
-  };
 
   const datos = afo == null ? aforeData : afo;
   const columns = [
@@ -101,6 +123,7 @@ export default function Afore(): any {
             <Box ml={"80"} mb="10" mt={3}>
               <Button
                 mr={"5"}
+                ml={"-10"}
                 alignItems={"center"}
                 size="md"
                 bg="blue.500"
@@ -119,9 +142,10 @@ export default function Afore(): any {
                 Descargar Csv
               </Button>
               <Button
-                onClick={handleClick}
+                onClick={Get}
                 rounded="5"
                 ml={"5"}
+                mr={"12"}
                 size={"md"}
                 bg="blue.500"
                 textColor={"white"}
@@ -129,15 +153,9 @@ export default function Afore(): any {
               >
                 Actualizar lista
               </Button>
-              <Checkbox
-                alignContent={"center"}
-                size="lg"
-                ml={5}
-                mt={1.5}
-                spacing={"3"}
-              >
-                Todos
-              </Checkbox>
+              <CheckboxGroup>
+                <Checkbox onChange={handleClick}>Ver todos</Checkbox>
+              </CheckboxGroup>
             </Box>
             <Box alignItems="center">
               {Array.isArray(datos) && (

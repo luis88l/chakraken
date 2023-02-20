@@ -43,10 +43,11 @@ export default function ProductFeed(): any {
           locale: "es",
         }),
       header: "Created At",
+      enableResizing: true,
     }),
     columnHelper.accessor("status", {
       cell: (info) => (
-        <>
+        <Box>
           {info.getValue() === "ok" && (
             <Button colorScheme="green" variant="outline" size="sm">
               Exitoso
@@ -57,29 +58,34 @@ export default function ProductFeed(): any {
               Publicado
             </Button>
           )}
-        </>
+        </Box>
       ),
       header: "Status",
+      enableResizing: true,
     }),
     columnHelper.accessor("description", {
       cell: (info) => info.getValue(),
       header: "Description",
+      enableResizing: true,
     }),
     columnHelper.accessor("item_count", {
       cell: (info) => info.getValue(),
       header: "Item Count",
+      enableResizing: true,
     }),
     columnHelper.accessor("mkp_item_count", {
       cell: (info) => info.getValue(),
       header: "Mkp Item Count",
+      enableResizing: true,
     }),
     columnHelper.accessor("processed_item_count", {
       cell: (info) => info.getValue(),
       header: "Processed Item Count",
+      enableResizing: true,
     }),
     columnHelper.accessor("id_product_feed", {
       cell: (props) => (
-        <ButtonGroup gap="2">
+        <ButtonGroup>
           <Box m={2} cursor="pointer">
             <Link
               href={{
@@ -93,6 +99,7 @@ export default function ProductFeed(): any {
         </ButtonGroup>
       ),
       header: "Acciones",
+      enableResizing: true,
     }),
   ];
 
@@ -110,8 +117,8 @@ export default function ProductFeed(): any {
 
   return (
     <KPage title="Feeds">
-      <Box overflow="scroll" max-height="100%" width="100%">
-        <Flex paddingBottom={5} position={"sticky"}>
+      <Box overflow="scroll" max-height="100%">
+        <Flex paddingBottom={5}>
           <Box>
             <Link href={"/dashboard/productFeed/exclusiones"}>
               <Button
@@ -150,7 +157,7 @@ export default function ProductFeed(): any {
             </Button>
           </Box>
         </Flex>
-        <Box>
+        <Box width="100%">
           <KTableLayout
             columns={columns}
             data={productFeedList.data.feed.map(
