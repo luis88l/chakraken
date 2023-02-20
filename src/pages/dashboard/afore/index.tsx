@@ -48,12 +48,13 @@ export default function Afore(): any {
   const [afo, setafo] = useState(null);
   const [verTodos, setVerTodos] = useState(false);
 
-  function handleClick(e) {
+  async function handleClick(e: any): Promise<any> {
     const isChecked = e.target.checked;
     setVerTodos(isChecked);
     void refetch().then(() => {
       void refetch();
     });
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if (!isChecked) {
       setVerTodos(false);
     }
