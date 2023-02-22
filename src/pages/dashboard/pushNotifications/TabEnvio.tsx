@@ -18,6 +18,7 @@ import {
   Button,
   FormControl,
   FormLabel,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import ApiService from "../../../../data/services/ApiService";
 import { useQuery, useMutation } from "react-query";
@@ -59,6 +60,8 @@ export default function TabEnvio(props: {
     id_push: "",
     icon: "https://cdn2.coppel.com/wcsstore/AuroraStorefrontAssetStore/emarketing/pwa/logo-coppel-512.png",
   });
+
+  const [isLargerThan450] = useMediaQuery("(min-width: 800px)");
 
   const [disableButtons, setDisable] = useState(false);
   const [tokenUsuario, setTokenUsuario] = useState("");
@@ -255,13 +258,20 @@ export default function TabEnvio(props: {
   return (
     <Box>
       <Flex>
-        <Grid templateColumns="repeat(2, 1fr)">
+        <Grid
+          templateColumns={{
+            base: "repeat(1, 1fr)",
+            sm: "repeat(1, 1fr)",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(2, 1fr)",
+          }}
+        >
           <GridItem>
             <Text fontSize="2xl"> Enviar Push </Text>
             <br />
             <form onSubmit={handleSubmit}>
               <Grid templateColumns="repeat(6, 1fr)" gap={2}>
-                <GridItem colSpan={6}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 6, lg: 6 }}>
                   <FormControl isRequired>
                     <FormLabel>Título</FormLabel>
                     <Input
@@ -274,7 +284,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={3}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 6, lg: 6 }}>
                   <FormControl isRequired>
                     <FormLabel>Topic</FormLabel>
                     <Select
@@ -295,7 +305,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={3}>
+                <GridItem colSpan={{ base: 9, sm: 12, md: 6, lg: 6 }}>
                   <FormControl isRequired>
                     <FormLabel>Horas de vida</FormLabel>
                     <Input
@@ -309,7 +319,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={6}>
+                <GridItem colSpan={{ base: 9, sm: 12, md: 6, lg: 6 }}>
                   <FormControl isRequired>
                     <FormLabel>Url Coppel</FormLabel>
                     <Input
@@ -322,7 +332,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={6}>
+                <GridItem colSpan={{ base: 9, sm: 12, md: 6, lg: 6 }}>
                   <FormControl isRequired>
                     <FormLabel>Mensaje</FormLabel>
                     <Input
@@ -335,7 +345,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={6}>
+                <GridItem colSpan={{ base: 9, sm: 12, md: 6, lg: 6 }}>
                   <FormControl isRequired>
                     <FormLabel>Url imagen</FormLabel>
                     <Input
@@ -348,7 +358,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={2}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 2, lg: 2 }}>
                   <FormControl isRequired>
                     <FormLabel>Campaña</FormLabel>
                     <Input
@@ -361,7 +371,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={2}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 2, lg: 2 }}>
                   <FormControl isRequired>
                     <FormLabel>Fuente</FormLabel>
                     <Select
@@ -382,7 +392,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={2}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 2, lg: 2 }}>
                   <FormControl isRequired>
                     <FormLabel>Medio</FormLabel>
                     <Select
@@ -403,7 +413,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={2}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 2, lg: 2 }}>
                   <FormControl>
                     <FormLabel>Hora de envio</FormLabel>
                     <Input
@@ -417,7 +427,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={2}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 2, lg: 2 }}>
                   <FormControl>
                     <FormLabel>Estatus</FormLabel>
                     <Input
@@ -430,7 +440,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={5}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 5, lg: 5 }}>
                   <FormControl>
                     <FormLabel>Toke de prueba</FormLabel>
                     <Input
@@ -443,7 +453,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={1}>
+                <GridItem colSpan={{ base: 12, sm: 12 }}>
                   <FormLabel>&nbsp;</FormLabel>
                   <Button
                     colorScheme="blue"
@@ -459,7 +469,7 @@ export default function TabEnvio(props: {
                   </Button>
                 </GridItem>
 
-                <GridItem colSpan={6}>
+                <GridItem colSpan={{ base: 9, sm: 12, md: 6, lg: 6 }}>
                   <Center>
                     <Button
                       colorScheme="white"
@@ -514,26 +524,28 @@ export default function TabEnvio(props: {
               </Grid>
             </form>
           </GridItem>
-          <GridItem>
-            <Tabs variant="soft-rounded" colorScheme="gray" align="center">
-              <TabList>
-                <Tab>Iphone </Tab>
-                <Tab> Android </Tab>
-                <Tab> Web </Tab>
-              </TabList>
-              <TabPanels>
-                <TabPanel>
-                  <p>one! </p>
-                </TabPanel>
-                <TabPanel>
-                  <p>two! </p>
-                </TabPanel>
-                <TabPanel>
-                  <p>Web! </p>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          </GridItem>
+          {isLargerThan450 ? (
+            <GridItem>
+              <Tabs variant="soft-rounded" colorScheme="gray" align="center">
+                <TabList>
+                  <Tab>Iphone </Tab>
+                  <Tab> Android </Tab>
+                  <Tab> Web </Tab>
+                </TabList>
+                <TabPanels>
+                  <TabPanel>
+                    <p>one! </p>
+                  </TabPanel>
+                  <TabPanel>
+                    <p>two! </p>
+                  </TabPanel>
+                  <TabPanel>
+                    <p>Web! </p>
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+            </GridItem>
+          ) : null}
         </Grid>
       </Flex>
     </Box>

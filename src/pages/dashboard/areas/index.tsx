@@ -55,12 +55,24 @@ export default function Areas(): any {
 
   return (
     <KPage title="Áreas">
-      <Box overflow="scroll" max-height="100%" width="100%">
-        <Flex mb={4} display="grid" justifyItems="flex-end">
+      <Box
+        overflow="scroll"
+        max-height="100%"
+        w={{ base: "100%", md: "100%", lg: "100%" }}
+      >
+        <Flex
+          mb={4}
+          display="grid"
+          justifyItems={{
+            base: "center",
+            md: "end",
+            lg: "end",
+            sm: "end",
+          }}
+        >
           <Link href={"/dashboard/areas/new"}>
             <Button
-              w="200px"
-              alignSelf="flex-end"
+              w={{ base: "200px", md: "200px", lg: "200px", sm: "200px" }}
               color="#fff"
               bg="#1cb35b"
               _hover={{ bg: "#238152" }}

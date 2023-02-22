@@ -6,6 +6,7 @@ import Link from "next/link";
 interface DashboardMenuItemProps {
   title: string;
   items: any;
+  cerrarModal: any;
 }
 
 interface DashboardMenuItemOptionProps {
@@ -29,7 +30,11 @@ export default function DashboardMenuItem(props: DashboardMenuItemProps): any {
         onClick={onToggle}
       >
         <Box mr={3}>
-          <Text className="active" fontSize="medium">
+          <Text
+            className="active"
+            fontSize="medium"
+            color={{ base: "white", sm: "white", md: "white", lg: "white" }}
+          >
             {props.title}
           </Text>
         </Box>
@@ -45,9 +50,20 @@ export default function DashboardMenuItem(props: DashboardMenuItemProps): any {
               key={item.id_opcion}
               cursor="pointer"
               _hover={{ color: "#ea4c89" }}
+              onClick={props.cerrarModal}
             >
               <Link href={`/dashboard/${item.de_ruta}`}>
-                <Text pt={2} pb={2} fontSize="sm">
+                <Text
+                  pt={3}
+                  pb={5}
+                  fontSize="sm"
+                  color={{
+                    base: "white",
+                    sm: "white",
+                    md: "white",
+                    lg: "white",
+                  }}
+                >
                   {item.nb_opcion}
                 </Text>
               </Link>
