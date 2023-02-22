@@ -32,6 +32,7 @@ export default function Sitemaps(): any {
     {
       onSuccess: (formData: any) => {
         const filenameString: string = formData.data.filename.toString();
+        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
         const downloadString = envUri + "/xml/" + filenameString;
         void downloadURI(downloadString, filenameString, "xml");
       },
