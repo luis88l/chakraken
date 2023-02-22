@@ -14,8 +14,17 @@ import {
 } from "@chakra-ui/react";
 import { DownloadIcon } from "@chakra-ui/icons";
 import { useMutation } from "react-query";
+import { useState } from "react";
+import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
 
 export default function Sitemaps(): any {
+  const [isLoading, setIsLoading] = useState(false);
+  let envUri = process.env.NEXT_PUBLIC_URL_API;
+
+  if (process.env.NEXT_PUBLIC_ENV !== "localhost") {
+    envUri = "https://apikraken.coppel.com";
+  }
+
   const getSitemap = useMutation(
     async (formData: any) => {
       return await ApiService.downloadSitemap(formData);
@@ -23,7 +32,8 @@ export default function Sitemaps(): any {
     {
       onSuccess: (formData: any) => {
         const filenameString: string = formData.data.filename.toString();
-        const downloadString = "http://localhost:8080/xml/" + filenameString;
+        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+        const downloadString = envUri + "/xml/" + filenameString;
         void downloadURI(downloadString, filenameString, "xml");
       },
     }
@@ -31,6 +41,7 @@ export default function Sitemaps(): any {
 
   const handleClick = async (event: any, cat: string): Promise<any> => {
     event.preventDefault();
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("cat", cat);
     getSitemap.mutate(formData);
@@ -57,8 +68,13 @@ export default function Sitemaps(): any {
         document.body.appendChild(link);
         link.click();
         link.remove();
+        setIsLoading(false);
       });
   };
+
+  if (isLoading) {
+    return <KSkeletonPage />;
+  }
 
   return (
     <KPage title="Seo Sitemaps">
