@@ -23,7 +23,7 @@ export default function Sitemaps(): any {
     {
       onSuccess: (formData: any) => {
         const filenameString: string = formData.data.filename.toString();
-        const downloadString = "http://localhost:8080/xml/" + filenameString;
+        const downloadString = "http://apikraken/xml/" + filenameString;
         void downloadURI(downloadString, filenameString, "xml");
       },
     }
