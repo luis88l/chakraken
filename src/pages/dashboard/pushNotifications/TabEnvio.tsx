@@ -271,7 +271,7 @@ export default function TabEnvio(props: {
             <br />
             <form onSubmit={handleSubmit}>
               <Grid templateColumns="repeat(6, 1fr)" gap={2}>
-                <GridItem colSpan={{ base: 12, sm: 12, md: 6, lg: 6 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 8 }}>
                   <FormControl isRequired>
                     <FormLabel>Título</FormLabel>
                     <Input
@@ -284,7 +284,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 6, lg: 6 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 10, lg: 2 }}>
                   <FormControl isRequired>
                     <FormLabel>Topic</FormLabel>
                     <Select
@@ -305,7 +305,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 9, sm: 12, md: 6, lg: 6 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 2, lg: 2 }}>
                   <FormControl isRequired>
                     <FormLabel>Horas de vida</FormLabel>
                     <Input
@@ -319,7 +319,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 9, sm: 12, md: 6, lg: 6 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 12 }}>
                   <FormControl isRequired>
                     <FormLabel>Url Coppel</FormLabel>
                     <Input
@@ -332,7 +332,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 9, sm: 12, md: 6, lg: 6 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 12 }}>
                   <FormControl isRequired>
                     <FormLabel>Mensaje</FormLabel>
                     <Input
@@ -345,7 +345,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 9, sm: 12, md: 6, lg: 6 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 12 }}>
                   <FormControl isRequired>
                     <FormLabel>Url imagen</FormLabel>
                     <Input
@@ -358,7 +358,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 2, lg: 2 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 11, lg: 7 }}>
                   <FormControl isRequired>
                     <FormLabel>Campaña</FormLabel>
                     <Input
@@ -371,7 +371,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 2, lg: 2 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 1, lg: 5 }}>
                   <FormControl isRequired>
                     <FormLabel>Fuente</FormLabel>
                     <Select
@@ -392,7 +392,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 2, lg: 2 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 7 }}>
                   <FormControl isRequired>
                     <FormLabel>Medio</FormLabel>
                     <Select
@@ -413,7 +413,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 2, lg: 2 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 5 }}>
                   <FormControl>
                     <FormLabel>Hora de envio</FormLabel>
                     <Input
@@ -427,7 +427,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 2, lg: 2 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 7 }}>
                   <FormControl>
                     <FormLabel>Estatus</FormLabel>
                     <Input
@@ -440,7 +440,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 5, lg: 5 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 5 }}>
                   <FormControl>
                     <FormLabel>Toke de prueba</FormLabel>
                     <Input
@@ -469,7 +469,15 @@ export default function TabEnvio(props: {
                   </Button>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 9, sm: 12, md: 6, lg: 6 }}>
+                <GridItem
+                  colSpan={{ base: 12, sm: 12, md: 12, lg: 12 }}
+                  alignItems={{
+                    base: "center",
+                    sm: "center",
+                    md: "center",
+                    lg: "center",
+                  }}
+                >
                   <Center>
                     <Button
                       colorScheme="white"
