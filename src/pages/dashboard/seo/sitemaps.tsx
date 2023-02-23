@@ -89,16 +89,41 @@ export default function Sitemaps(): any {
             </Thead>
             <Tbody>
               <Tr>
-                <Td>Bicicletas/bebes/automotriz</Td>
+                <Td>Automotriz</Td>
                 <Td>
                   <ButtonGroup gap="2">
                     <Box m={2} cursor="pointer">
                       <DownloadIcon
                         onClick={async (event) =>
-                          await handleClick(
-                            event,
-                            "Bicicletas/bebes/automotriz"
-                          )
+                          await handleClick(event, "automotriz")
+                        }
+                      />
+                    </Box>
+                  </ButtonGroup>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>Bebés</Td>
+                <Td>
+                  <ButtonGroup gap="2">
+                    <Box m={2} cursor="pointer">
+                      <DownloadIcon
+                        onClick={async (event) =>
+                          await handleClick(event, "bebes")
+                        }
+                      />
+                    </Box>
+                  </ButtonGroup>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>Bicicletas</Td>
+                <Td>
+                  <ButtonGroup gap="2">
+                    <Box m={2} cursor="pointer">
+                      <DownloadIcon
+                        onClick={async (event) =>
+                          await handleClick(event, "bicicletas")
                         }
                       />
                     </Box>
