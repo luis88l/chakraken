@@ -127,7 +127,7 @@ export default function TabHistorial(props: { parentF: Function }): any {
   };
 
   return (
-    <Grid templateColumns="repeat(12, 1fr)">
+    <Grid templateColumns="repeat(12, 1fr)" w={1000} overflow="auto">
       <GridItem colSpan={11}></GridItem>
       <GridItem colSpan={1}>
         <ButtonGroup gap="1" display="flex" justifyContent="center">
@@ -140,11 +140,14 @@ export default function TabHistorial(props: { parentF: Function }): any {
         <KTableLayout columns={columnas} data={arrPush} />
       </GridItem>
       <GridItem colSpan={12}>&nbsp;</GridItem>
-      <GridItem colSpan={6}></GridItem>
-      <GridItem colSpan={2} textAlign={"right"}>
+      <GridItem colSpan={{ base: 5, sm: 5, md: 1, lg: 4 }}></GridItem>
+      <GridItem
+        colSpan={{ base: 10, sm: 10, md: 4, lg: 2 }}
+        textAlign={"right"}
+      >
         Registros por página:&nbsp;
       </GridItem>
-      <GridItem colSpan={1}>
+      <GridItem colSpan={{ base: 2, sm: 2, md: 1, lg: 1 }}>
         <Select
           size="sm"
           value={filaspagina}
@@ -159,12 +162,21 @@ export default function TabHistorial(props: { parentF: Function }): any {
           <option value={100}>100</option>
         </Select>
       </GridItem>
-      <GridItem colSpan={2} textAlign={"center"}>
+      <GridItem
+        colSpan={{ base: 11, sm: 10, md: 3, lg: 2 }}
+        textAlign={{ base: "right", sm: "right", md: "center", lg: "center" }}
+        mt={{ base: "10px", sm: "10px", md: 0, lg: 0 }}
+        // border="solid 1px red"
+      >
         {arrPush.length === 0
           ? "Sin resultados"
           : `${Inicial} - ${Final} de ${total}`}
       </GridItem>
-      <GridItem colSpan={1} textAlign={"center"}>
+      <GridItem
+        colSpan={{ base: 1, sm: 1, md: 1, lg: 1 }}
+        textAlign={{ base: "right", sm: "right", md: "center", lg: "center" }}
+        mt={{ base: "5px", sm: "5px", md: 0, lg: 0 }}
+      >
         <ButtonGroup gap="1" display="flex" justifyContent="center">
           <Box m={1} cursor="pointer">
             <ChevronLeftIcon onClick={async () => await changePage(-1)} />

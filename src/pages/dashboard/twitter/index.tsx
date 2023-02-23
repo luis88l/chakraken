@@ -15,9 +15,8 @@ import {
   Icon,
   Button,
   IconButton,
-  Flex,
+  useMediaQuery,
   Box,
-  Spacer,
   Divider,
   Tooltip,
 } from "@chakra-ui/react";
@@ -29,6 +28,8 @@ import ApiService from "../../../../data/services/ApiService";
 import { DateTime } from "luxon";
 
 export default function Tendencias(): any {
+  const [isLargerThan450] = useMediaQuery("(min-width: 624px)");
+
   const [company, setCompany] = useState("");
   const [offset, setOffset] = useState(0);
   const [data, setData] = useState([]);
@@ -70,8 +71,9 @@ export default function Tendencias(): any {
   return (
     <KPage title="Tendencias">
       <Box>
-        <Box w="100px" h="10" p="1">
-          <Flex>
+        {/* ////WEB --------------------- */}
+        {isLargerThan450 ? (
+          <Box w="100px" h="10" p="1">
             <Center>
               <List spacing={4}>
                 <ListItem fontWeight={900} color="black">
@@ -140,11 +142,90 @@ export default function Tendencias(): any {
                 </ListItem>
               </List>
             </Center>
-          </Flex>
-        </Box>
+          </Box>
+        ) : (
+          <Stack
+            spacing="50px"
+            direction={["row"]}
+            overflow={"hidden"}
+            _hover={{
+              overflowX: "auto",
+            }}
+            w={"390px"}
+            mb={10}
+          >
+            <Box w="10px" h="40px">
+              <Icon as={AiFillTwitterCircle} w={10} h={10}></Icon>
+            </Box>
+            <Box w="40px" h="40px">
+              <Button
+                variant="ghost"
+                colorScheme="gray"
+                onClick={() => setCompany("coppel")}
+              >
+                Coppel
+              </Button>
+            </Box>
+            <Box w="40px" h="40px">
+              <Button
+                variant="ghost"
+                colorScheme="gray"
+                onClick={() => setCompany("amazon")}
+              >
+                Amazon
+              </Button>
+            </Box>
+            <Box w="40px" h="40px">
+              <Button
+                variant="ghost"
+                colorScheme="gray"
+                onClick={() => setCompany("liverpool")}
+              >
+                Liverpool
+              </Button>
+            </Box>
+            <Box w="40px" h="40px">
+              <Button
+                variant="ghost"
+                colorScheme="gray"
+                onClick={() => setCompany("walmart")}
+              >
+                Walmart{" "}
+              </Button>
+            </Box>
+            <Box
+              w={{ base: "80px", md: "40px", lg: "40px", sm: "40px" }}
+              h="40px"
+            >
+              <Button
+                variant="ghost"
+                colorScheme="gray"
+                onClick={() => setCompany("mercadolibre")}
+              >
+                Mercado libre{" "}
+              </Button>
+            </Box>
+            <Box w="40px" h="40px">
+              <Button
+                variant="ghost"
+                colorScheme="gray"
+                onClick={() => setCompany("elektra")}
+              >
+                Elektra{" "}
+              </Button>
+            </Box>
+          </Stack>
+        )}
 
-        <Spacer />
-        <Box w="100%">
+        <Box
+          w="100%"
+          overflowY={"hidden"}
+          _hover={{
+            overflowY: "auto",
+          }}
+          overflowX="hidden"
+          height={750}
+        >
           {data.map(
             (
               item: {
@@ -158,7 +239,13 @@ export default function Tendencias(): any {
               },
               i: number
             ) => (
-              <Box w="80%" marginLeft="20%" marginBottom={50} key={i}>
+              <Box
+                w={{ base: "80%", md: "80%", lg: "80%", sm: "70%" }}
+                marginLeft={{ base: "5%", md: "20%", lg: "20%", sm: "25%" }}
+                marginTop={{ base: "50px", md: "", lg: "", sm: "2" }}
+                marginBottom={50}
+                key={i}
+              >
                 <Grid margin={0} templateColumns="repeat(2, 1fr)" gap={1}>
                   <GridItem padding="7px" w="100%">
                     <Wrap>
@@ -271,28 +358,11 @@ export default function Tendencias(): any {
                         ) : (
                           ""
                         )}
-                        {/* <Progress
-                    colorScheme="red"
-                    size="sm"
-                    value={20}
-                    marginBottom={1}
-                  />
-                  <Progress
-                    colorScheme="gray"
-                    size="sm"
-                    value={20}
-                    marginBottom={1}
-                  /> */}
                       </ListItem>
                     </List>
                   </GridItem>
                 </Grid>
-                <Grid
-                  margin={0}
-                  templateColumns="repeat(1, 1fr)"
-                  gap={1}
-                  // templateRows="repeat(, 1fr)"
-                >
+                <Grid margin={0} templateColumns="repeat(1, 1fr)" gap={1}>
                   <GridItem padding="7px" w="100%" marginTop={5}>
                     <Wrap>
                       <WrapItem>

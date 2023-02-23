@@ -18,7 +18,7 @@ import {
 import { useRouter } from "next/router";
 
 export default function New(): any {
-  const colSpan = { base: 2, md: 1 };
+  const colSpan = { base: 9, md: 1, sm: 1, lg: 1 };
   const router = useRouter();
   const [nombreArea, setNombreArea] = useState("");
   const [updating, setUpdating] = useState(false);
@@ -85,7 +85,7 @@ export default function New(): any {
                     ) : undefined
                   }
                 >
-                  Crear rol
+                  Crear area
                 </Button>
               </GridItem>
             </SimpleGrid>

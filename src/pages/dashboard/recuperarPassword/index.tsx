@@ -192,7 +192,14 @@ export default function RecuperarPassword(props: UploaderProps): any {
 
   return (
     <KPage title="Recuperar contraseña">
-      <Box max-height="100%" width="100%">
+      <Box
+        max-height="100%"
+        width="100%"
+        overflowY={"hidden"}
+        _hover={{
+          overflowY: "auto",
+        }}
+      >
         <Grid templateColumns="repeat(1, 1fr)" gap={1}>
           <GridItem w="100%" h="10">
             <Stack spacing={4} direction="row" justifyContent="end">
@@ -210,10 +217,18 @@ export default function RecuperarPassword(props: UploaderProps): any {
           </GridItem>
         </Grid>
         <Divider marginBottom={10} p={4}></Divider>
-        <Heading as="h5" size="sm" marginBottom={10}>
+        <Heading
+          as="h5"
+          marginBottom={10}
+          size={{ base: "md", lg: "sm" }}
+          textAlign={{ base: "center", lg: "start" }}
+        >
           Pendientes{" "}
         </Heading>
-        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+        <Grid
+          templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
+          gap={6}
+        >
           <GridItem w="100%" h="200">
             <Card maxW="sm" variant={"filled"}>
               <CardBody>
@@ -295,10 +310,22 @@ export default function RecuperarPassword(props: UploaderProps): any {
             </Card>
           </GridItem>
         </Grid>
-        <Heading as="h5" size="sm" marginBottom={10}>
+        <Heading
+          as="h5"
+          size={{ base: "md", lg: "sm" }}
+          marginBottom={10}
+          textAlign={{ base: "center", lg: "start" }}
+        >
           Enviados{" "}
         </Heading>
-        <Grid templateColumns="repeat(3, 1fr)" gap={6}>
+        <Grid
+          templateColumns={{ base: "repeat(1, 1fr)", lg: "repeat(3, 1fr)" }}
+          gap={6}
+          overflowY={"hidden"}
+          _hover={{
+            overflowY: "auto",
+          }}
+        >
           <GridItem w="100%" h="200">
             <Card maxW="sm" variant={"filled"}>
               <CardBody>

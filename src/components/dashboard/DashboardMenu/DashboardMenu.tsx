@@ -2,7 +2,10 @@ import { Box } from "@chakra-ui/react";
 import { Key } from "react";
 import DashboardMenuItem from "../DashboardMenuItem/DashboardMenuItem";
 
-export default function DashboardMenu(props: { items: any }): any {
+export default function DashboardMenu(props: {
+  items: any;
+  cerrarModal: any;
+}): any {
   const allMenuItems = props.items[0];
   const menuItems: any = [];
 
@@ -27,6 +30,7 @@ export default function DashboardMenu(props: { items: any }): any {
           id_modulo: Key | null | undefined;
         }) => (
           <DashboardMenuItem
+            cerrarModal={props.cerrarModal}
             key={menuItem.id_modulo}
             title={menuItem.nb_modulo}
             items={allMenuItems.filter(

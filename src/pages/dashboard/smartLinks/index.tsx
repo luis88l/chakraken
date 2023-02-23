@@ -82,7 +82,12 @@ export default function SmartLinks(): any {
 
   return (
     <KPage title="Smart Links">
-      <Box>
+      <Box
+        overflowY={"hidden"}
+        _hover={{
+          overflowY: "auto",
+        }}
+      >
         <Flex mb={4} display="grid" justifyItems={"flex-end"}>
           <Link href={"/dashboard/smartLinks/new"}>
             <Button

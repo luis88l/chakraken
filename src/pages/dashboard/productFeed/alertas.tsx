@@ -111,7 +111,7 @@ export default function ProductFeedAlerts(): any {
 
   return (
     <KPage title="Alertas">
-      <Box>
+      <Box overflow={"scroll"} w="100%">
         <KTableLayout columns={columns} data={productFeedExclusions} />
       </Box>
     </KPage>

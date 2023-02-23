@@ -121,7 +121,7 @@ export default function ShortUrl(): any {
   if (isSuccess) {
     return (
       <KPage title="Reducir img">
-        <Box max-height="100%" width="100%">
+        <Box max-height="100%" width="100%" overflow={"scroll"} h="100%">
           <Card align="center">
             <CardHeader>
               <Heading size="md"> Reducir tamaño de imagenes</Heading>

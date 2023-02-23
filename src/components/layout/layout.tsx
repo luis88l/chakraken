@@ -1,5 +1,6 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, useMediaQuery } from "@chakra-ui/react";
 import Dashboard from "../dashboard/Dashboard";
+import DashboardMobile from "../dashboard/DashboardMobile";
 import Head from "next/head";
 import ApiService from "../../../data/services/ApiService";
 import FormData from "form-data";
@@ -7,6 +8,7 @@ import { useQuery } from "react-query";
 import Content from "../dashboard/Content";
 
 export default function Layout(props: { children: any }): any {
+  const [isLargerThan450] = useMediaQuery("(min-width: 624px)");
   const form = new FormData();
   const {
     isLoading,
@@ -27,11 +29,16 @@ export default function Layout(props: { children: any }): any {
   }
 
   return (
-    <Flex h="100vh" flexDir="row" overflow="hidden" maxW="2000px">
+    <Flex h="100vh" flexDir="row" overflow="hidden" w={{ base: "100%" }}>
       <Head>
         <title>Kraken</title>
       </Head>
-      <Dashboard userOptions={userOptions} />
+      {isLargerThan450 ? (
+        <Dashboard userOptions={userOptions} cerrarModal={undefined} />
+      ) : (
+        <DashboardMobile userOptions={userOptions} />
+      )}
+
       <Content> {props.children}</Content>
     </Flex>
   );
