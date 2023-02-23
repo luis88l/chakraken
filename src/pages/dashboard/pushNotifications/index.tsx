@@ -26,7 +26,14 @@ export default function PushNotifications(): any {
   };
   return (
     <KPage title="Notificaciones Push">
-      <Box overflow={{ base: "scroll", lg: "hidden" }} max-height="100%">
+      <Box
+        // overflow={{ base: "scroll" }}
+        max-height="100%"
+        overflow={"hidden"}
+        _hover={{
+          overflow: "auto",
+        }}
+      >
         <Tabs index={tabIndex} onChange={handleTabsChange}>
           <TabList>
             <Tab>Envío</Tab>

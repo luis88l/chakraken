@@ -61,7 +61,8 @@ export default function TabEnvio(props: {
     icon: "https://cdn2.coppel.com/wcsstore/AuroraStorefrontAssetStore/emarketing/pwa/logo-coppel-512.png",
   });
 
-  const [isLargerThan450] = useMediaQuery("(min-width: 800px)");
+  const [isLargerThan450] = useMediaQuery("(min-width: 1200px)");
+  // const [isLargerThan450] = useMediaQuery("(min-width: 950px)");
 
   const [disableButtons, setDisable] = useState(false);
   const [tokenUsuario, setTokenUsuario] = useState("");
@@ -270,8 +271,11 @@ export default function TabEnvio(props: {
             <Text fontSize="2xl"> Enviar Push </Text>
             <br />
             <form onSubmit={handleSubmit}>
-              <Grid templateColumns="repeat(6, 1fr)" gap={1}>
-                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 8 }}>
+              <Grid
+                templateColumns="repeat(6, 1fr)"
+                gap={{ base: 2, sm: 12, md: 12, lg: 6 }}
+              >
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 12 }}>
                   <FormControl isRequired>
                     <FormLabel>Título</FormLabel>
                     <Input
@@ -284,7 +288,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 10, lg: 2 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 8, lg: 10 }}>
                   <FormControl isRequired>
                     <FormLabel>Topic</FormLabel>
                     <Select
