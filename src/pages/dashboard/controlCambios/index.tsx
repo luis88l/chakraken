@@ -391,13 +391,11 @@ export default function controlCambios(): any {
       : (a: any, b: any) => -desc(a, b, orderBy);
   };
 
-  console.log(stateObj, "ESTADO COMPLETO");
-
   return (
     <KPage title="Web Developers > Control de Cambios">
       <Box max-height="100%" width="100%">
         <Container maxW="container.sm">
-          <SimpleGrid columns={4} gap={2}>
+          <SimpleGrid columns={{ base: 1, lg: 4 }} gap={2}>
             <Box w="100%" h="10">
               <Input placeholder="Folio" size="md" />
             </Box>
@@ -419,7 +417,7 @@ export default function controlCambios(): any {
                 type="datetime-local"
               />
             </Box>
-            <Box w="100%" h="10">
+            <Box w="100%" h="10" mt={{ base: "25px", lg: "0px" }}>
               <Text mb="8px"> Fecha reg final:</Text>
               <Input
                 placeholder="Fecha inicio"

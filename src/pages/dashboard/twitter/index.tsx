@@ -151,7 +151,7 @@ export default function Tendencias(): any {
             _hover={{
               overflowX: "auto",
             }}
-            w={"450px"}
+            w={"390px"}
             mb={10}
           >
             <Box w="10px" h="40px">
