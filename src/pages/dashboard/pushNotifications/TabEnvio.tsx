@@ -358,7 +358,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 11, lg: 7 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 11, lg: 10 }}>
                   <FormControl isRequired>
                     <FormLabel>Campaña</FormLabel>
                     <Input
@@ -371,7 +371,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 1, lg: 5 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 1, lg: 2 }}>
                   <FormControl isRequired>
                     <FormLabel>Fuente</FormLabel>
                     <Select
@@ -392,7 +392,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 7 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 10 }}>
                   <FormControl isRequired>
                     <FormLabel>Medio</FormLabel>
                     <Select
@@ -413,7 +413,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 5 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 2 }}>
                   <FormControl>
                     <FormLabel>Hora de envio</FormLabel>
                     <Input
@@ -427,7 +427,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 7 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 10 }}>
                   <FormControl>
                     <FormLabel>Estatus</FormLabel>
                     <Input
@@ -440,7 +440,7 @@ export default function TabEnvio(props: {
                   </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 5 }}>
+                <GridItem colSpan={{ base: 12, sm: 12, md: 12, lg: 2 }}>
                   <FormControl>
                     <FormLabel>Toke de prueba</FormLabel>
                     <Input
