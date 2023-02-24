@@ -24,7 +24,7 @@ const Index = (): any => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const handleShowClick = (): any => setShowPassword(!showPassword);
-  const [user, setUser] = useState("");
+  const [username, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,7 +40,7 @@ const Index = (): any => {
 
     const result = await signIn("credentials", {
       redirect: false,
-      user,
+      username,
       password,
       token,
     });

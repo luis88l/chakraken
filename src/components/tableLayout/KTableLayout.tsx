@@ -85,11 +85,11 @@ export function KTableLayout<Data extends object>({
           <Tbody>
             {table.getRowModel().rows.map((row) => (
               <Tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
+                {row.getVisibleCells().map((cell, index) => {
                   const meta: any = cell.column.columnDef.meta;
                   return (
                     <Td
-                      key={cell.id}
+                      key={index}
                       isNumeric={meta?.isNumeric}
                       fontSize="xs"
                       minWidth={210}

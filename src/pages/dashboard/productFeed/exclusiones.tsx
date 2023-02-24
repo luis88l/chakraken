@@ -2,7 +2,7 @@
 //
 import React from "react";
 import { Box, Button, Flex, HStack, Text } from "@chakra-ui/react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useRouter } from "next/router";
 import ApiService from "../../../../data/services/ApiService";
 import KSkeletonPage from "../../../components/skeleton/KSkeletonPage";
@@ -24,7 +24,7 @@ export interface productFeedExclusionsTable {
 }
 
 export default function ProductFeedExclusions(): any {
-  // const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const router = useRouter();
   const feedId = router.query.id;
 
@@ -33,16 +33,19 @@ export default function ProductFeedExclusions(): any {
     async () => await ApiService.getFeedExclusions({ idFeed: feedId })
   );
 
-  /* const deleteExclusion = useMutation(
-    async (formData: any) => {
+  const deleteExclusion = useMutation(
+    async (sku: string) => {
+      const formData = new FormData();
+      formData.append("sku", sku);
       return await ApiService.deleteExclusion(formData);
     },
     {
       onSuccess: () => {
-        // void queryClient.invalidateQueries("productFeedExclusions");
+        console.log("delete success");
+        void queryClient.invalidateQueries("productFeedExclusions");
       },
     }
-  ); */
+  );
 
   if (isLoading) {
     return <KSkeletonPage />;
@@ -96,7 +99,9 @@ export default function ProductFeedExclusions(): any {
       cell: (value) => (
         <Button>
           <Text>
-            <FiTrash2 />
+            <FiTrash2
+              onClick={() => deleteExclusion.mutate(value.getValue())}
+            />
           </Text>
         </Button>
       ),

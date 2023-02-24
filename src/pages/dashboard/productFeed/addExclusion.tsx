@@ -50,11 +50,11 @@ export default function AddExclusion(): any {
     // then send the array to the backend
     // else send an error message
 
-    // if skusstring is a string separated by commas then split the string
+    // if skusstring is a string separated by spaces then split the string
     // and create an array of skus
 
-    if (skusString.includes(",")) {
-      const skusArray = skusString.split(",");
+    if (skusString.includes(" ")) {
+      const skusArray = skusString.split(" ");
       console.log(skusArray);
       setError(false);
 
