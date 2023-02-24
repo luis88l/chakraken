@@ -13,7 +13,7 @@ export default function Dashboard(props: DashboardProps): any {
   return (
     <>
       <Flex
-        w={{ base: "100%", lg: "25%", md: "20%", sm: "25%" }}
+        w={{ base: "100%", lg: "18%", md: "18%", sm: "18%" }}
         flexDir="column"
         alignItems="center"
         backgroundColor={{
