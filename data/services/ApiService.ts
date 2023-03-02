@@ -1165,7 +1165,7 @@ export class ApiService {
     return res;
   }
 
-  //  get opciones de modulos
+  //  get opciones de moduloss
   public async getOpcionesModulos(form: {}): Promise<any> {
     const res = await axios
       .post(`${pathServer}/modulos/getOpciones`, form, await this.defaults())

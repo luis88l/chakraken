@@ -108,7 +108,6 @@ export default function Modulo(): any {
       if (op.id_modulo !== "") {
         opcionesArray[index].estado = "modificado";
       }
-
       setOpcionesModulo(opcionesArray);
     }
   };
