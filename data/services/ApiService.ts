@@ -1164,6 +1164,55 @@ export class ApiService {
 
     return res;
   }
+
+  //  get opciones de modulos
+  public async getOpcionesModulos(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/modulos/getOpciones`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async saveOpcionesModulos(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/modulos/saveOpciones`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async updateOpcionesModulos(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/modulos/updateOpciones`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async deleteOpcionesModulos(form: {}): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/modulos/deleteOpciones`, form, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
 }
 
 export default new ApiService();
