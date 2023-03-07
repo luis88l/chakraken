@@ -1213,6 +1213,67 @@ export class ApiService {
       });
     return res;
   }
+
+  //  get correos para envio de correos
+  public async getCorreos(): Promise<any> {
+    const res = await axios
+      .post(`${pathServer}/envio-correos/getCorreos`, await this.defaults())
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async saveCorreos(form: {}): Promise<any> {
+    const res = await axios
+      .post(
+        `${pathServer}/envio-correos/saveCorreos`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async updateCorreos(form: {}): Promise<any> {
+    const res = await axios
+      .post(
+        `${pathServer}/envio-correos/updateCorreos`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
+
+  public async deleteCorreos(form: {}): Promise<any> {
+    const res = await axios
+      .post(
+        `${pathServer}/envio-correos/deleteCorreos`,
+        form,
+        await this.defaults()
+      )
+      .then((response) => {
+        return response;
+      })
+      .catch((error) => {
+        return error.response;
+      });
+    return res;
+  }
 }
 
 export default new ApiService();
